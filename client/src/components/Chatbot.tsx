@@ -102,7 +102,7 @@ Please ask a specific question or visit our Contact page for more help.`;
       {/* Chat Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed bottom-8 right-8 w-16 h-16 rounded-full flex items-center justify-center cursor-pointer z-[1500] transition-all hover:scale-110"
+        className="fixed bottom-4 right-4 md:bottom-8 md:right-8 w-12 h-12 md:w-16 md:h-16 rounded-full flex items-center justify-center cursor-pointer z-[1500] transition-all hover:scale-110"
         style={{
           background: "linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%)",
           boxShadow: "0 4px 20px rgba(74, 124, 111, 0.4)",
@@ -110,15 +110,15 @@ Please ask a specific question or visit our Contact page for more help.`;
         data-testid="button-chatbot-toggle"
       >
         {isOpen ? (
-          <X className="w-6 h-6 text-white" />
+          <X className="w-5 h-5 md:w-6 md:h-6 text-white" />
         ) : (
-          <MessageCircle className="w-7 h-7 text-white" />
+          <MessageCircle className="w-5 h-5 md:w-7 md:h-7 text-white" />
         )}
       </button>
 
       {/* Chat Window */}
       <div
-        className={`fixed bottom-28 right-8 w-[380px] max-w-[calc(100vw-60px)] h-[500px] max-h-[calc(100vh-150px)] bg-white rounded-[20px] z-[1500] flex flex-col overflow-hidden transition-all ${
+        className={`fixed bottom-20 md:bottom-28 right-2 md:right-8 w-[calc(100vw-16px)] md:w-[380px] max-w-[380px] h-[60vh] md:h-[500px] max-h-[calc(100vh-120px)] bg-white rounded-2xl md:rounded-[20px] z-[1500] flex flex-col overflow-hidden transition-all ${
           isOpen
             ? "opacity-100 visible translate-y-0 scale-100"
             : "opacity-0 invisible translate-y-5 scale-95"

@@ -11,6 +11,8 @@ import {
   ChevronDown,
   Megaphone,
   FileText,
+  Menu,
+  X,
 } from "lucide-react";
 import zmcLogo from "@assets/zmc-logo_1766177505802.png";
 
@@ -25,6 +27,7 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
   const [aboutOpen, setAboutOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
   const [opportunitiesOpen, setOpportunitiesOpen] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [unreadCount, setUnreadCount] = useState(3);
   const [, setLocation] = useLocation();
 
@@ -67,6 +70,17 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [mobileMenuOpen]);
+
   const closeAllDropdowns = () => {
     setAboutOpen(false);
     setServicesOpen(false);
@@ -77,14 +91,19 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
     setUnreadCount(0);
   };
 
+  const handleMobileNavClick = (path: string) => {
+    setMobileMenuOpen(false);
+    closeAllDropdowns();
+  };
+
   return (
     <header className="fixed w-full top-0 z-[1000] bg-white" style={{ boxShadow: "var(--shadow-md)" }}>
       {/* Top Bar */}
       <div
-        className="py-3 px-8 flex justify-between items-center flex-wrap gap-4"
+        className="py-2 md:py-3 px-4 md:px-8 flex justify-between items-center flex-wrap gap-2 md:gap-4"
         style={{ background: "linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%)" }}
       >
-        <div className="flex items-center gap-6 flex-wrap">
+        <div className="hidden md:flex items-center gap-6 flex-wrap">
           <div className="flex gap-6 text-sm text-white/90">
             <span className="flex items-center gap-2">
               <Phone className="w-4 h-4" />
@@ -136,22 +155,51 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
           </div>
         </div>
 
-        <div className="flex gap-3 items-center">
+        {/* Mobile: Language toggle only */}
+        <div className="flex md:hidden items-center gap-2">
+          <div
+            className="flex rounded-[20px] overflow-hidden"
+            style={{ background: "rgba(0,0,0,0.2)" }}
+          >
+            {(["en", "sn", "nd"] as const).map((lang) => (
+              <button
+                key={lang}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setLanguage(lang);
+                }}
+                className={`py-1 px-2 text-xs font-semibold border-none cursor-pointer transition-all ${
+                  language === lang
+                    ? "text-neutral-900"
+                    : "text-white/80"
+                }`}
+                style={{
+                  background: language === lang ? "var(--accent)" : "transparent",
+                }}
+                data-testid={`button-lang-mobile-${lang}`}
+              >
+                {lang.toUpperCase()}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <div className="flex gap-2 md:gap-3 items-center">
           {/* Notification Bell */}
           <div className="relative" ref={notificationRef}>
             <button
               onClick={() => setNotificationsOpen(!notificationsOpen)}
-              className="w-[42px] h-[42px] rounded-full flex items-center justify-center cursor-pointer transition-all text-white hover:scale-105"
+              className="w-9 h-9 md:w-[42px] md:h-[42px] rounded-full flex items-center justify-center cursor-pointer transition-all text-white hover:scale-105"
               style={{
                 background: "rgba(255,255,255,0.15)",
                 border: "2px solid rgba(255,255,255,0.3)",
               }}
               data-testid="button-notifications"
             >
-              <Bell className="w-5 h-5" />
+              <Bell className="w-4 h-4 md:w-5 md:h-5" />
               {unreadCount > 0 && (
                 <span
-                  className="absolute -top-1.5 -right-1.5 text-white text-[0.7rem] font-bold min-w-5 h-5 rounded-full flex items-center justify-center animate-pulse-badge"
+                  className="absolute -top-1 -right-1 text-white text-[0.65rem] font-bold min-w-4 h-4 md:min-w-5 md:h-5 rounded-full flex items-center justify-center animate-pulse-badge"
                   style={{ background: "var(--zim-red)" }}
                 >
                   {unreadCount}
@@ -161,7 +209,7 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
 
             {/* Notification Dropdown */}
             <div
-              className={`absolute top-[calc(100%+10px)] right-0 w-[360px] bg-white rounded-2xl overflow-hidden z-[2000] transition-all ${
+              className={`absolute top-[calc(100%+10px)] right-0 w-[300px] md:w-[360px] bg-white rounded-2xl overflow-hidden z-[2000] transition-all ${
                 notificationsOpen
                   ? "opacity-100 visible translate-y-0"
                   : "opacity-0 invisible -translate-y-2.5"
@@ -169,26 +217,26 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
               style={{ boxShadow: "var(--shadow-xl)" }}
             >
               <div
-                className="flex justify-between items-center py-4 px-5 border-b"
+                className="flex justify-between items-center py-3 md:py-4 px-4 md:px-5 border-b"
                 style={{ background: "var(--primary-lighter)", borderColor: "var(--neutral-200)" }}
               >
-                <h4 className="text-base m-0" style={{ color: "var(--primary-dark)" }}>
+                <h4 className="text-sm md:text-base m-0" style={{ color: "var(--primary-dark)" }}>
                   Notifications
                 </h4>
                 <button
                   onClick={markAllRead}
-                  className="bg-transparent border-none text-sm cursor-pointer font-semibold hover:underline"
+                  className="bg-transparent border-none text-xs md:text-sm cursor-pointer font-semibold hover:underline"
                   style={{ color: "var(--primary)" }}
                   data-testid="button-mark-all-read"
                 >
                   Mark all read
                 </button>
               </div>
-              <div className="max-h-80 overflow-y-auto">
+              <div className="max-h-60 md:max-h-80 overflow-y-auto">
                 {notifications.map((notif) => (
                   <div
                     key={notif.id}
-                    className={`flex gap-4 py-4 px-5 border-b cursor-pointer transition-all ${
+                    className={`flex gap-3 md:gap-4 py-3 md:py-4 px-4 md:px-5 border-b cursor-pointer transition-all ${
                       notif.unread && unreadCount > 0 ? "hover:bg-[#FFF3CD]" : "hover:bg-neutral-50"
                     }`}
                     style={{
@@ -198,13 +246,13 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
                     data-testid={`notification-item-${notif.id}`}
                   >
                     <div
-                      className="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0"
+                      className="w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center flex-shrink-0"
                       style={{ background: "var(--primary-lighter)", color: "var(--primary)" }}
                     >
-                      <notif.icon className="w-5 h-5" />
+                      <notif.icon className="w-4 h-4 md:w-5 md:h-5" />
                     </div>
                     <div className="flex-1 min-w-0">
-                      <p className="font-semibold text-sm mb-1" style={{ color: "var(--neutral-800)" }}>
+                      <p className="font-semibold text-xs md:text-sm mb-1" style={{ color: "var(--neutral-800)" }}>
                         {notif.title}
                       </p>
                       <p
@@ -221,13 +269,13 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
                 ))}
               </div>
               <div
-                className="py-3 px-5 text-center border-t"
+                className="py-2 md:py-3 px-4 md:px-5 text-center border-t"
                 style={{ background: "var(--neutral-50)", borderColor: "var(--neutral-200)" }}
               >
                 <Link
                   href="/events"
                   onClick={() => setNotificationsOpen(false)}
-                  className="text-sm font-semibold hover:underline"
+                  className="text-xs md:text-sm font-semibold hover:underline"
                   style={{ color: "var(--primary)" }}
                 >
                   View all notifications
@@ -236,67 +284,82 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
             </div>
           </div>
 
-          <Link
-            href="/registration"
-            className="py-2.5 px-5 rounded-[10px] font-semibold text-sm border-none flex items-center gap-2 text-white transition-all hover:-translate-y-0.5 no-underline"
-            style={{
-              background: "linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%)",
-              boxShadow: "0 3px 12px rgba(27, 94, 32, 0.25)",
-            }}
-            data-testid="button-registration-header"
-          >
-            <Building2 className="w-4 h-4" />
-            Registration
-          </Link>
-          <Link
-            href="/accreditation"
-            className="py-2.5 px-5 rounded-[10px] font-semibold text-sm border-none flex items-center gap-2 text-white transition-all hover:-translate-y-0.5 no-underline"
-            style={{
-              background: "linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%)",
-              boxShadow: "0 3px 12px rgba(27, 94, 32, 0.25)",
-            }}
-            data-testid="button-accreditation-header"
-          >
-            <BadgeCheck className="w-4 h-4" />
-            Accreditation
-          </Link>
-          <button
-            onClick={() => window.open("#portal", "_blank")}
-            className="py-2.5 px-5 rounded-[10px] font-bold text-sm border-none flex items-center gap-2 transition-all hover:-translate-y-0.5"
-            style={{
-              background: "linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%)",
-              color: "var(--zim-black)",
-              boxShadow: "0 3px 12px rgba(212, 175, 55, 0.3)",
-            }}
-            data-testid="button-portal"
-          >
-            <ExternalLink className="w-4 h-4" />
-            Portal
-          </button>
+          {/* Desktop buttons */}
+          <div className="hidden lg:flex gap-3">
+            <Link
+              href="/registration"
+              className="py-2.5 px-5 rounded-[10px] font-semibold text-sm border-none flex items-center gap-2 text-white transition-all hover:-translate-y-0.5 no-underline"
+              style={{
+                background: "linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%)",
+                boxShadow: "0 3px 12px rgba(27, 94, 32, 0.25)",
+              }}
+              data-testid="button-registration-header"
+            >
+              <Building2 className="w-4 h-4" />
+              Registration
+            </Link>
+            <Link
+              href="/accreditation"
+              className="py-2.5 px-5 rounded-[10px] font-semibold text-sm border-none flex items-center gap-2 text-white transition-all hover:-translate-y-0.5 no-underline"
+              style={{
+                background: "linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%)",
+                boxShadow: "0 3px 12px rgba(27, 94, 32, 0.25)",
+              }}
+              data-testid="button-accreditation-header"
+            >
+              <BadgeCheck className="w-4 h-4" />
+              Accreditation
+            </Link>
+            <button
+              onClick={() => window.open("#portal", "_blank")}
+              className="py-2.5 px-5 rounded-[10px] font-bold text-sm border-none flex items-center gap-2 transition-all hover:-translate-y-0.5"
+              style={{
+                background: "linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%)",
+                color: "var(--zim-black)",
+                boxShadow: "0 3px 12px rgba(212, 175, 55, 0.3)",
+              }}
+              data-testid="button-portal"
+            >
+              <ExternalLink className="w-4 h-4" />
+              Portal
+            </button>
+          </div>
         </div>
       </div>
 
       {/* Main Navigation */}
-      <div className="px-8 flex justify-between items-center bg-white">
-        <Link href="/" className="flex items-center gap-4 py-4 no-underline">
+      <div className="px-4 md:px-8 flex justify-between items-center bg-white">
+        <Link href="/" className="flex items-center gap-3 md:gap-4 py-3 md:py-4 no-underline">
           <img 
             src={zmcLogo} 
             alt="Zimbabwe Media Commission Logo" 
-            className="w-[60px] h-[60px] object-contain"
+            className="w-10 h-10 md:w-[60px] md:h-[60px] object-contain"
           />
           <div className="flex flex-col">
-            <span className="text-[1.4rem] font-bold leading-tight" style={{ fontFamily: "var(--font-serif)" }}>
+            <span className="text-base md:text-[1.4rem] font-bold leading-tight" style={{ fontFamily: "var(--font-serif)" }}>
               <span style={{ color: "var(--zim-black)" }}>Zimbabwe</span>{" "}
               <span style={{ color: "var(--primary)" }}>Media</span>{" "}
-              <span style={{ color: "var(--zim-black)" }}>Commission</span>
+              <span className="hidden sm:inline" style={{ color: "var(--zim-black)" }}>Commission</span>
+              <span className="sm:hidden" style={{ color: "var(--zim-black)" }}>Comm.</span>
             </span>
-            <span className="text-xs uppercase tracking-wider" style={{ color: "var(--neutral-500)" }}>
+            <span className="hidden sm:block text-xs uppercase tracking-wider" style={{ color: "var(--neutral-500)" }}>
               Promoting Media Freedom
             </span>
           </div>
         </Link>
 
-        <nav>
+        {/* Mobile Menu Toggle */}
+        <button
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          className="lg:hidden p-2 rounded-lg"
+          style={{ background: "var(--primary-lighter)", color: "var(--primary)" }}
+          data-testid="button-mobile-menu"
+        >
+          {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+        </button>
+
+        {/* Desktop Navigation */}
+        <nav className="hidden lg:block">
           <ul className="flex list-none gap-2">
             <li>
               <Link
@@ -481,6 +544,173 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
             ))}
           </ul>
         </nav>
+      </div>
+
+      {/* Mobile Menu Overlay */}
+      <div
+        className={`lg:hidden fixed inset-0 top-[100px] md:top-[120px] z-[999] transition-all ${
+          mobileMenuOpen ? "opacity-100 visible" : "opacity-0 invisible pointer-events-none"
+        }`}
+        style={{ background: "rgba(0,0,0,0.5)" }}
+        onClick={() => setMobileMenuOpen(false)}
+      />
+
+      {/* Mobile Menu */}
+      <div
+        className={`lg:hidden fixed top-[100px] md:top-[120px] left-0 right-0 bg-white z-[1000] overflow-y-auto transition-all ${
+          mobileMenuOpen ? "max-h-[calc(100vh-100px)] opacity-100" : "max-h-0 opacity-0 overflow-hidden"
+        }`}
+        style={{ boxShadow: "var(--shadow-lg)" }}
+      >
+        <div className="p-4">
+          {/* Quick Actions */}
+          <div className="grid grid-cols-2 gap-3 mb-4">
+            <Link
+              href="/registration"
+              onClick={() => handleMobileNavClick("/registration")}
+              className="py-3 px-4 rounded-xl font-semibold text-sm flex items-center justify-center gap-2 text-white no-underline"
+              style={{ background: "linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%)" }}
+            >
+              <Building2 className="w-4 h-4" />
+              Registration
+            </Link>
+            <Link
+              href="/accreditation"
+              onClick={() => handleMobileNavClick("/accreditation")}
+              className="py-3 px-4 rounded-xl font-semibold text-sm flex items-center justify-center gap-2 text-white no-underline"
+              style={{ background: "linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%)" }}
+            >
+              <BadgeCheck className="w-4 h-4" />
+              Accreditation
+            </Link>
+          </div>
+
+          {/* Nav Links */}
+          <nav>
+            <Link
+              href="/"
+              onClick={() => handleMobileNavClick("/")}
+              className="block py-3 px-4 border-b no-underline"
+              style={{ borderColor: "var(--neutral-100)", color: currentPage === "home" ? "var(--primary)" : "var(--neutral-700)" }}
+            >
+              Home
+            </Link>
+
+            {/* About Section */}
+            <div className="border-b" style={{ borderColor: "var(--neutral-100)" }}>
+              <button
+                onClick={() => setAboutOpen(!aboutOpen)}
+                className="w-full py-3 px-4 flex justify-between items-center bg-transparent border-none cursor-pointer"
+                style={{ color: "var(--neutral-700)" }}
+              >
+                <span>About</span>
+                <ChevronDown className={`w-4 h-4 transition-transform ${aboutOpen ? "rotate-180" : ""}`} />
+              </button>
+              <div className={`overflow-hidden transition-all ${aboutOpen ? "max-h-40" : "max-h-0"}`}>
+                {[
+                  { label: "About ZMC", path: "/about" },
+                  { label: "Board of Commissioners", path: "/commissioners" },
+                  { label: "Secretariat", path: "/secretariat" },
+                ].map((item) => (
+                  <Link
+                    key={item.path}
+                    href={item.path}
+                    onClick={() => handleMobileNavClick(item.path)}
+                    className="block py-2 px-8 text-sm no-underline"
+                    style={{ color: "var(--neutral-600)", background: "var(--neutral-50)" }}
+                  >
+                    {item.label}
+                  </Link>
+                ))}
+              </div>
+            </div>
+
+            {/* Services Section */}
+            <div className="border-b" style={{ borderColor: "var(--neutral-100)" }}>
+              <button
+                onClick={() => setServicesOpen(!servicesOpen)}
+                className="w-full py-3 px-4 flex justify-between items-center bg-transparent border-none cursor-pointer"
+                style={{ color: "var(--neutral-700)" }}
+              >
+                <span>Services</span>
+                <ChevronDown className={`w-4 h-4 transition-transform ${servicesOpen ? "rotate-180" : ""}`} />
+              </button>
+              <div className={`overflow-hidden transition-all ${servicesOpen ? "max-h-40" : "max-h-0"}`}>
+                {[
+                  { label: "Accreditation", path: "/accreditation" },
+                  { label: "Registration", path: "/registration" },
+                  { label: "Complaints & Appeals", path: "/complaints" },
+                ].map((item) => (
+                  <Link
+                    key={item.path}
+                    href={item.path}
+                    onClick={() => handleMobileNavClick(item.path)}
+                    className="block py-2 px-8 text-sm no-underline"
+                    style={{ color: "var(--neutral-600)", background: "var(--neutral-50)" }}
+                  >
+                    {item.label}
+                  </Link>
+                ))}
+              </div>
+            </div>
+
+            {/* Opportunities Section */}
+            <div className="border-b" style={{ borderColor: "var(--neutral-100)" }}>
+              <button
+                onClick={() => setOpportunitiesOpen(!opportunitiesOpen)}
+                className="w-full py-3 px-4 flex justify-between items-center bg-transparent border-none cursor-pointer"
+                style={{ color: "var(--neutral-700)" }}
+              >
+                <span>Opportunities</span>
+                <ChevronDown className={`w-4 h-4 transition-transform ${opportunitiesOpen ? "rotate-180" : ""}`} />
+              </button>
+              <div className={`overflow-hidden transition-all ${opportunitiesOpen ? "max-h-24" : "max-h-0"}`}>
+                {[
+                  { label: "Vacancies", path: "/vacancies" },
+                  { label: "Tenders", path: "/tenders" },
+                ].map((item) => (
+                  <Link
+                    key={item.path}
+                    href={item.path}
+                    onClick={() => handleMobileNavClick(item.path)}
+                    className="block py-2 px-8 text-sm no-underline"
+                    style={{ color: "var(--neutral-600)", background: "var(--neutral-50)" }}
+                  >
+                    {item.label}
+                  </Link>
+                ))}
+              </div>
+            </div>
+
+            {[
+              { label: "Downloads", path: "/downloads" },
+              { label: "Events", path: "/events" },
+              { label: "Contact", path: "/contact" },
+            ].map((item) => (
+              <Link
+                key={item.path}
+                href={item.path}
+                onClick={() => handleMobileNavClick(item.path)}
+                className="block py-3 px-4 border-b no-underline"
+                style={{ borderColor: "var(--neutral-100)", color: currentPage === item.path.slice(1) ? "var(--primary)" : "var(--neutral-700)" }}
+              >
+                {item.label}
+              </Link>
+            ))}
+          </nav>
+
+          {/* Contact info for mobile */}
+          <div className="mt-4 pt-4 border-t" style={{ borderColor: "var(--neutral-200)" }}>
+            <div className="flex items-center gap-2 text-sm mb-2" style={{ color: "var(--neutral-600)" }}>
+              <Phone className="w-4 h-4" />
+              +263 242 253509/10
+            </div>
+            <div className="flex items-center gap-2 text-sm" style={{ color: "var(--neutral-600)" }}>
+              <Mail className="w-4 h-4" />
+              info@zmc.org.zw
+            </div>
+          </div>
+        </div>
       </div>
     </header>
   );
