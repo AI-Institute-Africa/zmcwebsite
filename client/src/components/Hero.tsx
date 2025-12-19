@@ -1,4 +1,5 @@
 import { Newspaper, Building2, Scale, GraduationCap } from "lucide-react";
+import zmcBuilding from "@assets/486716629_1064504462365594_5654935487513045845_n_1766177505816.jpg";
 
 interface HeroProps {
   onNavigate: (page: string) => void;
@@ -17,20 +18,17 @@ export default function Hero({ onNavigate }: HeroProps) {
       <section
         className="min-h-screen flex items-center relative overflow-hidden"
         style={{
-          background: "linear-gradient(135deg, rgba(27, 94, 32, 0.85) 0%, rgba(13, 59, 16, 0.9) 100%)",
           padding: "8rem 2rem 4rem",
         }}
       >
-        <div className="absolute inset-0 opacity-5">
-          <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse">
-                <path d="M50 0L100 50L50 100L0 50Z" fill="none" stroke="rgba(255,255,255,0.1)" strokeWidth="0.5"/>
-              </pattern>
-            </defs>
-            <rect width="100%" height="100%" fill="url(#grain)"/>
-          </svg>
-        </div>
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: `url(${zmcBuilding})` }}
+        />
+        <div 
+          className="absolute inset-0"
+          style={{ background: "linear-gradient(135deg, rgba(27, 94, 32, 0.88) 0%, rgba(13, 59, 16, 0.92) 100%)" }}
+        />
 
         <div className="max-w-[1200px] mx-auto w-full relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">

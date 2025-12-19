@@ -12,6 +12,7 @@ import {
   Megaphone,
   FileText,
 } from "lucide-react";
+import zmcLogo from "@assets/zmc-logo_1766177505802.png";
 
 interface HeaderProps {
   currentPage: string;
@@ -278,9 +279,11 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
       {/* Main Navigation */}
       <div className="px-8 flex justify-between items-center bg-white">
         <Link href="/" className="flex items-center gap-4 py-4 no-underline">
-          <div className="w-[60px] h-[60px] rounded-full flex items-center justify-center" style={{ background: "var(--primary-lighter)" }}>
-            <Building2 className="w-8 h-8" style={{ color: "var(--primary)" }} />
-          </div>
+          <img 
+            src={zmcLogo} 
+            alt="Zimbabwe Media Commission Logo" 
+            className="w-[60px] h-[60px] object-contain"
+          />
           <div className="flex flex-col">
             <span className="text-[1.4rem] font-bold leading-tight" style={{ fontFamily: "var(--font-serif)" }}>
               <span style={{ color: "var(--zim-black)" }}>Zimbabwe</span>{" "}
