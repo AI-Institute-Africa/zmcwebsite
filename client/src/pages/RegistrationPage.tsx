@@ -1,13 +1,25 @@
 import { useState } from "react";
-import { Building2, FileText, CheckCircle, X } from "lucide-react";
+import { Building2, FileText, CheckCircle, X, ExternalLink } from "lucide-react";
 
 interface RegistrationPageProps {
   onNavigate: (page: string) => void;
 }
 
+// Portal URL - update this when the link is available
+const PORTAL_URL = "#"; // Replace with actual portal URL when available
+
 export default function RegistrationPage({ onNavigate }: RegistrationPageProps) {
   const [showModal, setShowModal] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
+  
+  const openPortal = () => {
+    if (PORTAL_URL && PORTAL_URL !== "#") {
+      window.open(PORTAL_URL, "_blank", "noopener,noreferrer");
+    } else {
+      // Fallback to modal if portal URL not yet set
+      setShowModal(true);
+    }
+  };
 
   const steps = [
     { number: 1, title: "Gather Documents", desc: "Prepare all required documents" },
@@ -70,7 +82,7 @@ export default function RegistrationPage({ onNavigate }: RegistrationPageProps) 
               <div
                 className="bg-white rounded-2xl p-6 text-center cursor-pointer transition-all hover:-translate-y-1"
                 style={{ boxShadow: "0 4px 15px rgba(0,0,0,0.08)" }}
-                onClick={() => setShowModal(true)}
+                onClick={openPortal}
               >
                 <div className="w-[70px] h-[70px] rounded-full mx-auto mb-4 flex items-center justify-center" style={{ background: "var(--primary-lighter)", color: "var(--primary)" }}>
                   <Building2 className="w-8 h-8" />
@@ -78,17 +90,17 @@ export default function RegistrationPage({ onNavigate }: RegistrationPageProps) 
                 <h3 className="mb-2" style={{ color: "var(--primary-dark)" }}>New Registration</h3>
                 <p className="text-[0.9rem] mb-4" style={{ color: "var(--neutral-600)" }}>Register a new media service</p>
                 <button
-                  className="w-full py-3 rounded-xl font-semibold text-white border-none cursor-pointer"
+                  className="w-full py-3 rounded-xl font-semibold text-white border-none cursor-pointer flex items-center justify-center gap-2 active:scale-95 transition-transform"
                   style={{ background: "linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%)" }}
                   data-testid="button-new-registration"
                 >
-                  Register Now
+                  Register Now <ExternalLink className="w-4 h-4" />
                 </button>
               </div>
               <div
                 className="bg-white rounded-2xl p-6 text-center cursor-pointer transition-all hover:-translate-y-1"
                 style={{ boxShadow: "0 4px 15px rgba(0,0,0,0.08)" }}
-                onClick={() => setShowModal(true)}
+                onClick={openPortal}
               >
                 <div className="w-[70px] h-[70px] rounded-full mx-auto mb-4 flex items-center justify-center" style={{ background: "var(--accent-soft)", color: "var(--accent-dark)" }}>
                   <FileText className="w-8 h-8" />
@@ -96,11 +108,11 @@ export default function RegistrationPage({ onNavigate }: RegistrationPageProps) 
                 <h3 className="mb-2" style={{ color: "var(--primary-dark)" }}>Renew Registration</h3>
                 <p className="text-[0.9rem] mb-4" style={{ color: "var(--neutral-600)" }}>Renew existing registration</p>
                 <button
-                  className="w-full py-3 rounded-xl font-bold border-none cursor-pointer"
+                  className="w-full py-3 rounded-xl font-bold border-none cursor-pointer flex items-center justify-center gap-2 active:scale-95 transition-transform"
                   style={{ background: "linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%)", color: "var(--zim-black)" }}
                   data-testid="button-renew-registration"
                 >
-                  Renew Now
+                  Renew Now <ExternalLink className="w-4 h-4" />
                 </button>
               </div>
             </div>
