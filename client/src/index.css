@@ -175,6 +175,19 @@ a:hover {
   transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
+/* Global button active states */
+button:active,
+a.active,
+[role="button"]:active {
+  transform: scale(0.97);
+}
+
+/* Active/selected state for navigation */
+.nav-active {
+  color: var(--primary) !important;
+  font-weight: 600;
+}
+
 @layer base {
   * {
     @apply border-border;

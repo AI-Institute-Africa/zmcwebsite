@@ -15,6 +15,8 @@ import ComplaintsPage from "./pages/ComplaintsPage";
 import DownloadsPage from "./pages/DownloadsPage";
 import EventsPage from "./pages/EventsPage";
 import ContactPage from "./pages/ContactPage";
+import SecretariatPage from "./pages/SecretariatPage";
+import CommissionersPage from "./pages/CommissionersPage";
 
 function PlaceholderPage({ title, description }: { title: string; description: string }) {
   const [, setLocation] = useLocation();
@@ -70,10 +72,10 @@ function Router() {
         <AboutPage onNavigate={handleNavigate} />
       </Route>
       <Route path="/commissioners">
-        <AboutPage onNavigate={handleNavigate} />
+        <CommissionersPage onNavigate={handleNavigate} />
       </Route>
       <Route path="/secretariat">
-        <AboutPage onNavigate={handleNavigate} />
+        <SecretariatPage onNavigate={handleNavigate} />
       </Route>
       <Route path="/accreditation">
         <AccreditationPage onNavigate={handleNavigate} />
