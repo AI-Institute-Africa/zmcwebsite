@@ -152,8 +152,8 @@ export default function AccreditationPage({ onNavigate }: AccreditationPageProps
           {/* Fees */}
           <div className="rounded-2xl p-6 flex flex-wrap items-center justify-between gap-4" style={{ background: "var(--accent-soft)" }}>
             <div>
-              <h4 className="text-base font-semibold mb-1" style={{ color: "var(--neutral-700)", fontFamily: "var(--font-sans)" }}>Application Fee</h4>
-              <span className="text-2xl font-bold" style={{ fontFamily: "var(--font-serif)", color: "var(--accent-dark)" }}>USD $50.00</span>
+              <h4 className="text-base font-semibold mb-2" style={{ color: "var(--neutral-700)", fontFamily: "var(--font-sans)" }}>Application Fee</h4>
+              <span className="text-2xl font-bold whitespace-nowrap" style={{ fontFamily: "var(--font-serif)", color: "var(--accent-dark)" }}>USD&nbsp;$50.00</span>
             </div>
             <button
               onClick={() => onNavigate("downloads")}

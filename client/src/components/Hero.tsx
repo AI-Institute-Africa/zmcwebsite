@@ -84,16 +84,16 @@ export default function Hero({ onNavigate }: HeroProps) {
                   ].map((stat, index) => (
                     <div
                       key={index}
-                      className="p-3 md:p-4 rounded-xl text-center"
+                      className="p-3 md:p-5 rounded-xl text-center"
                       style={{ background: "rgba(255, 255, 255, 0.1)" }}
                     >
                       <div
-                        className="text-2xl md:text-3xl font-bold mb-1"
+                        className="text-xl md:text-3xl font-bold mb-1 md:mb-2 whitespace-nowrap"
                         style={{ color: "var(--accent)", fontFamily: "var(--font-serif)" }}
                       >
                         {stat.number}
                       </div>
-                      <div className="text-xs md:text-sm text-white/80">{stat.label}</div>
+                      <div className="text-[10px] md:text-sm text-white/80 leading-tight">{stat.label}</div>
                     </div>
                   ))}
                 </div>
@@ -105,7 +105,7 @@ export default function Hero({ onNavigate }: HeroProps) {
 
       {/* Stats Bar */}
       <section className="py-8 md:py-12 px-4 md:px-8" style={{ background: "var(--white)" }}>
-        <div className="max-w-[1200px] mx-auto grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+        <div className="max-w-[1200px] mx-auto grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-6">
           {stats.map((stat, index) => (
             <div
               key={index}
@@ -117,10 +117,10 @@ export default function Hero({ onNavigate }: HeroProps) {
               data-testid={`stat-box-${index}`}
             >
               <div className="mb-2 md:mb-3 animate-float" style={{ color: "var(--primary)" }}>
-                <stat.icon className="w-8 h-8 md:w-10 md:h-10 mx-auto" />
+                <stat.icon className="w-7 h-7 md:w-10 md:h-10 mx-auto" />
               </div>
               <div
-                className="text-2xl md:text-[2.75rem] font-bold"
+                className="text-xl md:text-[2.5rem] font-bold whitespace-nowrap"
                 style={{ color: "var(--primary)", fontFamily: "var(--font-serif)" }}
               >
                 {stat.number}

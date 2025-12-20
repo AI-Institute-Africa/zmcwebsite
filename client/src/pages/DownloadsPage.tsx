@@ -128,11 +128,11 @@ export default function DownloadsPage({ onNavigate }: DownloadsPageProps) {
                       onClick={() => handleDownload(file.name)}
                       data-testid={`download-item-${index}-${fileIndex}`}
                     >
-                      <div className="flex items-center gap-3">
-                        <FileText className="w-5 h-5" style={{ color: category.color }} />
-                        <div>
-                          <p className="text-[0.95rem] font-medium m-0" style={{ color: "var(--neutral-700)" }}>{file.name}</p>
-                          <span className="text-xs" style={{ color: "var(--neutral-400)" }}>{file.format} • {file.size}</span>
+                      <div className="flex items-center gap-3 min-w-0">
+                        <FileText className="w-5 h-5 flex-shrink-0" style={{ color: category.color }} />
+                        <div className="min-w-0">
+                          <p className="text-[0.95rem] font-medium m-0 truncate" style={{ color: "var(--neutral-700)" }}>{file.name}</p>
+                          <span className="text-xs whitespace-nowrap" style={{ color: "var(--neutral-400)" }}>{file.format}&nbsp;•&nbsp;{file.size}</span>
                         </div>
                       </div>
                       <button

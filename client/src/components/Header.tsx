@@ -106,12 +106,12 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
       >
         <div className="hidden md:flex items-center gap-6 flex-wrap">
           <div className="flex gap-6 text-sm text-white/90">
-            <span className="flex items-center gap-2">
-              <Phone className="w-4 h-4" />
-              +263 242 253509/10
+            <span className="flex items-center gap-2 whitespace-nowrap">
+              <Phone className="w-4 h-4 flex-shrink-0" />
+              <span>+263 242 253509/10</span>
             </span>
-            <span className="flex items-center gap-2">
-              <Mail className="w-4 h-4" />
+            <span className="flex items-center gap-2 whitespace-nowrap">
+              <Mail className="w-4 h-4 flex-shrink-0" />
               <a href="mailto:info@zmc.org.zw" className="text-white/90 hover:text-white">
                 info@zmc.org.zw
               </a>

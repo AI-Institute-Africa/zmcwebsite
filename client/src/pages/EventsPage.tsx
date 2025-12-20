@@ -109,17 +109,17 @@ export default function EventsPage({ onNavigate }: EventsPageProps) {
                     <div className="flex-1 p-8">
                       <h3 className="mb-3" style={{ color: "var(--neutral-800)" }}>{event.title}</h3>
                       <p className="text-[0.95rem] mb-4" style={{ color: "var(--neutral-600)" }}>{event.description}</p>
-                      <div className="flex flex-wrap gap-4 text-sm" style={{ color: "var(--neutral-500)" }}>
-                        <span className="flex items-center gap-2">
-                          <Calendar className="w-4 h-4" style={{ color: event.color }} />
+                      <div className="flex flex-wrap gap-x-4 gap-y-2 text-sm" style={{ color: "var(--neutral-500)" }}>
+                        <span className="flex items-center gap-2 whitespace-nowrap">
+                          <Calendar className="w-4 h-4 flex-shrink-0" style={{ color: event.color }} />
                           {event.date}
                         </span>
-                        <span className="flex items-center gap-2">
-                          <Clock className="w-4 h-4" style={{ color: event.color }} />
+                        <span className="flex items-center gap-2 whitespace-nowrap">
+                          <Clock className="w-4 h-4 flex-shrink-0" style={{ color: event.color }} />
                           {event.time}
                         </span>
                         <span className="flex items-center gap-2">
-                          <MapPin className="w-4 h-4" style={{ color: event.color }} />
+                          <MapPin className="w-4 h-4 flex-shrink-0" style={{ color: event.color }} />
                           {event.location}
                         </span>
                       </div>

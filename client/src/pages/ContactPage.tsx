@@ -187,7 +187,7 @@ export default function ContactPage({ onNavigate }: ContactPageProps) {
                       <Phone className="w-5 h-5 mt-1 flex-shrink-0" style={{ color: "var(--primary)" }} />
                       <div>
                         <p className="font-medium text-[0.9rem] mb-1" style={{ color: "var(--neutral-700)" }}>Phone</p>
-                        <p className="text-[0.95rem]" style={{ color: "var(--neutral-600)" }}>{office.phone}</p>
+                        <p className="text-[0.95rem] whitespace-nowrap" style={{ color: "var(--neutral-600)" }}>{office.phone}</p>
                       </div>
                     </div>
                     <div className="flex items-start gap-4">
@@ -201,7 +201,7 @@ export default function ContactPage({ onNavigate }: ContactPageProps) {
                       <Clock className="w-5 h-5 mt-1 flex-shrink-0" style={{ color: "var(--primary)" }} />
                       <div>
                         <p className="font-medium text-[0.9rem] mb-1" style={{ color: "var(--neutral-700)" }}>Office Hours</p>
-                        <p className="text-[0.95rem]" style={{ color: "var(--neutral-600)" }}>{office.hours}</p>
+                        <p className="text-[0.95rem] whitespace-nowrap" style={{ color: "var(--neutral-600)" }}>{office.hours}</p>
                       </div>
                     </div>
                   </div>

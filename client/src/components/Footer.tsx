@@ -135,8 +135,8 @@ export default function Footer({ onNavigate }: FooterProps) {
               </p>
             </div>
             <div className="flex items-center gap-3">
-              <Phone className="w-5 h-5" style={{ color: "var(--accent)" }} />
-              <p className="text-[0.95rem] m-0" style={{ color: "var(--neutral-400)" }}>
+              <Phone className="w-5 h-5 flex-shrink-0" style={{ color: "var(--accent)" }} />
+              <p className="text-[0.95rem] m-0 whitespace-nowrap" style={{ color: "var(--neutral-400)" }}>
                 +263 242 253509/10
               </p>
             </div>
@@ -151,8 +151,8 @@ export default function Footer({ onNavigate }: FooterProps) {
               </a>
             </div>
             <div className="flex items-center gap-3">
-              <Clock className="w-5 h-5" style={{ color: "var(--accent)" }} />
-              <p className="text-[0.95rem] m-0" style={{ color: "var(--neutral-400)" }}>
+              <Clock className="w-5 h-5 flex-shrink-0" style={{ color: "var(--accent)" }} />
+              <p className="text-[0.95rem] m-0 whitespace-nowrap" style={{ color: "var(--neutral-400)" }}>
                 Mon - Fri: 8:00 AM - 4:30 PM
               </p>
             </div>
