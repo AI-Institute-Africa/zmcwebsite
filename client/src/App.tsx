@@ -17,6 +17,7 @@ import EventsPage from "./pages/EventsPage";
 import ContactPage from "./pages/ContactPage";
 import SecretariatPage from "./pages/SecretariatPage";
 import CommissionersPage from "./pages/CommissionersPage";
+import TendersPage from "./pages/TendersPage";
 
 function PlaceholderPage({ title, description }: { title: string; description: string }) {
   const [, setLocation] = useLocation();
@@ -99,7 +100,7 @@ function Router() {
         <PlaceholderPage title="Vacancies" description="Current job opportunities at ZMC" />
       </Route>
       <Route path="/tenders">
-        <PlaceholderPage title="Tenders" description="Current tender opportunities" />
+        <TendersPage onNavigate={handleNavigate} />
       </Route>
       <Route>
         <HomePage onNavigate={handleNavigate} />

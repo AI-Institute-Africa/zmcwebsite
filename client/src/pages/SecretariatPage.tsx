@@ -8,8 +8,7 @@ export default function SecretariatPage({ onNavigate }: SecretariatPageProps) {
   const secretariatTeam = {
     head: {
       title: "Secretary",
-      name: "To be announced",
-      description: "Chief Executive Officer of the Commission, responsible for overall administration and implementation of Commission policies.",
+      scope: "Chief Executive Officer responsible for administration and policy implementation",
       icon: Briefcase,
     },
     departments: [
@@ -111,7 +110,7 @@ export default function SecretariatPage({ onNavigate }: SecretariatPageProps) {
                   {secretariatTeam.head.title}
                 </h3>
                 <p className="text-xs md:text-sm mb-3" style={{ color: "var(--neutral-600)" }}>
-                  {secretariatTeam.head.description}
+                  {secretariatTeam.head.scope}
                 </p>
                 <span 
                   className="inline-block py-1 px-3 rounded-full text-xs font-semibold"
