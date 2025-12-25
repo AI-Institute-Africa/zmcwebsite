@@ -105,11 +105,11 @@ export default function Hero({ onNavigate }: HeroProps) {
 
       {/* Stats Bar */}
       <section className="py-8 md:py-12 px-4 md:px-8" style={{ background: "var(--white)" }}>
-        <div className="max-w-[1200px] mx-auto grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-6">
+        <div className="max-w-[1200px] mx-auto grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
           {stats.map((stat, index) => (
             <div
               key={index}
-              className="text-center p-4 md:p-6 rounded-xl md:rounded-2xl transition-all hover:scale-105"
+              className="text-center p-5 md:p-6 rounded-xl md:rounded-2xl transition-all hover:scale-105"
               style={{
                 background: "var(--primary-lighter)",
                 border: "1px solid var(--neutral-200)",
@@ -120,12 +120,12 @@ export default function Hero({ onNavigate }: HeroProps) {
                 <stat.icon className="w-7 h-7 md:w-10 md:h-10 mx-auto" />
               </div>
               <div
-                className="text-xl md:text-[2.5rem] font-bold whitespace-nowrap"
+                className="text-lg md:text-[2.25rem] font-bold whitespace-nowrap tracking-tight"
                 style={{ color: "var(--primary)", fontFamily: "var(--font-serif)" }}
               >
                 {stat.number}
               </div>
-              <div className="text-xs md:text-[0.9rem]" style={{ color: "var(--neutral-500)" }}>
+              <div className="text-[11px] md:text-[0.9rem] mt-1" style={{ color: "var(--neutral-500)" }}>
                 {stat.label}
               </div>
             </div>

@@ -137,13 +137,13 @@ export default function CommissionersPage({ onNavigate }: CommissionersPageProps
               </div>
             </div>
 
-            {/* Connecting Line */}
-            <div className="hidden md:flex justify-center mb-4">
-              <div className="w-1 h-10" style={{ background: "var(--accent)" }} />
+            {/* Connecting Line from Chairperson */}
+            <div className="hidden md:flex justify-center">
+              <div className="w-0.5 h-8" style={{ background: "var(--accent)" }} />
             </div>
 
             {/* Vice Chairperson */}
-            <div className="flex justify-center mb-6 md:mb-10">
+            <div className="flex justify-center mb-6 md:mb-8">
               <div
                 className="bg-white rounded-xl p-5 md:p-6 text-center max-w-[350px] w-full"
                 style={{ 
@@ -172,19 +172,13 @@ export default function CommissionersPage({ onNavigate }: CommissionersPageProps
               </div>
             </div>
 
-            {/* Connecting Lines for Desktop */}
-            <div className="hidden md:flex justify-center mb-4">
-              <div className="w-1 h-8" style={{ background: "var(--primary-light)" }} />
-            </div>
-            <div className="hidden md:block relative mb-4">
-              <div 
-                className="absolute left-[10%] right-[10%] h-1 top-0"
-                style={{ background: "var(--primary-light)" }}
-              />
+            {/* Connecting Line to Commissioners */}
+            <div className="hidden md:flex justify-center">
+              <div className="w-0.5 h-6" style={{ background: "var(--primary-light)" }} />
             </div>
 
             {/* Commissioners Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 md:gap-5">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 md:gap-5 pt-2">
               {commissioners.members.map((member, index) => (
                 <div
                   key={index}
@@ -194,11 +188,6 @@ export default function CommissionersPage({ onNavigate }: CommissionersPageProps
                     border: "1px solid var(--neutral-200)",
                   }}
                 >
-                  {/* Connecting line for desktop */}
-                  <div 
-                    className="hidden md:block absolute -top-4 left-1/2 w-1 h-4"
-                    style={{ background: "var(--primary-light)", transform: "translateX(-50%)" }}
-                  />
                   
                   <div 
                     className="w-12 h-12 md:w-14 md:h-14 rounded-full mx-auto mb-3 flex items-center justify-center"
