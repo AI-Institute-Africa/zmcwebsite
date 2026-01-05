@@ -50,9 +50,11 @@ export default function Hero({ onNavigate }: HeroProps) {
                 >
                   Learn More
                 </button>
-                <button
-                  onClick={() => onNavigate("accreditation")}
-                  className="py-3 md:py-4 px-6 md:px-8 rounded-xl font-bold text-sm md:text-base border-none cursor-pointer transition-all hover:-translate-y-0.5"
+                <a
+                  href="https://zmc-portalfinal--devgithub1.replit.app"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="py-3 md:py-4 px-6 md:px-8 rounded-xl font-bold text-sm md:text-base border-none cursor-pointer transition-all hover:-translate-y-0.5 no-underline"
                   style={{
                     background: "linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%)",
                     color: "var(--zim-black)",
@@ -61,7 +63,7 @@ export default function Hero({ onNavigate }: HeroProps) {
                   data-testid="button-get-accredited"
                 >
                   Get Accredited
-                </button>
+                </a>
               </div>
             </div>
 

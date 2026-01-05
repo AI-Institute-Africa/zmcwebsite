@@ -145,9 +145,11 @@ export default function AboutPage({ onNavigate }: AboutPageProps) {
               Explore our services or get in touch with us
             </p>
             <div className="flex gap-4 justify-center relative flex-wrap">
-              <button
-                onClick={() => onNavigate("accreditation")}
-                className="py-3 px-8 rounded-xl font-semibold text-base border-none cursor-pointer transition-all hover:-translate-y-0.5"
+              <a
+                href="https://zmc-portalfinal--devgithub1.replit.app"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="py-3 px-8 rounded-xl font-semibold text-base border-none cursor-pointer transition-all hover:-translate-y-0.5 no-underline"
                 style={{
                   background: "linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%)",
                   color: "var(--zim-black)",
@@ -155,7 +157,7 @@ export default function AboutPage({ onNavigate }: AboutPageProps) {
                 data-testid="button-about-accreditation"
               >
                 Get Accredited
-              </button>
+              </a>
               <button
                 onClick={() => onNavigate("contact")}
                 className="py-3 px-8 rounded-xl font-semibold text-base cursor-pointer transition-all hover:-translate-y-0.5"
