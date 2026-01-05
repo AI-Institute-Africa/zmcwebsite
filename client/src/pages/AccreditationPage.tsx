@@ -5,8 +5,8 @@ interface AccreditationPageProps {
   onNavigate: (page: string) => void;
 }
 
-// Portal URL - update this when the link is available
-const PORTAL_URL = "#"; // Replace with actual portal URL when available
+// Portal URL for accreditation applications
+const PORTAL_URL = "https://zmc-portalfinal--devgithub1.replit.app";
 
 export default function AccreditationPage({ onNavigate }: AccreditationPageProps) {
   const [showModal, setShowModal] = useState(false);

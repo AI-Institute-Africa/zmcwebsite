@@ -5,8 +5,8 @@ interface RegistrationPageProps {
   onNavigate: (page: string) => void;
 }
 
-// Portal URL - update this when the link is available
-const PORTAL_URL = "#"; // Replace with actual portal URL when available
+// Portal URL for media registration
+const PORTAL_URL = "https://zmc-portalfinal--devgithub1.replit.app";
 
 export default function RegistrationPage({ onNavigate }: RegistrationPageProps) {
   const [showModal, setShowModal] = useState(false);
