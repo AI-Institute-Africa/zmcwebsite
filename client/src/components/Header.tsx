@@ -299,9 +299,11 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
               <Building2 className="w-4 h-4" />
               Registration
             </Link>
-            <Link
-              href="/accreditation"
-              className="py-2.5 px-5 rounded-[10px] font-semibold text-sm border-none flex items-center gap-2 text-white transition-all hover:-translate-y-0.5 no-underline active:scale-95"
+            <a
+              href="https://f17c25d1-8d60-4751-b64c-aadbdeaf0836-00-mtsfdj8ol3sm.worf.replit.dev/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="py-2.5 px-5 rounded-[10px] font-semibold text-sm border-none flex items-center gap-2 text-white transition-all hover:-translate-y-0.5 no-underline active:scale-95 cursor-pointer"
               style={{
                 background: "linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%)",
                 boxShadow: "0 3px 12px rgba(27, 94, 32, 0.25)",
@@ -309,8 +311,8 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
               data-testid="button-accreditation-header"
             >
               <BadgeCheck className="w-4 h-4" />
-              Accreditation
-            </Link>
+              Get Accredited
+            </a>
             <Link
               href="/complaints"
               className="py-2.5 px-5 rounded-[10px] font-semibold text-sm border-none flex items-center gap-2 text-white transition-all hover:-translate-y-0.5 no-underline active:scale-95"
@@ -323,9 +325,11 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
               <Scale className="w-4 h-4" />
               Complaints
             </Link>
-            <button
-              onClick={() => window.open("#portal", "_blank")}
-              className="py-2.5 px-5 rounded-[10px] font-bold text-sm border-none flex items-center gap-2 transition-all hover:-translate-y-0.5 active:scale-95"
+            <a
+              href="https://f17c25d1-8d60-4751-b64c-aadbdeaf0836-00-mtsfdj8ol3sm.worf.replit.dev/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="py-2.5 px-5 rounded-[10px] font-bold text-sm border-none flex items-center gap-2 transition-all hover:-translate-y-0.5 active:scale-95 no-underline cursor-pointer"
               style={{
                 background: "linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%)",
                 color: "var(--zim-black)",
@@ -335,7 +339,7 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
             >
               <ExternalLink className="w-4 h-4" />
               Portal
-            </button>
+            </a>
           </div>
         </div>
       </div>
