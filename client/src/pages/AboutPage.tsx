@@ -146,7 +146,7 @@ export default function AboutPage({ onNavigate }: AboutPageProps) {
             </p>
             <div className="flex gap-4 justify-center relative flex-wrap">
               <a
-                href="https://zmc-portalfinal--devgithub1.replit.app"
+                href="https://f17c25d1-8d60-4751-b64c-aadbdeaf0836-00-mtsfdj8ol3sm.worf.replit.dev/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="py-3 px-8 rounded-xl font-semibold text-base border-none cursor-pointer transition-all hover:-translate-y-0.5 no-underline"
