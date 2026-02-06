@@ -473,7 +473,8 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
                 {[
                   { label: "Accreditation", path: "/accreditation" },
                   { label: "Registration", path: "/registration" },
-                  { label: "Complaints & Appeals", path: "/complaints" },
+                  { label: "Complaints", path: "/complaints" },
+                  { label: "Appeals (FOIA)", path: "/appeals" },
                 ].map((item) => (
                   <Link
                     key={item.path}
@@ -712,7 +713,8 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
                 {[
                   { label: "Accreditation", path: "/accreditation" },
                   { label: "Registration", path: "/registration" },
-                  { label: "Complaints & Appeals", path: "/complaints" },
+                  { label: "Complaints", path: "/complaints" },
+                  { label: "Appeals (FOIA)", path: "/appeals" },
                 ].map((item) => (
                   <Link
                     key={item.path}

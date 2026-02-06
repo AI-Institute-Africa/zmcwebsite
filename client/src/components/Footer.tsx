@@ -17,7 +17,8 @@ export default function Footer({ onNavigate }: FooterProps) {
   const services = [
     { label: "Media Accreditation", path: "/accreditation" },
     { label: "Media Registration", path: "/registration" },
-    { label: "Complaints & Appeals", path: "/complaints" },
+    { label: "Complaints", path: "/complaints" },
+    { label: "Appeals (FOIA)", path: "/appeals" },
     { label: "Training Programs", path: "/events" },
   ];
 

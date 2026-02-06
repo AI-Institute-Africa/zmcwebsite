@@ -12,6 +12,7 @@ import AboutPage from "./pages/AboutPage";
 import AccreditationPage from "./pages/AccreditationPage";
 import RegistrationPage from "./pages/RegistrationPage";
 import ComplaintsPage from "./pages/ComplaintsPage";
+import AppealsPage from "./pages/AppealsPage";
 import DownloadsPage from "./pages/DownloadsPage";
 import EventsPage from "./pages/EventsPage";
 import ContactPage from "./pages/ContactPage";
@@ -88,6 +89,9 @@ function Router() {
       </Route>
       <Route path="/complaints">
         <ComplaintsPage onNavigate={handleNavigate} />
+      </Route>
+      <Route path="/appeals">
+        <AppealsPage onNavigate={handleNavigate} />
       </Route>
       <Route path="/downloads">
         <DownloadsPage onNavigate={handleNavigate} />
