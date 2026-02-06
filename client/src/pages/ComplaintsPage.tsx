@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FilePen, CheckCircle, Download, AlertTriangle, Newspaper, Radio, Tv, Globe, Scale } from "lucide-react";
 
 interface ComplaintsPageProps {
@@ -11,6 +11,20 @@ export default function ComplaintsPage({ onNavigate }: ComplaintsPageProps) {
   const [fileError, setFileError] = useState("");
 
   const MAX_FILE_SIZE = 10 * 1024 * 1024;
+
+  useEffect(() => {
+    if (showComplaintModal) {
+      document.body.style.overflow = "hidden";
+      document.documentElement.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+      document.documentElement.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+      document.documentElement.style.overflow = "";
+    };
+  }, [showComplaintModal]);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
@@ -185,8 +199,8 @@ export default function ComplaintsPage({ onNavigate }: ComplaintsPageProps) {
 
       {/* Complaint Modal */}
       {showComplaintModal && (
-        <div className="fixed inset-0 flex items-center justify-center z-[2000] p-4" style={{ background: "rgba(0,0,0,0.5)" }} onClick={() => setShowComplaintModal(false)}>
-          <div className="bg-white rounded-2xl md:rounded-3xl max-w-[600px] w-full max-h-[90vh] overflow-y-auto" style={{ animation: "modalFadeIn 0.5s ease" }} onClick={(e) => e.stopPropagation()}>
+        <div className="modal-overlay fixed inset-0 flex items-center justify-center z-[2000] p-4" style={{ background: "rgba(0,0,0,0.45)" }} onClick={() => setShowComplaintModal(false)}>
+          <div className="modal-content bg-white rounded-2xl md:rounded-3xl max-w-[600px] w-full max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
             {formSubmitted ? (
               <div className="p-8 md:p-12 text-center">
                 <div className="w-16 h-16 md:w-20 md:h-20 rounded-full mx-auto mb-6 flex items-center justify-center text-white" style={{ background: "linear-gradient(135deg, #22c55e 0%, #16a34a 100%)" }}>

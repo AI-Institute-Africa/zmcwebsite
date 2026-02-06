@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { BadgeCheck, FileText, Camera, Briefcase, CreditCard, CheckCircle, X, ExternalLink } from "lucide-react";
 
 interface AccreditationPageProps {
@@ -11,6 +11,20 @@ const PORTAL_URL = "https://f17c25d1-8d60-4751-b64c-aadbdeaf0836-00-mtsfdj8ol3sm
 export default function AccreditationPage({ onNavigate }: AccreditationPageProps) {
   const [showModal, setShowModal] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
+
+  useEffect(() => {
+    if (showModal) {
+      document.body.style.overflow = "hidden";
+      document.documentElement.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+      document.documentElement.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+      document.documentElement.style.overflow = "";
+    };
+  }, [showModal]);
   
   const openPortal = () => {
     if (PORTAL_URL && PORTAL_URL !== "#") {
@@ -208,13 +222,12 @@ export default function AccreditationPage({ onNavigate }: AccreditationPageProps
       {/* Modal */}
       {showModal && (
         <div
-          className="fixed inset-0 flex items-center justify-center z-[2000] p-4"
-          style={{ background: "rgba(0,0,0,0.5)" }}
+          className="modal-overlay fixed inset-0 flex items-center justify-center z-[2000] p-4"
+          style={{ background: "rgba(0,0,0,0.45)" }}
           onClick={() => setShowModal(false)}
         >
           <div
-            className="bg-white rounded-3xl max-w-[600px] w-full max-h-[90vh] overflow-y-auto"
-            style={{ animation: "modalFadeIn 0.5s ease" }}
+            className="modal-content bg-white rounded-3xl max-w-[600px] w-full max-h-[90vh] overflow-y-auto"
             onClick={(e) => e.stopPropagation()}
           >
             {formSubmitted ? (
