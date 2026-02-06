@@ -28,6 +28,7 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
   const [aboutOpen, setAboutOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
   const [opportunitiesOpen, setOpportunitiesOpen] = useState(false);
+  const [mediaCentreOpen, setMediaCentreOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [unreadCount, setUnreadCount] = useState(3);
   const [, setLocation] = useLocation();
@@ -86,6 +87,7 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
     setAboutOpen(false);
     setServicesOpen(false);
     setOpportunitiesOpen(false);
+    setMediaCentreOpen(false);
   };
 
   const markAllRead = () => {
@@ -534,8 +536,53 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
               </div>
             </li>
 
+            {/* Media Centre Dropdown */}
+            <li className="relative">
+              <button
+                onClick={() => {
+                  setMediaCentreOpen(!mediaCentreOpen);
+                  setAboutOpen(false);
+                  setServicesOpen(false);
+                  setOpportunitiesOpen(false);
+                }}
+                className="block py-6 px-4 font-medium text-[0.95rem] flex items-center gap-1 transition-all hover:text-[var(--primary)] bg-transparent border-none cursor-pointer"
+                style={{ color: "var(--neutral-700)" }}
+                data-testid="nav-media-centre"
+              >
+                Media Centre
+                <ChevronDown
+                  className={`w-3 h-3 transition-transform ${mediaCentreOpen ? "rotate-180" : ""}`}
+                />
+              </button>
+              <div
+                className={`absolute top-full left-0 bg-white min-w-[220px] rounded-2xl overflow-hidden z-[100] transition-all ${
+                  mediaCentreOpen ? "opacity-100 visible translate-y-0" : "opacity-0 invisible translate-y-2.5"
+                }`}
+                style={{ boxShadow: "var(--shadow-lg)" }}
+              >
+                {[
+                  { label: "Downloads", path: "/downloads" },
+                  { label: "Press Releases", path: "/press-releases" },
+                  { label: "Magazine", path: "/magazine" },
+                ].map((item) => (
+                  <Link
+                    key={item.path}
+                    href={item.path}
+                    onClick={() => closeAllDropdowns()}
+                    className="block py-3.5 px-5 text-[0.9rem] border-b transition-all hover:pl-6 no-underline"
+                    style={{
+                      color: "var(--neutral-700)",
+                      borderColor: "var(--neutral-100)",
+                    }}
+                    data-testid={`nav-${item.path.slice(1)}`}
+                  >
+                    {item.label}
+                  </Link>
+                ))}
+              </div>
+            </li>
+
             {[
-              { label: "Downloads", path: "/downloads" },
               { label: "Events", path: "/events" },
               { label: "Contact", path: "/contact" },
             ].map((item) => (
@@ -708,8 +755,36 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
               </div>
             </div>
 
+            {/* Media Centre Section */}
+            <div className="border-b" style={{ borderColor: "var(--neutral-100)" }}>
+              <button
+                onClick={() => setMediaCentreOpen(!mediaCentreOpen)}
+                className="w-full py-3 px-4 flex justify-between items-center bg-transparent border-none cursor-pointer"
+                style={{ color: "var(--neutral-700)" }}
+              >
+                <span>Media Centre</span>
+                <ChevronDown className={`w-4 h-4 transition-transform ${mediaCentreOpen ? "rotate-180" : ""}`} />
+              </button>
+              <div className={`overflow-hidden transition-all ${mediaCentreOpen ? "max-h-40" : "max-h-0"}`}>
+                {[
+                  { label: "Downloads", path: "/downloads" },
+                  { label: "Press Releases", path: "/press-releases" },
+                  { label: "Magazine", path: "/magazine" },
+                ].map((item) => (
+                  <Link
+                    key={item.path}
+                    href={item.path}
+                    onClick={() => handleMobileNavClick(item.path)}
+                    className="block py-2 px-8 text-sm no-underline"
+                    style={{ color: "var(--neutral-600)", background: "var(--neutral-50)" }}
+                  >
+                    {item.label}
+                  </Link>
+                ))}
+              </div>
+            </div>
+
             {[
-              { label: "Downloads", path: "/downloads" },
               { label: "Events", path: "/events" },
               { label: "Contact", path: "/contact" },
             ].map((item) => (

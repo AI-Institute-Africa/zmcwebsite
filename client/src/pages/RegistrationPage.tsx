@@ -28,14 +28,26 @@ export default function RegistrationPage({ onNavigate }: RegistrationPageProps) 
     { number: 4, title: "Get Registered", desc: "Receive your registration certificate" },
   ];
 
-  const requirements = [
-    "Cash flow projections for 12 months",
-    "Editorial Charter",
-    "Code of Ethics",
-    "Certificate of Incorporation",
-    "Company Profile",
-    "Proof of Office Address",
-    "Directors' CVs and IDs",
+  const localRequirements = [
+    "Projected cash flow statement for three years",
+    "Projected balance sheet for three years",
+    "Editorial charter",
+    "Code of ethics",
+    "Code of conduct for employees",
+    "Market analysis",
+    "Certified IDs for directors",
+    "In-house style book",
+    "Attach dummy (copy of publication)",
+    "Attach mission statement",
+    "Attach certificate of incorporation",
+    "Attach memorandum of association",
+  ];
+
+  const foreignRequirements = [
+    "Clearance to operate a representative office from the Ministry of Information, Publicity and Broadcasting Services",
+    "Proof of registration in home country",
+    "Names and certified copies of IDs of people running the representative office",
+    "Contact details (Physical address, email and telephone)",
   ];
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -134,16 +146,44 @@ export default function RegistrationPage({ onNavigate }: RegistrationPageProps) 
             </div>
           </div>
 
-          {/* Requirements */}
-          <div className="rounded-2xl p-8 mb-8" style={{ background: "var(--primary-soft)", borderLeft: "4px solid var(--primary)" }}>
+          {/* Description */}
+          <div className="bg-white rounded-[20px] p-6 md:p-10 mb-8" style={{ boxShadow: "var(--shadow-sm)", border: "1px solid var(--neutral-100)" }}>
+            <h2 style={{ color: "var(--primary)", borderBottom: "2px solid var(--primary-lighter)", paddingBottom: "0.75rem" }}>
+              Registration of Mass Media Services
+            </h2>
+            <p className="leading-relaxed text-sm md:text-base" style={{ color: "var(--neutral-600)" }}>
+              Registration of mass media services is provided for by Statutory 169C of 2002. The Statutory Instrument prescribes 
+              the manner and form in which an individual can lodge an application for registration with the Zimbabwe Media Commission. 
+              Statutory Instrument 65 of 2022 prescribes the fees payable for registration.
+            </p>
+          </div>
+
+          {/* Requirements - Local */}
+          <div className="rounded-2xl p-6 md:p-8 mb-6" style={{ background: "var(--primary-soft)", borderLeft: "4px solid var(--primary)" }}>
             <h3 className="flex items-center gap-2 mb-4" style={{ color: "var(--primary)" }}>
               <FileText className="w-6 h-6" />
-              Required Documents
+              Requirements - Local Media Organizations
             </h3>
-            <ul className="list-none pl-6">
-              {requirements.map((req, index) => (
-                <li key={index} className="relative pl-6 mb-3" style={{ color: "var(--neutral-700)" }}>
+            <ul className="list-none pl-4 md:pl-6">
+              {localRequirements.map((req, index) => (
+                <li key={index} className="relative pl-6 mb-3 text-sm md:text-base" style={{ color: "var(--neutral-700)" }}>
                   <span className="absolute left-0 font-bold text-lg" style={{ color: "var(--primary)" }}>•</span>
+                  {req}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Requirements - Foreign */}
+          <div className="rounded-2xl p-6 md:p-8 mb-8" style={{ background: "var(--accent-soft)", borderLeft: "4px solid var(--accent)" }}>
+            <h3 className="flex items-center gap-2 mb-4" style={{ color: "var(--accent-dark)" }}>
+              <FileText className="w-6 h-6" />
+              Requirements - Representative Office of Foreign Mass Media Service
+            </h3>
+            <ul className="list-none pl-4 md:pl-6">
+              {foreignRequirements.map((req, index) => (
+                <li key={index} className="relative pl-6 mb-3 text-sm md:text-base" style={{ color: "var(--neutral-700)" }}>
+                  <span className="absolute left-0 font-bold text-lg" style={{ color: "var(--accent-dark)" }}>•</span>
                   {req}
                 </li>
               ))}

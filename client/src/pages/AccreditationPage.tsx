@@ -28,13 +28,20 @@ export default function AccreditationPage({ onNavigate }: AccreditationPageProps
     { number: 4, title: "Get Accredited", desc: "Receive your accreditation card" },
   ];
 
-  const requirements = [
-    "Certified copy of National ID or Passport",
-    "Two recent passport-size photographs",
-    "Certified copies of academic qualifications",
-    "Portfolio or samples of published work",
-    "Letter of recommendation from employer",
-    "Proof of employment or freelance work",
+  const localRequirements = [
+    "Certified copy of National Identity card",
+    "One passport sized photograph",
+    "Certified copy of professional and academic qualifications or sample of past work done",
+    "Where certificates are not available, applicant must submit five samples of past work done",
+    "Any other relevant reference materials such as a stamped letter from the employer or media house or professional association, testimonial, and/or referral from a media organisation/institution",
+    "An accreditation fee as prescribed",
+  ];
+
+  const foreignRequirements = [
+    "Copy of a valid passport",
+    "One passport size photograph",
+    "Temporary Employment Permit (TEP) / Clearance from the Ministry of Information, Publicity and Broadcasting Services",
+    "An accreditation fee as prescribed",
   ];
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -133,16 +140,47 @@ export default function AccreditationPage({ onNavigate }: AccreditationPageProps
             </div>
           </div>
 
-          {/* Requirements */}
-          <div className="rounded-2xl p-8 mb-8" style={{ background: "var(--primary-soft)", borderLeft: "4px solid var(--primary)" }}>
+          {/* Description */}
+          <div className="bg-white rounded-[20px] p-6 md:p-10 mb-8" style={{ boxShadow: "var(--shadow-sm)", border: "1px solid var(--neutral-100)" }}>
+            <h2 style={{ color: "var(--primary)", borderBottom: "2px solid var(--primary-lighter)", paddingBottom: "0.75rem" }}>
+              Accreditation of Journalists and Media Practitioners
+            </h2>
+            <p className="leading-relaxed text-sm md:text-base" style={{ color: "var(--neutral-600)" }}>
+              Accreditation of journalists and media practitioners employed in the media is provided for by Statutory 169C of 2002. 
+              The Statutory Instrument prescribes the manner and form in which an individual can lodge an application for accreditation 
+              with the Zimbabwe Media Commission. Statutory Instrument 65 of 2022 prescribes the fees payable for accreditation.
+            </p>
+          </div>
+
+          {/* Requirements - Local */}
+          <div className="rounded-2xl p-6 md:p-8 mb-6" style={{ background: "var(--primary-soft)", borderLeft: "4px solid var(--primary)" }}>
             <h3 className="flex items-center gap-2 mb-4" style={{ color: "var(--primary)" }}>
               <FileText className="w-6 h-6" />
-              Required Documents
+              Requirements - Local Media Practitioners
             </h3>
-            <ul className="list-none pl-6">
-              {requirements.map((req, index) => (
-                <li key={index} className="relative pl-6 mb-3" style={{ color: "var(--neutral-700)" }}>
+            <p className="text-sm mb-4" style={{ color: "var(--neutral-600)" }}>
+              An application form for accreditation must be accompanied by the following:
+            </p>
+            <ul className="list-none pl-4 md:pl-6">
+              {localRequirements.map((req, index) => (
+                <li key={index} className="relative pl-6 mb-3 text-sm md:text-base" style={{ color: "var(--neutral-700)" }}>
                   <span className="absolute left-0 font-bold text-lg" style={{ color: "var(--primary)" }}>•</span>
+                  {req}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Requirements - Foreign */}
+          <div className="rounded-2xl p-6 md:p-8 mb-8" style={{ background: "var(--accent-soft)", borderLeft: "4px solid var(--accent)" }}>
+            <h3 className="flex items-center gap-2 mb-4" style={{ color: "var(--accent-dark)" }}>
+              <FileText className="w-6 h-6" />
+              Requirements - Foreign Media Practitioners
+            </h3>
+            <ul className="list-none pl-4 md:pl-6">
+              {foreignRequirements.map((req, index) => (
+                <li key={index} className="relative pl-6 mb-3 text-sm md:text-base" style={{ color: "var(--neutral-700)" }}>
+                  <span className="absolute left-0 font-bold text-lg" style={{ color: "var(--accent-dark)" }}>•</span>
                   {req}
                 </li>
               ))}

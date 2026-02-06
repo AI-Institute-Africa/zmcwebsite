@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ClipboardList, FilePen, Scale, CheckCircle, Download, AlertTriangle, Newspaper, Radio, Tv, Globe } from "lucide-react";
+import { ClipboardList, FilePen, Scale, CheckCircle, Download, AlertTriangle, Newspaper, Radio, Tv, Globe, Upload } from "lucide-react";
 
 interface ComplaintsPageProps {
   onNavigate: (page: string) => void;
@@ -295,6 +295,20 @@ export default function ComplaintsPage({ onNavigate }: ComplaintsPageProps) {
                     <label className="block mb-2 font-medium text-sm" style={{ color: "var(--neutral-700)" }}>Complaint Details *</label>
                     <textarea required rows={4} placeholder="Describe your complaint in detail..." className="w-full py-2.5 md:py-3 px-4 rounded-xl text-sm md:text-base" style={{ border: "2px solid var(--neutral-200)", background: "var(--neutral-50)" }} />
                   </div>
+                  <div className="mb-4">
+                    <label className="block mb-2 font-medium text-sm" style={{ color: "var(--neutral-700)" }}>Upload Supporting Documents</label>
+                    <div className="relative">
+                      <input 
+                        type="file" 
+                        multiple 
+                        accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" 
+                        className="w-full py-2.5 md:py-3 px-4 rounded-xl text-sm md:text-base file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:cursor-pointer" 
+                        style={{ border: "2px solid var(--neutral-200)", background: "var(--neutral-50)" }} 
+                        data-testid="input-complaint-file-upload"
+                      />
+                    </div>
+                    <p className="text-xs mt-1" style={{ color: "var(--neutral-500)" }}>Accepted: PDF, DOC, DOCX, JPG, PNG (max 10MB each)</p>
+                  </div>
                   <div className="flex gap-3 justify-end flex-wrap">
                     <button type="button" onClick={() => setShowComplaintModal(false)} className="py-2.5 md:py-3 px-5 md:px-6 rounded-xl font-semibold border-none transition-all active:scale-95 text-sm md:text-base" style={{ background: "var(--neutral-200)" }}>Cancel</button>
                     <button type="submit" className="py-2.5 md:py-3 px-5 md:px-6 rounded-xl font-semibold border-none text-white transition-all active:scale-95 text-sm md:text-base" style={{ background: "linear-gradient(135deg, #dc2626 0%, #b91c1c 100%)" }}>Submit Complaint</button>
@@ -361,6 +375,20 @@ export default function ComplaintsPage({ onNavigate }: ComplaintsPageProps) {
                   <div className="mb-4">
                     <label className="block mb-2 font-medium text-sm" style={{ color: "var(--neutral-700)" }}>Appeal Details *</label>
                     <textarea required rows={4} placeholder="Describe the information you requested and why you believe the decision should be reviewed..." className="w-full py-2.5 md:py-3 px-4 rounded-xl text-sm md:text-base" style={{ border: "2px solid var(--neutral-200)", background: "var(--neutral-50)" }} />
+                  </div>
+                  <div className="mb-4">
+                    <label className="block mb-2 font-medium text-sm" style={{ color: "var(--neutral-700)" }}>Upload Appeal Application Form & Documents</label>
+                    <div className="relative">
+                      <input 
+                        type="file" 
+                        multiple 
+                        accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" 
+                        className="w-full py-2.5 md:py-3 px-4 rounded-xl text-sm md:text-base file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:cursor-pointer" 
+                        style={{ border: "2px solid var(--neutral-200)", background: "var(--neutral-50)" }} 
+                        data-testid="input-appeal-file-upload"
+                      />
+                    </div>
+                    <p className="text-xs mt-1" style={{ color: "var(--neutral-500)" }}>Accepted: PDF, DOC, DOCX, JPG, PNG (max 10MB each)</p>
                   </div>
                   <div className="flex gap-3 justify-end flex-wrap">
                     <button type="button" onClick={() => setShowAppealModal(false)} className="py-2.5 md:py-3 px-5 md:px-6 rounded-xl font-semibold border-none transition-all active:scale-95 text-sm md:text-base" style={{ background: "var(--neutral-200)" }}>Cancel</button>

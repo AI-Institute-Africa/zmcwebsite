@@ -1,10 +1,23 @@
-import { Target, Eye, Heart, Users, Shield, Award } from "lucide-react";
+import { Target, Eye, Heart, Users, Shield, Award, BookOpen, Globe, Radio, Scale, Megaphone, Lightbulb } from "lucide-react";
 
 interface AboutPageProps {
   onNavigate: (page: string) => void;
 }
 
 export default function AboutPage({ onNavigate }: AboutPageProps) {
+  const functions = [
+    { icon: Shield, title: "Uphold Media Freedom", desc: "To uphold, promote and develop freedom of the media" },
+    { icon: Award, title: "Ethics & Good Practice", desc: "To promote and enforce good practices and ethics in the media" },
+    { icon: Radio, title: "Monitor Broadcasting", desc: "To monitor broadcasting in the public interest and ensure fairness and diversity of views broadly representing the Zimbabwean society" },
+    { icon: BookOpen, title: "Codes of Conduct", desc: "To encourage the formulation of codes of conduct for persons employed in the media and, where no such code exists, to formulate and enforce one" },
+    { icon: Scale, title: "Complaints Handling", desc: "To receive and consider complaints from the public and take action against journalists and other persons employed in the media or broadcasting who are found to have breached any law or code of conduct" },
+    { icon: Globe, title: "Access to Information", desc: "To ensure that the people of Zimbabwe have fair and wide access to information" },
+    { icon: Megaphone, title: "Language Development", desc: "To encourage the use and development of all the officially recognised languages of Zimbabwe" },
+    { icon: Lightbulb, title: "New Technology", desc: "To encourage the adoption of new technology in the media and in the dissemination of information" },
+    { icon: Users, title: "Fair Competition", desc: "To promote fair competition and diversity in the media" },
+    { icon: Target, title: "Research & Reform", desc: "To conduct research into issues relating to freedom of the press and of expression, and to promote reforms in the law" },
+  ];
+
   return (
     <div className="animate-fadeIn pt-[130px]">
       {/* Page Header */}
@@ -15,7 +28,7 @@ export default function AboutPage({ onNavigate }: AboutPageProps) {
         <div className="absolute top-0 right-0 w-1/2 h-full" style={{ background: "radial-gradient(circle at 70% 50%, rgba(255,255,255,0.1) 0%, transparent 50%)" }} />
         <h1 className="text-white mb-3 relative">About ZMC</h1>
         <p className="text-white/85 max-w-[600px] mx-auto text-lg relative">
-          Learn about the Zimbabwe Media Commission and our mission
+          Learn about the Zimbabwe Media Commission and our mandate
         </p>
         <div className="flex justify-center gap-2 mt-6 text-[0.9rem]">
           <a
@@ -31,45 +44,73 @@ export default function AboutPage({ onNavigate }: AboutPageProps) {
       </div>
 
       {/* Content */}
-      <div className="py-16 px-8">
+      <div className="py-16 px-4 md:px-8">
         <div className="max-w-[1000px] mx-auto">
-          {/* Introduction */}
+          {/* Introduction / Purpose & General Mandate */}
           <div
-            className="bg-white rounded-[20px] p-10 mb-8 transition-all"
+            className="bg-white rounded-[20px] p-6 md:p-10 mb-8 transition-all"
             style={{ boxShadow: "var(--shadow-sm)", border: "1px solid var(--neutral-100)" }}
           >
             <h2 style={{ color: "var(--primary)", borderBottom: "2px solid var(--primary-lighter)", paddingBottom: "0.75rem" }}>
-              Who We Are
+              Purpose & General Mandate
             </h2>
-            <p className="text-lg leading-relaxed">
-              The Zimbabwe Media Commission (ZMC) is a constitutional body established under Section 249 of the Constitution of Zimbabwe to uphold, promote and develop freedom of the media. The Commission is independent and not subject to the direction or control of anyone.
+            <p className="text-base md:text-lg leading-relaxed" style={{ color: "var(--neutral-700)" }}>
+              The Zimbabwe Media Commission (ZMC) is one of the Chapter 12 Independent Commissions whose purpose is the 
+              entrenchment of a democratic society driven by respect for the Constitution, rule of law, democracy and human rights 
+              among other objectives. The Commission's major focus is on the promotion and protection of freedom of expression 
+              and of the media; and the promotion of accountable governance through facilitating public access to information held 
+              by public entities for the purposes of transparency, accountability and protection of human rights.
             </p>
-            <p className="leading-relaxed">
-              ZMC is mandated to register and accredit media practitioners, receive and process complaints from the public, promote ethical conduct in the media, and ensure that the media covers all aspects of Zimbabwean society in a fair and balanced manner.
+            <p className="leading-relaxed text-sm md:text-base" style={{ color: "var(--neutral-600)" }}>
+              The ZMC plays its critical role in the media and information sector as part of the Chapter 12 Independent Commissions 
+              whose major purpose is to contribute towards a democratic Zimbabwe with constitutionalism as a shared value. The ZMC, 
+              like other Independent Commissions, is expected to monitor compliance with Constitutional provisions across the public 
+              and private sectors, to receive complaints from the public and to take appropriate action where necessary.
+            </p>
+            <p className="leading-relaxed text-sm md:text-base" style={{ color: "var(--neutral-600)" }}>
+              Apart from Constitutional provisions, the ZMC is guided by the Freedom of Information Act (FOIA) [Chapter 10:33] and 
+              the Zimbabwe Media Commission Act [Chapter 10:35]. Under the FOIA, the Commission is required to review decisions 
+              relating to access to information held by public entities and to rectify any failure to meet prescribed standards. The 
+              Commission receives appeals from members of the public who are denied access to requested information as per the 
+              provisions of the law.
+            </p>
+            <p className="leading-relaxed text-sm md:text-base" style={{ color: "var(--neutral-600)" }}>
+              The ZMC Act also requires the Commission to investigate any action that threatens freedom of the press and of expression. 
+              The Commission can institute inquiries and investigations on any development that threatens the right to free expression 
+              and the right of the media as provided by Section 61 of the Constitution.
+            </p>
+            <p className="leading-relaxed text-sm md:text-base" style={{ color: "var(--neutral-600)" }}>
+              In line with Statutory Instrument 169C of 2002 and Statutory Instrument 10 of 2004, the Commission registers all mass 
+              media services and accredits journalists who choose to be accredited. The Commission keeps a register of both accredited 
+              media practitioners and registered mass media services.
+            </p>
+            <p className="leading-relaxed text-sm md:text-base" style={{ color: "var(--neutral-600)" }}>
+              Through the ZMC Act the Commission administers the Media Fund whose major purpose is the standardization of mass media 
+              services in Zimbabwe.
             </p>
           </div>
 
-          {/* Mission, Vision, Values */}
+          {/* Mission, Vision, Objective */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
             {[
               {
                 icon: Target,
                 title: "Our Mission",
-                content: "To promote and protect freedom of expression and the media while ensuring responsible journalism and a well-informed public.",
+                content: "Enhancing democracy by facilitating access to information and a diverse, plural and ethical media.",
                 color: "var(--primary)",
                 bg: "var(--primary-lighter)",
               },
               {
                 icon: Eye,
                 title: "Our Vision",
-                content: "A media environment that is free, responsible, and accountable, contributing to a democratic and informed society.",
+                content: "Fostering access to information and a professional, national interest-driven media by 2030.",
                 color: "var(--blue)",
                 bg: "var(--blue-light)",
               },
               {
                 icon: Heart,
-                title: "Our Values",
-                content: "Integrity, Independence, Professionalism, Accountability, Transparency, and Respect for Human Rights.",
+                title: "Our Objective",
+                content: "To facilitate the development of an accessible and professional media.",
                 color: "var(--accent-dark)",
                 bg: "var(--accent-soft)",
               },
@@ -95,21 +136,19 @@ export default function AboutPage({ onNavigate }: AboutPageProps) {
             ))}
           </div>
 
-          {/* Functions */}
+          {/* Functions of the ZMC - Section 249 */}
           <div
-            className="bg-white rounded-[20px] p-10 mb-8 transition-all"
+            className="bg-white rounded-[20px] p-6 md:p-10 mb-8 transition-all"
             style={{ boxShadow: "var(--shadow-sm)", border: "1px solid var(--neutral-100)" }}
           >
             <h2 style={{ color: "var(--primary)", borderBottom: "2px solid var(--primary-lighter)", paddingBottom: "0.75rem" }}>
-              Our Functions
+              Functions of the ZMC
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
-              {[
-                { icon: Users, title: "Media Accreditation", desc: "Accredit journalists and other media practitioners" },
-                { icon: Shield, title: "Media Registration", desc: "Register mass media services and products" },
-                { icon: Award, title: "Ethical Standards", desc: "Promote high professional and ethical standards" },
-                { icon: Target, title: "Complaints Handling", desc: "Receive and process complaints from the public" },
-              ].map((func, index) => (
+            <p className="text-sm md:text-base mb-6" style={{ color: "var(--neutral-600)" }}>
+              Section 249 of the Constitution spells out the functions of the Commission as follows:
+            </p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+              {functions.map((func, index) => (
                 <div
                   key={index}
                   className="flex gap-4 p-4 rounded-xl transition-all hover:bg-[var(--primary-soft)]"
