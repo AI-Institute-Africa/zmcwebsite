@@ -1,48 +1,11 @@
-import { Users, Award, Scale, GraduationCap, Globe } from "lucide-react";
+import { Users, Scale } from "lucide-react";
+import zmcStructureImg from "@assets/zmc_board_structure.png";
 
 interface CommissionersPageProps {
   onNavigate: (page: string) => void;
 }
 
 export default function CommissionersPage({ onNavigate }: CommissionersPageProps) {
-  const commissioners = {
-    chairperson: {
-      title: "Chairperson",
-      scope: "Strategic leadership and oversight of all Commission activities",
-    },
-    viceChairperson: {
-      title: "Vice Chairperson",
-      scope: "Supports the Chairperson and leads in their absence",
-    },
-    members: [
-      {
-        title: "Commissioner",
-        portfolio: "Legal Affairs",
-        scope: "Oversees legal and regulatory compliance matters",
-      },
-      {
-        title: "Commissioner",
-        portfolio: "Ethics & Standards",
-        scope: "Champions ethical journalism and professional standards",
-      },
-      {
-        title: "Commissioner",
-        portfolio: "Accreditation",
-        scope: "Oversees accreditation and registration processes",
-      },
-      {
-        title: "Commissioner",
-        portfolio: "Research & Development",
-        scope: "Leads research initiatives and policy development",
-      },
-      {
-        title: "Commissioner",
-        portfolio: "Public Relations",
-        scope: "Manages stakeholder relations and communications",
-      },
-    ],
-  };
-
   return (
     <div className="animate-fadeIn pt-[100px] md:pt-[130px]">
       {/* Page Header */}
@@ -55,17 +18,18 @@ export default function CommissionersPage({ onNavigate }: CommissionersPageProps
           Leadership and governance of the Zimbabwe Media Commission
         </p>
         <div className="flex justify-center gap-2 mt-6 text-[0.9rem] flex-wrap">
-          <a href="#" onClick={(e) => { e.preventDefault(); onNavigate("home"); }} className="text-white/70 hover:text-white">Home</a>
+          <a href="#" onClick={(e) => { e.preventDefault(); onNavigate("home"); }} className="text-white/70 hover:text-white" data-testid="link-breadcrumb-home">Home</a>
           <span className="text-white/70">/</span>
-          <a href="#" onClick={(e) => { e.preventDefault(); onNavigate("about"); }} className="text-white/70 hover:text-white">About</a>
+          <a href="#" onClick={(e) => { e.preventDefault(); onNavigate("about"); }} className="text-white/70 hover:text-white" data-testid="link-breadcrumb-about">About</a>
           <span className="text-white/70">/</span>
           <span style={{ color: "var(--accent-light)" }}>Board of Commissioners</span>
         </div>
       </div>
 
-      {/* Introduction */}
+      {/* Content */}
       <div className="py-12 md:py-16 px-4 md:px-8">
         <div className="max-w-[1200px] mx-auto">
+          {/* Introduction */}
           <div 
             className="text-center mb-12 md:mb-16 p-6 md:p-10 rounded-2xl"
             style={{ background: "var(--primary-lighter)", border: "1px solid var(--primary-light)" }}
@@ -80,103 +44,30 @@ export default function CommissionersPage({ onNavigate }: CommissionersPageProps
             </p>
           </div>
 
-          {/* Organogram */}
-          <div className="relative">
-            {/* Chairperson - Top Level */}
-            <div className="flex justify-center mb-6 md:mb-10">
-              <div
-                className="bg-white rounded-2xl p-6 md:p-8 text-center max-w-[400px] w-full"
-                style={{ 
-                  boxShadow: "0 8px 32px rgba(212, 175, 55, 0.2)", 
-                  border: "3px solid var(--accent)",
-                }}
-              >
-                <div 
-                  className="w-20 h-20 md:w-24 md:h-24 rounded-full mx-auto mb-4 flex items-center justify-center"
-                  style={{ background: "linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%)" }}
-                >
-                  <Award className="w-10 h-10 md:w-12 md:h-12" style={{ color: "var(--zim-black)" }} />
-                </div>
-                <h3 className="text-lg md:text-xl mb-2" style={{ color: "var(--primary-dark)", fontFamily: "var(--font-serif)" }}>
-                  {commissioners.chairperson.title}
-                </h3>
-                <p className="text-xs md:text-sm" style={{ color: "var(--neutral-600)" }}>
-                  {commissioners.chairperson.scope}
-                </p>
-              </div>
+          {/* Proposed Structure - Exact Image */}
+          <div className="mb-12 md:mb-16">
+            <h2 className="text-center text-xl md:text-2xl mb-6" style={{ color: "var(--primary-dark)" }}>
+              Proposed / Revised Structure
+            </h2>
+            <div 
+              className="bg-white rounded-2xl p-4 md:p-8 overflow-hidden"
+              style={{ boxShadow: "var(--shadow-lg)", border: "1px solid var(--neutral-200)" }}
+            >
+              <img 
+                src={zmcStructureImg} 
+                alt="Zimbabwe Media Commission Proposed / Revised Structure - Establishment 108" 
+                className="w-full h-auto rounded-lg"
+                style={{ maxWidth: "100%" }}
+                data-testid="img-board-structure"
+              />
             </div>
-
-            {/* Connecting Line from Chairperson */}
-            <div className="hidden md:flex justify-center">
-              <div className="w-0.5 h-8" style={{ background: "var(--accent)" }} />
-            </div>
-
-            {/* Vice Chairperson */}
-            <div className="flex justify-center mb-6 md:mb-8">
-              <div
-                className="bg-white rounded-xl p-5 md:p-6 text-center max-w-[350px] w-full"
-                style={{ 
-                  boxShadow: "var(--shadow-lg)", 
-                  border: "2px solid var(--primary-light)",
-                }}
-              >
-                <div 
-                  className="w-14 h-14 md:w-16 md:h-16 rounded-full mx-auto mb-3 flex items-center justify-center"
-                  style={{ background: "linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%)" }}
-                >
-                  <Users className="w-7 h-7 md:w-8 md:h-8 text-white" />
-                </div>
-                <h4 className="text-base md:text-lg mb-2" style={{ color: "var(--primary-dark)", fontFamily: "var(--font-serif)" }}>
-                  {commissioners.viceChairperson.title}
-                </h4>
-                <p className="text-xs md:text-sm" style={{ color: "var(--neutral-600)" }}>
-                  {commissioners.viceChairperson.scope}
-                </p>
-              </div>
-            </div>
-
-            {/* Connecting Line to Commissioners */}
-            <div className="hidden md:flex justify-center">
-              <div className="w-0.5 h-6" style={{ background: "var(--primary-light)" }} />
-            </div>
-
-            {/* Commissioners Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 md:gap-5 pt-2">
-              {commissioners.members.map((member, index) => (
-                <div
-                  key={index}
-                  className="bg-white rounded-xl p-4 md:p-5 text-center relative transition-all hover:-translate-y-1"
-                  style={{ 
-                    boxShadow: "var(--shadow-sm)", 
-                    border: "1px solid var(--neutral-200)",
-                  }}
-                >
-                  
-                  <div 
-                    className="w-12 h-12 md:w-14 md:h-14 rounded-full mx-auto mb-3 flex items-center justify-center"
-                    style={{ background: "var(--neutral-100)", color: "var(--primary)" }}
-                  >
-                    <GraduationCap className="w-6 h-6 md:w-7 md:h-7" />
-                  </div>
-                  <span 
-                    className="inline-block py-0.5 px-2 rounded-md text-[10px] font-medium mb-2"
-                    style={{ background: "var(--accent-soft)", color: "var(--accent-dark)" }}
-                  >
-                    {member.portfolio}
-                  </span>
-                  <h5 className="text-sm md:text-base mb-1" style={{ color: "var(--primary-dark)", fontFamily: "var(--font-serif)" }}>
-                    {member.title}
-                  </h5>
-                  <p className="text-xs" style={{ color: "var(--neutral-500)" }}>
-                    {member.scope}
-                  </p>
-                </div>
-              ))}
-            </div>
+            <p className="text-center mt-4 text-xs md:text-sm" style={{ color: "var(--neutral-500)" }}>
+              Zimbabwe Media Commission Proposed / Revised Structure: Establishment 108
+            </p>
           </div>
 
           {/* Powers and Functions */}
-          <div className="mt-12 md:mt-16 grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div 
               className="bg-white rounded-xl p-6 md:p-8"
               style={{ boxShadow: "var(--shadow-sm)", border: "1px solid var(--neutral-200)" }}
@@ -192,7 +83,7 @@ export default function CommissionersPage({ onNavigate }: CommissionersPageProps
                 ].map((item, idx) => (
                   <li key={idx} className="flex items-start gap-3">
                     <span 
-                      className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5"
+                      className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 text-xs"
                       style={{ background: "var(--primary-lighter)", color: "var(--primary)" }}
                     >
                       {idx + 1}
@@ -217,7 +108,7 @@ export default function CommissionersPage({ onNavigate }: CommissionersPageProps
                 ].map((item, idx) => (
                   <li key={idx} className="flex items-start gap-3">
                     <span 
-                      className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5"
+                      className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 text-xs"
                       style={{ background: "var(--accent-soft)", color: "var(--accent-dark)" }}
                     >
                       {idx + 1}
@@ -233,7 +124,7 @@ export default function CommissionersPage({ onNavigate }: CommissionersPageProps
           <div className="mt-12 text-center">
             <button
               onClick={() => onNavigate("about")}
-              className="py-3 px-6 rounded-xl font-semibold border-none cursor-pointer text-white transition-all hover:-translate-y-0.5 active:scale-95"
+              className="py-3 px-6 rounded-xl font-semibold border-none cursor-pointer text-white transition-all hover:-translate-y-0.5"
               style={{ background: "linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%)" }}
               data-testid="button-about-zmc"
             >
