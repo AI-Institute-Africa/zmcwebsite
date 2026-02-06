@@ -291,7 +291,7 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
           <div className="hidden lg:flex gap-3">
             <Link
               href="/registration"
-              className="py-2.5 px-5 rounded-[10px] font-semibold text-sm border-none flex items-center gap-2 text-white transition-all hover:-translate-y-0.5 no-underline active:scale-95"
+              className="py-2.5 px-5 rounded-[10px] font-semibold text-sm border-none flex items-center gap-2 text-white transition-all hover:-translate-y-0.5 no-underline"
               style={{
                 background: "linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%)",
                 boxShadow: "0 3px 12px rgba(27, 94, 32, 0.25)",
@@ -305,7 +305,7 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
               href="https://f17c25d1-8d60-4751-b64c-aadbdeaf0836-00-mtsfdj8ol3sm.worf.replit.dev/"
               target="_blank"
               rel="noopener noreferrer"
-              className="py-2.5 px-5 rounded-[10px] font-semibold text-sm border-none flex items-center gap-2 text-white transition-all hover:-translate-y-0.5 no-underline active:scale-95 cursor-pointer"
+              className="py-2.5 px-5 rounded-[10px] font-semibold text-sm border-none flex items-center gap-2 text-white transition-all hover:-translate-y-0.5 no-underline cursor-pointer"
               style={{
                 background: "linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%)",
                 boxShadow: "0 3px 12px rgba(27, 94, 32, 0.25)",
@@ -317,7 +317,7 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
             </a>
             <Link
               href="/complaints"
-              className="py-2.5 px-5 rounded-[10px] font-semibold text-sm border-none flex items-center gap-2 text-white transition-all hover:-translate-y-0.5 no-underline active:scale-95"
+              className="py-2.5 px-5 rounded-[10px] font-semibold text-sm border-none flex items-center gap-2 text-white transition-all hover:-translate-y-0.5 no-underline"
               style={{
                 background: "linear-gradient(135deg, var(--zim-red) 0%, #991b1b 100%)",
                 boxShadow: "0 3px 12px rgba(198, 40, 40, 0.25)",
@@ -327,11 +327,23 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
               <Scale className="w-4 h-4" />
               Complaints
             </Link>
+            <Link
+              href="/appeals"
+              className="py-2.5 px-5 rounded-[10px] font-semibold text-sm border-none flex items-center gap-2 text-white transition-all hover:-translate-y-0.5 no-underline"
+              style={{
+                background: "linear-gradient(135deg, var(--blue, #2563eb) 0%, #1d4ed8 100%)",
+                boxShadow: "0 3px 12px rgba(37, 99, 235, 0.25)",
+              }}
+              data-testid="button-appeals-header"
+            >
+              <Scale className="w-4 h-4" />
+              Appeals
+            </Link>
             <a
               href="https://f17c25d1-8d60-4751-b64c-aadbdeaf0836-00-mtsfdj8ol3sm.worf.replit.dev/"
               target="_blank"
               rel="noopener noreferrer"
-              className="py-2.5 px-5 rounded-[10px] font-bold text-sm border-none flex items-center gap-2 transition-all hover:-translate-y-0.5 active:scale-95 no-underline cursor-pointer"
+              className="py-2.5 px-5 rounded-[10px] font-bold text-sm border-none flex items-center gap-2 transition-all hover:-translate-y-0.5 no-underline cursor-pointer"
               style={{
                 background: "linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%)",
                 color: "var(--zim-black)",
@@ -629,33 +641,43 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
       >
         <div className="p-4">
           {/* Quick Actions */}
-          <div className="grid grid-cols-3 gap-2 mb-4">
+          <div className="grid grid-cols-4 gap-2 mb-4">
             <Link
               href="/registration"
               onClick={() => handleMobileNavClick("/registration")}
-              className="py-2.5 px-2 rounded-xl font-semibold text-xs flex flex-col items-center justify-center gap-1.5 text-white no-underline active:scale-95"
+              className="py-2.5 px-1 rounded-xl font-semibold text-[10px] flex flex-col items-center justify-center gap-1.5 text-white no-underline"
               style={{ background: "linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%)" }}
             >
               <Building2 className="w-4 h-4" />
-              Registration
+              Register
             </Link>
             <Link
               href="/accreditation"
               onClick={() => handleMobileNavClick("/accreditation")}
-              className="py-2.5 px-2 rounded-xl font-semibold text-xs flex flex-col items-center justify-center gap-1.5 text-white no-underline active:scale-95"
+              className="py-2.5 px-1 rounded-xl font-semibold text-[10px] flex flex-col items-center justify-center gap-1.5 text-white no-underline"
               style={{ background: "linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%)" }}
             >
               <BadgeCheck className="w-4 h-4" />
-              Accreditation
+              Accredit
             </Link>
             <Link
               href="/complaints"
               onClick={() => handleMobileNavClick("/complaints")}
-              className="py-2.5 px-2 rounded-xl font-semibold text-xs flex flex-col items-center justify-center gap-1.5 text-white no-underline active:scale-95"
+              className="py-2.5 px-1 rounded-xl font-semibold text-[10px] flex flex-col items-center justify-center gap-1.5 text-white no-underline"
               style={{ background: "linear-gradient(135deg, var(--zim-red) 0%, #991b1b 100%)" }}
             >
               <Scale className="w-4 h-4" />
               Complaints
+            </Link>
+            <Link
+              href="/appeals"
+              onClick={() => handleMobileNavClick("/appeals")}
+              className="py-2.5 px-1 rounded-xl font-semibold text-[10px] flex flex-col items-center justify-center gap-1.5 text-white no-underline"
+              style={{ background: "linear-gradient(135deg, var(--blue, #2563eb) 0%, #1d4ed8 100%)" }}
+              data-testid="button-appeals-mobile"
+            >
+              <Scale className="w-4 h-4" />
+              Appeals
             </Link>
           </div>
 

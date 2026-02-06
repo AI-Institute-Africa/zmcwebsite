@@ -54,7 +54,7 @@ export default function AccreditationPage({ onNavigate }: AccreditationPageProps
   };
 
   return (
-    <div className="animate-fadeIn pt-[130px]">
+    <div className="animate-fadeIn pt-[100px] md:pt-[130px]">
       {/* Page Header */}
       <div
         className="py-16 px-8 text-center relative overflow-hidden"
@@ -96,7 +96,7 @@ export default function AccreditationPage({ onNavigate }: AccreditationPageProps
                 <h3 className="mb-2" style={{ color: "var(--primary-dark)" }}>New Accreditation</h3>
                 <p className="text-[0.9rem] mb-4" style={{ color: "var(--neutral-600)" }}>Apply for first-time accreditation</p>
                 <button
-                  className="w-full py-3 rounded-xl font-semibold text-white border-none cursor-pointer flex items-center justify-center gap-2 active:scale-95 transition-transform"
+                  className="w-full py-3 rounded-xl font-semibold text-white border-none cursor-pointer flex items-center justify-center gap-2 transition-transform"
                   style={{ background: "linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%)" }}
                   data-testid="button-apply-accreditation"
                 >
@@ -114,7 +114,7 @@ export default function AccreditationPage({ onNavigate }: AccreditationPageProps
                 <h3 className="mb-2" style={{ color: "var(--primary-dark)" }}>Renew Accreditation</h3>
                 <p className="text-[0.9rem] mb-4" style={{ color: "var(--neutral-600)" }}>Renew your existing accreditation</p>
                 <button
-                  className="w-full py-3 rounded-xl font-bold border-none cursor-pointer flex items-center justify-center gap-2 active:scale-95 transition-transform"
+                  className="w-full py-3 rounded-xl font-bold border-none cursor-pointer flex items-center justify-center gap-2 transition-transform"
                   style={{ background: "linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%)", color: "var(--zim-black)" }}
                   data-testid="button-renew-accreditation"
                 >

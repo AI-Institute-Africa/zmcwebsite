@@ -27,7 +27,7 @@ export default function ContactPage({ onNavigate }: ContactPageProps) {
   };
 
   return (
-    <div className="animate-fadeIn pt-[130px]">
+    <div className="animate-fadeIn pt-[100px] md:pt-[130px]">
       {/* Page Header */}
       <div
         className="py-16 px-8 text-center relative overflow-hidden"
