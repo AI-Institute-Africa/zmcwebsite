@@ -9,9 +9,26 @@ export default function ComplaintsPage({ onNavigate }: ComplaintsPageProps) {
   const [showComplaintModal, setShowComplaintModal] = useState(false);
   const [showAppealModal, setShowAppealModal] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const [fileError, setFileError] = useState("");
+
+  const MAX_FILE_SIZE = 10 * 1024 * 1024;
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    if (!files) return;
+    for (let i = 0; i < files.length; i++) {
+      if (files[i].size > MAX_FILE_SIZE) {
+        setFileError(`File "${files[i].name}" exceeds the 10MB size limit.`);
+        e.target.value = "";
+        return;
+      }
+    }
+    setFileError("");
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (fileError) return;
     setFormSubmitted(true);
     setTimeout(() => {
       setShowComplaintModal(false);
@@ -302,12 +319,14 @@ export default function ComplaintsPage({ onNavigate }: ComplaintsPageProps) {
                         type="file" 
                         multiple 
                         accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" 
+                        onChange={handleFileChange}
                         className="w-full py-2.5 md:py-3 px-4 rounded-xl text-sm md:text-base file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:cursor-pointer" 
                         style={{ border: "2px solid var(--neutral-200)", background: "var(--neutral-50)" }} 
                         data-testid="input-complaint-file-upload"
                       />
                     </div>
                     <p className="text-xs mt-1" style={{ color: "var(--neutral-500)" }}>Accepted: PDF, DOC, DOCX, JPG, PNG (max 10MB each)</p>
+                    {fileError && <p className="text-xs mt-1" style={{ color: "#dc2626" }} data-testid="text-file-error">{fileError}</p>}
                   </div>
                   <div className="flex gap-3 justify-end flex-wrap">
                     <button type="button" onClick={() => setShowComplaintModal(false)} className="py-2.5 md:py-3 px-5 md:px-6 rounded-xl font-semibold border-none transition-all active:scale-95 text-sm md:text-base" style={{ background: "var(--neutral-200)" }}>Cancel</button>
@@ -383,12 +402,14 @@ export default function ComplaintsPage({ onNavigate }: ComplaintsPageProps) {
                         type="file" 
                         multiple 
                         accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" 
+                        onChange={handleFileChange}
                         className="w-full py-2.5 md:py-3 px-4 rounded-xl text-sm md:text-base file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:cursor-pointer" 
                         style={{ border: "2px solid var(--neutral-200)", background: "var(--neutral-50)" }} 
                         data-testid="input-appeal-file-upload"
                       />
                     </div>
                     <p className="text-xs mt-1" style={{ color: "var(--neutral-500)" }}>Accepted: PDF, DOC, DOCX, JPG, PNG (max 10MB each)</p>
+                    {fileError && <p className="text-xs mt-1" style={{ color: "#dc2626" }} data-testid="text-file-error-appeal">{fileError}</p>}
                   </div>
                   <div className="flex gap-3 justify-end flex-wrap">
                     <button type="button" onClick={() => setShowAppealModal(false)} className="py-2.5 md:py-3 px-5 md:px-6 rounded-xl font-semibold border-none transition-all active:scale-95 text-sm md:text-base" style={{ background: "var(--neutral-200)" }}>Cancel</button>

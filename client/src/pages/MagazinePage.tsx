@@ -47,7 +47,7 @@ export default function MagazinePage({ onNavigate }: MagazinePageProps) {
 
             <button
               onClick={() => onNavigate("contact")}
-              className="inline-flex items-center gap-3 py-4 px-8 rounded-xl font-semibold text-base border-none cursor-pointer text-white transition-all hover:scale-105 active:scale-95"
+              className="inline-flex items-center gap-3 py-4 px-8 rounded-xl font-semibold text-base border-none cursor-pointer text-white transition-all hover:-translate-y-0.5"
               style={{ background: "linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%)" }}
               data-testid="button-contact-magazine"
             >
