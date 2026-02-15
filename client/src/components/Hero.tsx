@@ -106,15 +106,17 @@ export default function Hero({ onNavigate }: HeroProps) {
       </section>
 
       {/* Stats Bar */}
-      <section className="py-8 md:py-12 px-4 md:px-8" style={{ background: "var(--white)" }}>
+      <section className="py-8 md:py-12 px-4 md:px-8" style={{ background: "rgba(255, 255, 255, 0.7)", backdropFilter: "blur(16px)", WebkitBackdropFilter: "blur(16px)" }}>
         <div className="max-w-[1200px] mx-auto grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
           {stats.map((stat, index) => (
             <div
               key={index}
               className="text-center p-5 md:p-6 rounded-xl md:rounded-2xl transition-all hover:scale-105"
               style={{
-                background: "var(--primary-lighter)",
-                border: "1px solid var(--neutral-200)",
+                background: "rgba(255, 255, 255, 0.5)",
+                backdropFilter: "blur(8px)",
+                WebkitBackdropFilter: "blur(8px)",
+                border: "1px solid rgba(255, 255, 255, 0.6)",
               }}
               data-testid={`stat-box-${index}`}
             >
