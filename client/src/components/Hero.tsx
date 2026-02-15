@@ -24,7 +24,7 @@ export default function Hero({ onNavigate }: HeroProps) {
         />
         <div 
           className="absolute inset-0"
-          style={{ background: "linear-gradient(135deg, rgba(27, 94, 32, 0.88) 0%, rgba(13, 59, 16, 0.92) 100%)" }}
+          style={{ background: "linear-gradient(135deg, rgba(27, 94, 32, 0.55) 0%, rgba(13, 59, 16, 0.65) 100%)" }}
         />
 
         <div className="max-w-[1200px] mx-auto w-full relative z-10">
