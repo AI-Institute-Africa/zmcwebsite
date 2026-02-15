@@ -100,7 +100,7 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
   };
 
   return (
-    <header className="fixed w-full top-0 z-[1000] bg-white" style={{ boxShadow: "var(--shadow-md)" }}>
+    <header className="fixed w-full top-0 z-[1000]" style={{ background: "rgba(255, 255, 255, 0.72)", backdropFilter: "saturate(180%) blur(20px)", WebkitBackdropFilter: "saturate(180%) blur(20px)", boxShadow: "0 1px 0 rgba(0,0,0,0.08)" }}>
       {/* Top Bar */}
       <div
         className="py-2 md:py-3 px-4 md:px-8 flex justify-between items-center flex-wrap gap-2 md:gap-4"
@@ -359,7 +359,7 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
       </div>
 
       {/* Main Navigation */}
-      <div className="px-4 md:px-8 flex justify-between items-center bg-white">
+      <div className="px-4 md:px-8 flex justify-between items-center">
         <Link href="/" className="flex items-center gap-3 md:gap-4 py-3 md:py-4 no-underline">
           <img 
             src={zmcLogo} 
@@ -634,10 +634,10 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
 
       {/* Mobile Menu */}
       <div
-        className={`lg:hidden fixed top-[100px] md:top-[120px] left-0 right-0 bg-white z-[1000] overflow-y-auto transition-all ${
+        className={`lg:hidden fixed top-[100px] md:top-[120px] left-0 right-0 z-[1000] overflow-y-auto transition-all ${
           mobileMenuOpen ? "max-h-[calc(100vh-100px)] opacity-100" : "max-h-0 opacity-0 overflow-hidden"
         }`}
-        style={{ boxShadow: "var(--shadow-lg)" }}
+        style={{ background: "rgba(255, 255, 255, 0.82)", backdropFilter: "saturate(180%) blur(20px)", WebkitBackdropFilter: "saturate(180%) blur(20px)", boxShadow: "0 4px 30px rgba(0,0,0,0.08)" }}
       >
         <div className="p-4">
           {/* Quick Actions */}
