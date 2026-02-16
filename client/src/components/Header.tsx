@@ -364,7 +364,7 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
           <img 
             src={zmcLogo} 
             alt="Zimbabwe Media Commission Logo" 
-            className="w-10 h-10 md:w-[60px] md:h-[60px] object-contain"
+            className="w-14 h-14 md:w-[80px] md:h-[80px] object-contain"
           />
           <div className="flex flex-col">
             <span className="text-base md:text-[1.4rem] font-bold leading-tight" style={{ fontFamily: "var(--font-serif)" }}>
