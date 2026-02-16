@@ -15,7 +15,7 @@ import {
   X,
   Scale,
 } from "lucide-react";
-import zmcLogo from "@assets/zmc-logo_1766177505802.png";
+import zmcLogo from "@assets/zmc_logo-removebg-preview_1771225841865.png";
 
 interface HeaderProps {
   currentPage: string;
