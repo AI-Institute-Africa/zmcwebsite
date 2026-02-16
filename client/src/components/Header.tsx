@@ -359,7 +359,7 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
       </div>
 
       {/* Main Navigation */}
-      <div className="px-4 md:px-8 flex justify-between items-center">
+      <div className="px-4 md:pl-14 md:pr-8 flex justify-between items-center">
         <Link href="/" className="flex items-center gap-3 md:gap-4 py-3 md:py-4 no-underline">
           <img 
             src={zmcLogo} 
@@ -575,6 +575,7 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
               >
                 {[
                   { label: "Downloads", path: "/downloads" },
+                  { label: "Photos", path: "/photos" },
                   { label: "Press Releases", path: "/press-releases" },
                   { label: "Magazine", path: "/magazine" },
                 ].map((item) => (
@@ -789,9 +790,10 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
                 <span>Media Centre</span>
                 <ChevronDown className={`w-4 h-4 transition-transform ${mediaCentreOpen ? "rotate-180" : ""}`} />
               </button>
-              <div className={`overflow-hidden transition-all ${mediaCentreOpen ? "max-h-40" : "max-h-0"}`}>
+              <div className={`overflow-hidden transition-all ${mediaCentreOpen ? "max-h-48" : "max-h-0"}`}>
                 {[
                   { label: "Downloads", path: "/downloads" },
+                  { label: "Photos", path: "/photos" },
                   { label: "Press Releases", path: "/press-releases" },
                   { label: "Magazine", path: "/magazine" },
                 ].map((item) => (

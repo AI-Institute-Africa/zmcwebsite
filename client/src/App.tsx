@@ -21,6 +21,7 @@ import CommissionersPage from "./pages/CommissionersPage";
 import TendersPage from "./pages/TendersPage";
 import PressReleasesPage from "./pages/PressReleasesPage";
 import MagazinePage from "./pages/MagazinePage";
+import PhotosPage from "./pages/PhotosPage";
 
 function PlaceholderPage({ title, description }: { title: string; description: string }) {
   const [, setLocation] = useLocation();
@@ -113,6 +114,9 @@ function Router() {
       </Route>
       <Route path="/magazine">
         <MagazinePage onNavigate={handleNavigate} />
+      </Route>
+      <Route path="/photos">
+        <PhotosPage onNavigate={handleNavigate} />
       </Route>
       <Route>
         <HomePage onNavigate={handleNavigate} />
