@@ -625,7 +625,7 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
 
       {/* Mobile Menu Overlay */}
       <div
-        className={`lg:hidden fixed inset-0 top-[100px] md:top-[120px] z-[999] transition-all ${
+        className={`lg:hidden fixed inset-0 top-[140px] md:top-[170px] z-[999] transition-all ${
           mobileMenuOpen ? "opacity-100 visible" : "opacity-0 invisible pointer-events-none"
         }`}
         style={{ background: "rgba(0,0,0,0.5)" }}
@@ -634,8 +634,8 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
 
       {/* Mobile Menu */}
       <div
-        className={`lg:hidden fixed top-[100px] md:top-[120px] left-0 right-0 z-[1000] overflow-y-auto transition-all ${
-          mobileMenuOpen ? "max-h-[calc(100vh-100px)] opacity-100" : "max-h-0 opacity-0 overflow-hidden"
+        className={`lg:hidden fixed top-[140px] md:top-[170px] left-0 right-0 z-[1000] overflow-y-auto transition-all ${
+          mobileMenuOpen ? "max-h-[calc(100vh-140px)] opacity-100" : "max-h-0 opacity-0 overflow-hidden"
         }`}
         style={{ background: "rgba(255, 255, 255, 0.82)", backdropFilter: "saturate(180%) blur(20px)", WebkitBackdropFilter: "saturate(180%) blur(20px)", boxShadow: "0 4px 30px rgba(0,0,0,0.08)" }}
       >

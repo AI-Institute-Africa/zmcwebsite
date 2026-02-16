@@ -19,15 +19,15 @@ export default function AboutPage({ onNavigate }: AboutPageProps) {
   ];
 
   return (
-    <div className="animate-fadeIn pt-[100px] md:pt-[130px]">
+    <div className="animate-fadeIn pt-[140px] md:pt-[180px]">
       {/* Page Header */}
       <div
-        className="py-16 px-8 text-center relative overflow-hidden"
+        className="py-12 md:py-16 px-4 md:px-8 text-center relative overflow-hidden"
         style={{ background: "linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%)" }}
       >
         <div className="absolute top-0 right-0 w-1/2 h-full" style={{ background: "radial-gradient(circle at 70% 50%, rgba(255,255,255,0.1) 0%, transparent 50%)" }} />
-        <h1 className="text-white mb-3 relative">About ZMC</h1>
-        <p className="text-white/85 max-w-[600px] mx-auto text-lg relative">
+        <h1 className="text-white mb-3 relative text-2xl md:text-4xl">About ZMC</h1>
+        <p className="text-white/85 max-w-[600px] mx-auto text-base md:text-lg relative">
           Learn about the Zimbabwe Media Commission and our mandate
         </p>
         <div className="flex justify-center gap-2 mt-6 text-[0.9rem]">

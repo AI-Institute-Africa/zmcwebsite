@@ -6,7 +6,7 @@ interface TendersPageProps {
 
 export default function TendersPage({ onNavigate }: TendersPageProps) {
   return (
-    <div className="animate-fadeIn pt-[100px] md:pt-[130px]">
+    <div className="animate-fadeIn pt-[140px] md:pt-[180px]">
       {/* Page Header */}
       <div
         className="py-12 md:py-16 px-4 md:px-8 text-center relative overflow-hidden"

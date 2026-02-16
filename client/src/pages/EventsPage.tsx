@@ -59,14 +59,14 @@ export default function EventsPage({ onNavigate }: EventsPageProps) {
   ];
 
   return (
-    <div className="animate-fadeIn pt-[100px] md:pt-[130px]">
+    <div className="animate-fadeIn pt-[140px] md:pt-[180px]">
       {/* Page Header */}
       <div
-        className="py-16 px-8 text-center relative overflow-hidden"
+        className="py-12 md:py-16 px-4 md:px-8 text-center relative overflow-hidden"
         style={{ background: "linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%)" }}
       >
-        <h1 className="text-white mb-3 relative">Events & Programs</h1>
-        <p className="text-white/85 max-w-[600px] mx-auto text-lg relative">
+        <h1 className="text-white mb-3 relative text-2xl md:text-4xl">Events & Programs</h1>
+        <p className="text-white/85 max-w-[600px] mx-auto text-base md:text-lg relative">
           Stay updated with ZMC events, workshops, and training programs
         </p>
         <div className="flex justify-center gap-2 mt-6 text-[0.9rem]">
@@ -77,7 +77,7 @@ export default function EventsPage({ onNavigate }: EventsPageProps) {
       </div>
 
       {/* Content */}
-      <div className="py-16 px-8">
+      <div className="py-12 md:py-16 px-4 md:px-8">
         <div className="max-w-[1000px] mx-auto">
           {/* Upcoming Events */}
           <div className="mb-12">

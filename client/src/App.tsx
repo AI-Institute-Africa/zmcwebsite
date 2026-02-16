@@ -26,7 +26,7 @@ function PlaceholderPage({ title, description }: { title: string; description: s
   const [, setLocation] = useLocation();
   
   return (
-    <div className="animate-fadeIn pt-[100px] md:pt-[130px]">
+    <div className="animate-fadeIn pt-[140px] md:pt-[180px]">
       <div
         className="py-12 md:py-16 px-4 md:px-8 text-center"
         style={{ background: "linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%)" }}
@@ -34,7 +34,7 @@ function PlaceholderPage({ title, description }: { title: string; description: s
         <h1 className="text-white mb-3 text-2xl md:text-4xl">{title}</h1>
         <p className="text-white/85 text-base md:text-lg">{description}</p>
       </div>
-      <div className="py-16 px-8 text-center">
+      <div className="py-12 md:py-16 px-4 md:px-8 text-center">
         <div
           className="max-w-[600px] mx-auto p-12 rounded-[20px]"
           style={{ background: "var(--primary-soft)", border: "1px solid var(--primary-lighter)" }}

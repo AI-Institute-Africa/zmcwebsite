@@ -27,14 +27,14 @@ export default function ContactPage({ onNavigate }: ContactPageProps) {
   };
 
   return (
-    <div className="animate-fadeIn pt-[100px] md:pt-[130px]">
+    <div className="animate-fadeIn pt-[140px] md:pt-[180px]">
       {/* Page Header */}
       <div
-        className="py-16 px-8 text-center relative overflow-hidden"
+        className="py-12 md:py-16 px-4 md:px-8 text-center relative overflow-hidden"
         style={{ background: "linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%)" }}
       >
-        <h1 className="text-white mb-3 relative">Contact Us</h1>
-        <p className="text-white/85 max-w-[600px] mx-auto text-lg relative">
+        <h1 className="text-white mb-3 relative text-2xl md:text-4xl">Contact Us</h1>
+        <p className="text-white/85 max-w-[600px] mx-auto text-base md:text-lg relative">
           Get in touch with the Zimbabwe Media Commission
         </p>
         <div className="flex justify-center gap-2 mt-6 text-[0.9rem]">
@@ -45,7 +45,7 @@ export default function ContactPage({ onNavigate }: ContactPageProps) {
       </div>
 
       {/* Content */}
-      <div className="py-16 px-8">
+      <div className="py-12 md:py-16 px-4 md:px-8">
         <div className="max-w-[1200px] mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             {/* Contact Form */}
