@@ -100,7 +100,7 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
   };
 
   return (
-    <header className="fixed w-full top-0 z-[1000]" style={{ background: "rgba(255, 255, 255, 0.72)", backdropFilter: "saturate(180%) blur(20px)", WebkitBackdropFilter: "saturate(180%) blur(20px)", boxShadow: "0 1px 0 rgba(0,0,0,0.08)" }}>
+    <header className="fixed w-full top-0 z-[1000]" style={{ background: "linear-gradient(135deg, #D4AF37 0%, #C49A2C 100%)", boxShadow: "0 2px 12px rgba(0,0,0,0.15)" }}>
       {/* Top Bar */}
       <div
         className="py-2 md:py-3 px-4 md:px-8 flex justify-between items-center flex-wrap gap-2 md:gap-4"
@@ -368,12 +368,12 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
           />
           <div className="flex flex-col">
             <span className="text-base md:text-[1.4rem] font-bold leading-tight" style={{ fontFamily: "var(--font-serif)" }}>
-              <span style={{ color: "var(--zim-black)" }}>Zimbabwe</span>{" "}
-              <span style={{ color: "var(--primary)" }}>Media</span>{" "}
-              <span className="hidden sm:inline" style={{ color: "var(--zim-black)" }}>Commission</span>
-              <span className="sm:hidden" style={{ color: "var(--zim-black)" }}>Comm.</span>
+              <span style={{ color: "#212121" }}>Zimbabwe</span>{" "}
+              <span style={{ color: "#1B5E20" }}>Media</span>{" "}
+              <span className="hidden sm:inline" style={{ color: "#212121" }}>Commission</span>
+              <span className="sm:hidden" style={{ color: "#212121" }}>Comm.</span>
             </span>
-            <span className="hidden sm:block text-xs uppercase tracking-wider" style={{ color: "var(--neutral-500)" }}>
+            <span className="hidden sm:block text-xs uppercase tracking-wider" style={{ color: "rgba(0,0,0,0.6)" }}>
               Promoting Media Freedom
             </span>
           </div>
@@ -383,7 +383,7 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
         <button
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           className="lg:hidden p-2 rounded-lg"
-          style={{ background: "var(--primary-lighter)", color: "var(--primary)" }}
+          style={{ background: "rgba(0,0,0,0.1)", color: "#212121" }}
           data-testid="button-mobile-menu"
         >
           {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -399,7 +399,7 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
                   currentPage === "home" ? "font-semibold" : ""
                 }`}
                 style={{
-                  color: currentPage === "home" ? "var(--primary)" : "var(--neutral-700)",
+                  color: currentPage === "home" ? "#1B5E20" : "#212121",
                 }}
                 data-testid="nav-home"
               >
@@ -408,7 +408,7 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
                   className="absolute bottom-0 left-1/2 -translate-x-1/2 h-[3px] rounded-sm transition-all"
                   style={{
                     width: currentPage === "home" ? "60%" : "0",
-                    background: currentPage === "home" ? "var(--primary)" : "var(--accent)",
+                    background: currentPage === "home" ? "#1B5E20" : "#212121",
                   }}
                 />
               </Link>
@@ -422,8 +422,8 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
                   setServicesOpen(false);
                   setOpportunitiesOpen(false);
                 }}
-                className="block py-6 px-4 font-medium text-[0.95rem] flex items-center gap-1 transition-all hover:text-[var(--primary)] bg-transparent border-none cursor-pointer"
-                style={{ color: "var(--neutral-700)" }}
+                className="block py-6 px-4 font-medium text-[0.95rem] flex items-center gap-1 transition-all hover:text-[#1B5E20] bg-transparent border-none cursor-pointer"
+                style={{ color: "#212121" }}
                 data-testid="nav-about"
               >
                 About
@@ -467,8 +467,8 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
                   setAboutOpen(false);
                   setOpportunitiesOpen(false);
                 }}
-                className="block py-6 px-4 font-medium text-[0.95rem] flex items-center gap-1 transition-all hover:text-[var(--primary)] bg-transparent border-none cursor-pointer"
-                style={{ color: "var(--neutral-700)" }}
+                className="block py-6 px-4 font-medium text-[0.95rem] flex items-center gap-1 transition-all hover:text-[#1B5E20] bg-transparent border-none cursor-pointer"
+                style={{ color: "#212121" }}
                 data-testid="nav-services"
               >
                 Services
@@ -513,8 +513,8 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
                   setAboutOpen(false);
                   setServicesOpen(false);
                 }}
-                className="block py-6 px-4 font-medium text-[0.95rem] flex items-center gap-1 transition-all hover:text-[var(--primary)] bg-transparent border-none cursor-pointer"
-                style={{ color: "var(--neutral-700)" }}
+                className="block py-6 px-4 font-medium text-[0.95rem] flex items-center gap-1 transition-all hover:text-[#1B5E20] bg-transparent border-none cursor-pointer"
+                style={{ color: "#212121" }}
                 data-testid="nav-opportunities"
               >
                 Opportunities
@@ -558,8 +558,8 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
                   setServicesOpen(false);
                   setOpportunitiesOpen(false);
                 }}
-                className="block py-6 px-4 font-medium text-[0.95rem] flex items-center gap-1 transition-all hover:text-[var(--primary)] bg-transparent border-none cursor-pointer"
-                style={{ color: "var(--neutral-700)" }}
+                className="block py-6 px-4 font-medium text-[0.95rem] flex items-center gap-1 transition-all hover:text-[#1B5E20] bg-transparent border-none cursor-pointer"
+                style={{ color: "#212121" }}
                 data-testid="nav-media-centre"
               >
                 Media Centre
@@ -602,9 +602,9 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
               <li key={item.path}>
                 <Link
                   href={item.path}
-                  className="block py-6 px-4 font-medium text-[0.95rem] relative transition-all hover:text-[var(--primary)] no-underline"
+                  className="block py-6 px-4 font-medium text-[0.95rem] relative transition-all hover:text-[#1B5E20] no-underline"
                   style={{
-                    color: currentPage === item.path.slice(1) ? "var(--primary)" : "var(--neutral-700)",
+                    color: currentPage === item.path.slice(1) ? "#1B5E20" : "#212121",
                   }}
                   data-testid={`nav-${item.path.slice(1)}`}
                 >
@@ -613,7 +613,7 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
                     className="absolute bottom-0 left-1/2 -translate-x-1/2 h-[3px] rounded-sm transition-all"
                     style={{
                       width: currentPage === item.path.slice(1) ? "60%" : "0",
-                      background: "var(--accent)",
+                      background: "#1B5E20",
                     }}
                   />
                 </Link>
