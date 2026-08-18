@@ -3,7 +3,6 @@ import { Link, useLocation } from "wouter";
 import {
   Phone,
   Mail,
-  Globe,
   Bell,
   Building2,
   BadgeCheck,
@@ -14,8 +13,10 @@ import {
   Menu,
   X,
   Scale,
+  FolderOpen,
 } from "lucide-react";
 import zmcLogo from "@assets/zmc_logo-removebg-preview_1771225841865.png";
+import { useLanguage } from "../i18n/LanguageContext";
 
 interface HeaderProps {
   currentPage: string;
@@ -23,7 +24,7 @@ interface HeaderProps {
 }
 
 export default function Header({ currentPage, onNavigate }: HeaderProps) {
-  const [language, setLanguage] = useState<"en" | "sn" | "nd">("en");
+  const { t } = useLanguage();
   const [notificationsOpen, setNotificationsOpen] = useState(false);
   const [aboutOpen, setAboutOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
@@ -36,35 +37,19 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
   const notificationRef = useRef<HTMLDivElement>(null);
 
   const notifications = [
-    {
-      id: 1,
-      icon: Megaphone,
-      title: "Accreditation Renewal 2025",
-      text: "Renew your accreditation before December 1st",
-      time: "2 hours ago",
-      unread: true,
-    },
-    {
-      id: 2,
-      icon: Building2,
-      title: "New Bulawayo Office",
-      text: "ZMC Regional Office now open in Bulawayo",
-      time: "1 day ago",
-      unread: true,
-    },
-    {
-      id: 3,
-      icon: FileText,
-      title: "Policy Update",
-      text: "New Sexual Harassment Policy launched",
-      time: "3 days ago",
-      unread: true,
-    },
+    { id: 1, icon: Megaphone, title: t.notifications.notif1Title, text: t.notifications.notif1Text, time: "2 hours ago", unread: true },
+    { id: 2, icon: Building2, title: t.notifications.notif2Title, text: t.notifications.notif2Text, time: "1 day ago", unread: true },
+    { id: 3, icon: FileText, title: t.notifications.notif3Title, text: t.notifications.notif3Text, time: "3 days ago", unread: true },
   ];
+
+  const headerRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
-      if (notificationRef.current && !notificationRef.current.contains(event.target as Node)) {
+      if (headerRef.current && !headerRef.current.contains(event.target as Node)) {
+        closeAllDropdowns();
+        setNotificationsOpen(false);
+      } else if (notificationRef.current && !notificationRef.current.contains(event.target as Node)) {
         setNotificationsOpen(false);
       }
     }
@@ -96,15 +81,19 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
 
   const handleMobileNavClick = (path: string) => {
     setMobileMenuOpen(false);
-    closeAllDropdowns();
+    setAboutOpen(false);
+    setServicesOpen(false);
+    setOpportunitiesOpen(false);
+    setMediaCentreOpen(false);
+    setNotificationsOpen(false);
   };
 
   return (
-    <header className="fixed w-full top-0 z-[1000]" style={{ background: "linear-gradient(135deg, #D4AF37 0%, #C49A2C 100%)", boxShadow: "0 2px 12px rgba(0,0,0,0.15)" }}>
+    <header ref={headerRef} className="fixed w-full top-0 z-[1000]" style={{ background: "linear-gradient(180deg, rgba(255,255,255,0.82) 0%, rgba(255,255,255,0.72) 100%)", backdropFilter: "blur(24px) saturate(200%)", WebkitBackdropFilter: "blur(24px) saturate(200%)", boxShadow: "0 1px 16px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.6)", borderBottom: "1px solid rgba(255,255,255,0.45)" }}>
       {/* Top Bar */}
       <div
         className="py-2 md:py-3 px-4 md:px-8 flex justify-between items-center flex-wrap gap-2 md:gap-4"
-        style={{ background: "linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%)" }}
+        style={{ background: "linear-gradient(90deg, rgba(46, 125, 86, 0.9) 0%, rgba(74, 158, 114, 0.85) 35%, rgba(180, 160, 60, 0.8) 65%, rgba(212, 175, 55, 0.85) 100%)", backdropFilter: "blur(16px) saturate(180%)", WebkitBackdropFilter: "blur(16px) saturate(180%)", borderBottom: "1px solid rgba(255,255,255,0.15)" }}
       >
         <div className="hidden md:flex items-center gap-6 flex-wrap">
           <div className="flex gap-6 text-sm text-white/90">
@@ -120,82 +109,23 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
             </span>
           </div>
 
-          {/* Language Toggle */}
-          <div
-            className="flex items-center gap-3 py-2 px-4 rounded-full cursor-pointer transition-all"
-            style={{
-              background: "rgba(255,255,255,0.2)",
-              border: "2px solid rgba(255,255,255,0.4)",
-            }}
-          >
-            <Globe className="w-4 h-4 text-white" />
-            <span className="text-white font-semibold text-sm">Language</span>
-            <div
-              className="flex rounded-[20px] overflow-hidden"
-              style={{ background: "rgba(0,0,0,0.2)" }}
-            >
-              {(["en", "sn", "nd"] as const).map((lang) => (
-                <button
-                  key={lang}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setLanguage(lang);
-                  }}
-                  className={`py-1.5 px-3 text-xs font-semibold border-none cursor-pointer transition-all ${
-                    language === lang
-                      ? "text-neutral-900"
-                      : "text-white/80 hover:bg-white/10 hover:text-white"
-                  }`}
-                  style={{
-                    background: language === lang ? "var(--accent)" : "transparent",
-                  }}
-                  data-testid={`button-lang-${lang}`}
-                >
-                  {lang.toUpperCase()}
-                </button>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        {/* Mobile: Language toggle only */}
-        <div className="flex md:hidden items-center gap-2">
-          <div
-            className="flex rounded-[20px] overflow-hidden"
-            style={{ background: "rgba(0,0,0,0.2)" }}
-          >
-            {(["en", "sn", "nd"] as const).map((lang) => (
-              <button
-                key={lang}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setLanguage(lang);
-                }}
-                className={`py-1 px-2 text-xs font-semibold border-none cursor-pointer transition-all ${
-                  language === lang
-                    ? "text-neutral-900"
-                    : "text-white/80"
-                }`}
-                style={{
-                  background: language === lang ? "var(--accent)" : "transparent",
-                }}
-                data-testid={`button-lang-mobile-${lang}`}
-              >
-                {lang.toUpperCase()}
-              </button>
-            ))}
-          </div>
         </div>
 
         <div className="flex gap-2 md:gap-3 items-center">
           {/* Notification Bell */}
           <div className="relative" ref={notificationRef}>
             <button
-              onClick={() => setNotificationsOpen(!notificationsOpen)}
-              className="w-9 h-9 md:w-[42px] md:h-[42px] rounded-full flex items-center justify-center cursor-pointer transition-all text-white hover:scale-105"
+              onClick={() => {
+                const next = !notificationsOpen;
+                closeAllDropdowns();
+                setNotificationsOpen(next);
+              }}
+              className="w-9 h-9 md:w-[42px] md:h-[42px] rounded-full flex items-center justify-center cursor-pointer transition-all text-white hover:scale-105 hover:bg-white/25"
               style={{
                 background: "rgba(255,255,255,0.15)",
-                border: "2px solid rgba(255,255,255,0.3)",
+                border: "1px solid rgba(255,255,255,0.3)",
+                backdropFilter: "blur(8px)",
+                WebkitBackdropFilter: "blur(8px)",
               }}
               data-testid="button-notifications"
             >
@@ -224,7 +154,7 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
                 style={{ background: "var(--primary-lighter)", borderColor: "var(--neutral-200)" }}
               >
                 <h4 className="text-sm md:text-base m-0" style={{ color: "var(--primary-dark)" }}>
-                  Notifications
+                  {t.notifications.title}
                 </h4>
                 <button
                   onClick={markAllRead}
@@ -232,7 +162,7 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
                   style={{ color: "var(--primary)" }}
                   data-testid="button-mark-all-read"
                 >
-                  Mark all read
+                  {t.notifications.markAllRead}
                 </button>
               </div>
               <div className="max-h-60 md:max-h-80 overflow-y-auto">
@@ -281,7 +211,7 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
                   className="text-xs md:text-sm font-semibold hover:underline"
                   style={{ color: "var(--primary)" }}
                 >
-                  View all notifications
+                  {t.notifications.viewAll}
                 </Link>
               </div>
             </div>
@@ -289,70 +219,102 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
 
           {/* Desktop buttons */}
           <div className="hidden lg:flex gap-3">
-            <Link
-              href="/registration"
-              className="py-2.5 px-5 rounded-[10px] font-semibold text-sm border-none flex items-center gap-2 text-white transition-all hover:-translate-y-0.5 no-underline"
+            <a
+              href="https://zmc--portal.replit.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="py-2.5 px-5 rounded-[10px] font-semibold text-sm flex items-center gap-2 text-white transition-all no-underline hover:brightness-110"
               style={{
-                background: "linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%)",
-                boxShadow: "0 3px 12px rgba(27, 94, 32, 0.25)",
+                background: "linear-gradient(135deg, rgba(46, 125, 86, 0.85) 0%, rgba(27, 94, 63, 0.9) 100%)",
+                border: "1px solid rgba(255,255,255,0.2)",
+                backdropFilter: "blur(6px)",
+                WebkitBackdropFilter: "blur(6px)",
+                boxShadow: "0 2px 8px rgba(46, 125, 86, 0.3), inset 0 1px 0 rgba(255,255,255,0.15)",
               }}
               data-testid="button-registration-header"
             >
               <Building2 className="w-4 h-4" />
-              Registration
-            </Link>
+              {t.nav.registration}
+            </a>
             <a
-              href="https://f17c25d1-8d60-4751-b64c-aadbdeaf0836-00-mtsfdj8ol3sm.worf.replit.dev/"
+              href="https://zmc--portal.replit.app/"
               target="_blank"
               rel="noopener noreferrer"
-              className="py-2.5 px-5 rounded-[10px] font-semibold text-sm border-none flex items-center gap-2 text-white transition-all hover:-translate-y-0.5 no-underline cursor-pointer"
+              className="py-2.5 px-5 rounded-[10px] font-semibold text-sm flex items-center gap-2 text-white transition-all no-underline cursor-pointer hover:brightness-110"
               style={{
-                background: "linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%)",
-                boxShadow: "0 3px 12px rgba(27, 94, 32, 0.25)",
+                background: "linear-gradient(135deg, rgba(46, 125, 86, 0.85) 0%, rgba(27, 94, 63, 0.9) 100%)",
+                border: "1px solid rgba(255,255,255,0.2)",
+                backdropFilter: "blur(6px)",
+                WebkitBackdropFilter: "blur(6px)",
+                boxShadow: "0 2px 8px rgba(46, 125, 86, 0.3), inset 0 1px 0 rgba(255,255,255,0.15)",
               }}
               data-testid="button-accreditation-header"
             >
               <BadgeCheck className="w-4 h-4" />
-              Get Accredited
+              {t.nav.getAccredited}
             </a>
             <Link
-              href="/complaints"
-              className="py-2.5 px-5 rounded-[10px] font-semibold text-sm border-none flex items-center gap-2 text-white transition-all hover:-translate-y-0.5 no-underline"
+              href="/downloads"
+              className="py-2.5 px-5 rounded-[10px] font-semibold text-sm flex items-center gap-2 text-white transition-all no-underline hover:brightness-110"
               style={{
-                background: "linear-gradient(135deg, var(--zim-red) 0%, #991b1b 100%)",
-                boxShadow: "0 3px 12px rgba(198, 40, 40, 0.25)",
+                background: "linear-gradient(135deg, rgba(46, 125, 86, 0.85) 0%, rgba(27, 94, 63, 0.9) 100%)",
+                border: "1px solid rgba(255,255,255,0.2)",
+                backdropFilter: "blur(6px)",
+                WebkitBackdropFilter: "blur(6px)",
+                boxShadow: "0 2px 8px rgba(46, 125, 86, 0.3), inset 0 1px 0 rgba(255,255,255,0.15)",
+              }}
+              data-testid="button-reports-documents-header"
+            >
+              <FolderOpen className="w-4 h-4" />
+              Reports & Documents
+            </Link>
+            <Link
+              href="/complaints"
+              className="py-2.5 px-5 rounded-[10px] font-semibold text-sm flex items-center gap-2 text-white transition-all no-underline hover:brightness-110"
+              style={{
+                background: "linear-gradient(135deg, rgba(198, 40, 40, 0.85) 0%, rgba(153, 27, 27, 0.9) 100%)",
+                border: "1px solid rgba(255,255,255,0.2)",
+                backdropFilter: "blur(6px)",
+                WebkitBackdropFilter: "blur(6px)",
+                boxShadow: "0 2px 8px rgba(198, 40, 40, 0.3), inset 0 1px 0 rgba(255,255,255,0.15)",
               }}
               data-testid="button-complaints-header"
             >
               <Scale className="w-4 h-4" />
-              Complaints
+              {t.nav.mediaComplaints}
             </Link>
             <Link
               href="/appeals"
-              className="py-2.5 px-5 rounded-[10px] font-semibold text-sm border-none flex items-center gap-2 text-white transition-all hover:-translate-y-0.5 no-underline"
+              className="py-2.5 px-5 rounded-[10px] font-semibold text-sm flex items-center gap-2 text-white transition-all no-underline hover:brightness-110"
               style={{
-                background: "linear-gradient(135deg, var(--blue, #2563eb) 0%, #1d4ed8 100%)",
-                boxShadow: "0 3px 12px rgba(37, 99, 235, 0.25)",
+                background: "linear-gradient(135deg, rgba(37, 99, 235, 0.85) 0%, rgba(29, 78, 216, 0.9) 100%)",
+                border: "1px solid rgba(255,255,255,0.2)",
+                backdropFilter: "blur(6px)",
+                WebkitBackdropFilter: "blur(6px)",
+                boxShadow: "0 2px 8px rgba(37, 99, 235, 0.3), inset 0 1px 0 rgba(255,255,255,0.15)",
               }}
               data-testid="button-appeals-header"
             >
               <Scale className="w-4 h-4" />
-              Appeals
+              {t.nav.foiaAppeals}
             </Link>
             <a
-              href="https://f17c25d1-8d60-4751-b64c-aadbdeaf0836-00-mtsfdj8ol3sm.worf.replit.dev/"
+              href="https://zmc--portal.replit.app/"
               target="_blank"
               rel="noopener noreferrer"
-              className="py-2.5 px-5 rounded-[10px] font-bold text-sm border-none flex items-center gap-2 transition-all hover:-translate-y-0.5 no-underline cursor-pointer"
+              className="py-2.5 px-5 rounded-[10px] font-bold text-sm flex items-center gap-2 transition-all no-underline cursor-pointer hover:brightness-110"
               style={{
-                background: "linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%)",
+                background: "linear-gradient(135deg, rgba(212, 175, 55, 0.9) 0%, rgba(184, 134, 11, 0.95) 100%)",
                 color: "var(--zim-black)",
-                boxShadow: "0 3px 12px rgba(212, 175, 55, 0.3)",
+                border: "1px solid rgba(255,255,255,0.25)",
+                backdropFilter: "blur(6px)",
+                WebkitBackdropFilter: "blur(6px)",
+                boxShadow: "0 2px 8px rgba(212, 175, 55, 0.35), inset 0 1px 0 rgba(255,255,255,0.2)",
               }}
               data-testid="button-portal"
             >
               <ExternalLink className="w-4 h-4" />
-              Portal
+              {t.nav.portal}
             </a>
           </div>
         </div>
@@ -367,15 +329,20 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
             className="w-14 h-14 md:w-[80px] md:h-[80px] object-contain"
           />
           <div className="flex flex-col">
-            <span className="text-base md:text-[1.4rem] font-bold leading-tight" style={{ fontFamily: "var(--font-serif)" }}>
+            <span className="text-base md:text-[1.4rem] font-bold leading-tight">
               <span style={{ color: "#212121" }}>Zimbabwe</span>{" "}
-              <span style={{ color: "#1B5E20" }}>Media</span>{" "}
+              <span style={{ color: "var(--primary)" }}>Media</span>{" "}
               <span className="hidden sm:inline" style={{ color: "#212121" }}>Commission</span>
               <span className="sm:hidden" style={{ color: "#212121" }}>Comm.</span>
             </span>
-            <span className="hidden sm:block text-xs uppercase tracking-wider" style={{ color: "rgba(0,0,0,0.6)" }}>
-              Promoting Media Freedom
-            </span>
+            <div className="hidden sm:block overflow-hidden max-w-[220px] md:max-w-[280px]">
+              <div
+                className="whitespace-nowrap text-xs tracking-wider animate-marquee"
+                style={{ color: "rgba(0,0,0,0.6)", fontStyle: "italic" }}
+              >
+                {t.vision}
+              </div>
+            </div>
           </div>
         </Link>
 
@@ -399,16 +366,16 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
                   currentPage === "home" ? "font-semibold" : ""
                 }`}
                 style={{
-                  color: currentPage === "home" ? "#1B5E20" : "#212121",
+                  color: currentPage === "home" ? "var(--primary)" : "#212121",
                 }}
                 data-testid="nav-home"
               >
-                Home
+                {t.nav.home}
                 <span
                   className="absolute bottom-0 left-1/2 -translate-x-1/2 h-[3px] rounded-sm transition-all"
                   style={{
                     width: currentPage === "home" ? "60%" : "0",
-                    background: currentPage === "home" ? "#1B5E20" : "#212121",
+                    background: currentPage === "home" ? "var(--primary)" : "#212121",
                   }}
                 />
               </Link>
@@ -418,15 +385,16 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
             <li className="relative">
               <button
                 onClick={() => {
-                  setAboutOpen(!aboutOpen);
-                  setServicesOpen(false);
-                  setOpportunitiesOpen(false);
+                  const next = !aboutOpen;
+                  closeAllDropdowns();
+                  setNotificationsOpen(false);
+                  setAboutOpen(next);
                 }}
-                className="block py-6 px-4 font-medium text-[0.95rem] flex items-center gap-1 transition-all hover:text-[#1B5E20] bg-transparent border-none cursor-pointer"
+                className="block py-6 px-4 font-medium text-[0.95rem] flex items-center gap-1 transition-all hover:text-[var(--primary)] bg-transparent border-none cursor-pointer"
                 style={{ color: "#212121" }}
                 data-testid="nav-about"
               >
-                About
+                {t.nav.about}
                 <ChevronDown
                   className={`w-3 h-3 transition-transform ${aboutOpen ? "rotate-180" : ""}`}
                 />
@@ -438,14 +406,14 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
                 style={{ boxShadow: "var(--shadow-lg)" }}
               >
                 {[
-                  { label: "About ZMC", path: "/about" },
-                  { label: "Board of Commissioners", path: "/commissioners" },
-                  { label: "Secretariat", path: "/secretariat" },
+                  { label: t.nav.aboutZmc, path: "/about" },
+                  { label: t.nav.commissioners, path: "/commissioners" },
+                  { label: t.nav.secretariat, path: "/secretariat" },
                 ].map((item) => (
                   <Link
                     key={item.path}
                     href={item.path}
-                    onClick={() => closeAllDropdowns()}
+                    onClick={() => { closeAllDropdowns(); setNotificationsOpen(false); }}
                     className="block py-3.5 px-5 text-[0.9rem] border-b transition-all hover:pl-6 no-underline"
                     style={{
                       color: "var(--neutral-700)",
@@ -463,15 +431,16 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
             <li className="relative">
               <button
                 onClick={() => {
-                  setServicesOpen(!servicesOpen);
-                  setAboutOpen(false);
-                  setOpportunitiesOpen(false);
+                  const next = !servicesOpen;
+                  closeAllDropdowns();
+                  setNotificationsOpen(false);
+                  setServicesOpen(next);
                 }}
-                className="block py-6 px-4 font-medium text-[0.95rem] flex items-center gap-1 transition-all hover:text-[#1B5E20] bg-transparent border-none cursor-pointer"
+                className="block py-6 px-4 font-medium text-[0.95rem] flex items-center gap-1 transition-all hover:text-[var(--primary)] bg-transparent border-none cursor-pointer"
                 style={{ color: "#212121" }}
                 data-testid="nav-services"
               >
-                Services
+                {t.nav.services}
                 <ChevronDown
                   className={`w-3 h-3 transition-transform ${servicesOpen ? "rotate-180" : ""}`}
                 />
@@ -483,15 +452,16 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
                 style={{ boxShadow: "var(--shadow-lg)" }}
               >
                 {[
-                  { label: "Accreditation", path: "/accreditation" },
-                  { label: "Registration", path: "/registration" },
-                  { label: "Complaints", path: "/complaints" },
-                  { label: "Appeals (FOIA)", path: "/appeals" },
+                  { label: t.nav.accreditation, path: "/accreditation" },
+                  { label: t.nav.registration, path: "/registration" },
+                  { label: t.nav.mediaComplaints, path: "/complaints" },
+                  { label: t.nav.foiaAppeals, path: "/appeals" },
+                  { label: t.nav.training, path: "/media-hub" },
                 ].map((item) => (
                   <Link
                     key={item.path}
                     href={item.path}
-                    onClick={() => closeAllDropdowns()}
+                    onClick={() => { closeAllDropdowns(); setNotificationsOpen(false); }}
                     className="block py-3.5 px-5 text-[0.9rem] border-b transition-all hover:pl-6 no-underline"
                     style={{
                       color: "var(--neutral-700)",
@@ -509,15 +479,16 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
             <li className="relative">
               <button
                 onClick={() => {
-                  setOpportunitiesOpen(!opportunitiesOpen);
-                  setAboutOpen(false);
-                  setServicesOpen(false);
+                  const next = !opportunitiesOpen;
+                  closeAllDropdowns();
+                  setNotificationsOpen(false);
+                  setOpportunitiesOpen(next);
                 }}
-                className="block py-6 px-4 font-medium text-[0.95rem] flex items-center gap-1 transition-all hover:text-[#1B5E20] bg-transparent border-none cursor-pointer"
+                className="block py-6 px-4 font-medium text-[0.95rem] flex items-center gap-1 transition-all hover:text-[var(--primary)] bg-transparent border-none cursor-pointer"
                 style={{ color: "#212121" }}
                 data-testid="nav-opportunities"
               >
-                Opportunities
+                {t.nav.opportunities}
                 <ChevronDown
                   className={`w-3 h-3 transition-transform ${opportunitiesOpen ? "rotate-180" : ""}`}
                 />
@@ -529,19 +500,20 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
                 style={{ boxShadow: "var(--shadow-lg)" }}
               >
                 {[
-                  { label: "Vacancies", path: "/vacancies" },
-                  { label: "Tenders", path: "/tenders" },
+                  { label: t.nav.vacancies, path: "/vacancies", testId: "nav-vacancies" },
+                  { label: t.nav.tenders, path: "/tenders", testId: "nav-tenders" },
+                  { label: t.nav.training, path: "/media-hub", testId: "nav-training" },
                 ].map((item) => (
                   <Link
-                    key={item.path}
+                    key={item.testId}
                     href={item.path}
-                    onClick={() => closeAllDropdowns()}
+                    onClick={() => { closeAllDropdowns(); setNotificationsOpen(false); }}
                     className="block py-3.5 px-5 text-[0.9rem] border-b transition-all hover:pl-6 no-underline"
                     style={{
                       color: "var(--neutral-700)",
                       borderColor: "var(--neutral-100)",
                     }}
-                    data-testid={`nav-${item.path.slice(1)}`}
+                    data-testid={item.testId}
                   >
                     {item.label}
                   </Link>
@@ -553,16 +525,16 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
             <li className="relative">
               <button
                 onClick={() => {
-                  setMediaCentreOpen(!mediaCentreOpen);
-                  setAboutOpen(false);
-                  setServicesOpen(false);
-                  setOpportunitiesOpen(false);
+                  const next = !mediaCentreOpen;
+                  closeAllDropdowns();
+                  setNotificationsOpen(false);
+                  setMediaCentreOpen(next);
                 }}
-                className="block py-6 px-4 font-medium text-[0.95rem] flex items-center gap-1 transition-all hover:text-[#1B5E20] bg-transparent border-none cursor-pointer"
+                className="block py-6 px-4 font-medium text-[0.95rem] flex items-center gap-1 transition-all hover:text-[var(--primary)] bg-transparent border-none cursor-pointer"
                 style={{ color: "#212121" }}
                 data-testid="nav-media-centre"
               >
-                Media Centre
+                {t.nav.mediaCentre}
                 <ChevronDown
                   className={`w-3 h-3 transition-transform ${mediaCentreOpen ? "rotate-180" : ""}`}
                 />
@@ -574,38 +546,50 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
                 style={{ boxShadow: "var(--shadow-lg)" }}
               >
                 {[
-                  { label: "Downloads", path: "/downloads" },
-                  { label: "Photos", path: "/photos" },
-                  { label: "Press Releases", path: "/press-releases" },
-                  { label: "Magazine", path: "/magazine" },
+                  { label: t.nav.downloads, path: "/downloads" },
+                  { label: t.nav.photos, path: "/photos" },
+                  { label: t.nav.pressReleases, path: "/press-releases" },
+                  { label: t.nav.magazine, path: "/magazine" },
+                  { label: t.nav.mediaHub, path: "/media-hub", highlight: true },
                 ].map((item) => (
                   <Link
                     key={item.path}
                     href={item.path}
-                    onClick={() => closeAllDropdowns()}
-                    className="block py-3.5 px-5 text-[0.9rem] border-b transition-all hover:pl-6 no-underline"
+                    onClick={() => { closeAllDropdowns(); setNotificationsOpen(false); }}
+                    className={`block py-3.5 px-5 text-[0.9rem] border-b transition-all hover:pl-6 no-underline flex items-center justify-between ${
+                      (item as any).highlight ? "font-semibold" : ""
+                    }`}
                     style={{
-                      color: "var(--neutral-700)",
+                      color: (item as any).highlight ? "var(--primary-dark)" : "var(--neutral-700)",
                       borderColor: "var(--neutral-100)",
+                      background: (item as any).highlight ? "var(--accent-soft)" : "transparent",
                     }}
                     data-testid={`nav-${item.path.slice(1)}`}
                   >
                     {item.label}
+                    {(item as any).highlight && (
+                      <span
+                        className="text-[0.65rem] font-bold py-0.5 px-2 rounded-full"
+                        style={{ background: "var(--accent)", color: "var(--zim-black)" }}
+                      >
+                        {t.newBadge}
+                      </span>
+                    )}
                   </Link>
                 ))}
               </div>
             </li>
 
             {[
-              { label: "Events", path: "/events" },
-              { label: "Contact", path: "/contact" },
+              { label: t.nav.events, path: "/events" },
+              { label: t.nav.contact, path: "/contact" },
             ].map((item) => (
               <li key={item.path}>
                 <Link
                   href={item.path}
-                  className="block py-6 px-4 font-medium text-[0.95rem] relative transition-all hover:text-[#1B5E20] no-underline"
+                  className="block py-6 px-4 font-medium text-[0.95rem] relative transition-all hover:text-[var(--primary)] no-underline"
                   style={{
-                    color: currentPage === item.path.slice(1) ? "#1B5E20" : "#212121",
+                    color: currentPage === item.path.slice(1) ? "var(--primary)" : "#212121",
                   }}
                   data-testid={`nav-${item.path.slice(1)}`}
                 >
@@ -614,7 +598,7 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
                     className="absolute bottom-0 left-1/2 -translate-x-1/2 h-[3px] rounded-sm transition-all"
                     style={{
                       width: currentPage === item.path.slice(1) ? "60%" : "0",
-                      background: "#1B5E20",
+                      background: "var(--primary)",
                     }}
                   />
                 </Link>
@@ -643,24 +627,28 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
         <div className="p-4">
           {/* Quick Actions */}
           <div className="grid grid-cols-4 gap-2 mb-4">
-            <Link
-              href="/registration"
-              onClick={() => handleMobileNavClick("/registration")}
+            <a
+              href="https://zmc--portal.replit.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setMobileMenuOpen(false)}
               className="py-2.5 px-1 rounded-xl font-semibold text-[10px] flex flex-col items-center justify-center gap-1.5 text-white no-underline"
               style={{ background: "linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%)" }}
             >
               <Building2 className="w-4 h-4" />
-              Register
-            </Link>
-            <Link
-              href="/accreditation"
-              onClick={() => handleMobileNavClick("/accreditation")}
+              {t.nav.registration}
+            </a>
+            <a
+              href="https://zmc--portal.replit.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setMobileMenuOpen(false)}
               className="py-2.5 px-1 rounded-xl font-semibold text-[10px] flex flex-col items-center justify-center gap-1.5 text-white no-underline"
               style={{ background: "linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%)" }}
             >
               <BadgeCheck className="w-4 h-4" />
-              Accredit
-            </Link>
+              {t.nav.accreditation}
+            </a>
             <Link
               href="/complaints"
               onClick={() => handleMobileNavClick("/complaints")}
@@ -668,7 +656,7 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
               style={{ background: "linear-gradient(135deg, var(--zim-red) 0%, #991b1b 100%)" }}
             >
               <Scale className="w-4 h-4" />
-              Complaints
+              {t.nav.mediaComplaints}
             </Link>
             <Link
               href="/appeals"
@@ -678,7 +666,7 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
               data-testid="button-appeals-mobile"
             >
               <Scale className="w-4 h-4" />
-              Appeals
+              {t.nav.foiaAppeals}
             </Link>
           </div>
 
@@ -690,7 +678,7 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
               className="block py-3 px-4 border-b no-underline"
               style={{ borderColor: "var(--neutral-100)", color: currentPage === "home" ? "var(--primary)" : "var(--neutral-700)" }}
             >
-              Home
+              {t.nav.home}
             </Link>
 
             {/* About Section */}
@@ -700,14 +688,14 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
                 className="w-full py-3 px-4 flex justify-between items-center bg-transparent border-none cursor-pointer"
                 style={{ color: "var(--neutral-700)" }}
               >
-                <span>About</span>
+                <span>{t.nav.about}</span>
                 <ChevronDown className={`w-4 h-4 transition-transform ${aboutOpen ? "rotate-180" : ""}`} />
               </button>
               <div className={`overflow-hidden transition-all ${aboutOpen ? "max-h-40" : "max-h-0"}`}>
                 {[
-                  { label: "About ZMC", path: "/about" },
-                  { label: "Board of Commissioners", path: "/commissioners" },
-                  { label: "Secretariat", path: "/secretariat" },
+                  { label: t.nav.aboutZmc, path: "/about" },
+                  { label: t.nav.commissioners, path: "/commissioners" },
+                  { label: t.nav.secretariat, path: "/secretariat" },
                 ].map((item) => (
                   <Link
                     key={item.path}
@@ -729,15 +717,16 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
                 className="w-full py-3 px-4 flex justify-between items-center bg-transparent border-none cursor-pointer"
                 style={{ color: "var(--neutral-700)" }}
               >
-                <span>Services</span>
+                <span>{t.nav.services}</span>
                 <ChevronDown className={`w-4 h-4 transition-transform ${servicesOpen ? "rotate-180" : ""}`} />
               </button>
-              <div className={`overflow-hidden transition-all ${servicesOpen ? "max-h-40" : "max-h-0"}`}>
+              <div className={`overflow-hidden transition-all ${servicesOpen ? "max-h-60" : "max-h-0"}`}>
                 {[
-                  { label: "Accreditation", path: "/accreditation" },
-                  { label: "Registration", path: "/registration" },
-                  { label: "Complaints", path: "/complaints" },
-                  { label: "Appeals (FOIA)", path: "/appeals" },
+                  { label: t.nav.accreditation, path: "/accreditation" },
+                  { label: t.nav.registration, path: "/registration" },
+                  { label: t.nav.mediaComplaints, path: "/complaints" },
+                  { label: t.nav.foiaAppeals, path: "/appeals" },
+                  { label: t.nav.training, path: "/media-hub" },
                 ].map((item) => (
                   <Link
                     key={item.path}
@@ -759,16 +748,17 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
                 className="w-full py-3 px-4 flex justify-between items-center bg-transparent border-none cursor-pointer"
                 style={{ color: "var(--neutral-700)" }}
               >
-                <span>Opportunities</span>
+                <span>{t.nav.opportunities}</span>
                 <ChevronDown className={`w-4 h-4 transition-transform ${opportunitiesOpen ? "rotate-180" : ""}`} />
               </button>
-              <div className={`overflow-hidden transition-all ${opportunitiesOpen ? "max-h-24" : "max-h-0"}`}>
+              <div className={`overflow-hidden transition-all ${opportunitiesOpen ? "max-h-40" : "max-h-0"}`}>
                 {[
-                  { label: "Vacancies", path: "/vacancies" },
-                  { label: "Tenders", path: "/tenders" },
+                  { label: t.nav.vacancies, path: "/vacancies", key: "vacancies" },
+                  { label: t.nav.tenders, path: "/tenders", key: "tenders" },
+                  { label: t.nav.training, path: "/media-hub", key: "training" },
                 ].map((item) => (
                   <Link
-                    key={item.path}
+                    key={item.key}
                     href={item.path}
                     onClick={() => handleMobileNavClick(item.path)}
                     className="block py-2 px-8 text-sm no-underline"
@@ -787,32 +777,46 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
                 className="w-full py-3 px-4 flex justify-between items-center bg-transparent border-none cursor-pointer"
                 style={{ color: "var(--neutral-700)" }}
               >
-                <span>Media Centre</span>
+                <span>{t.nav.mediaCentre}</span>
                 <ChevronDown className={`w-4 h-4 transition-transform ${mediaCentreOpen ? "rotate-180" : ""}`} />
               </button>
-              <div className={`overflow-hidden transition-all ${mediaCentreOpen ? "max-h-48" : "max-h-0"}`}>
+              <div className={`overflow-hidden transition-all ${mediaCentreOpen ? "max-h-60" : "max-h-0"}`}>
                 {[
-                  { label: "Downloads", path: "/downloads" },
-                  { label: "Photos", path: "/photos" },
-                  { label: "Press Releases", path: "/press-releases" },
-                  { label: "Magazine", path: "/magazine" },
+                  { label: t.nav.downloads, path: "/downloads" },
+                  { label: t.nav.photos, path: "/photos" },
+                  { label: t.nav.pressReleases, path: "/press-releases" },
+                  { label: t.nav.magazine, path: "/magazine" },
+                  { label: t.nav.mediaHub, path: "/media-hub", highlight: true },
                 ].map((item) => (
                   <Link
                     key={item.path}
                     href={item.path}
                     onClick={() => handleMobileNavClick(item.path)}
-                    className="block py-2 px-8 text-sm no-underline"
-                    style={{ color: "var(--neutral-600)", background: "var(--neutral-50)" }}
+                    className={`block py-2 px-8 text-sm no-underline flex items-center justify-between ${
+                      (item as any).highlight ? "font-semibold" : ""
+                    }`}
+                    style={{
+                      color: (item as any).highlight ? "var(--primary-dark)" : "var(--neutral-600)",
+                      background: (item as any).highlight ? "var(--accent-soft)" : "var(--neutral-50)",
+                    }}
                   >
                     {item.label}
+                    {(item as any).highlight && (
+                      <span
+                        className="text-[0.6rem] font-bold py-0.5 px-1.5 rounded-full"
+                        style={{ background: "var(--accent)", color: "var(--zim-black)" }}
+                      >
+                        {t.newBadge}
+                      </span>
+                    )}
                   </Link>
                 ))}
               </div>
             </div>
 
             {[
-              { label: "Events", path: "/events" },
-              { label: "Contact", path: "/contact" },
+              { label: t.nav.events, path: "/events" },
+              { label: t.nav.contact, path: "/contact" },
             ].map((item) => (
               <Link
                 key={item.path}

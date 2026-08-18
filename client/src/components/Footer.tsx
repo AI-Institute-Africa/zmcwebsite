@@ -1,25 +1,27 @@
 import { Link } from "wouter";
 import { MapPin, Phone, Mail, Clock, ChevronRight, Facebook, Twitter, Instagram, Youtube } from "lucide-react";
+import { useLanguage } from "../i18n/LanguageContext";
 
 interface FooterProps {
   onNavigate: (page: string) => void;
 }
 
 export default function Footer({ onNavigate }: FooterProps) {
+  const { t } = useLanguage();
   const quickLinks = [
-    { label: "About ZMC", path: "/about" },
-    { label: "Accreditation", path: "/accreditation" },
-    { label: "Registration", path: "/registration" },
-    { label: "Downloads", path: "/downloads" },
-    { label: "Contact Us", path: "/contact" },
+    { label: t.footer.aboutZmc, path: "/about" },
+    { label: t.nav.accreditation, path: "/accreditation" },
+    { label: t.nav.registration, path: "/registration" },
+    { label: t.nav.downloads, path: "/downloads" },
+    { label: t.footer.contactUs, path: "/contact" },
   ];
 
   const services = [
-    { label: "Media Accreditation", path: "/accreditation" },
-    { label: "Media Registration", path: "/registration" },
-    { label: "Complaints", path: "/complaints" },
-    { label: "Appeals (FOIA)", path: "/appeals" },
-    { label: "Training Programs", path: "/events" },
+    { label: t.footer.mediaAccreditation, path: "/accreditation" },
+    { label: t.footer.mediaRegistration, path: "/registration" },
+    { label: t.footer.mediaComplaints, path: "/complaints" },
+    { label: t.footer.foiaAppeals, path: "/appeals" },
+    { label: t.footer.trainingPrograms, path: "/events" },
   ];
 
   return (
@@ -35,13 +37,11 @@ export default function Footer({ onNavigate }: FooterProps) {
         <div>
           <h4
             className="text-white mb-5 text-[1.35rem]"
-            style={{ fontFamily: "var(--font-serif)" }}
           >
-            Zimbabwe Media Commission
+            {t.footer.zmcName}
           </h4>
           <p className="text-[0.95rem] leading-relaxed" style={{ color: "var(--neutral-400)" }}>
-            Promoting and protecting freedom of expression and the media. Ensuring responsible
-            journalism, a well-informed public, and a diverse, plural and ethical media.
+            {t.footer.mission}
           </p>
           <div className="flex gap-4 mt-6">
             {[
@@ -72,9 +72,8 @@ export default function Footer({ onNavigate }: FooterProps) {
         <div>
           <h4
             className="text-white mb-5 text-[1.35rem]"
-            style={{ fontFamily: "var(--font-serif)" }}
           >
-            Quick Links
+            {t.footer.quickLinks}
           </h4>
           <ul className="list-none">
             {quickLinks.map((link, index) => (
@@ -97,9 +96,8 @@ export default function Footer({ onNavigate }: FooterProps) {
         <div>
           <h4
             className="text-white mb-5 text-[1.35rem]"
-            style={{ fontFamily: "var(--font-serif)" }}
           >
-            Our Services
+            {t.footer.ourServices}
           </h4>
           <ul className="list-none">
             {services.map((service, index) => (
@@ -122,9 +120,8 @@ export default function Footer({ onNavigate }: FooterProps) {
         <div>
           <h4
             className="text-white mb-5 text-[1.35rem]"
-            style={{ fontFamily: "var(--font-serif)" }}
           >
-            Contact Us
+            {t.footer.contactUs}
           </h4>
           <div className="space-y-4">
             <div className="flex items-start gap-3">
@@ -154,7 +151,7 @@ export default function Footer({ onNavigate }: FooterProps) {
             <div className="flex items-center gap-3">
               <Clock className="w-5 h-5 flex-shrink-0" style={{ color: "var(--accent)" }} />
               <p className="text-[0.95rem] m-0 whitespace-nowrap" style={{ color: "var(--neutral-400)" }}>
-                Mon - Fri: 8:00 AM - 4:30 PM
+                {t.footer.officeHours}
               </p>
             </div>
           </div>
@@ -170,7 +167,7 @@ export default function Footer({ onNavigate }: FooterProps) {
         }}
       >
         <p className="m-0">
-          &copy; {new Date().getFullYear()} Zimbabwe Media Commission. All rights reserved.
+          © {new Date().getFullYear()} {t.footer.copyright}
         </p>
       </div>
     </footer>

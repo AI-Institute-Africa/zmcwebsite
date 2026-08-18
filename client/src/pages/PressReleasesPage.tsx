@@ -1,4 +1,5 @@
 import { Newspaper } from "lucide-react";
+import PageHero from "../components/PageHero";
 
 interface PressReleasesPageProps {
   onNavigate: (page: string) => void;
@@ -7,22 +8,11 @@ interface PressReleasesPageProps {
 export default function PressReleasesPage({ onNavigate }: PressReleasesPageProps) {
   return (
     <div className="animate-fadeIn pt-[140px] md:pt-[180px]">
-      <div
-        className="py-12 md:py-16 px-4 md:px-8 text-center relative overflow-hidden"
-        style={{ background: "linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%)" }}
-      >
-        <h1 className="text-white mb-3 relative text-2xl md:text-4xl">Press Releases</h1>
-        <p className="text-white/85 max-w-[600px] mx-auto text-base md:text-lg relative">
-          Official press releases from the Zimbabwe Media Commission
-        </p>
-        <div className="flex justify-center gap-2 mt-6 text-[0.9rem] flex-wrap">
-          <a href="#" onClick={(e) => { e.preventDefault(); onNavigate("home"); }} className="text-white/70 hover:text-white" data-testid="link-breadcrumb-home">Home</a>
-          <span className="text-white/70">/</span>
-          <span className="text-white/70">Media Centre</span>
-          <span className="text-white/70">/</span>
-          <span style={{ color: "var(--accent-light)" }}>Press Releases</span>
-        </div>
-      </div>
+      <PageHero
+        title="Press Releases"
+        subtitle="Official press releases from the Zimbabwe Media Commission"
+        breadcrumbs={[{ label: "Home", onClick: () => onNavigate("home") }, { label: "Media Centre" }, { label: "Press Releases" }]}
+      />
 
       <div className="py-12 md:py-16 px-4 md:px-8">
         <div className="max-w-[800px] mx-auto">

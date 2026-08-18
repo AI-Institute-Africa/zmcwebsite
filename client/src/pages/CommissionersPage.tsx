@@ -1,136 +1,189 @@
-import { Users, Scale } from "lucide-react";
-import zmcStructureImg from "@assets/zmc_board_structure.png";
+import { Scale, User, GraduationCap } from "lucide-react";
+import { useLanguage } from "../i18n/LanguageContext";
+import PageHero from "../components/PageHero";
 
 interface CommissionersPageProps {
   onNavigate: (page: string) => void;
 }
 
 export default function CommissionersPage({ onNavigate }: CommissionersPageProps) {
+  const { t } = useLanguage();
+
+  interface Commissioner {
+    title: string;
+    name?: string;
+    scope?: string;
+  }
+
+  const board = {
+    chair: {
+      title: "Chairperson",
+      scope: "Leads the Board of Commissioners and chairs all meetings of the Commission",
+    } as Commissioner,
+    deputyChair: {
+      title: "Deputy Chairperson",
+      scope: "Supports the Chairperson and acts in their place when required",
+    } as Commissioner,
+    commissioners: [
+      { title: "Commissioner" },
+      { title: "Commissioner" },
+      { title: "Commissioner" },
+      { title: "Commissioner" },
+      { title: "Commissioner" },
+      { title: "Commissioner" },
+      { title: "Commissioner" },
+    ] as Commissioner[],
+  };
+
+  const PersonCard = ({ title, name, scope, size = "md", highlight = false }: {
+    title: string;
+    name?: string;
+    scope?: string;
+    size?: "lg" | "md" | "sm";
+    highlight?: boolean;
+  }) => {
+    const avatarSize = size === "lg" ? "w-32 h-32 md:w-40 md:h-40" : size === "md" ? "w-24 h-24 md:w-28 md:h-28" : "w-20 h-20 md:w-24 md:h-24";
+    const iconSize = size === "lg" ? "w-12 h-12 md:w-14 md:h-14" : size === "md" ? "w-8 h-8 md:w-10 md:h-10" : "w-6 h-6 md:w-7 md:h-7";
+
+    return (
+      <div
+        className={`bg-white rounded-2xl text-center transition-all hover:-translate-y-1 ${size === "lg" ? "p-6 md:p-8" : size === "md" ? "p-4 md:p-6" : "p-3 md:p-4"}`}
+        style={{
+          boxShadow: highlight ? "0 8px 32px rgba(46, 125, 86, 0.15)" : "var(--shadow-sm)",
+          border: highlight ? "3px solid var(--primary)" : "1px solid var(--neutral-200)",
+        }}
+        data-testid={`card-commissioner-${title.toLowerCase().replace(/\s+/g, "-")}`}
+      >
+        <div
+          className={`${avatarSize} rounded-full mx-auto mb-3 flex items-center justify-center overflow-hidden relative`}
+          style={{
+            background: highlight
+              ? "linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%)"
+              : "var(--neutral-100)",
+          }}
+        >
+          <User className={`${iconSize} ${highlight ? "text-white" : ""}`} style={highlight ? {} : { color: "var(--neutral-400)" }} />
+        </div>
+        <h4
+          className={`mb-1 ${size === "lg" ? "text-lg md:text-xl" : size === "md" ? "text-base md:text-lg" : "text-sm md:text-base"}`}
+          style={{ color: "var(--primary-dark)" }}
+        >
+          {title}
+        </h4>
+        {name && (
+          <p className="text-xs md:text-sm font-semibold mb-1" style={{ color: "var(--primary)" }}>
+            {name}
+          </p>
+        )}
+        {scope && (
+          <p className="text-xs md:text-sm" style={{ color: "var(--neutral-600)" }}>
+            {scope}
+          </p>
+        )}
+      </div>
+    );
+  };
+
   return (
     <div className="animate-fadeIn pt-[140px] md:pt-[180px]">
-      {/* Page Header */}
-      <div
-        className="py-12 md:py-16 px-4 md:px-8 text-center relative overflow-hidden"
-        style={{ background: "linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%)" }}
-      >
-        <h1 className="text-white mb-3 relative text-2xl md:text-4xl">Board of Commissioners</h1>
-        <p className="text-white/85 max-w-[600px] mx-auto text-base md:text-lg relative">
-          Leadership and governance of the Zimbabwe Media Commission
-        </p>
-        <div className="flex justify-center gap-2 mt-6 text-[0.9rem] flex-wrap">
-          <a href="#" onClick={(e) => { e.preventDefault(); onNavigate("home"); }} className="text-white/70 hover:text-white" data-testid="link-breadcrumb-home">Home</a>
-          <span className="text-white/70">/</span>
-          <a href="#" onClick={(e) => { e.preventDefault(); onNavigate("about"); }} className="text-white/70 hover:text-white" data-testid="link-breadcrumb-about">About</a>
-          <span className="text-white/70">/</span>
-          <span style={{ color: "var(--accent-light)" }}>Board of Commissioners</span>
-        </div>
-      </div>
+      <PageHero
+        title={t.pages.commissioners.title}
+        subtitle={t.pages.commissioners.subtitle}
+        breadcrumbs={[{ label: "Home", onClick: () => onNavigate("home") }, { label: "About", onClick: () => onNavigate("about") }, { label: "Board of Commissioners" }]}
+      />
 
-      {/* Content */}
+      {/* Constitutional Mandate */}
       <div className="py-12 md:py-16 px-4 md:px-8">
         <div className="max-w-[1200px] mx-auto">
-          {/* Introduction */}
-          <div 
+          <div
             className="text-center mb-12 md:mb-16 p-6 md:p-10 rounded-2xl"
             style={{ background: "var(--primary-lighter)", border: "1px solid var(--primary-light)" }}
           >
             <Scale className="w-10 h-10 md:w-12 md:h-12 mx-auto mb-4" style={{ color: "var(--primary)" }} />
             <h2 className="mb-4 text-xl md:text-2xl" style={{ color: "var(--primary-dark)" }}>Constitutional Mandate</h2>
             <p className="max-w-[800px] mx-auto text-sm md:text-base" style={{ color: "var(--neutral-600)" }}>
-              The Zimbabwe Media Commission is established under Section 249 of the Constitution of Zimbabwe. 
-              The Board of Commissioners is appointed by the President after consultation with the Committee 
-              on Standing Rules and Orders. Commissioners serve to promote and protect freedom of expression 
+              The Zimbabwe Media Commission is established under Section 249 of the Constitution of Zimbabwe.
+              The Board of Commissioners is appointed by the President after consultation with the Committee
+              on Standing Rules and Orders. Commissioners serve to promote and protect freedom of expression
               and media freedom in Zimbabwe.
             </p>
           </div>
 
-          {/* Proposed Structure - Exact Image */}
-          <div className="mb-12 md:mb-16">
-            <h2 className="text-center text-xl md:text-2xl mb-6" style={{ color: "var(--primary-dark)" }}>
-              Proposed / Revised Structure
-            </h2>
-            <div 
-              className="bg-white rounded-2xl p-4 md:p-8 overflow-hidden"
-              style={{ boxShadow: "var(--shadow-lg)", border: "1px solid var(--neutral-200)" }}
-            >
-              <img 
-                src={zmcStructureImg} 
-                alt="Zimbabwe Media Commission Proposed / Revised Structure - Establishment 108" 
-                className="w-full h-auto rounded-lg"
-                style={{ maxWidth: "100%" }}
-                data-testid="img-board-structure"
-              />
-            </div>
-            <p className="text-center mt-4 text-xs md:text-sm" style={{ color: "var(--neutral-500)" }}>
-              Zimbabwe Media Commission Proposed / Revised Structure: Establishment 108
+          {/* Board Structure */}
+          <div className="text-center mb-12 md:mb-16">
+            <h2 className="text-xl md:text-2xl mb-4" style={{ color: "var(--primary-dark)" }}>Board of Commissioners</h2>
+            <p className="max-w-[700px] mx-auto text-sm md:text-base" style={{ color: "var(--neutral-600)" }}>
+              The Commission consists of a Chairperson, Deputy Chairperson, and seven other Commissioners
+              appointed in accordance with Section 237 of the Constitution. Member photos and names will be
+              published here once confirmed.
             </p>
           </div>
 
-          {/* Powers and Functions */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div 
-              className="bg-white rounded-xl p-6 md:p-8"
-              style={{ boxShadow: "var(--shadow-sm)", border: "1px solid var(--neutral-200)" }}
-            >
-              <h3 className="mb-4 text-lg md:text-xl" style={{ color: "var(--primary-dark)" }}>Powers of the Commission</h3>
-              <ul className="space-y-3">
-                {[
-                  "Regulate the media industry in Zimbabwe",
-                  "Register and accredit media practitioners",
-                  "Receive and adjudicate complaints against media",
-                  "Conduct research on media issues",
-                  "Promote best practices in the media industry",
-                ].map((item, idx) => (
-                  <li key={idx} className="flex items-start gap-3">
-                    <span 
-                      className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 text-xs"
-                      style={{ background: "var(--primary-lighter)", color: "var(--primary)" }}
-                    >
-                      {idx + 1}
-                    </span>
-                    <span className="text-sm md:text-base" style={{ color: "var(--neutral-700)" }}>{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div 
-              className="bg-white rounded-xl p-6 md:p-8"
-              style={{ boxShadow: "var(--shadow-sm)", border: "1px solid var(--neutral-200)" }}
-            >
-              <h3 className="mb-4 text-lg md:text-xl" style={{ color: "var(--primary-dark)" }}>Functions of the Commission</h3>
-              <ul className="space-y-3">
-                {[
-                  "Promote freedom of expression and media freedom",
-                  "Protect journalists from harassment",
-                  "Ensure fair and accurate reporting",
-                  "Uphold ethical standards in journalism",
-                  "Foster a diverse and pluralistic media environment",
-                ].map((item, idx) => (
-                  <li key={idx} className="flex items-start gap-3">
-                    <span 
-                      className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 text-xs"
-                      style={{ background: "var(--accent-soft)", color: "var(--accent-dark)" }}
-                    >
-                      {idx + 1}
-                    </span>
-                    <span className="text-sm md:text-base" style={{ color: "var(--neutral-700)" }}>{item}</span>
-                  </li>
-                ))}
-              </ul>
+          {/* Chairperson - Top Level */}
+          <div className="flex justify-center mb-8 md:mb-10">
+            <div className="max-w-[380px] w-full">
+              <PersonCard
+                title={board.chair.title}
+                scope={board.chair.scope}
+                size="lg"
+                highlight
+              />
             </div>
           </div>
 
-          {/* CTA */}
-          <div className="mt-12 text-center">
-            <button
-              onClick={() => onNavigate("about")}
-              className="py-3 px-6 rounded-xl font-semibold border-none cursor-pointer text-white transition-all hover:-translate-y-0.5"
-              style={{ background: "linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%)" }}
-              data-testid="button-about-zmc"
-            >
-              Learn More About ZMC
-            </button>
+          {/* Connecting Line */}
+          <div className="hidden md:flex justify-center mb-6">
+            <div className="w-0.5 h-8" style={{ background: "var(--primary-light)" }} />
           </div>
+
+          {/* Deputy Chairperson */}
+          <div className="flex justify-center mb-8 md:mb-10">
+            <div className="max-w-[340px] w-full">
+              <PersonCard
+                title={board.deputyChair.title}
+                scope={board.deputyChair.scope}
+                size="md"
+                highlight
+              />
+            </div>
+          </div>
+
+          {/* Connecting Line */}
+          <div className="hidden md:flex justify-center mb-6">
+            <div className="w-0.5 h-8" style={{ background: "var(--neutral-300)" }} />
+          </div>
+
+          {/* Commissioners */}
+          <div className="mb-12">
+            <h3 className="text-center text-lg md:text-xl mb-6" style={{ color: "var(--primary-dark)" }}>
+              Commissioners
+            </h3>
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-3 md:gap-4 max-w-[1100px] mx-auto">
+              {board.commissioners.map((person, index) => (
+                <PersonCard
+                  key={index}
+                  title={person.title}
+                  name={person.name}
+                  size="sm"
+                />
+              ))}
+            </div>
+          </div>
+
+          {/* Commitment */}
+          <div
+            className="p-6 md:p-10 rounded-2xl text-center"
+            style={{ background: "var(--primary-lighter)", border: "1px solid var(--primary-light)" }}
+          >
+            <GraduationCap className="w-10 h-10 md:w-12 md:h-12 mx-auto mb-4" style={{ color: "var(--primary)" }} />
+            <h3 className="mb-4 text-lg md:text-xl" style={{ color: "var(--primary-dark)" }}>Our Commitment</h3>
+            <p className="max-w-[600px] mx-auto text-sm md:text-base" style={{ color: "var(--neutral-600)" }}>
+              The Board of Commissioners is committed to upholding the principles of media freedom, transparency
+              and accountability set out in the Constitution, and to serving the people of Zimbabwe with
+              integrity and impartiality.
+            </p>
+          </div>
+
         </div>
       </div>
     </div>

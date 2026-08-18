@@ -1,10 +1,13 @@
 import { Target, Eye, Heart, Users, Shield, Award, BookOpen, Globe, Radio, Scale, Megaphone, Lightbulb } from "lucide-react";
+import { useLanguage } from "../i18n/LanguageContext";
+import PageHero from "../components/PageHero";
 
 interface AboutPageProps {
   onNavigate: (page: string) => void;
 }
 
 export default function AboutPage({ onNavigate }: AboutPageProps) {
+  const { t } = useLanguage();
   const functions = [
     { icon: Shield, title: "Uphold Media Freedom", desc: "To uphold, promote and develop freedom of the media" },
     { icon: Award, title: "Ethics & Good Practice", desc: "To promote and enforce good practices and ethics in the media" },
@@ -20,28 +23,11 @@ export default function AboutPage({ onNavigate }: AboutPageProps) {
 
   return (
     <div className="animate-fadeIn pt-[140px] md:pt-[180px]">
-      {/* Page Header */}
-      <div
-        className="py-12 md:py-16 px-4 md:px-8 text-center relative overflow-hidden"
-        style={{ background: "linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%)" }}
-      >
-        <div className="absolute top-0 right-0 w-1/2 h-full" style={{ background: "radial-gradient(circle at 70% 50%, rgba(255,255,255,0.1) 0%, transparent 50%)" }} />
-        <h1 className="text-white mb-3 relative text-2xl md:text-4xl">About ZMC</h1>
-        <p className="text-white/85 max-w-[600px] mx-auto text-base md:text-lg relative">
-          Learn about the Zimbabwe Media Commission and our mandate
-        </p>
-        <div className="flex justify-center gap-2 mt-6 text-[0.9rem]">
-          <a
-            href="#"
-            onClick={(e) => { e.preventDefault(); onNavigate("home"); }}
-            className="text-white/70 hover:text-white"
-          >
-            Home
-          </a>
-          <span className="text-white/70">/</span>
-          <span style={{ color: "var(--accent-light)" }}>About ZMC</span>
-        </div>
-      </div>
+      <PageHero
+        title={t.pages.about.title}
+        subtitle={t.pages.about.subtitle}
+        breadcrumbs={[{ label: "Home", onClick: () => onNavigate("home") }, { label: "About ZMC" }]}
+      />
 
       {/* Content */}
       <div className="py-16 px-4 md:px-8">
@@ -49,42 +35,42 @@ export default function AboutPage({ onNavigate }: AboutPageProps) {
           {/* Introduction / Purpose & General Mandate */}
           <div
             className="bg-white rounded-[20px] p-6 md:p-10 mb-8 transition-all"
-            style={{ boxShadow: "var(--shadow-sm)", border: "1px solid var(--neutral-100)" }}
+            style={{ boxShadow: "var(--shadow-sm)", border: "1px solid var(--neutral-100)", letterSpacing: "0.02em" }}
           >
-            <h2 style={{ color: "var(--primary)", borderBottom: "2px solid var(--primary-lighter)", paddingBottom: "0.75rem" }}>
+            <h2 style={{ color: "var(--primary)", borderBottom: "2px solid var(--primary-lighter)", paddingBottom: "0.75rem", letterSpacing: "0.02em" }}>
               Purpose & General Mandate
             </h2>
-            <p className="text-base md:text-lg leading-relaxed" style={{ color: "var(--neutral-700)" }}>
+            <p className="text-base leading-relaxed mt-4" style={{ color: "var(--neutral-700)" }}>
               The Zimbabwe Media Commission (ZMC) is one of the Chapter 12 Independent Commissions whose purpose is the 
               entrenchment of a democratic society driven by respect for the Constitution, rule of law, democracy and human rights 
               among other objectives. The Commission's major focus is on the promotion and protection of freedom of expression 
               and of the media; and the promotion of accountable governance through facilitating public access to information held 
               by public entities for the purposes of transparency, accountability and protection of human rights.
             </p>
-            <p className="leading-relaxed text-sm md:text-base" style={{ color: "var(--neutral-600)" }}>
+            <p className="text-base leading-relaxed mt-4" style={{ color: "var(--neutral-700)" }}>
               The ZMC plays its critical role in the media and information sector as part of the Chapter 12 Independent Commissions 
               whose major purpose is to contribute towards a democratic Zimbabwe with constitutionalism as a shared value. The ZMC, 
               like other Independent Commissions, is expected to monitor compliance with Constitutional provisions across the public 
               and private sectors, to receive complaints from the public and to take appropriate action where necessary.
             </p>
-            <p className="leading-relaxed text-sm md:text-base" style={{ color: "var(--neutral-600)" }}>
+            <p className="text-base leading-relaxed mt-4" style={{ color: "var(--neutral-700)" }}>
               Apart from Constitutional provisions, the ZMC is guided by the Freedom of Information Act (FOIA) [Chapter 10:33] and 
               the Zimbabwe Media Commission Act [Chapter 10:35]. Under the FOIA, the Commission is required to review decisions 
               relating to access to information held by public entities and to rectify any failure to meet prescribed standards. The 
               Commission receives appeals from members of the public who are denied access to requested information as per the 
               provisions of the law.
             </p>
-            <p className="leading-relaxed text-sm md:text-base" style={{ color: "var(--neutral-600)" }}>
+            <p className="text-base leading-relaxed mt-4" style={{ color: "var(--neutral-700)" }}>
               The ZMC Act also requires the Commission to investigate any action that threatens freedom of the press and of expression. 
               The Commission can institute inquiries and investigations on any development that threatens the right to free expression 
               and the right of the media as provided by Section 61 of the Constitution.
             </p>
-            <p className="leading-relaxed text-sm md:text-base" style={{ color: "var(--neutral-600)" }}>
+            <p className="text-base leading-relaxed mt-4" style={{ color: "var(--neutral-700)" }}>
               In line with Statutory Instrument 169C of 2002 and Statutory Instrument 10 of 2004, the Commission registers all mass 
               media services and accredits journalists who choose to be accredited. The Commission keeps a register of both accredited 
               media practitioners and registered mass media services.
             </p>
-            <p className="leading-relaxed text-sm md:text-base" style={{ color: "var(--neutral-600)" }}>
+            <p className="text-base leading-relaxed mt-4" style={{ color: "var(--neutral-700)" }}>
               Through the ZMC Act the Commission administers the Media Fund whose major purpose is the standardization of mass media 
               services in Zimbabwe.
             </p>
@@ -95,22 +81,22 @@ export default function AboutPage({ onNavigate }: AboutPageProps) {
             {[
               {
                 icon: Target,
-                title: "Our Mission",
-                content: "Enhancing democracy by facilitating access to information and a diverse, plural and ethical media.",
+                title: t.pages.about.ourMission,
+                content: t.pages.about.missionText,
                 color: "var(--primary)",
                 bg: "var(--primary-lighter)",
               },
               {
                 icon: Eye,
-                title: "Our Vision",
-                content: "Fostering access to information and a professional, national interest-driven media by 2030.",
+                title: t.pages.about.ourVision,
+                content: t.pages.about.visionText,
                 color: "var(--blue)",
                 bg: "var(--blue-light)",
               },
               {
                 icon: Heart,
-                title: "Our Objective",
-                content: "To facilitate the development of an accessible and professional media.",
+                title: "Our Strategic Objective",
+                content: "To facilitate the development of an accessible and professional media",
                 color: "var(--accent-dark)",
                 bg: "var(--accent-soft)",
               },
@@ -185,7 +171,7 @@ export default function AboutPage({ onNavigate }: AboutPageProps) {
             </p>
             <div className="flex gap-4 justify-center relative flex-wrap">
               <a
-                href="https://f17c25d1-8d60-4751-b64c-aadbdeaf0836-00-mtsfdj8ol3sm.worf.replit.dev/"
+                href="https://zmc--portal.replit.app/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="py-3 px-8 rounded-xl font-semibold text-base border-none cursor-pointer transition-all hover:-translate-y-0.5 no-underline"

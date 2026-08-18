@@ -1,4 +1,5 @@
 import { ExternalLink, FileText, Building2 } from "lucide-react";
+import PageHero from "../components/PageHero";
 
 interface TendersPageProps {
   onNavigate: (page: string) => void;
@@ -7,21 +8,11 @@ interface TendersPageProps {
 export default function TendersPage({ onNavigate }: TendersPageProps) {
   return (
     <div className="animate-fadeIn pt-[140px] md:pt-[180px]">
-      {/* Page Header */}
-      <div
-        className="py-12 md:py-16 px-4 md:px-8 text-center relative overflow-hidden"
-        style={{ background: "linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%)" }}
-      >
-        <h1 className="text-white mb-3 relative text-2xl md:text-4xl">Tenders</h1>
-        <p className="text-white/85 max-w-[600px] mx-auto text-base md:text-lg relative">
-          Current tender opportunities at the Zimbabwe Media Commission
-        </p>
-        <div className="flex justify-center gap-2 mt-6 text-[0.9rem] flex-wrap">
-          <a href="#" onClick={(e) => { e.preventDefault(); onNavigate("home"); }} className="text-white/70 hover:text-white">Home</a>
-          <span className="text-white/70">/</span>
-          <span style={{ color: "var(--accent-light)" }}>Tenders</span>
-        </div>
-      </div>
+      <PageHero
+        title="Tenders"
+        subtitle="Current tender opportunities at the Zimbabwe Media Commission"
+        breadcrumbs={[{ label: "Home", onClick: () => onNavigate("home") }, { label: "Tenders" }]}
+      />
 
       {/* Content */}
       <div className="py-12 md:py-16 px-4 md:px-8">

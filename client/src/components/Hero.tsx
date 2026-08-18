@@ -1,60 +1,70 @@
 import { Newspaper, Building2, Scale, GraduationCap } from "lucide-react";
 import zmcBuilding from "@assets/486716629_1064504462365594_5654935487513045845_n_1766177505816.jpg";
+import { useLanguage } from "../i18n/LanguageContext";
 
 interface HeroProps {
   onNavigate: (page: string) => void;
 }
 
 export default function Hero({ onNavigate }: HeroProps) {
+  const { t } = useLanguage();
+
   const stats = [
-    { icon: Newspaper, number: "500+", label: "Accredited Journalists" },
-    { icon: Building2, number: "150+", label: "Registered Media Houses" },
-    { icon: Scale, number: "1000+", label: "Complaints Resolved" },
-    { icon: GraduationCap, number: "50+", label: "Training Programs" },
+    { icon: Newspaper, number: "500+", label: t.hero.accreditedJournalists },
+    { icon: Building2, number: "150+", label: t.hero.registeredMediaHouses },
+    { icon: Scale, number: "1000+", label: t.hero.complaintsResolved },
+    { icon: GraduationCap, number: "50+", label: t.hero.trainingPrograms },
   ];
 
   return (
     <>
-      <section
-        className="min-h-[100svh] flex items-center relative overflow-hidden pt-[140px] md:pt-[180px] pb-8 md:pb-16 px-4 md:px-8"
-      >
-        <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: `url(${zmcBuilding})` }}
+      <section className="min-h-[100svh] flex items-center relative overflow-hidden pt-[140px] md:pt-[180px] pb-8 md:pb-16 px-4 md:px-8">
+        <div className="absolute inset-0" style={{ background: "#0a1a0f" }} />
+
+        <img
+          src={zmcBuilding}
+          alt=""
+          className="absolute inset-0 w-full h-full"
+          style={{
+            objectFit: "cover",
+            objectPosition: "center",
+            filter: "saturate(1.4) contrast(1.1) brightness(1.05)",
+          }}
         />
-        <div 
+
+        <div
           className="absolute inset-0"
-          style={{ background: "linear-gradient(135deg, rgba(27, 94, 32, 0.55) 0%, rgba(13, 59, 16, 0.65) 100%)" }}
+          style={{ background: "linear-gradient(135deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.45) 100%)" }}
         />
 
         <div className="max-w-[1200px] mx-auto w-full relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
             <div className="text-white animate-fadeIn text-center lg:text-left">
               <h1 className="mb-4 md:mb-6 leading-tight text-3xl md:text-4xl lg:text-5xl">
-                <span className="text-white/90">Welcome to</span>
+                <span className="text-white/90">{t.hero.welcomeTo}</span>
                 <br />
-                <span className="text-white">Zimbabwe Media Commission</span>
+                <span className="text-white">{t.hero.title}</span>
               </h1>
               <p className="text-base md:text-xl text-white/85 mb-6 md:mb-8 max-w-lg mx-auto lg:mx-0">
-                Promoting and protecting freedom of expression and the media.
+                {t.hero.subtitle}
               </p>
               <div className="flex gap-3 md:gap-4 flex-wrap justify-center lg:justify-start">
                 <button
                   onClick={() => onNavigate("about")}
-                  className="py-3 md:py-4 px-6 md:px-8 rounded-xl font-semibold text-sm md:text-base border-none cursor-pointer transition-all hover:-translate-y-0.5 text-white"
+                  className="py-3 md:py-4 px-6 md:px-8 rounded-xl font-bold text-sm md:text-base border-none cursor-pointer transition-all hover:-translate-y-0.5 text-white uppercase tracking-wide"
                   style={{
                     background: "linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%)",
-                    boxShadow: "0 4px 15px rgba(27, 94, 32, 0.4)",
+                    boxShadow: "0 4px 15px rgba(46, 125, 86, 0.4)",
                   }}
                   data-testid="button-learn-more"
                 >
-                  Learn More
+                  {t.hero.learnMore}
                 </button>
                 <a
-                  href="https://f17c25d1-8d60-4751-b64c-aadbdeaf0836-00-mtsfdj8ol3sm.worf.replit.dev/"
+                  href="https://zmc--portal.replit.app/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="py-3 md:py-4 px-6 md:px-8 rounded-xl font-bold text-sm md:text-base border-none cursor-pointer transition-all hover:-translate-y-0.5 no-underline"
+                  className="py-3 md:py-4 px-6 md:px-8 rounded-xl font-bold text-sm md:text-base border-none cursor-pointer transition-all hover:-translate-y-0.5 no-underline uppercase tracking-wide"
                   style={{
                     background: "linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%)",
                     color: "var(--zim-black)",
@@ -62,7 +72,7 @@ export default function Hero({ onNavigate }: HeroProps) {
                   }}
                   data-testid="button-get-accredited"
                 >
-                  Get Accredited
+                  {t.hero.getAccredited}
                 </a>
               </div>
             </div>
@@ -76,13 +86,13 @@ export default function Hero({ onNavigate }: HeroProps) {
                   border: "1px solid rgba(255, 255, 255, 0.2)",
                 }}
               >
-                <h3 className="text-white text-xl md:text-2xl mb-4 md:mb-6 text-center">Quick Stats</h3>
+                <h3 className="text-white text-xl md:text-2xl mb-4 md:mb-6 text-center">{t.hero.quickStats}</h3>
                 <div className="grid grid-cols-2 gap-3 md:gap-4">
                   {[
-                    { number: "500+", label: "Accredited Journalists" },
-                    { number: "150+", label: "Registered Media" },
-                    { number: "20+", label: "Years of Service" },
-                    { number: "100%", label: "Commitment" },
+                    { number: "500+", label: t.hero.accreditedJournalists },
+                    { number: "150+", label: t.hero.registeredMedia },
+                    { number: "20+", label: t.hero.yearsOfService },
+                    { number: "100%", label: t.hero.commitment },
                   ].map((stat, index) => (
                     <div
                       key={index}
@@ -91,7 +101,7 @@ export default function Hero({ onNavigate }: HeroProps) {
                     >
                       <div
                         className="text-xl md:text-3xl font-bold mb-1 md:mb-2 whitespace-nowrap"
-                        style={{ color: "var(--accent)", fontFamily: "var(--font-serif)" }}
+                        style={{ color: "var(--accent)" }}
                       >
                         {stat.number}
                       </div>
@@ -105,7 +115,6 @@ export default function Hero({ onNavigate }: HeroProps) {
         </div>
       </section>
 
-      {/* Stats Bar */}
       <section className="py-8 md:py-12 px-4 md:px-8" style={{ background: "rgba(255, 255, 255, 0.7)", backdropFilter: "blur(16px)", WebkitBackdropFilter: "blur(16px)" }}>
         <div className="max-w-[1200px] mx-auto grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
           {stats.map((stat, index) => (
@@ -125,7 +134,7 @@ export default function Hero({ onNavigate }: HeroProps) {
               </div>
               <div
                 className="text-lg md:text-[2.25rem] font-bold whitespace-nowrap tracking-tight"
-                style={{ color: "var(--primary)", fontFamily: "var(--font-serif)" }}
+                style={{ color: "var(--primary)" }}
               >
                 {stat.number}
               </div>

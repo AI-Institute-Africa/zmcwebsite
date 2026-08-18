@@ -18,7 +18,7 @@ Preferred communication style: Simple, everyday language.
 - **State Management**: TanStack React Query for server state
 - **Styling**: Tailwind CSS with custom CSS variables for Zimbabwe national colors (green, gold, red, black)
 - **UI Components**: shadcn/ui component library built on Radix UI primitives
-- **Typography**: Cormorant Garamond (headings) and Inter (body text)
+- **Typography**: Inter (uniform across all text — headings and body)
 - **Icons**: Lucide React icons
 
 ### Backend Architecture
@@ -40,7 +40,9 @@ Preferred communication style: Simple, everyday language.
 
 ### Design System
 The website uses Zimbabwe national colors as the primary palette:
-- Primary Green: #1B5E20 (main brand)
+- Primary Green: #2E7D56 (main brand, lighter teal-green)
+- Primary Dark: #1B5E3F (darker shade for gradients)
+- Primary Light: #4A9E72 (hover/accent shade)
 - Gold/Accent: #D4AF37 (CTAs, highlights)
 - Red: #C62828 (alerts)
 - Black: #212121 (text)

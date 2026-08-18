@@ -1,14 +1,17 @@
 import { useState, useEffect } from "react";
 import { Building2, FileText, CheckCircle, X, ExternalLink } from "lucide-react";
+import { useLanguage } from "../i18n/LanguageContext";
+import PageHero from "../components/PageHero";
 
 interface RegistrationPageProps {
   onNavigate: (page: string) => void;
 }
 
 // Portal URL for media registration
-const PORTAL_URL = "https://f17c25d1-8d60-4751-b64c-aadbdeaf0836-00-mtsfdj8ol3sm.worf.replit.dev/";
+const PORTAL_URL = "https://zmc--portal.replit.app/";
 
 export default function RegistrationPage({ onNavigate }: RegistrationPageProps) {
+  const { t } = useLanguage();
   const [showModal, setShowModal] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
 
@@ -38,8 +41,9 @@ export default function RegistrationPage({ onNavigate }: RegistrationPageProps) 
   const steps = [
     { number: 1, title: "Gather Documents", desc: "Prepare all required documents" },
     { number: 2, title: "Complete Form", desc: "Fill out the registration form" },
-    { number: 3, title: "Submit & Pay", desc: "Submit application and pay fees" },
-    { number: 4, title: "Get Registered", desc: "Receive your registration certificate" },
+    { number: 3, title: "Submit & Pay", desc: "Submit application and pay the application fee" },
+    { number: 4, title: "Confirm & Pay", desc: "Confirm your approval and proceed to pay the registration fee" },
+    { number: 5, title: "Get Registered", desc: "Receive your registration certificate" },
   ];
 
   const localRequirements = [
@@ -55,6 +59,7 @@ export default function RegistrationPage({ onNavigate }: RegistrationPageProps) 
     "Attach mission statement",
     "Attach certificate of incorporation",
     "Attach memorandum of association",
+    "The application and registration fee as prescribed by Statutory Instrument 65 of 2022",
   ];
 
   const foreignRequirements = [
@@ -62,6 +67,7 @@ export default function RegistrationPage({ onNavigate }: RegistrationPageProps) 
     "Proof of registration in home country",
     "Names and certified copies of IDs of people running the representative office",
     "Contact details (Physical address, email and telephone)",
+    "The application and registration fee as prescribed by Statutory Instrument 65 of 2022",
   ];
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -75,29 +81,85 @@ export default function RegistrationPage({ onNavigate }: RegistrationPageProps) 
 
   return (
     <div className="animate-fadeIn pt-[140px] md:pt-[180px]">
-      {/* Page Header */}
-      <div
-        className="py-12 md:py-16 px-4 md:px-8 text-center relative overflow-hidden"
-        style={{ background: "linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%)" }}
-      >
-        <div className="absolute top-0 right-0 w-1/2 h-full" style={{ background: "radial-gradient(circle at 70% 50%, rgba(255,255,255,0.1) 0%, transparent 50%)" }} />
-        <h1 className="text-white mb-3 relative text-2xl md:text-4xl">Media Registration</h1>
-        <p className="text-white/85 max-w-[600px] mx-auto text-base md:text-lg relative">
-          Register your mass media service
-        </p>
-        <div className="flex justify-center gap-2 mt-6 text-[0.9rem]">
-          <a href="#" onClick={(e) => { e.preventDefault(); onNavigate("home"); }} className="text-white/70 hover:text-white">Home</a>
-          <span className="text-white/70">/</span>
-          <span style={{ color: "var(--accent-light)" }}>Registration</span>
-        </div>
-      </div>
+      <PageHero
+        title={t.pages.registration.title}
+        subtitle={t.pages.registration.subtitle}
+        breadcrumbs={[{ label: "Home", onClick: () => onNavigate("home") }, { label: "Registration" }]}
+      />
 
       {/* Content */}
       <div className="py-12 md:py-16 px-4 md:px-8">
         <div className="max-w-[1000px] mx-auto">
+          {/* Description */}
+          <div className="bg-white rounded-[20px] p-6 md:p-10 mb-8" style={{ boxShadow: "var(--shadow-sm)", border: "1px solid var(--neutral-100)" }}>
+            <h2 style={{ color: "var(--primary)", borderBottom: "2px solid var(--primary-lighter)", paddingBottom: "0.75rem" }}>
+              Registration of Mass Media Services
+            </h2>
+            <p className="leading-relaxed text-sm md:text-base" style={{ color: "var(--neutral-600)" }}>
+              Registration of mass media services is provided for by Statutory Instrument 169C of 2002 as read with Statutory Instrument 10 of 2004. The Statutory Instrument prescribes 
+              the manner and form in which an individual can lodge an application for registration with the Zimbabwe Media Commission. 
+              Statutory Instrument 65 of 2022 prescribes the fees payable for registration.
+            </p>
+          </div>
+
+          {/* Requirements - Local */}
+          <div className="rounded-2xl p-6 md:p-8 mb-6" style={{ background: "var(--primary-soft)", borderLeft: "4px solid var(--primary)" }}>
+            <h3 className="flex items-center gap-2 mb-4" style={{ color: "var(--primary)" }}>
+              <FileText className="w-6 h-6" />
+              Requirements - Local Media Organizations
+            </h3>
+            <ul className="list-none pl-4 md:pl-6">
+              {localRequirements.map((req, index) => (
+                <li key={index} className="relative pl-6 mb-3 text-sm md:text-base" style={{ color: "var(--neutral-700)" }}>
+                  <span className="absolute left-0 font-bold text-lg" style={{ color: "var(--primary)" }}>•</span>
+                  {req}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Requirements - Foreign */}
+          <div className="rounded-2xl p-6 md:p-8 mb-8" style={{ background: "var(--accent-soft)", borderLeft: "4px solid var(--accent)" }}>
+            <h3 className="flex items-center gap-2 mb-4" style={{ color: "var(--accent-dark)" }}>
+              <FileText className="w-6 h-6" />
+              Requirements - Representative Office of Foreign Mass Media Service
+            </h3>
+            <ul className="list-none pl-4 md:pl-6">
+              {foreignRequirements.map((req, index) => (
+                <li key={index} className="relative pl-6 mb-3 text-sm md:text-base" style={{ color: "var(--neutral-700)" }}>
+                  <span className="absolute left-0 font-bold text-lg" style={{ color: "var(--accent-dark)" }}>•</span>
+                  {req}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Fees Note */}
+          <div className="rounded-2xl p-6 mb-8" style={{ background: "var(--accent-soft)" }}>
+            <p className="text-sm md:text-base m-0" style={{ color: "var(--neutral-700)" }}>
+              {t.pages.registration.nbNote}
+            </p>
+          </div>
+
+          {/* Process Steps */}
+          <div className="bg-white rounded-[20px] p-10 mb-8" style={{ boxShadow: "var(--shadow-sm)", border: "1px solid var(--neutral-100)" }}>
+            <h2 style={{ color: "var(--primary)", borderBottom: "2px solid var(--primary-lighter)", paddingBottom: "0.75rem" }}>Registration Process</h2>
+            <div className="grid grid-cols-2 md:grid-cols-5 gap-6 mt-8">
+              {steps.map((step) => (
+                <div key={step.number} className="text-center p-6 rounded-2xl transition-all hover:-translate-y-1 hover:border-[var(--primary)]" style={{ border: "2px solid var(--neutral-200)" }}>
+                  <div className="w-12 h-12 rounded-full mx-auto mb-4 flex items-center justify-center text-xl font-bold text-white" style={{ background: "linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%)" }}>
+                    {step.number}
+                  </div>
+                  <h4 className="text-lg mb-2" style={{ color: "var(--neutral-800)" }}>{step.title}</h4>
+                  <p className="text-[0.9rem] m-0" style={{ color: "var(--neutral-500)" }}>{step.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
           {/* Quick Register Box */}
           <div
-            className="rounded-3xl p-8 mb-8"
+            className="rounded-3xl p-8"
             style={{ background: "linear-gradient(135deg, var(--primary-lighter) 0%, var(--accent-soft) 100%)", border: "2px solid var(--primary-light)" }}
           >
             <h2 className="text-center mb-6" style={{ color: "var(--primary-dark)" }}>
@@ -142,82 +204,6 @@ export default function RegistrationPage({ onNavigate }: RegistrationPageProps) 
                 </button>
               </div>
             </div>
-          </div>
-
-          {/* Process Steps */}
-          <div className="bg-white rounded-[20px] p-10 mb-8" style={{ boxShadow: "var(--shadow-sm)", border: "1px solid var(--neutral-100)" }}>
-            <h2 style={{ color: "var(--primary)", borderBottom: "2px solid var(--primary-lighter)", paddingBottom: "0.75rem" }}>Registration Process</h2>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-8">
-              {steps.map((step) => (
-                <div key={step.number} className="text-center p-6 rounded-2xl transition-all hover:-translate-y-1 hover:border-[var(--primary)]" style={{ border: "2px solid var(--neutral-200)" }}>
-                  <div className="w-12 h-12 rounded-full mx-auto mb-4 flex items-center justify-center text-xl font-bold text-white" style={{ background: "linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%)" }}>
-                    {step.number}
-                  </div>
-                  <h4 className="text-lg mb-2" style={{ fontFamily: "var(--font-serif)", color: "var(--neutral-800)" }}>{step.title}</h4>
-                  <p className="text-[0.9rem] m-0" style={{ color: "var(--neutral-500)" }}>{step.desc}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Description */}
-          <div className="bg-white rounded-[20px] p-6 md:p-10 mb-8" style={{ boxShadow: "var(--shadow-sm)", border: "1px solid var(--neutral-100)" }}>
-            <h2 style={{ color: "var(--primary)", borderBottom: "2px solid var(--primary-lighter)", paddingBottom: "0.75rem" }}>
-              Registration of Mass Media Services
-            </h2>
-            <p className="leading-relaxed text-sm md:text-base" style={{ color: "var(--neutral-600)" }}>
-              Registration of mass media services is provided for by Statutory 169C of 2002. The Statutory Instrument prescribes 
-              the manner and form in which an individual can lodge an application for registration with the Zimbabwe Media Commission. 
-              Statutory Instrument 65 of 2022 prescribes the fees payable for registration.
-            </p>
-          </div>
-
-          {/* Requirements - Local */}
-          <div className="rounded-2xl p-6 md:p-8 mb-6" style={{ background: "var(--primary-soft)", borderLeft: "4px solid var(--primary)" }}>
-            <h3 className="flex items-center gap-2 mb-4" style={{ color: "var(--primary)" }}>
-              <FileText className="w-6 h-6" />
-              Requirements - Local Media Organizations
-            </h3>
-            <ul className="list-none pl-4 md:pl-6">
-              {localRequirements.map((req, index) => (
-                <li key={index} className="relative pl-6 mb-3 text-sm md:text-base" style={{ color: "var(--neutral-700)" }}>
-                  <span className="absolute left-0 font-bold text-lg" style={{ color: "var(--primary)" }}>•</span>
-                  {req}
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Requirements - Foreign */}
-          <div className="rounded-2xl p-6 md:p-8 mb-8" style={{ background: "var(--accent-soft)", borderLeft: "4px solid var(--accent)" }}>
-            <h3 className="flex items-center gap-2 mb-4" style={{ color: "var(--accent-dark)" }}>
-              <FileText className="w-6 h-6" />
-              Requirements - Representative Office of Foreign Mass Media Service
-            </h3>
-            <ul className="list-none pl-4 md:pl-6">
-              {foreignRequirements.map((req, index) => (
-                <li key={index} className="relative pl-6 mb-3 text-sm md:text-base" style={{ color: "var(--neutral-700)" }}>
-                  <span className="absolute left-0 font-bold text-lg" style={{ color: "var(--accent-dark)" }}>•</span>
-                  {req}
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Fees */}
-          <div className="rounded-2xl p-6 flex flex-wrap items-center justify-between gap-4" style={{ background: "var(--accent-soft)" }}>
-            <div>
-              <h4 className="text-base font-semibold mb-2" style={{ color: "var(--neutral-700)", fontFamily: "var(--font-sans)" }}>Registration Fee</h4>
-              <span className="text-2xl font-bold whitespace-nowrap" style={{ fontFamily: "var(--font-serif)", color: "var(--accent-dark)" }}>USD&nbsp;$100.00</span>
-            </div>
-            <button
-              onClick={() => onNavigate("downloads")}
-              className="py-3 px-6 rounded-xl font-semibold border-none cursor-pointer"
-              style={{ background: "linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%)", color: "var(--zim-black)" }}
-              data-testid="button-view-fees-reg"
-            >
-              View Full Fee Schedule
-            </button>
           </div>
         </div>
       </div>

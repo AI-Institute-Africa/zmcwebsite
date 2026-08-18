@@ -1,11 +1,16 @@
 import { useState } from "react";
-import { MapPin, Phone, Mail, Clock, Send, CheckCircle, Building2, MessageCircle } from "lucide-react";
+import { MapPin, Phone, Mail, Clock, Send, CheckCircle, Building2, MessageCircle, Bell } from "lucide-react";
+import { useLanguage } from "../i18n/LanguageContext";
+import PageHero from "../components/PageHero";
+import { useSubscribe } from "../components/SubscribeDialog";
 
 interface ContactPageProps {
   onNavigate: (page: string) => void;
 }
 
 export default function ContactPage({ onNavigate }: ContactPageProps) {
+  const { t } = useLanguage();
+  const subscribe = useSubscribe();
   const [formSubmitted, setFormSubmitted] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -28,21 +33,11 @@ export default function ContactPage({ onNavigate }: ContactPageProps) {
 
   return (
     <div className="animate-fadeIn pt-[140px] md:pt-[180px]">
-      {/* Page Header */}
-      <div
-        className="py-12 md:py-16 px-4 md:px-8 text-center relative overflow-hidden"
-        style={{ background: "linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%)" }}
-      >
-        <h1 className="text-white mb-3 relative text-2xl md:text-4xl">Contact Us</h1>
-        <p className="text-white/85 max-w-[600px] mx-auto text-base md:text-lg relative">
-          Get in touch with the Zimbabwe Media Commission
-        </p>
-        <div className="flex justify-center gap-2 mt-6 text-[0.9rem]">
-          <a href="#" onClick={(e) => { e.preventDefault(); onNavigate("home"); }} className="text-white/70 hover:text-white">Home</a>
-          <span className="text-white/70">/</span>
-          <span style={{ color: "var(--accent-light)" }}>Contact</span>
-        </div>
-      </div>
+      <PageHero
+        title={t.pages.contact.title}
+        subtitle={t.pages.contact.subtitle}
+        breadcrumbs={[{ label: "Home", onClick: () => onNavigate("home") }, { label: "Contact" }]}
+      />
 
       {/* Content */}
       <div className="py-12 md:py-16 px-4 md:px-8">
@@ -55,7 +50,7 @@ export default function ContactPage({ onNavigate }: ContactPageProps) {
                 style={{ boxShadow: "var(--shadow-sm)", border: "1px solid var(--neutral-100)" }}
               >
                 <h2 className="mb-6" style={{ color: "var(--primary)", borderBottom: "2px solid var(--primary-lighter)", paddingBottom: "0.75rem" }}>
-                  Send Us a Message
+                  {t.pages.contact.sendMessage}
                 </h2>
 
                 {formSubmitted ? (
@@ -73,7 +68,7 @@ export default function ContactPage({ onNavigate }: ContactPageProps) {
                   <form onSubmit={handleSubmit}>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                       <div>
-                        <label className="block mb-2 font-medium text-[0.9rem]" style={{ color: "var(--neutral-700)" }}>First Name *</label>
+                        <label className="block mb-2 font-medium text-[0.9rem]" style={{ color: "var(--neutral-700)" }}>{t.pages.contact.fullName} *</label>
                         <input
                           type="text"
                           required
@@ -94,7 +89,7 @@ export default function ContactPage({ onNavigate }: ContactPageProps) {
                       </div>
                     </div>
                     <div className="mb-4">
-                      <label className="block mb-2 font-medium text-[0.9rem]" style={{ color: "var(--neutral-700)" }}>Email Address *</label>
+                      <label className="block mb-2 font-medium text-[0.9rem]" style={{ color: "var(--neutral-700)" }}>{t.pages.contact.emailAddress} *</label>
                       <input
                         type="email"
                         required
@@ -104,7 +99,7 @@ export default function ContactPage({ onNavigate }: ContactPageProps) {
                       />
                     </div>
                     <div className="mb-4">
-                      <label className="block mb-2 font-medium text-[0.9rem]" style={{ color: "var(--neutral-700)" }}>Phone Number</label>
+                      <label className="block mb-2 font-medium text-[0.9rem]" style={{ color: "var(--neutral-700)" }}>{t.pages.contact.phone}</label>
                       <input
                         type="tel"
                         className="w-full py-3 px-4 rounded-xl text-base transition-all focus:outline-none"
@@ -113,7 +108,7 @@ export default function ContactPage({ onNavigate }: ContactPageProps) {
                       />
                     </div>
                     <div className="mb-4">
-                      <label className="block mb-2 font-medium text-[0.9rem]" style={{ color: "var(--neutral-700)" }}>Subject *</label>
+                      <label className="block mb-2 font-medium text-[0.9rem]" style={{ color: "var(--neutral-700)" }}>{t.pages.contact.subject} *</label>
                       <select
                         required
                         className="w-full py-3 px-4 rounded-xl text-base transition-all focus:outline-none"
@@ -130,7 +125,7 @@ export default function ContactPage({ onNavigate }: ContactPageProps) {
                       </select>
                     </div>
                     <div className="mb-6">
-                      <label className="block mb-2 font-medium text-[0.9rem]" style={{ color: "var(--neutral-700)" }}>Message *</label>
+                      <label className="block mb-2 font-medium text-[0.9rem]" style={{ color: "var(--neutral-700)" }}>{t.pages.contact.message} *</label>
                       <textarea
                         required
                         rows={5}
@@ -146,8 +141,24 @@ export default function ContactPage({ onNavigate }: ContactPageProps) {
                       data-testid="button-send-message"
                     >
                       <Send className="w-5 h-5" />
-                      Send Message
+                      {t.pages.contact.send}
                     </button>
+
+                    <div className="mt-4 pt-4" style={{ borderTop: "1px solid var(--neutral-100)" }}>
+                      <p className="text-center text-[0.85rem] mb-3" style={{ color: "var(--neutral-500)" }}>
+                        Want to stay informed about new vacancies and updates?
+                      </p>
+                      <button
+                        type="button"
+                        onClick={() => subscribe.open()}
+                        className="w-full py-4 rounded-xl font-semibold text-base cursor-pointer flex items-center justify-center gap-2"
+                        style={{ background: "var(--primary-soft)", color: "var(--primary-dark)", border: "2px solid var(--primary-lighter)" }}
+                        data-testid="button-subscribe-contact"
+                      >
+                        <Bell className="w-5 h-5" />
+                        Subscribe for Free Updates
+                      </button>
+                    </div>
                   </form>
                 )}
               </div>
@@ -228,6 +239,46 @@ export default function ContactPage({ onNavigate }: ContactPageProps) {
                     <div>
                       <p className="font-medium text-[0.9rem] mb-1" style={{ color: "var(--neutral-700)" }}>Office Hours</p>
                       <p className="text-[0.95rem] whitespace-nowrap" style={{ color: "var(--neutral-600)" }} data-testid="text-hours">{office.hours}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Bulawayo Regional Office */}
+              <div
+                className="bg-white rounded-[20px] p-8 mb-6"
+                style={{ boxShadow: "var(--shadow-sm)", border: "1px solid var(--neutral-100)" }}
+                data-testid="card-office-bulawayo"
+              >
+                <div className="flex items-center gap-3 mb-6">
+                  <div
+                    className="w-12 h-12 rounded-xl flex items-center justify-center"
+                    style={{ background: "var(--primary-lighter)", color: "var(--primary)" }}
+                  >
+                    <Building2 className="w-6 h-6" />
+                  </div>
+                  <h3 className="m-0" style={{ color: "var(--primary-dark)" }} data-testid="text-office-name-bulawayo">Regional Office – Bulawayo</h3>
+                </div>
+                <div className="space-y-4">
+                  <div className="flex items-start gap-4">
+                    <MapPin className="w-5 h-5 mt-1 flex-shrink-0" style={{ color: "var(--primary)" }} />
+                    <div>
+                      <p className="font-medium text-[0.9rem] mb-1" style={{ color: "var(--neutral-700)" }}>Address</p>
+                      <p className="text-[0.95rem]" style={{ color: "var(--neutral-600)" }} data-testid="text-office-address-bulawayo">Zimbabwe Media Commission, 17 Rylanders Court, Windsor Park Complex, 16th Avenue, Famona, Bulawayo</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-4">
+                    <Phone className="w-5 h-5 mt-1 flex-shrink-0" style={{ color: "var(--primary)" }} />
+                    <div>
+                      <p className="font-medium text-[0.9rem] mb-1" style={{ color: "var(--neutral-700)" }}>Contact Number</p>
+                      <p className="text-[0.95rem] whitespace-nowrap" style={{ color: "var(--neutral-600)" }} data-testid="text-phone-bulawayo">+263 713 879 044</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-4">
+                    <Clock className="w-5 h-5 mt-1 flex-shrink-0" style={{ color: "var(--primary)" }} />
+                    <div>
+                      <p className="font-medium text-[0.9rem] mb-1" style={{ color: "var(--neutral-700)" }}>Office Hours</p>
+                      <p className="text-[0.95rem] whitespace-nowrap" style={{ color: "var(--neutral-600)" }} data-testid="text-hours-bulawayo">Mon - Fri: 8:00 AM - 4:30 PM</p>
                     </div>
                   </div>
                 </div>

@@ -1,34 +1,15 @@
 import { useState, useEffect } from "react";
 import { Megaphone, AlertTriangle, Building2, Calendar, ChevronLeft, ChevronRight, Newspaper } from "lucide-react";
+import { useLanguage } from "../i18n/LanguageContext";
 
 export default function NewsSlider() {
+  const { t } = useLanguage();
   const [currentSlide, setCurrentSlide] = useState(0);
 
   const slides = [
-    {
-      icon: Megaphone,
-      badge: "Announcement",
-      title: "2024 Media Awards Nominations Open",
-      text: "Submit your nominations for the annual Zimbabwe Media Excellence Awards. Categories include print, broadcast, and digital media.",
-      date: "December 1, 2024",
-      bgClass: "linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%)",
-    },
-    {
-      icon: AlertTriangle,
-      badge: "Urgent",
-      title: "Accreditation Renewal Deadline Approaching",
-      text: "All media practitioners are reminded to renew their accreditation before December 31, 2024 to avoid penalties.",
-      date: "November 28, 2024",
-      bgClass: "linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)",
-    },
-    {
-      icon: Building2,
-      badge: "Opening",
-      title: "New Regional Office in Bulawayo",
-      text: "ZMC has opened a new regional office in Bulawayo to better serve media practitioners in Matabeleland provinces.",
-      date: "November 25, 2024",
-      bgClass: "linear-gradient(135deg, var(--primary-dark) 0%, #0a2f0d 100%)",
-    },
+    { icon: Megaphone, badge: t.news.announcement, title: t.news.newsTitle1, text: t.news.newsText1, date: "December 1, 2024", bgClass: "linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%)" },
+    { icon: AlertTriangle, badge: t.news.urgent, title: t.news.newsTitle2, text: t.news.newsText2, date: "November 28, 2024", bgClass: "linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)" },
+    { icon: Building2, badge: t.news.opening, title: t.news.newsTitle3, text: t.news.newsText3, date: "November 25, 2024", bgClass: "linear-gradient(135deg, var(--primary-dark) 0%, #0a2f0d 100%)" },
   ];
 
   useEffect(() => {
@@ -58,9 +39,9 @@ export default function NewsSlider() {
       <div className="text-center mb-10">
         <h2 className="flex items-center justify-center gap-3" style={{ color: "var(--primary-dark)", fontSize: "1.75rem" }}>
           <Newspaper className="w-7 h-7" />
-          Latest News & Updates
+          {t.news.title}
         </h2>
-        <p style={{ color: "var(--neutral-500)" }}>Stay informed with the latest from ZMC</p>
+        <p style={{ color: "var(--neutral-500)" }}>{t.news.subtitle}</p>
       </div>
 
       <div className="max-w-[900px] mx-auto relative">

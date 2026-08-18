@@ -1,10 +1,15 @@
-import { Calendar, MapPin, Clock, Users, ArrowRight, CalendarDays, Trophy, GraduationCap, Megaphone } from "lucide-react";
+import { Calendar, MapPin, Clock, Users, ArrowRight, CalendarDays, Trophy, GraduationCap, Megaphone, Bell } from "lucide-react";
+import { useLanguage } from "../i18n/LanguageContext";
+import PageHero from "../components/PageHero";
+import { useSubscribe } from "../components/SubscribeDialog";
 
 interface EventsPageProps {
   onNavigate: (page: string) => void;
 }
 
 export default function EventsPage({ onNavigate }: EventsPageProps) {
+  const { t } = useLanguage();
+  const subscribe = useSubscribe();
   const upcomingEvents = [
     {
       icon: Trophy,
@@ -25,8 +30,19 @@ export default function EventsPage({ onNavigate }: EventsPageProps) {
       location: "ZMC Training Centre, Harare",
       description: "A comprehensive workshop on digital journalism tools, fact-checking, and ethical reporting in the digital age.",
       type: "Training",
-      color: "var(--blue)",
-      bg: "var(--blue-light)",
+      color: "var(--primary)",
+      bg: "var(--primary-lighter)",
+    },
+    {
+      icon: GraduationCap,
+      title: "Media Ethics & Law Training",
+      date: "April 12, 2025",
+      time: "9:00 AM - 3:00 PM",
+      location: "ZMC Training Centre, Harare",
+      description: "Intensive training for journalists and editors on media law, ethical standards, and the ZMC Code of Conduct.",
+      type: "Training",
+      color: "var(--primary)",
+      bg: "var(--primary-lighter)",
     },
     {
       icon: Users,
@@ -60,21 +76,11 @@ export default function EventsPage({ onNavigate }: EventsPageProps) {
 
   return (
     <div className="animate-fadeIn pt-[140px] md:pt-[180px]">
-      {/* Page Header */}
-      <div
-        className="py-12 md:py-16 px-4 md:px-8 text-center relative overflow-hidden"
-        style={{ background: "linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%)" }}
-      >
-        <h1 className="text-white mb-3 relative text-2xl md:text-4xl">Events & Programs</h1>
-        <p className="text-white/85 max-w-[600px] mx-auto text-base md:text-lg relative">
-          Stay updated with ZMC events, workshops, and training programs
-        </p>
-        <div className="flex justify-center gap-2 mt-6 text-[0.9rem]">
-          <a href="#" onClick={(e) => { e.preventDefault(); onNavigate("home"); }} className="text-white/70 hover:text-white">Home</a>
-          <span className="text-white/70">/</span>
-          <span style={{ color: "var(--accent-light)" }}>Events</span>
-        </div>
-      </div>
+      <PageHero
+        title={t.pages.events.title}
+        subtitle={t.pages.events.subtitle}
+        breadcrumbs={[{ label: "Home", onClick: () => onNavigate("home") }, { label: "Events" }]}
+      />
 
       {/* Content */}
       <div className="py-12 md:py-16 px-4 md:px-8">
@@ -171,20 +177,15 @@ export default function EventsPage({ onNavigate }: EventsPageProps) {
             <p className="text-white/85 mb-6 max-w-[500px] mx-auto">
               Subscribe to our newsletter to receive updates about upcoming events and training programs.
             </p>
-            <div className="flex gap-3 max-w-[400px] mx-auto">
-              <input
-                type="email"
-                placeholder="Enter your email"
-                className="flex-1 py-3 px-4 rounded-xl text-base border-none"
-                style={{ background: "rgba(255,255,255,0.95)" }}
-                data-testid="input-newsletter-email"
-              />
+            <div className="flex justify-center">
               <button
-                className="py-3 px-6 rounded-xl font-bold border-none cursor-pointer"
+                onClick={() => subscribe.open()}
+                className="flex items-center gap-2 py-3 px-7 rounded-xl font-bold border-none cursor-pointer"
                 style={{ background: "linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%)", color: "var(--zim-black)" }}
                 data-testid="button-subscribe"
               >
-                Subscribe
+                <Bell className="w-5 h-5" />
+                Subscribe for Free
               </button>
             </div>
           </div>

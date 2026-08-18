@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { Camera, X, ChevronLeft, ChevronRight, ZoomIn, Calendar, MapPin } from "lucide-react";
+import { Camera, X, ChevronLeft, ChevronRight, ZoomIn, Calendar, MapPin, Video, Play } from "lucide-react";
+import PageHero from "../components/PageHero";
 
 interface PhotosPageProps {
   onNavigate: (page: string) => void;
@@ -77,9 +78,45 @@ const photoAlbums = [
   },
 ];
 
+const videos = [
+  {
+    id: "v1",
+    title: "World Press Freedom Day 2024 — Highlights",
+    date: "May 2024",
+    duration: "4:32",
+    youtubeId: "dQw4w9WgXcQ",
+    color: "from-blue-800 to-blue-600",
+  },
+  {
+    id: "v2",
+    title: "Accreditation Ceremony 2024",
+    date: "November 2024",
+    duration: "6:15",
+    youtubeId: "dQw4w9WgXcQ",
+    color: "from-green-800 to-green-600",
+  },
+  {
+    id: "v3",
+    title: "Media Training Workshop — Bulawayo",
+    date: "August 2024",
+    duration: "3:48",
+    youtubeId: "dQw4w9WgXcQ",
+    color: "from-orange-700 to-orange-500",
+  },
+  {
+    id: "v4",
+    title: "Stakeholder Engagement Forum",
+    date: "March 2024",
+    duration: "5:21",
+    youtubeId: "dQw4w9WgXcQ",
+    color: "from-cyan-700 to-cyan-500",
+  },
+];
+
 export default function PhotosPage({ onNavigate }: PhotosPageProps) {
   const [selectedAlbum, setSelectedAlbum] = useState<string | null>(null);
   const [lightboxPhoto, setLightboxPhoto] = useState<{ albumId: string; photoIndex: number } | null>(null);
+  const [playingVideo, setPlayingVideo] = useState<typeof videos[number] | null>(null);
 
   const activeAlbum = photoAlbums.find((a) => a.id === selectedAlbum);
 
@@ -108,22 +145,11 @@ export default function PhotosPage({ onNavigate }: PhotosPageProps) {
 
   return (
     <div className="animate-fadeIn pt-[140px] md:pt-[180px]">
-      <div
-        className="py-12 md:py-16 px-4 md:px-8 text-center relative overflow-hidden"
-        style={{ background: "linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%)" }}
-      >
-        <h1 className="text-white mb-3 relative text-2xl md:text-4xl" data-testid="text-photos-heading">Photo Gallery</h1>
-        <p className="text-white/85 max-w-[600px] mx-auto text-base md:text-lg relative">
-          Browse photos from ZMC events, workshops, and activities
-        </p>
-        <div className="flex justify-center gap-2 mt-6 text-[0.9rem] flex-wrap">
-          <a href="#" onClick={(e) => { e.preventDefault(); onNavigate("home"); }} className="text-white/70 hover:text-white" data-testid="link-breadcrumb-home">Home</a>
-          <span className="text-white/70">/</span>
-          <span className="text-white/70">Media Centre</span>
-          <span className="text-white/70">/</span>
-          <span style={{ color: "var(--accent-light)" }}>Photos</span>
-        </div>
-      </div>
+      <PageHero
+        title="Gallery"
+        subtitle="Browse photos from ZMC events, workshops, and activities"
+        breadcrumbs={[{ label: "Home", onClick: () => onNavigate("home") }, { label: "Media Centre" }, { label: "Gallery" }]}
+      />
 
       <div className="py-12 md:py-16 px-4 md:px-8">
         <div className="max-w-[1200px] mx-auto">
@@ -137,7 +163,7 @@ export default function PhotosPage({ onNavigate }: PhotosPageProps) {
                 </p>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6 mb-16">
                 {photoAlbums.map((album) => (
                   <button
                     key={album.id}
@@ -166,6 +192,45 @@ export default function PhotosPage({ onNavigate }: PhotosPageProps) {
                       <div className="flex items-center gap-2 text-xs md:text-sm" style={{ color: "var(--neutral-500)" }}>
                         <MapPin className="w-3.5 h-3.5" />
                         {album.location}
+                      </div>
+                    </div>
+                  </button>
+                ))}
+              </div>
+
+              {/* Videos Section */}
+              <div className="text-center mb-10 md:mb-12">
+                <Video className="w-10 h-10 md:w-12 md:h-12 mx-auto mb-4" style={{ color: "var(--primary)" }} />
+                <h2 className="text-xl md:text-2xl mb-3" style={{ color: "var(--primary-dark)" }}>Videos</h2>
+                <p className="text-sm md:text-base max-w-[600px] mx-auto" style={{ color: "var(--neutral-600)" }}>
+                  Watch highlights from ZMC events, training workshops, and stakeholder engagements.
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
+                {videos.map((video) => (
+                  <button
+                    key={video.id}
+                    onClick={() => setPlayingVideo(video)}
+                    className="text-left rounded-2xl overflow-hidden transition-all hover:-translate-y-1 cursor-pointer border-none p-0 bg-white group"
+                    style={{ boxShadow: "var(--shadow-md)", border: "1px solid var(--neutral-100)" }}
+                    data-testid={`video-card-${video.id}`}
+                  >
+                    <div className={`h-48 md:h-56 bg-gradient-to-br ${video.color} relative flex items-center justify-center`}>
+                      <div className="w-16 h-16 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center group-hover:bg-white/30 group-hover:scale-110 transition-all">
+                        <Play className="w-8 h-8 text-white ml-1" fill="white" />
+                      </div>
+                      <div className="absolute bottom-3 right-3 bg-black/60 text-white text-xs px-2.5 py-1 rounded-full">
+                        {video.duration}
+                      </div>
+                    </div>
+                    <div className="p-4 md:p-5">
+                      <h3 className="text-base md:text-lg font-semibold mb-2" style={{ color: "var(--neutral-800)" }}>
+                        {video.title}
+                      </h3>
+                      <div className="flex items-center gap-2 text-xs md:text-sm" style={{ color: "var(--neutral-500)" }}>
+                        <Calendar className="w-3.5 h-3.5" />
+                        {video.date}
                       </div>
                     </div>
                   </button>
@@ -227,6 +292,38 @@ export default function PhotosPage({ onNavigate }: PhotosPageProps) {
           ) : null}
         </div>
       </div>
+
+      {playingVideo && (
+        <div
+          className="modal-overlay fixed inset-0 z-[2000] flex items-center justify-center p-4"
+          style={{ background: "rgba(0, 0, 0, 0.92)" }}
+          onClick={() => setPlayingVideo(null)}
+        >
+          <div className="modal-content relative max-w-4xl w-full" onClick={(e) => e.stopPropagation()}>
+            <button
+              onClick={() => setPlayingVideo(null)}
+              className="absolute -top-12 right-0 text-white/70 hover:text-white bg-transparent border-none cursor-pointer z-10"
+              data-testid="button-close-video"
+            >
+              <X className="w-8 h-8" />
+            </button>
+            <div className="aspect-video rounded-xl overflow-hidden bg-black">
+              <iframe
+                className="w-full h-full"
+                src={`https://www.youtube.com/embed/${playingVideo.youtubeId}?autoplay=1`}
+                title={playingVideo.title}
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              />
+            </div>
+            <div className="mt-4 text-white">
+              <h3 className="text-lg md:text-xl font-semibold mb-1">{playingVideo.title}</h3>
+              <p className="text-white/60 text-sm">{playingVideo.date}</p>
+            </div>
+          </div>
+        </div>
+      )}
 
       {lightboxPhoto && currentLightboxAlbum && currentPhoto && (
         <div
