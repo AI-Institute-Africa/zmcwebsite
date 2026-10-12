@@ -4,13 +4,15 @@
 
 This is a government institutional website for the Zimbabwe Media Commission, a constitutional body established under Section 249 of the Constitution of Zimbabwe. The website promotes and protects freedom of expression and media freedom, providing services for media practitioner accreditation, media house registration, complaints handling, and public information dissemination.
 
-The application follows a full-stack architecture with a React frontend and Express backend, using PostgreSQL for data persistence.
+The site is built as a React/Node (Express) application in this repository (`client/`, `server/`, `shared/`). The earlier plain-PHP implementation has been removed.
+
+**Content source**: Public content (news, notices, events, vacancies, tenders, downloads) is fetched from the ZMC Portal API at `https://portal.zmc.org.zw/api/v1` via `client/src/lib/api.ts`. Appeals submissions and their Paynow payments are also handled by the portal. The website only owns the newsletter subscribe and complaint-email endpoints.
 
 ## User Preferences
 
 Preferred communication style: Simple, everyday language.
 
-## System Architecture
+## Architecture (React/Express)
 
 ### Frontend Architecture
 - **Framework**: React 18 with TypeScript

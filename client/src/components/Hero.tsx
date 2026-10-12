@@ -1,6 +1,7 @@
 import { Newspaper, Building2, Scale, GraduationCap } from "lucide-react";
 import zmcBuilding from "@assets/486716629_1064504462365594_5654935487513045845_n_1766177505816.jpg";
 import { useLanguage } from "../i18n/LanguageContext";
+import { PORTAL_LOGIN_URL } from "../lib/api";
 
 interface HeroProps {
   onNavigate: (page: string) => void;
@@ -61,7 +62,7 @@ export default function Hero({ onNavigate }: HeroProps) {
                   {t.hero.learnMore}
                 </button>
                 <a
-                  href="https://zmc--portal.replit.app/"
+                  href={PORTAL_LOGIN_URL}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="py-3 md:py-4 px-6 md:px-8 rounded-xl font-bold text-sm md:text-base border-none cursor-pointer transition-all hover:-translate-y-0.5 no-underline uppercase tracking-wide"

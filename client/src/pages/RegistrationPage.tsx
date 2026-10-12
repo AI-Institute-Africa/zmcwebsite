@@ -2,13 +2,14 @@ import { useState, useEffect } from "react";
 import { Building2, FileText, CheckCircle, X, ExternalLink } from "lucide-react";
 import { useLanguage } from "../i18n/LanguageContext";
 import PageHero from "../components/PageHero";
+import { PORTAL_LOGIN_URL } from "../lib/api";
 
 interface RegistrationPageProps {
   onNavigate: (page: string) => void;
 }
 
 // Portal URL for media registration
-const PORTAL_URL = "https://zmc--portal.replit.app/";
+const PORTAL_URL = PORTAL_LOGIN_URL;
 
 export default function RegistrationPage({ onNavigate }: RegistrationPageProps) {
   const { t } = useLanguage();
@@ -30,7 +31,7 @@ export default function RegistrationPage({ onNavigate }: RegistrationPageProps) 
   }, [showModal]);
   
   const openPortal = () => {
-    if (PORTAL_URL && PORTAL_URL !== "#") {
+    if (PORTAL_URL) {
       window.open(PORTAL_URL, "_blank", "noopener,noreferrer");
     } else {
       // Fallback to modal if portal URL not yet set

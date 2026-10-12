@@ -1,5 +1,6 @@
 import { FilePen, Building2, Scale, Download, ArrowRight, MessageSquareWarning } from "lucide-react";
 import { useLanguage } from "../i18n/LanguageContext";
+import { PORTAL_LOGIN_URL } from "../lib/api";
 
 interface ServicesCardsProps {
   onNavigate: (page: string) => void;
@@ -8,7 +9,7 @@ interface ServicesCardsProps {
 export default function ServicesCards({ onNavigate }: ServicesCardsProps) {
   const { t } = useLanguage();
 
-  const PORTAL_URL = "https://zmc--portal.replit.app/";
+const PORTAL_URL = PORTAL_LOGIN_URL;
   const services = [
     { icon: FilePen, title: t.services.accreditationTitle, description: t.services.accreditationDesc, action: t.services.applyNow, page: "accreditation", external: PORTAL_URL },
     { icon: Building2, title: t.services.registrationTitle, description: t.services.registrationDesc, action: t.services.registerNow, page: "registration", external: PORTAL_URL },

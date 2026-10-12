@@ -90,28 +90,11 @@ const nd: Translations = {
     officeHours: "UMvulo - uLwesihlanu: 8:00 AM - 4:30 PM",
     copyright: "iKhomishini yeMidiya yeZimbabwe — Ukukhuthaza lokuvikela imikhuba emihle lezimilo emidiyeni ngapha sivimbela imikhuba emibi lokusetshenziswa kubi kwenkululeko yemidiya.",
   },
-  notifications: {
-    title: "Izaziso",
-    markAllRead: "Maka konke njengokufundiwe",
-    viewAll: "Bona zonke izaziso",
-    notif1Title: "Ukuvuselela Ugunyazo 2025",
-    notif1Text: "Vuselela ugunyazo lwakho ngaphambi kuka-1 Zibandlela",
-    notif2Title: "IHhovisi Elitsha leBulawayo",
-    notif2Text: "IHhovisi leZMC lesifunda livuliwe eBulawayo",
-    notif3Title: "Ukuvuselelwa koMthetho",
-    notif3Text: "Umthetho omutsha weKuphathwa Kubi Ngokobulili usethulwe",
-  },
   vision: "Ukukhuthaza ukutholakala kolwazi lemidiya eqondiswe yizidingo zesizwe kuze kufike ku-2030",
-  comingSoon: "Kuyeza Masinyane",
-  mediaHubComingSoon: "Media Hub — Kuyeza Masinyane",
   newBadge: "KUTSHA",
   subscribeForUpdates: "Bhalisa Ukuthola Okutsha",
   noCurrent: "Akukho Okwamanje",
   noCurrentText: "Akukho {title} okwamanje. Sicela ubuye futhi kumbe ubhalise kumaphephandaba ethu ukuthola okutsha.",
-  placeholder: {
-    title: "Media Hub",
-    description: "Ukuqeqetsha ku-inthanethi lokwakha amakhono abasebenzisi bemidiya — Kuyeza Masinyane",
-  },
   chatbot: {
     greeting: `Sawubona! Siyalemukela kuKhomishini yeMidiya yeZimbabwe. Singakusiza njani namhlanje?
 
@@ -247,10 +230,10 @@ NB: Intengo ingakhokhwa ngemali yendawo ngeliganiso lebhanki elisemthethweni los
 - Uhlu lwentengo (SI 65 ka2022)
 
 Vakashela ikhasi lokulanda ngaphansi kweNdawo yeMidiya ukuthola wonke amaphepha.`,
-    mediaHub: `Media Hub (Kuyeza Masinyane):
-IZMC ikwakha inkundla yokuqeqetsha ku-inthanethi yabasebenzisi bemidiya. IMedia Hub izanikeza amakhosi okwakha amakhono, izifundo, lemithombo yokuthuthukisa.
+    mediaHub: `Media Hub:
+IMedia Training Hub yeZMC inikeza amakhosi okwakha amakhono ku-inthanethi, izifundo, lezinsiza zokuthuthukisa abasebenzisi bemidiya.
 
-Hlala ulindile ukuthola okutsha!`,
+Vakashela iMedia Training Hub ku-https://traininghub.zmc.org.zw ukuqalisa.`,
     hello: "Sawubona! Siyalemukela kuZMC. Singakusiza njani namhlanje? Ungabuza ngokugunyazwa, ukubhaliswa, izikhalazo, izicelo zeFOIA, intengo, kumbe ulwazi lokuxhumana.",
     thanks: "Siyabonga! Kukhona okunye esingakusiza ngakho?",
     fallback: `Singakusiza ngolwazi mayelana le:
@@ -261,7 +244,7 @@ Hlala ulindile ukuthola okutsha!`,
 - Okulandwayo & Amafomu
 - Ulwazi Lokuxhumana
 - Intengo & Ukukhokha
-- Media Hub (kuyeza)
+- Media Hub
 
 Sicela ubuze umbuzo oqondileyo kumbe uvakashele ikhasi lokuXhumana ukuthola usizo olwengeziweyo.`,
   },

@@ -88,28 +88,11 @@ const en = {
     officeHours: "Mon - Fri: 8:00 AM - 4:30 PM",
     copyright: "Zimbabwe Media Commission — To uphold and promote good practices and ethics in the media while discouraging malpractices by the media and the abuse of media freedom.",
   },
-  notifications: {
-    title: "Notifications",
-    markAllRead: "Mark all read",
-    viewAll: "View all notifications",
-    notif1Title: "Accreditation Renewal 2025",
-    notif1Text: "Renew your accreditation before December 1st",
-    notif2Title: "New Bulawayo Office",
-    notif2Text: "ZMC Regional Office now open in Bulawayo",
-    notif3Title: "Policy Update",
-    notif3Text: "New Sexual Harassment Policy launched",
-  },
   vision: "Fostering access to information and a professional national interest driven media by 2030",
-  comingSoon: "Coming Soon",
-  mediaHubComingSoon: "Media Hub — Coming Soon",
   newBadge: "NEW",
   subscribeForUpdates: "Subscribe for Updates",
   noCurrent: "No Current",
   noCurrentText: "There are currently no open {title}. Please check back later or subscribe to our newsletter for updates.",
-  placeholder: {
-    title: "Media Hub",
-    description: "Online trainings and capacity building for media practitioners — Coming Soon",
-  },
   chatbot: {
     greeting: `Hello! Welcome to Zimbabwe Media Commission. How can I help you today?
 
@@ -255,10 +238,10 @@ Visit our Downloads page for the full fee schedule.`,
 - Fee Schedule (SI 65 of 2022)
 
 Visit the Downloads page under Media Centre for all documents.`,
-    mediaHub: `Media Hub (Coming Soon):
-ZMC is developing an online training platform for media practitioners. The Media Hub will offer capacity building courses, workshops, and professional development resources.
+    mediaHub: `Media Hub:
+ZMC's Media Training Hub offers online capacity building courses, workshops, and professional development resources for media practitioners.
 
-Stay tuned for updates!`,
+Visit the Media Training Hub at https://traininghub.zmc.org.zw to get started.`,
     hello: "Hello! Welcome to ZMC. How can I help you today? You can ask about accreditation, registration, complaints, FOIA appeals, fees, or contact information.",
     thanks: "You're welcome! Is there anything else I can help you with?",
     fallback: `I can help you with information about:
@@ -269,7 +252,7 @@ Stay tuned for updates!`,
 - Downloads & Forms
 - Contact Information
 - Fees & Payment
-- Media Hub (coming soon)
+- Media Hub
 
 Please ask a specific question or visit our Contact page for more help.`,
   },

@@ -14,6 +14,7 @@ import {
   RotateCcw,
 } from "lucide-react";
 import { useLanguage } from "../i18n/LanguageContext";
+import { TRAINING_HUB_URL } from "../lib/api";
 import zmcLogo from "@assets/zmc_logo-removebg-preview_1771225841865.png";
 
 interface ChatbotProps {
@@ -422,10 +423,12 @@ Office Hours: Mon–Fri, 8:00 AM – 4:30 PM`,
     <>
       {!isOpen && (
         <a
-          href="/media-hub"
+          href={TRAINING_HUB_URL}
+          target="_blank"
+          rel="noopener noreferrer"
           className="fixed bottom-[72px] right-4 md:bottom-[108px] md:right-8 z-[1500] no-underline animate-bounce-gentle"
           style={{ animationDuration: "2s" }}
-          data-testid="banner-media-hub-coming-soon"
+          data-testid="banner-media-hub"
         >
           <div
             className="flex items-center gap-2 py-2 px-3 md:py-2.5 md:px-4 rounded-xl text-white text-xs md:text-sm font-bold shadow-lg"
@@ -435,7 +438,7 @@ Office Hours: Mon–Fri, 8:00 AM – 4:30 PM`,
             }}
           >
             <Sparkles className="w-3.5 h-3.5 md:w-4 md:h-4" />
-            {t.mediaHubComingSoon}
+            {t.nav.mediaHub}
           </div>
         </a>
       )}
@@ -570,7 +573,14 @@ Office Hours: Mon–Fri, 8:00 AM – 4:30 PM`,
                   ))}
                   {message.link && (
                     <button
-                      onClick={() => { onNavigate(message.link!.page); setIsOpen(false); }}
+                      onClick={() => {
+                        if (message.link!.page === "media-hub") {
+                          window.open(TRAINING_HUB_URL, "_blank", "noopener,noreferrer");
+                        } else {
+                          onNavigate(message.link!.page);
+                        }
+                        setIsOpen(false);
+                      }}
                       className="flex items-center gap-1.5 py-1.5 px-3 rounded-full text-xs font-semibold cursor-pointer transition-all hover:-translate-y-0.5 text-white border-none"
                       style={{ background: "linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%)" }}
                       data-testid={`link-${message.link.page}`}

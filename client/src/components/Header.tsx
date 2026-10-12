@@ -3,13 +3,10 @@ import { Link, useLocation } from "wouter";
 import {
   Phone,
   Mail,
-  Bell,
   Building2,
   BadgeCheck,
   ExternalLink,
   ChevronDown,
-  Megaphone,
-  FileText,
   Menu,
   X,
   Scale,
@@ -17,6 +14,7 @@ import {
 } from "lucide-react";
 import zmcLogo from "@assets/zmc_logo-removebg-preview_1771225841865.png";
 import { useLanguage } from "../i18n/LanguageContext";
+import { PORTAL_LOGIN_URL, TRAINING_HUB_URL } from "../lib/api";
 
 interface HeaderProps {
   currentPage: string;
@@ -25,22 +23,12 @@ interface HeaderProps {
 
 export default function Header({ currentPage, onNavigate }: HeaderProps) {
   const { t } = useLanguage();
-  const [notificationsOpen, setNotificationsOpen] = useState(false);
   const [aboutOpen, setAboutOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
   const [opportunitiesOpen, setOpportunitiesOpen] = useState(false);
   const [mediaCentreOpen, setMediaCentreOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [unreadCount, setUnreadCount] = useState(3);
   const [, setLocation] = useLocation();
-
-  const notificationRef = useRef<HTMLDivElement>(null);
-
-  const notifications = [
-    { id: 1, icon: Megaphone, title: t.notifications.notif1Title, text: t.notifications.notif1Text, time: "2 hours ago", unread: true },
-    { id: 2, icon: Building2, title: t.notifications.notif2Title, text: t.notifications.notif2Text, time: "1 day ago", unread: true },
-    { id: 3, icon: FileText, title: t.notifications.notif3Title, text: t.notifications.notif3Text, time: "3 days ago", unread: true },
-  ];
 
   const headerRef = useRef<HTMLElement>(null);
 
@@ -48,9 +36,6 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
     function handleClickOutside(event: MouseEvent) {
       if (headerRef.current && !headerRef.current.contains(event.target as Node)) {
         closeAllDropdowns();
-        setNotificationsOpen(false);
-      } else if (notificationRef.current && !notificationRef.current.contains(event.target as Node)) {
-        setNotificationsOpen(false);
       }
     }
     document.addEventListener("mousedown", handleClickOutside);
@@ -75,17 +60,12 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
     setMediaCentreOpen(false);
   };
 
-  const markAllRead = () => {
-    setUnreadCount(0);
-  };
-
   const handleMobileNavClick = (path: string) => {
     setMobileMenuOpen(false);
     setAboutOpen(false);
     setServicesOpen(false);
     setOpportunitiesOpen(false);
     setMediaCentreOpen(false);
-    setNotificationsOpen(false);
   };
 
   return (
@@ -112,118 +92,11 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
         </div>
 
         <div className="flex gap-2 md:gap-3 items-center">
-          {/* Notification Bell */}
-          <div className="relative" ref={notificationRef}>
-            <button
-              onClick={() => {
-                const next = !notificationsOpen;
-                closeAllDropdowns();
-                setNotificationsOpen(next);
-              }}
-              className="w-9 h-9 md:w-[42px] md:h-[42px] rounded-full flex items-center justify-center cursor-pointer transition-all text-white hover:scale-105 hover:bg-white/25"
-              style={{
-                background: "rgba(255,255,255,0.15)",
-                border: "1px solid rgba(255,255,255,0.3)",
-                backdropFilter: "blur(8px)",
-                WebkitBackdropFilter: "blur(8px)",
-              }}
-              data-testid="button-notifications"
-            >
-              <Bell className="w-4 h-4 md:w-5 md:h-5" />
-              {unreadCount > 0 && (
-                <span
-                  className="absolute -top-1 -right-1 text-white text-[0.65rem] font-bold min-w-4 h-4 md:min-w-5 md:h-5 rounded-full flex items-center justify-center animate-pulse-badge"
-                  style={{ background: "var(--zim-red)" }}
-                >
-                  {unreadCount}
-                </span>
-              )}
-            </button>
-
-            {/* Notification Dropdown */}
-            <div
-              className={`absolute top-[calc(100%+10px)] right-0 w-[300px] md:w-[360px] bg-white rounded-2xl overflow-hidden z-[2000] transition-all ${
-                notificationsOpen
-                  ? "opacity-100 visible translate-y-0"
-                  : "opacity-0 invisible -translate-y-2.5"
-              }`}
-              style={{ boxShadow: "var(--shadow-xl)" }}
-            >
-              <div
-                className="flex justify-between items-center py-3 md:py-4 px-4 md:px-5 border-b"
-                style={{ background: "var(--primary-lighter)", borderColor: "var(--neutral-200)" }}
-              >
-                <h4 className="text-sm md:text-base m-0" style={{ color: "var(--primary-dark)" }}>
-                  {t.notifications.title}
-                </h4>
-                <button
-                  onClick={markAllRead}
-                  className="bg-transparent border-none text-xs md:text-sm cursor-pointer font-semibold hover:underline"
-                  style={{ color: "var(--primary)" }}
-                  data-testid="button-mark-all-read"
-                >
-                  {t.notifications.markAllRead}
-                </button>
-              </div>
-              <div className="max-h-60 md:max-h-80 overflow-y-auto">
-                {notifications.map((notif) => (
-                  <div
-                    key={notif.id}
-                    className={`flex gap-3 md:gap-4 py-3 md:py-4 px-4 md:px-5 border-b cursor-pointer transition-all ${
-                      notif.unread && unreadCount > 0 ? "hover:bg-[#FFF3CD]" : "hover:bg-neutral-50"
-                    }`}
-                    style={{
-                      background: notif.unread && unreadCount > 0 ? "var(--accent-soft)" : "transparent",
-                      borderColor: "var(--neutral-100)",
-                    }}
-                    data-testid={`notification-item-${notif.id}`}
-                  >
-                    <div
-                      className="w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center flex-shrink-0"
-                      style={{ background: "var(--primary-lighter)", color: "var(--primary)" }}
-                    >
-                      <notif.icon className="w-4 h-4 md:w-5 md:h-5" />
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <p className="font-semibold text-xs md:text-sm mb-1" style={{ color: "var(--neutral-800)" }}>
-                        {notif.title}
-                      </p>
-                      <p
-                        className="text-xs mb-1 whitespace-nowrap overflow-hidden text-ellipsis"
-                        style={{ color: "var(--neutral-600)" }}
-                      >
-                        {notif.text}
-                      </p>
-                      <span className="text-xs" style={{ color: "var(--neutral-500)" }}>
-                        {notif.time}
-                      </span>
-                    </div>
-                  </div>
-                ))}
-              </div>
-              <div
-                className="py-2 md:py-3 px-4 md:px-5 text-center border-t"
-                style={{ background: "var(--neutral-50)", borderColor: "var(--neutral-200)" }}
-              >
-                <Link
-                  href="/events"
-                  onClick={() => setNotificationsOpen(false)}
-                  className="text-xs md:text-sm font-semibold hover:underline"
-                  style={{ color: "var(--primary)" }}
-                >
-                  {t.notifications.viewAll}
-                </Link>
-              </div>
-            </div>
-          </div>
-
           {/* Desktop buttons */}
           <div className="hidden lg:flex gap-3">
-            <a
-              href="https://zmc--portal.replit.app/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="py-2.5 px-5 rounded-[10px] font-semibold text-sm flex items-center gap-2 text-white transition-all no-underline hover:brightness-110"
+             <a
+               href="/registration"
+               className="py-2.5 px-5 rounded-[10px] font-semibold text-sm flex items-center gap-2 text-white transition-all no-underline hover:brightness-110"
               style={{
                 background: "linear-gradient(135deg, rgba(46, 125, 86, 0.85) 0%, rgba(27, 94, 63, 0.9) 100%)",
                 border: "1px solid rgba(255,255,255,0.2)",
@@ -236,23 +109,22 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
               <Building2 className="w-4 h-4" />
               {t.nav.registration}
             </a>
-            <a
-              href="https://zmc--portal.replit.app/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="py-2.5 px-5 rounded-[10px] font-semibold text-sm flex items-center gap-2 text-white transition-all no-underline cursor-pointer hover:brightness-110"
-              style={{
-                background: "linear-gradient(135deg, rgba(46, 125, 86, 0.85) 0%, rgba(27, 94, 63, 0.9) 100%)",
-                border: "1px solid rgba(255,255,255,0.2)",
-                backdropFilter: "blur(6px)",
-                WebkitBackdropFilter: "blur(6px)",
-                boxShadow: "0 2px 8px rgba(46, 125, 86, 0.3), inset 0 1px 0 rgba(255,255,255,0.15)",
-              }}
-              data-testid="button-accreditation-header"
-            >
-              <BadgeCheck className="w-4 h-4" />
-              {t.nav.getAccredited}
-            </a>
+             <a
+               href="/accreditation"
+               className="py-2.5 px-5 rounded-[10px] font-semibold text-sm flex items-center gap-2 text-white transition-all no-underline cursor-pointer hover:brightness-110"
+               style={{
+                 background: "linear-gradient(135deg, rgba(46, 125, 86, 0.85) 0%, rgba(27, 94, 63, 0.9) 100%)",
+                 border: "1px solid rgba(255,255,255,0.2)",
+                 backdropFilter: "blur(6px)",
+                 WebkitBackdropFilter: "blur(6px)",
+                 boxShadow: "0 2px 8px rgba(46, 125, 86, 0.3), inset 0 1px 0 rgba(255,255,255,0.15)",
+               }}
+               data-testid="button-accreditation-header"
+               onClick={() => onNavigate("accreditation")}
+             >
+               <BadgeCheck className="w-4 h-4" />
+               {t.nav.getAccredited}
+             </a>
             <Link
               href="/downloads"
               className="py-2.5 px-5 rounded-[10px] font-semibold text-sm flex items-center gap-2 text-white transition-all no-underline hover:brightness-110"
@@ -299,7 +171,7 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
               {t.nav.foiaAppeals}
             </Link>
             <a
-              href="https://zmc--portal.replit.app/"
+              href={PORTAL_LOGIN_URL}
               target="_blank"
               rel="noopener noreferrer"
               className="py-2.5 px-5 rounded-[10px] font-bold text-sm flex items-center gap-2 transition-all no-underline cursor-pointer hover:brightness-110"
@@ -387,7 +259,6 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
                 onClick={() => {
                   const next = !aboutOpen;
                   closeAllDropdowns();
-                  setNotificationsOpen(false);
                   setAboutOpen(next);
                 }}
                 className="block py-6 px-4 font-medium text-[0.95rem] flex items-center gap-1 transition-all hover:text-[var(--primary)] bg-transparent border-none cursor-pointer"
@@ -413,7 +284,7 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
                   <Link
                     key={item.path}
                     href={item.path}
-                    onClick={() => { closeAllDropdowns(); setNotificationsOpen(false); }}
+                    onClick={() => { closeAllDropdowns(); }}
                     className="block py-3.5 px-5 text-[0.9rem] border-b transition-all hover:pl-6 no-underline"
                     style={{
                       color: "var(--neutral-700)",
@@ -433,7 +304,6 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
                 onClick={() => {
                   const next = !servicesOpen;
                   closeAllDropdowns();
-                  setNotificationsOpen(false);
                   setServicesOpen(next);
                 }}
                 className="block py-6 px-4 font-medium text-[0.95rem] flex items-center gap-1 transition-all hover:text-[var(--primary)] bg-transparent border-none cursor-pointer"
@@ -456,22 +326,34 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
                   { label: t.nav.registration, path: "/registration" },
                   { label: t.nav.mediaComplaints, path: "/complaints" },
                   { label: t.nav.foiaAppeals, path: "/appeals" },
-                  { label: t.nav.training, path: "/media-hub" },
-                ].map((item) => (
-                  <Link
-                    key={item.path}
-                    href={item.path}
-                    onClick={() => { closeAllDropdowns(); setNotificationsOpen(false); }}
-                    className="block py-3.5 px-5 text-[0.9rem] border-b transition-all hover:pl-6 no-underline"
-                    style={{
-                      color: "var(--neutral-700)",
-                      borderColor: "var(--neutral-100)",
-                    }}
-                    data-testid={`nav-${item.path.slice(1)}`}
-                  >
-                    {item.label}
-                  </Link>
-                ))}
+                  { label: t.nav.training, path: TRAINING_HUB_URL, external: true, testId: "nav-training" },
+                ].map((item) =>
+                  (item as any).external ? (
+                    <a
+                      key={item.path}
+                      href={item.path}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={() => { closeAllDropdowns(); }}
+                      className="block py-3.5 px-5 text-[0.9rem] border-b transition-all hover:pl-6 no-underline"
+                      style={{ color: "var(--neutral-700)", borderColor: "var(--neutral-100)" }}
+                      data-testid={(item as any).testId}
+                    >
+                      {item.label}
+                    </a>
+                  ) : (
+                    <Link
+                      key={item.path}
+                      href={item.path}
+                      onClick={() => { closeAllDropdowns(); }}
+                      className="block py-3.5 px-5 text-[0.9rem] border-b transition-all hover:pl-6 no-underline"
+                      style={{ color: "var(--neutral-700)", borderColor: "var(--neutral-100)" }}
+                      data-testid={`nav-${item.path.slice(1)}`}
+                    >
+                      {item.label}
+                    </Link>
+                  )
+                )}
               </div>
             </li>
 
@@ -481,7 +363,6 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
                 onClick={() => {
                   const next = !opportunitiesOpen;
                   closeAllDropdowns();
-                  setNotificationsOpen(false);
                   setOpportunitiesOpen(next);
                 }}
                 className="block py-6 px-4 font-medium text-[0.95rem] flex items-center gap-1 transition-all hover:text-[var(--primary)] bg-transparent border-none cursor-pointer"
@@ -502,22 +383,34 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
                 {[
                   { label: t.nav.vacancies, path: "/vacancies", testId: "nav-vacancies" },
                   { label: t.nav.tenders, path: "/tenders", testId: "nav-tenders" },
-                  { label: t.nav.training, path: "/media-hub", testId: "nav-training" },
-                ].map((item) => (
-                  <Link
-                    key={item.testId}
-                    href={item.path}
-                    onClick={() => { closeAllDropdowns(); setNotificationsOpen(false); }}
-                    className="block py-3.5 px-5 text-[0.9rem] border-b transition-all hover:pl-6 no-underline"
-                    style={{
-                      color: "var(--neutral-700)",
-                      borderColor: "var(--neutral-100)",
-                    }}
-                    data-testid={item.testId}
-                  >
-                    {item.label}
-                  </Link>
-                ))}
+                  { label: t.nav.training, path: TRAINING_HUB_URL, external: true, testId: "nav-training" },
+                ].map((item) =>
+                  (item as any).external ? (
+                    <a
+                      key={item.testId}
+                      href={item.path}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={() => { closeAllDropdowns(); }}
+                      className="block py-3.5 px-5 text-[0.9rem] border-b transition-all hover:pl-6 no-underline"
+                      style={{ color: "var(--neutral-700)", borderColor: "var(--neutral-100)" }}
+                      data-testid={item.testId}
+                    >
+                      {item.label}
+                    </a>
+                  ) : (
+                    <Link
+                      key={item.testId}
+                      href={item.path}
+                      onClick={() => { closeAllDropdowns(); }}
+                      className="block py-3.5 px-5 text-[0.9rem] border-b transition-all hover:pl-6 no-underline"
+                      style={{ color: "var(--neutral-700)", borderColor: "var(--neutral-100)" }}
+                      data-testid={item.testId}
+                    >
+                      {item.label}
+                    </Link>
+                  )
+                )}
               </div>
             </li>
 
@@ -527,7 +420,6 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
                 onClick={() => {
                   const next = !mediaCentreOpen;
                   closeAllDropdowns();
-                  setNotificationsOpen(false);
                   setMediaCentreOpen(next);
                 }}
                 className="block py-6 px-4 font-medium text-[0.95rem] flex items-center gap-1 transition-all hover:text-[var(--primary)] bg-transparent border-none cursor-pointer"
@@ -550,33 +442,54 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
                   { label: t.nav.photos, path: "/photos" },
                   { label: t.nav.pressReleases, path: "/press-releases" },
                   { label: t.nav.magazine, path: "/magazine" },
-                  { label: t.nav.mediaHub, path: "/media-hub", highlight: true },
-                ].map((item) => (
-                  <Link
-                    key={item.path}
-                    href={item.path}
-                    onClick={() => { closeAllDropdowns(); setNotificationsOpen(false); }}
-                    className={`block py-3.5 px-5 text-[0.9rem] border-b transition-all hover:pl-6 no-underline flex items-center justify-between ${
-                      (item as any).highlight ? "font-semibold" : ""
-                    }`}
-                    style={{
-                      color: (item as any).highlight ? "var(--primary-dark)" : "var(--neutral-700)",
-                      borderColor: "var(--neutral-100)",
-                      background: (item as any).highlight ? "var(--accent-soft)" : "transparent",
-                    }}
-                    data-testid={`nav-${item.path.slice(1)}`}
-                  >
-                    {item.label}
-                    {(item as any).highlight && (
-                      <span
-                        className="text-[0.65rem] font-bold py-0.5 px-2 rounded-full"
-                        style={{ background: "var(--accent)", color: "var(--zim-black)" }}
-                      >
-                        {t.newBadge}
-                      </span>
-                    )}
-                  </Link>
-                ))}
+                  { label: t.nav.mediaHub, path: "/media-hub", highlight: true, testId: "nav-media-hub" },
+                ].map((item) => {
+                  const isHighlight = (item as any).highlight;
+                  const cls = `block py-3.5 px-5 text-[0.9rem] border-b transition-all hover:pl-6 no-underline flex items-center justify-between ${isHighlight ? "font-semibold" : ""}`;
+                  const sty = {
+                    color: isHighlight ? "var(--primary-dark)" : "var(--neutral-700)",
+                    borderColor: "var(--neutral-100)",
+                    background: isHighlight ? "var(--accent-soft)" : "transparent",
+                  };
+                  const inner = (
+                    <>
+                      {item.label}
+                      {isHighlight && (
+                        <span
+                          className="text-[0.65rem] font-bold py-0.5 px-2 rounded-full"
+                          style={{ background: "var(--accent)", color: "var(--zim-black)" }}
+                        >
+                          {t.newBadge}
+                        </span>
+                      )}
+                    </>
+                  );
+                  return (item as any).external ? (
+                    <a
+                      key={item.path}
+                      href={item.path}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={() => { closeAllDropdowns(); }}
+                      className={cls}
+                      style={sty}
+                      data-testid={(item as any).testId}
+                    >
+                      {inner}
+                    </a>
+                  ) : (
+                    <Link
+                      key={item.path}
+                      href={item.path}
+                      onClick={() => { closeAllDropdowns(); }}
+                      className={cls}
+                      style={sty}
+                      data-testid={`nav-${item.path.slice(1)}`}
+                    >
+                      {inner}
+                    </Link>
+                  );
+                })}
               </div>
             </li>
 
@@ -628,18 +541,7 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
           {/* Quick Actions */}
           <div className="grid grid-cols-4 gap-2 mb-4">
             <a
-              href="https://zmc--portal.replit.app/"
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() => setMobileMenuOpen(false)}
-              className="py-2.5 px-1 rounded-xl font-semibold text-[10px] flex flex-col items-center justify-center gap-1.5 text-white no-underline"
-              style={{ background: "linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%)" }}
-            >
-              <Building2 className="w-4 h-4" />
-              {t.nav.registration}
-            </a>
-            <a
-              href="https://zmc--portal.replit.app/"
+               href={PORTAL_LOGIN_URL}
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => setMobileMenuOpen(false)}
@@ -726,18 +628,33 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
                   { label: t.nav.registration, path: "/registration" },
                   { label: t.nav.mediaComplaints, path: "/complaints" },
                   { label: t.nav.foiaAppeals, path: "/appeals" },
-                  { label: t.nav.training, path: "/media-hub" },
-                ].map((item) => (
-                  <Link
-                    key={item.path}
-                    href={item.path}
-                    onClick={() => handleMobileNavClick(item.path)}
-                    className="block py-2 px-8 text-sm no-underline"
-                    style={{ color: "var(--neutral-600)", background: "var(--neutral-50)" }}
-                  >
-                    {item.label}
-                  </Link>
-                ))}
+                  { label: t.nav.training, path: TRAINING_HUB_URL, external: true, testId: "nav-training" },
+                ].map((item) =>
+                  (item as any).external ? (
+                    <a
+                      key={item.path}
+                      href={item.path}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={() => handleMobileNavClick(item.path)}
+                      className="block py-2 px-8 text-sm no-underline"
+                      style={{ color: "var(--neutral-600)", background: "var(--neutral-50)" }}
+                      data-testid={(item as any).testId}
+                    >
+                      {item.label}
+                    </a>
+                  ) : (
+                    <Link
+                      key={item.path}
+                      href={item.path}
+                      onClick={() => handleMobileNavClick(item.path)}
+                      className="block py-2 px-8 text-sm no-underline"
+                      style={{ color: "var(--neutral-600)", background: "var(--neutral-50)" }}
+                    >
+                      {item.label}
+                    </Link>
+                  )
+                )}
               </div>
             </div>
 
@@ -755,18 +672,33 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
                 {[
                   { label: t.nav.vacancies, path: "/vacancies", key: "vacancies" },
                   { label: t.nav.tenders, path: "/tenders", key: "tenders" },
-                  { label: t.nav.training, path: "/media-hub", key: "training" },
-                ].map((item) => (
-                  <Link
-                    key={item.key}
-                    href={item.path}
-                    onClick={() => handleMobileNavClick(item.path)}
-                    className="block py-2 px-8 text-sm no-underline"
-                    style={{ color: "var(--neutral-600)", background: "var(--neutral-50)" }}
-                  >
-                    {item.label}
-                  </Link>
-                ))}
+                  { label: t.nav.training, path: TRAINING_HUB_URL, external: true, key: "training", testId: "nav-training" },
+                ].map((item) =>
+                  (item as any).external ? (
+                    <a
+                      key={item.key}
+                      href={item.path}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={() => handleMobileNavClick(item.path)}
+                      className="block py-2 px-8 text-sm no-underline"
+                      style={{ color: "var(--neutral-600)", background: "var(--neutral-50)" }}
+                      data-testid={(item as any).testId}
+                    >
+                      {item.label}
+                    </a>
+                  ) : (
+                    <Link
+                      key={item.key}
+                      href={item.path}
+                      onClick={() => handleMobileNavClick(item.path)}
+                      className="block py-2 px-8 text-sm no-underline"
+                      style={{ color: "var(--neutral-600)", background: "var(--neutral-50)" }}
+                    >
+                      {item.label}
+                    </Link>
+                  )
+                )}
               </div>
             </div>
 
@@ -786,31 +718,52 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
                   { label: t.nav.photos, path: "/photos" },
                   { label: t.nav.pressReleases, path: "/press-releases" },
                   { label: t.nav.magazine, path: "/magazine" },
-                  { label: t.nav.mediaHub, path: "/media-hub", highlight: true },
-                ].map((item) => (
-                  <Link
-                    key={item.path}
-                    href={item.path}
-                    onClick={() => handleMobileNavClick(item.path)}
-                    className={`block py-2 px-8 text-sm no-underline flex items-center justify-between ${
-                      (item as any).highlight ? "font-semibold" : ""
-                    }`}
-                    style={{
-                      color: (item as any).highlight ? "var(--primary-dark)" : "var(--neutral-600)",
-                      background: (item as any).highlight ? "var(--accent-soft)" : "var(--neutral-50)",
-                    }}
-                  >
-                    {item.label}
-                    {(item as any).highlight && (
-                      <span
-                        className="text-[0.6rem] font-bold py-0.5 px-1.5 rounded-full"
-                        style={{ background: "var(--accent)", color: "var(--zim-black)" }}
-                      >
-                        {t.newBadge}
-                      </span>
-                    )}
-                  </Link>
-                ))}
+                  { label: t.nav.mediaHub, path: "/media-hub", highlight: true, testId: "nav-media-hub" },
+                ].map((item) => {
+                  const isHighlight = (item as any).highlight;
+                  const cls = `block py-2 px-8 text-sm no-underline flex items-center justify-between ${isHighlight ? "font-semibold" : ""}`;
+                  const sty = {
+                    color: isHighlight ? "var(--primary-dark)" : "var(--neutral-600)",
+                    background: isHighlight ? "var(--accent-soft)" : "var(--neutral-50)",
+                  };
+                  const inner = (
+                    <>
+                      {item.label}
+                      {isHighlight && (
+                        <span
+                          className="text-[0.6rem] font-bold py-0.5 px-1.5 rounded-full"
+                          style={{ background: "var(--accent)", color: "var(--zim-black)" }}
+                        >
+                          {t.newBadge}
+                        </span>
+                      )}
+                    </>
+                  );
+                  return (item as any).external ? (
+                    <a
+                      key={item.path}
+                      href={item.path}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={() => handleMobileNavClick(item.path)}
+                      className={cls}
+                      style={sty}
+                      data-testid={(item as any).testId}
+                    >
+                      {inner}
+                    </a>
+                  ) : (
+                    <Link
+                      key={item.path}
+                      href={item.path}
+                      onClick={() => handleMobileNavClick(item.path)}
+                      className={cls}
+                      style={sty}
+                    >
+                      {inner}
+                    </Link>
+                  );
+                })}
               </div>
             </div>
 

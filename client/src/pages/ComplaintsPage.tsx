@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
-import { FilePen, CheckCircle, AlertTriangle, Newspaper, Radio, Tv, Globe } from "lucide-react";
+import { FilePen, CheckCircle, AlertTriangle, Newspaper, Radio, Tv, Globe, Loader2 } from "lucide-react";
 import { useLanguage } from "../i18n/LanguageContext";
 import PageHero from "../components/PageHero";
 
@@ -12,9 +12,70 @@ export default function ComplaintsPage({ onNavigate }: ComplaintsPageProps) {
   const { t } = useLanguage();
   const [showComplaintModal, setShowComplaintModal] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState("");
   const [fileError, setFileError] = useState("");
 
+  const nameRef = useRef<HTMLInputElement>(null);
+  const emailRef = useRef<HTMLInputElement>(null);
+  const descriptionRef = useRef<HTMLTextAreaElement>(null);
+  const evidenceLinkRef = useRef<HTMLInputElement>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
   const MAX_FILE_SIZE = 10 * 1024 * 1024;
+
+  function filesToBase64(files: FileList | File[]): Promise<{ filename: string; type: string; content: string }[]> {
+    return Promise.all(
+      Array.from(files).map(
+        (file) =>
+          new Promise<{ filename: string; type: string; content: string }>((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onload = () => {
+              const dataUrl = String(reader.result || "");
+              const base64 = dataUrl.split(",")[1] || "";
+              resolve({ filename: file.name, type: file.type || "application/octet-stream", content: base64 });
+            };
+            reader.onerror = () => reject(new Error(`Could not read file "${file.name}"`));
+            reader.readAsDataURL(file);
+          }),
+      ),
+    );
+  }
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (fileError) return;
+    setIsSubmitting(true);
+    setSubmitError("");
+    try {
+      const name = nameRef.current?.value || "";
+      const email = emailRef.current?.value || "";
+      const description = descriptionRef.current?.value || "";
+      const evidenceLink = evidenceLinkRef.current?.value || "";
+      const files = fileInputRef.current?.files || [];
+
+      const attachments = files.length > 0 ? await filesToBase64(files) : [];
+
+      const res = await fetch("/api/complaints", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, description, evidenceLink, attachments }),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        throw new Error(data.message || "Failed to submit your complaint. Please try again.");
+      }
+      setFormSubmitted(true);
+      setTimeout(() => {
+        setShowComplaintModal(false);
+        setFormSubmitted(false);
+      }, 3500);
+    } catch (err: any) {
+      setSubmitError(err.message || "Something went wrong. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   useEffect(() => {
     if (showComplaintModal) {
@@ -41,16 +102,6 @@ export default function ComplaintsPage({ onNavigate }: ComplaintsPageProps) {
       }
     }
     setFileError("");
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (fileError) return;
-    setFormSubmitted(true);
-    setTimeout(() => {
-      setShowComplaintModal(false);
-      setFormSubmitted(false);
-    }, 3000);
   };
 
   const mediaTypes = [
@@ -159,6 +210,7 @@ export default function ComplaintsPage({ onNavigate }: ComplaintsPageProps) {
                       <input
                         type="text"
                         required
+                        ref={nameRef}
                         placeholder="Enter your full name"
                         className="w-full py-2.5 px-4 rounded-xl text-sm outline-none"
                         style={{ border: "2px solid var(--neutral-200)", background: "var(--neutral-50)" }}
@@ -170,6 +222,7 @@ export default function ComplaintsPage({ onNavigate }: ComplaintsPageProps) {
                       <input
                         type="email"
                         required
+                        ref={emailRef}
                         placeholder="Enter your email address"
                         className="w-full py-2.5 px-4 rounded-xl text-sm outline-none"
                         style={{ border: "2px solid var(--neutral-200)", background: "var(--neutral-50)" }}
@@ -181,6 +234,7 @@ export default function ComplaintsPage({ onNavigate }: ComplaintsPageProps) {
                       <textarea
                         required
                         rows={3}
+                        ref={descriptionRef}
                         placeholder="Briefly describe your complaint..."
                         className="w-full py-2.5 px-4 rounded-xl text-sm outline-none resize-none"
                         style={{ border: "2px solid var(--neutral-200)", background: "var(--neutral-50)" }}
@@ -192,6 +246,7 @@ export default function ComplaintsPage({ onNavigate }: ComplaintsPageProps) {
                       <input
                         type="file"
                         multiple
+                        ref={fileInputRef}
                         accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.mp3,.mp4,.avi,.mov,.wav,.webm"
                         onChange={handleFileChange}
                         className="w-full py-2.5 px-4 rounded-xl text-sm file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:cursor-pointer"
@@ -205,6 +260,7 @@ export default function ComplaintsPage({ onNavigate }: ComplaintsPageProps) {
                       <label className="block mb-1.5 font-medium text-sm" style={{ color: "var(--neutral-700)" }}>Evidence Link (Optional)</label>
                       <input
                         type="url"
+                        ref={evidenceLinkRef}
                         placeholder="Paste a link to online evidence (e.g. https://...)"
                         className="w-full py-2.5 px-4 rounded-xl text-sm outline-none"
                         style={{ border: "2px solid var(--neutral-200)", background: "var(--neutral-50)" }}
@@ -212,10 +268,18 @@ export default function ComplaintsPage({ onNavigate }: ComplaintsPageProps) {
                       />
                       <p className="text-xs mt-1" style={{ color: "var(--neutral-500)" }}>If the evidence is on a website, paste the link here.</p>
                     </div>
+                    {submitError && (
+                      <div className="p-3 rounded-xl text-sm" style={{ background: "#fef2f2", border: "1px solid #fecaca", color: "#b91c1c" }} data-testid="text-submit-error">
+                        {submitError}
+                      </div>
+                    )}
                   </div>
                   <div className="flex gap-3 justify-end flex-wrap p-4 md:px-8 md:py-4 border-t flex-shrink-0" style={{ borderColor: "var(--neutral-200)", background: "var(--neutral-50)", borderRadius: "0 0 1rem 1rem" }}>
                     <button type="button" onClick={() => setShowComplaintModal(false)} className="py-2.5 md:py-3 px-5 md:px-6 rounded-xl font-semibold border-none transition-all text-sm md:text-base cursor-pointer" style={{ background: "var(--neutral-200)" }} data-testid="button-cancel-complaint">Cancel</button>
-                    <button type="submit" className="py-2.5 md:py-3 px-5 md:px-6 rounded-xl font-semibold border-none text-white transition-all text-sm md:text-base cursor-pointer" style={{ background: "linear-gradient(135deg, #dc2626 0%, #b91c1c 100%)" }} data-testid="button-submit-complaint">Submit Complaint</button>
+                    <button type="submit" disabled={isSubmitting} className="py-2.5 md:py-3 px-5 md:px-6 rounded-xl font-semibold border-none text-white transition-all text-sm md:text-base cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed flex items-center gap-2" style={{ background: "linear-gradient(135deg, #dc2626 0%, #b91c1c 100%)" }} data-testid="button-submit-complaint">
+                      {isSubmitting && <Loader2 className="w-4 h-4 animate-spin" />}
+                      {isSubmitting ? "Submitting..." : "Submit Complaint"}
+                    </button>
                   </div>
                 </form>
               </>

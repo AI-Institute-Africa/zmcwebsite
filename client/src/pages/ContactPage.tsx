@@ -3,10 +3,66 @@ import { MapPin, Phone, Mail, Clock, Send, CheckCircle, Building2, MessageCircle
 import { useLanguage } from "../i18n/LanguageContext";
 import PageHero from "../components/PageHero";
 import { useSubscribe } from "../components/SubscribeDialog";
+import { CONTACT_EMAIL } from "../lib/api";
 
 interface ContactPageProps {
   onNavigate: (page: string) => void;
 }
+
+interface RegionalOffice {
+  id: string;
+  name: string;
+  city?: string;
+  address?: string;
+  postalAddress?: string;
+  switchboard?: string | string[];
+  directLines?: string | string[];
+  hotline?: string;
+  whatsapp?: string;
+  email?: string;
+  hours?: string;
+  phone?: string;
+  mapsEmbed?: string;
+  mapsUrl?: string;
+  isHeadOffice?: boolean;
+}
+
+const asArray = (value: unknown): string[] => {
+  if (Array.isArray(value)) return value.filter(Boolean).map(String);
+  if (typeof value === "string" && value.trim()) {
+    return value
+      .split(/\n|,/)
+      .map((s) => s.trim())
+      .filter(Boolean);
+  }
+  return [];
+};
+
+const OFFICES: RegionalOffice[] = [
+  {
+    id: "head-harare",
+    isHeadOffice: true,
+    name: "Head Office - Harare",
+    address: "Zimbabwe Media Commission House, 108 Swan Drive, Alexandra Park, Harare",
+    postalAddress: "P.O Box BE 33, Harare",
+    switchboard: ["+263 242 253509/10", "+263 242 253572/5/6"],
+    directLines: ["+263 242 253463", "0242 745296", "0242 783133"],
+    hotline: "0719 299 150",
+    whatsapp: "0719 299 150",
+    email: CONTACT_EMAIL,
+    hours: "Mon - Fri: 8:00 AM - 4:30 PM",
+    mapsEmbed: "https://maps.google.com/maps?q=-17.795610,31.062229&z=15&output=embed",
+  },
+  {
+    id: "bulawayo",
+    name: "Regional Office – Bulawayo",
+    city: "Bulawayo",
+    address:
+      "Zimbabwe Media Commission, 17 Rylanders Court, Windsor Park Complex, 16th Avenue, Famona, Bulawayo",
+    phone: "+263 713 879 044",
+    hours: "Mon - Fri: 8:00 AM - 4:30 PM",
+  },
+];
 
 export default function ContactPage({ onNavigate }: ContactPageProps) {
   const { t } = useLanguage();
@@ -19,17 +75,12 @@ export default function ContactPage({ onNavigate }: ContactPageProps) {
     setTimeout(() => setFormSubmitted(false), 5000);
   };
 
-  const office = {
-    name: "Head Office - Harare",
-    address: "Zimbabwe Media Commission House, 108 Swan Drive, Alexandra Park, Harare",
-    postalAddress: "P.O Box BE 33, Harare",
-    email: "info@zmc.org.zw",
-    hours: "Mon - Fri: 8:00 AM - 4:30 PM",
-    switchboard: ["+263 242 253509/10", "+263 242 253572/5/6"],
-    directLines: ["+263 242 253463", "0242 745296", "0242 783133"],
-    hotline: "0719 299 150",
-    whatsapp: "0719 299 150",
-  };
+  const offices = OFFICES;
+  const head = offices.find((o) => o.isHeadOffice) || offices[0];
+  const regionals = offices.filter((o) => o.id !== head.id);
+
+  const headSwitchboard = asArray(head.switchboard);
+  const headDirectLines = asArray(head.directLines);
 
   return (
     <div className="animate-fadeIn pt-[140px] md:pt-[180px]">
@@ -169,7 +220,7 @@ export default function ContactPage({ onNavigate }: ContactPageProps) {
               <div
                 className="bg-white rounded-[20px] p-8 mb-6"
                 style={{ boxShadow: "var(--shadow-sm)", border: "1px solid var(--neutral-100)" }}
-                data-testid="card-office-harare"
+                data-testid="card-office-head"
               >
                 <div className="flex items-center gap-3 mb-6">
                   <div
@@ -178,111 +229,145 @@ export default function ContactPage({ onNavigate }: ContactPageProps) {
                   >
                     <Building2 className="w-6 h-6" />
                   </div>
-                  <h3 className="m-0" style={{ color: "var(--primary-dark)" }} data-testid="text-office-name">{office.name}</h3>
+                  <h3 className="m-0" style={{ color: "var(--primary-dark)" }} data-testid="text-office-name">{head.name}</h3>
                 </div>
                 <div className="space-y-4">
-                  <div className="flex items-start gap-4">
-                    <MapPin className="w-5 h-5 mt-1 flex-shrink-0" style={{ color: "var(--primary)" }} />
-                    <div>
-                      <p className="font-medium text-[0.9rem] mb-1" style={{ color: "var(--neutral-700)" }}>Address</p>
-                      <p className="text-[0.95rem]" style={{ color: "var(--neutral-600)" }} data-testid="text-office-address">{office.address}</p>
+                  {head.address && (
+                    <div className="flex items-start gap-4">
+                      <MapPin className="w-5 h-5 mt-1 flex-shrink-0" style={{ color: "var(--primary)" }} />
+                      <div>
+                        <p className="font-medium text-[0.9rem] mb-1" style={{ color: "var(--neutral-700)" }}>Address</p>
+                        <p className="text-[0.95rem]" style={{ color: "var(--neutral-600)" }} data-testid="text-office-address">{head.address}</p>
+                      </div>
                     </div>
-                  </div>
-                  <div className="flex items-start gap-4" data-testid="section-postal-address">
-                    <MapPin className="w-5 h-5 mt-1 flex-shrink-0" style={{ color: "var(--primary)" }} />
-                    <div>
-                      <p className="font-medium text-[0.9rem] mb-1" style={{ color: "var(--neutral-700)" }}>Postal Address</p>
-                      <p className="text-[0.95rem]" style={{ color: "var(--neutral-600)" }} data-testid="text-postal-address">{office.postalAddress}</p>
+                  )}
+                  {head.postalAddress && (
+                    <div className="flex items-start gap-4" data-testid="section-postal-address">
+                      <MapPin className="w-5 h-5 mt-1 flex-shrink-0" style={{ color: "var(--primary)" }} />
+                      <div>
+                        <p className="font-medium text-[0.9rem] mb-1" style={{ color: "var(--neutral-700)" }}>Postal Address</p>
+                        <p className="text-[0.95rem]" style={{ color: "var(--neutral-600)" }} data-testid="text-postal-address">{head.postalAddress}</p>
+                      </div>
                     </div>
-                  </div>
-                  <div className="flex items-start gap-4" data-testid="section-phone-numbers">
-                    <Phone className="w-5 h-5 mt-1 flex-shrink-0" style={{ color: "var(--primary)" }} />
-                    <div>
-                      <p className="font-medium text-[0.9rem] mb-1" style={{ color: "var(--neutral-700)" }}>Switchboard</p>
-                      {office.switchboard.map((num, i) => (
-                        <p key={i} className="text-[0.95rem] whitespace-nowrap" style={{ color: "var(--neutral-600)" }} data-testid={`text-switchboard-${i}`}>{num}</p>
-                      ))}
+                  )}
+                  {headSwitchboard.length > 0 && (
+                    <div className="flex items-start gap-4" data-testid="section-phone-numbers">
+                      <Phone className="w-5 h-5 mt-1 flex-shrink-0" style={{ color: "var(--primary)" }} />
+                      <div>
+                        <p className="font-medium text-[0.9rem] mb-1" style={{ color: "var(--neutral-700)" }}>Switchboard</p>
+                        {headSwitchboard.map((num, i) => (
+                          <p key={i} className="text-[0.95rem] whitespace-nowrap" style={{ color: "var(--neutral-600)" }} data-testid={`text-switchboard-${i}`}>{num}</p>
+                        ))}
+                      </div>
                     </div>
-                  </div>
-                  <div className="flex items-start gap-4" data-testid="section-direct-lines">
-                    <Phone className="w-5 h-5 mt-1 flex-shrink-0" style={{ color: "var(--primary)" }} />
-                    <div>
-                      <p className="font-medium text-[0.9rem] mb-1" style={{ color: "var(--neutral-700)" }}>Direct Lines</p>
-                      {office.directLines.map((num, i) => (
-                        <p key={i} className="text-[0.95rem] whitespace-nowrap" style={{ color: "var(--neutral-600)" }} data-testid={`text-directline-${i}`}>{num}</p>
-                      ))}
+                  )}
+                  {headDirectLines.length > 0 && (
+                    <div className="flex items-start gap-4" data-testid="section-direct-lines">
+                      <Phone className="w-5 h-5 mt-1 flex-shrink-0" style={{ color: "var(--primary)" }} />
+                      <div>
+                        <p className="font-medium text-[0.9rem] mb-1" style={{ color: "var(--neutral-700)" }}>Direct Lines</p>
+                        {headDirectLines.map((num, i) => (
+                          <p key={i} className="text-[0.95rem] whitespace-nowrap" style={{ color: "var(--neutral-600)" }} data-testid={`text-directline-${i}`}>{num}</p>
+                        ))}
+                      </div>
                     </div>
-                  </div>
-                  <div className="flex items-start gap-4" data-testid="section-hotline">
-                    <Phone className="w-5 h-5 mt-1 flex-shrink-0" style={{ color: "var(--primary)" }} />
-                    <div>
-                      <p className="font-medium text-[0.9rem] mb-1" style={{ color: "var(--neutral-700)" }}>Hotline</p>
-                      <p className="text-[0.95rem] whitespace-nowrap" style={{ color: "var(--neutral-600)" }} data-testid="text-hotline">{office.hotline}</p>
+                  )}
+                  {head.hotline && (
+                    <div className="flex items-start gap-4" data-testid="section-hotline">
+                      <Phone className="w-5 h-5 mt-1 flex-shrink-0" style={{ color: "var(--primary)" }} />
+                      <div>
+                        <p className="font-medium text-[0.9rem] mb-1" style={{ color: "var(--neutral-700)" }}>Hotline</p>
+                        <p className="text-[0.95rem] whitespace-nowrap" style={{ color: "var(--neutral-600)" }} data-testid="text-hotline">{head.hotline}</p>
+                      </div>
                     </div>
-                  </div>
-                  <div className="flex items-start gap-4" data-testid="section-whatsapp">
-                    <MessageCircle className="w-5 h-5 mt-1 flex-shrink-0" style={{ color: "var(--primary)" }} />
-                    <div>
-                      <p className="font-medium text-[0.9rem] mb-1" style={{ color: "var(--neutral-700)" }}>WhatsApp</p>
-                      <p className="text-[0.95rem] whitespace-nowrap" style={{ color: "var(--neutral-600)" }} data-testid="text-whatsapp">{office.whatsapp}</p>
+                  )}
+                  {head.whatsapp && (
+                    <div className="flex items-start gap-4" data-testid="section-whatsapp">
+                      <MessageCircle className="w-5 h-5 mt-1 flex-shrink-0" style={{ color: "var(--primary)" }} />
+                      <div>
+                        <p className="font-medium text-[0.9rem] mb-1" style={{ color: "var(--neutral-700)" }}>WhatsApp</p>
+                        <p className="text-[0.95rem] whitespace-nowrap" style={{ color: "var(--neutral-600)" }} data-testid="text-whatsapp">{head.whatsapp}</p>
+                      </div>
                     </div>
-                  </div>
-                  <div className="flex items-start gap-4">
-                    <Mail className="w-5 h-5 mt-1 flex-shrink-0" style={{ color: "var(--primary)" }} />
-                    <div>
-                      <p className="font-medium text-[0.9rem] mb-1" style={{ color: "var(--neutral-700)" }}>Email</p>
-                      <a href={`mailto:${office.email}`} className="text-[0.95rem]" style={{ color: "var(--primary)" }} data-testid="text-email">{office.email}</a>
+                  )}
+                  {head.email && (
+                    <div className="flex items-start gap-4">
+                      <Mail className="w-5 h-5 mt-1 flex-shrink-0" style={{ color: "var(--primary)" }} />
+                      <div>
+                        <p className="font-medium text-[0.9rem] mb-1" style={{ color: "var(--neutral-700)" }}>Email</p>
+                        <a href={`mailto:${head.email}`} className="text-[0.95rem]" style={{ color: "var(--primary)" }} data-testid="text-email">{head.email}</a>
+                      </div>
                     </div>
-                  </div>
-                  <div className="flex items-start gap-4">
-                    <Clock className="w-5 h-5 mt-1 flex-shrink-0" style={{ color: "var(--primary)" }} />
-                    <div>
-                      <p className="font-medium text-[0.9rem] mb-1" style={{ color: "var(--neutral-700)" }}>Office Hours</p>
-                      <p className="text-[0.95rem] whitespace-nowrap" style={{ color: "var(--neutral-600)" }} data-testid="text-hours">{office.hours}</p>
+                  )}
+                  {head.hours && (
+                    <div className="flex items-start gap-4">
+                      <Clock className="w-5 h-5 mt-1 flex-shrink-0" style={{ color: "var(--primary)" }} />
+                      <div>
+                        <p className="font-medium text-[0.9rem] mb-1" style={{ color: "var(--neutral-700)" }}>Office Hours</p>
+                        <p className="text-[0.95rem] whitespace-nowrap" style={{ color: "var(--neutral-600)" }} data-testid="text-hours">{head.hours}</p>
+                      </div>
                     </div>
-                  </div>
+                  )}
                 </div>
               </div>
 
-              {/* Bulawayo Regional Office */}
-              <div
-                className="bg-white rounded-[20px] p-8 mb-6"
-                style={{ boxShadow: "var(--shadow-sm)", border: "1px solid var(--neutral-100)" }}
-                data-testid="card-office-bulawayo"
-              >
-                <div className="flex items-center gap-3 mb-6">
-                  <div
-                    className="w-12 h-12 rounded-xl flex items-center justify-center"
-                    style={{ background: "var(--primary-lighter)", color: "var(--primary)" }}
-                  >
-                    <Building2 className="w-6 h-6" />
+              {/* Regional Offices */}
+              {regionals.map((office) => (
+                <div
+                  key={office.id}
+                  className="bg-white rounded-[20px] p-8 mb-6"
+                  style={{ boxShadow: "var(--shadow-sm)", border: "1px solid var(--neutral-100)" }}
+                  data-testid={`card-office-${office.city?.toLowerCase() || office.id}`}
+                >
+                  <div className="flex items-center gap-3 mb-6">
+                    <div
+                      className="w-12 h-12 rounded-xl flex items-center justify-center"
+                      style={{ background: "var(--primary-lighter)", color: "var(--primary)" }}
+                    >
+                      <Building2 className="w-6 h-6" />
+                    </div>
+                    <h3 className="m-0" style={{ color: "var(--primary-dark)" }}>{office.name}</h3>
                   </div>
-                  <h3 className="m-0" style={{ color: "var(--primary-dark)" }} data-testid="text-office-name-bulawayo">Regional Office – Bulawayo</h3>
+                  <div className="space-y-4">
+                    {office.address && (
+                      <div className="flex items-start gap-4">
+                        <MapPin className="w-5 h-5 mt-1 flex-shrink-0" style={{ color: "var(--primary)" }} />
+                        <div>
+                          <p className="font-medium text-[0.9rem] mb-1" style={{ color: "var(--neutral-700)" }}>Address</p>
+                          <p className="text-[0.95rem]" style={{ color: "var(--neutral-600)" }}>{office.address}</p>
+                        </div>
+                      </div>
+                    )}
+                    {office.phone && (
+                      <div className="flex items-start gap-4">
+                        <Phone className="w-5 h-5 mt-1 flex-shrink-0" style={{ color: "var(--primary)" }} />
+                        <div>
+                          <p className="font-medium text-[0.9rem] mb-1" style={{ color: "var(--neutral-700)" }}>Contact Number</p>
+                          <p className="text-[0.95rem] whitespace-nowrap" style={{ color: "var(--neutral-600)" }}>{office.phone}</p>
+                        </div>
+                      </div>
+                    )}
+                    {office.email && (
+                      <div className="flex items-start gap-4">
+                        <Mail className="w-5 h-5 mt-1 flex-shrink-0" style={{ color: "var(--primary)" }} />
+                        <div>
+                          <p className="font-medium text-[0.9rem] mb-1" style={{ color: "var(--neutral-700)" }}>Email</p>
+                          <a href={`mailto:${office.email}`} className="text-[0.95rem]" style={{ color: "var(--primary)" }}>{office.email}</a>
+                        </div>
+                      </div>
+                    )}
+                    {office.hours && (
+                      <div className="flex items-start gap-4">
+                        <Clock className="w-5 h-5 mt-1 flex-shrink-0" style={{ color: "var(--primary)" }} />
+                        <div>
+                          <p className="font-medium text-[0.9rem] mb-1" style={{ color: "var(--neutral-700)" }}>Office Hours</p>
+                          <p className="text-[0.95rem] whitespace-nowrap" style={{ color: "var(--neutral-600)" }}>{office.hours}</p>
+                        </div>
+                      </div>
+                    )}
+                  </div>
                 </div>
-                <div className="space-y-4">
-                  <div className="flex items-start gap-4">
-                    <MapPin className="w-5 h-5 mt-1 flex-shrink-0" style={{ color: "var(--primary)" }} />
-                    <div>
-                      <p className="font-medium text-[0.9rem] mb-1" style={{ color: "var(--neutral-700)" }}>Address</p>
-                      <p className="text-[0.95rem]" style={{ color: "var(--neutral-600)" }} data-testid="text-office-address-bulawayo">Zimbabwe Media Commission, 17 Rylanders Court, Windsor Park Complex, 16th Avenue, Famona, Bulawayo</p>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-4">
-                    <Phone className="w-5 h-5 mt-1 flex-shrink-0" style={{ color: "var(--primary)" }} />
-                    <div>
-                      <p className="font-medium text-[0.9rem] mb-1" style={{ color: "var(--neutral-700)" }}>Contact Number</p>
-                      <p className="text-[0.95rem] whitespace-nowrap" style={{ color: "var(--neutral-600)" }} data-testid="text-phone-bulawayo">+263 713 879 044</p>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-4">
-                    <Clock className="w-5 h-5 mt-1 flex-shrink-0" style={{ color: "var(--primary)" }} />
-                    <div>
-                      <p className="font-medium text-[0.9rem] mb-1" style={{ color: "var(--neutral-700)" }}>Office Hours</p>
-                      <p className="text-[0.95rem] whitespace-nowrap" style={{ color: "var(--neutral-600)" }} data-testid="text-hours-bulawayo">Mon - Fri: 8:00 AM - 4:30 PM</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              ))}
 
               {/* Google Maps Embed */}
               <div
@@ -291,14 +376,14 @@ export default function ContactPage({ onNavigate }: ContactPageProps) {
                 data-testid="map-embed"
               >
                 <iframe
-                  src="https://maps.google.com/maps?q=-17.795610,31.062229&z=15&output=embed"
+                  src={head.mapsEmbed || head.mapsUrl || "https://maps.google.com/maps?q=-17.795610,31.062229&z=15&output=embed"}
                   width="100%"
                   height="100%"
                   style={{ border: 0 }}
                   allowFullScreen
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
-                  title="Head Office - Harare Location"
+                  title={`${head.name} Location`}
                   data-testid="iframe-google-map"
                 />
               </div>

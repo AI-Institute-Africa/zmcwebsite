@@ -1,13 +1,26 @@
 import { Link } from "wouter";
 import { MapPin, Phone, Mail, Clock, ChevronRight, Facebook, Twitter, Instagram, Youtube } from "lucide-react";
 import { useLanguage } from "../i18n/LanguageContext";
+import { SOCIAL_LINKS, CONTACT_EMAIL } from "../lib/api";
 
 interface FooterProps {
   onNavigate: (page: string) => void;
 }
 
+const HEAD_OFFICE = {
+  address: "108 Swan Drive, Alexandra Park, Harare",
+  phone: "+263 242 253509/10",
+  email: CONTACT_EMAIL,
+};
+
 export default function Footer({ onNavigate }: FooterProps) {
   const { t } = useLanguage();
+
+  const address = HEAD_OFFICE.address;
+  const phone = HEAD_OFFICE.phone;
+  const email = HEAD_OFFICE.email;
+  const hours = t.footer.officeHours;
+
   const quickLinks = [
     { label: t.footer.aboutZmc, path: "/about" },
     { label: t.nav.accreditation, path: "/accreditation" },
@@ -45,10 +58,10 @@ export default function Footer({ onNavigate }: FooterProps) {
           </p>
           <div className="flex gap-4 mt-6">
             {[
-              { icon: Facebook, href: "https://facebook.com" },
-              { icon: Twitter, href: "https://twitter.com" },
-              { icon: Instagram, href: "https://instagram.com" },
-              { icon: Youtube, href: "https://youtube.com" },
+              { icon: Facebook, href: SOCIAL_LINKS.facebook },
+              { icon: Twitter, href: SOCIAL_LINKS.x },
+              { icon: Instagram, href: SOCIAL_LINKS.instagram },
+              { icon: Youtube, href: SOCIAL_LINKS.youtube },
             ].map((social, index) => (
               <a
                 key={index}
@@ -127,31 +140,29 @@ export default function Footer({ onNavigate }: FooterProps) {
             <div className="flex items-start gap-3">
               <MapPin className="w-5 h-5 mt-1" style={{ color: "var(--accent)" }} />
               <p className="text-[0.95rem] m-0" style={{ color: "var(--neutral-400)" }}>
-                108 Swan Drive,
-                <br />
-                Alexandra Park, Harare
+                {address}
               </p>
             </div>
             <div className="flex items-center gap-3">
               <Phone className="w-5 h-5 flex-shrink-0" style={{ color: "var(--accent)" }} />
               <p className="text-[0.95rem] m-0 whitespace-nowrap" style={{ color: "var(--neutral-400)" }}>
-                +263 242 253509/10
+                {phone}
               </p>
             </div>
             <div className="flex items-center gap-3">
               <Mail className="w-5 h-5" style={{ color: "var(--accent)" }} />
               <a
-                href="mailto:info@zmc.org.zw"
+                href={`mailto:${email}`}
                 className="text-[0.95rem]"
                 style={{ color: "var(--neutral-400)" }}
               >
-                info@zmc.org.zw
+                {email}
               </a>
             </div>
             <div className="flex items-center gap-3">
               <Clock className="w-5 h-5 flex-shrink-0" style={{ color: "var(--accent)" }} />
               <p className="text-[0.95rem] m-0 whitespace-nowrap" style={{ color: "var(--neutral-400)" }}>
-                {t.footer.officeHours}
+                {hours}
               </p>
             </div>
           </div>

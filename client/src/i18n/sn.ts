@@ -90,28 +90,11 @@ const sn: Translations = {
     officeHours: "Muvhuro - Chishanu: 8:00 AM - 4:30 PM",
     copyright: "Komisheni yeMidia yeZimbabwe — Kusimudzira nekudzivirira tsika dzakanaka mumidia uku tichirambidza zvisina kunaka nemushandisiro wakaipa werusununguko rwemidia.",
   },
-  notifications: {
-    title: "Zviziviso",
-    markAllRead: "Maka zvese sezvakaverengwa",
-    viewAll: "Ona zviziviso zvese",
-    notif1Title: "Kuvandudza Mvumo 2025",
-    notif1Text: "Vandudza mvumo yako pamberi pa1 Zvita",
-    notif2Title: "Hofisi Itsva yeBulawayo",
-    notif2Text: "Hofisi yeZMC yedunhu yakavhurwa muBulawayo",
-    notif3Title: "Kugadziridzwa kweMutemo",
-    notif3Text: "Mutemo mutsva weKukanganisa Pabonde wakatangwa",
-  },
   vision: "Kusimudzira kuwana ruzivo nemedia yehutungamiriri hwenyika ine hunhu kusvika 2030",
-  comingSoon: "Inouya Munguva Pfupi",
-  mediaHubComingSoon: "Media Hub — Inouya Munguva Pfupi",
   newBadge: "ITSVA",
   subscribeForUpdates: "Nyorera Zvitsva",
   noCurrent: "Hapana Parizvino",
   noCurrentText: "Hapana {title} parizvino. Ndapota dzokai gare gare kana munyorere tsamba dzedu kuti muzive nezvitsva.",
-  placeholder: {
-    title: "Media Hub",
-    description: "Kudzidzisa kwepamhepo nekuvaka humhizha hwevashandi vemidia — Inouya Munguva Pfupi",
-  },
   chatbot: {
     greeting: `Mhoro! Titambirei kuKomisheni yeMidia yeZimbabwe. Ndingakubatsirai sei nhasi?
 
@@ -247,10 +230,10 @@ NB: Mitengo inobhadharwawo nemari yemunyika kumari yebhangi yezuva rekubhadhara.
 - Rondedzero yeMitengo (SI 65 ye2022)
 
 Shanyirai peji yeZvekudhaunirodha pasi peMidia Centre kuti muwane magwaro ese.`,
-    mediaHub: `Media Hub (Inouya Munguva Pfupi):
-ZMC iri kugadzira nzvimbo yekudzidzisa pamhepo yevashandi vemidia. Media Hub ichapiwa makosi ekuvaka humhizha, masemina, nemashoko ekusimudzira.
+    mediaHub: `Media Hub:
+Media Training Hub yeZMC inopa makosi ekudzidzisa pamhepo, masemina, uye zviwanikwa zvekusimudzira vashandi vemidia.
 
-Garai makatarisa zvitsva!`,
+Shanyirai Media Training Hub pa-https://traininghub.zmc.org.zw kuti mutange.`,
     hello: "Mhoro! Titambirei kuZMC. Ndingakubatsirai sei nhasi? Munogona kubvunza pamusoro pekupiwa mvumo, kunyoresa, mhiko, mikumbiro yeFOIA, mitengo, kana ruzivo rwekutaurirana.",
     thanks: "Makakosha! Pane chimwe chandingakubatsirai nacho here?",
     fallback: `Ndinogona kukubatsirai neruzivo pamusoro pe:
@@ -261,7 +244,7 @@ Garai makatarisa zvitsva!`,
 - Zvekudhaunirodha & Mafomu
 - Ruzivo rweKutaurirana
 - Mitengo & Kubhadhara
-- Media Hub (inouya)
+- Media Hub
 
 Ndapota bvunzai mubvunzo wakasiyana kana mushanyirei peji yeKutaurirana kuti muwane rubatsiro rwakawanda.`,
   },

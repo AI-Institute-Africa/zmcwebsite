@@ -1,6 +1,7 @@
 import { Target, Eye, Heart, Users, Shield, Award, BookOpen, Globe, Radio, Scale, Megaphone, Lightbulb } from "lucide-react";
 import { useLanguage } from "../i18n/LanguageContext";
 import PageHero from "../components/PageHero";
+import { PORTAL_LOGIN_URL } from "../lib/api";
 
 interface AboutPageProps {
   onNavigate: (page: string) => void;
@@ -171,7 +172,7 @@ export default function AboutPage({ onNavigate }: AboutPageProps) {
             </p>
             <div className="flex gap-4 justify-center relative flex-wrap">
               <a
-                href="https://zmc--portal.replit.app/"
+                href={PORTAL_LOGIN_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="py-3 px-8 rounded-xl font-semibold text-base border-none cursor-pointer transition-all hover:-translate-y-0.5 no-underline"

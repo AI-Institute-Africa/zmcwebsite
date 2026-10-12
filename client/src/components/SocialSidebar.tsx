@@ -1,13 +1,14 @@
 import { Facebook, Instagram, Youtube, MessageCircle } from "lucide-react";
+import { SOCIAL_LINKS } from "../lib/api";
 
 export default function SocialSidebar() {
   const socials = [
-    { icon: Facebook, href: "https://www.facebook.com/zimbabwemediacommission", bg: "#1877f2", label: "Facebook" },
-    { icon: null, href: "https://x.com/Zim_Media_Com", bg: "#000000", label: "X", isX: true },
-    { icon: Instagram, href: "https://www.instagram.com/zim_media_com/", bg: "linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888)", label: "Instagram" },
-    { icon: null, href: "https://www.tiktok.com/@zim.mediacommission?_r=1&_t=ZS-96xQqrloUvF", bg: "#000000", label: "TikTok", isTikTok: true },
-    { icon: Youtube, href: "https://www.youtube.com/results?search_query=zimbabwe+media+commission", bg: "#ff0000", label: "YouTube" },
-    { icon: MessageCircle, href: "https://wa.me/263719299150", bg: "#25d366", label: "WhatsApp" },
+    { icon: Facebook, href: SOCIAL_LINKS.facebook, bg: "#1877f2", label: "Facebook" },
+    { icon: null, href: SOCIAL_LINKS.x, bg: "#000000", label: "X", isX: true },
+    { icon: Instagram, href: SOCIAL_LINKS.instagram, bg: "linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888)", label: "Instagram" },
+    { icon: null, href: SOCIAL_LINKS.tiktok, bg: "#000000", label: "TikTok", isTikTok: true },
+    { icon: Youtube, href: SOCIAL_LINKS.youtube, bg: "#ff0000", label: "YouTube" },
+    { icon: MessageCircle, href: SOCIAL_LINKS.whatsapp, bg: "#25d366", label: "WhatsApp" },
   ];
 
   return (
