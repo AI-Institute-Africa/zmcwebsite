@@ -86,11 +86,11 @@ export const portalApi = {
 
   // Verification
   verifyAccreditation: async (number: string) => {
-    const res = await fetch(`${BASE_URL}/verify/accreditation/${number}`);
+    const res = await fetch(`${BASE_URL}/verify/accreditation/${encodeURIComponent(number)}`);
     return handleResponse(res);
   },
   verifyRegistration: async (number: string) => {
-    const res = await fetch(`${BASE_URL}/verify/registration/${number}`);
+    const res = await fetch(`${BASE_URL}/verify/registration/${encodeURIComponent(number)}`);
     return handleResponse(res);
   },
 

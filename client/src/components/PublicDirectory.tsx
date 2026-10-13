@@ -1,15 +1,5 @@
-import { useEffect, useState, type ReactNode } from "react";
-import {
-  Search,
-  Loader2,
-  AlertCircle,
-  Building2,
-  MapPin,
-  Phone,
-  Mail,
-  Globe,
-  Inbox,
-} from "lucide-react";
+import { useEffect, useState } from "react";
+import { Search, Loader2, AlertCircle, Building2, User, Inbox } from "lucide-react";
 import { portalApi } from "../lib/api";
 
 type DirectoryVariant = "practitioners" | "mediahouses";
@@ -19,68 +9,15 @@ interface PublicDirectoryProps {
 }
 
 interface DirectoryRecord {
-  accreditation_number?: string;
+  first_name?: string;
+  surname?: string;
   full_name?: string;
-  designation?: string;
-  organisation?: string;
-  medium?: string;
-  nationality?: string;
-  accreditation_year?: number | string;
-  registration_no?: string;
   organisation_name?: string;
-  physical_address?: string;
-  town?: string;
-  province?: string;
-  phone?: string;
-  email?: string;
-  website?: string;
-  category?: string;
-  issued_at?: string;
-  expires_at?: string;
+  accreditation_number?: string;
+  registration_no?: string;
 }
 
-const PER_PAGE = 12;
-
-function initials(name?: string) {
-  if (!name) return "?";
-  const parts = name.trim().split(/\s+/).filter(Boolean);
-  if (parts.length === 0) return "?";
-  if (parts.length === 1) return parts[0].slice(0, 2).toUpperCase();
-  return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
-}
-
-function formatDate(value?: string) {
-  if (!value) return "";
-  const parsed = new Date(value);
-  if (Number.isNaN(parsed.getTime())) return value;
-  return parsed.toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" });
-}
-
-function Chip({ children, tone = "primary" }: { children: ReactNode; tone?: "primary" | "neutral" }) {
-  const styles =
-    tone === "primary"
-      ? { background: "var(--primary-lighter)", color: "var(--primary-dark)" }
-      : { background: "var(--neutral-100)", color: "var(--neutral-600)" };
-  return (
-    <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold" style={styles}>
-      {children}
-    </span>
-  );
-}
-
-function DetailRow({ label, value }: { label: string; value?: string }) {
-  if (!value) return null;
-  return (
-    <div className="flex items-start justify-between gap-4 py-1.5" style={{ borderTop: "1px dashed var(--neutral-100)" }}>
-      <span className="text-xs font-medium uppercase tracking-wide" style={{ color: "var(--neutral-400)" }}>
-        {label}
-      </span>
-      <span className="text-sm text-right" style={{ color: "var(--neutral-700)" }}>
-        {value}
-      </span>
-    </div>
-  );
-}
+const PER_PAGE = 24;
 
 export default function PublicDirectory({ variant }: PublicDirectoryProps) {
   const isPractitioner = variant === "practitioners";
@@ -138,11 +75,15 @@ export default function PublicDirectory({ variant }: PublicDirectoryProps) {
 
   const title = isPractitioner ? "Accredited Practitioners" : "Registered Media Houses";
   const blurb = isPractitioner
-    ? "Browse journalists and media practitioners currently accredited by the Zimbabwe Media Commission."
-    : "Browse mass media services currently registered with the Zimbabwe Media Commission.";
-  const placeholder = isPractitioner
-    ? "Search by name, organisation or accreditation number"
-    : "Search by name, town or registration number";
+    ? "Journalists and media practitioners currently accredited by the Zimbabwe Media Commission."
+    : "Mass media services currently registered with the Zimbabwe Media Commission.";
+  const placeholder = isPractitioner ? "Search by name" : "Search by media house name";
+
+  const displayName = (record: DirectoryRecord) => {
+    if (!isPractitioner) return record.organisation_name?.trim() || "Unnamed media house";
+    const firstAndSurname = [record.first_name, record.surname].filter(Boolean).join(" ").trim();
+    return firstAndSurname || record.full_name?.trim() || "Unnamed practitioner";
+  };
 
   return (
     <div>
@@ -218,134 +159,32 @@ export default function PublicDirectory({ variant }: PublicDirectoryProps) {
           </h3>
           <p className="text-sm m-0" style={{ color: "var(--neutral-500)" }}>
             {search
-              ? "Try a different name, organisation or number."
+              ? "Try a different name."
               : "This directory will be populated as records are approved on the ZMC portal."}
           </p>
         </div>
       )}
 
       {!loading && !error && records.length > 0 && (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {records.map((record, index) => {
-            if (isPractitioner) {
-              const name = record.full_name || "Unnamed practitioner";
-              const subtitle = [record.designation, record.organisation].filter(Boolean).join(" • ");
-              return (
-                <article
-                  key={`${record.accreditation_number ?? index}`}
-                  className="bg-white rounded-2xl p-6 transition-all hover:-translate-y-1"
-                  style={{ boxShadow: "var(--shadow-sm)", border: "1px solid var(--neutral-100)" }}
-                  data-testid={`directory-card-${index}`}
-                >
-                  <div className="flex items-start gap-4">
-                    <div
-                      className="w-14 h-14 rounded-full flex items-center justify-center font-bold text-lg text-white flex-shrink-0"
-                      style={{ background: "linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%)" }}
-                    >
-                      {initials(record.full_name)}
-                    </div>
-                    <div className="min-w-0">
-                      <h3 className="text-lg mb-1 leading-snug" style={{ color: "var(--neutral-800)" }}>
-                        {name}
-                      </h3>
-                      {subtitle && (
-                        <p className="text-sm m-0 truncate" style={{ color: "var(--neutral-500)" }}>
-                          {subtitle}
-                        </p>
-                      )}
-                      <div className="flex flex-wrap gap-2 mt-3">
-                        {record.category && <Chip>{record.category}</Chip>}
-                        {record.medium && <Chip tone="neutral">{record.medium}</Chip>}
-                        {record.nationality && <Chip tone="neutral">{record.nationality}</Chip>}
-                      </div>
-                    </div>
-                  </div>
-                  <div className="mt-4">
-                    <DetailRow label="Accreditation No." value={record.accreditation_number} />
-                    <DetailRow
-                      label="Accredited"
-                      value={record.accreditation_year ? String(record.accreditation_year) : formatDate(record.issued_at)}
-                    />
-                    <DetailRow label="Valid Until" value={formatDate(record.expires_at)} />
-                  </div>
-                </article>
-              );
-            }
-
-            const name = record.organisation_name || "Unnamed media house";
-            const location = [record.town, record.province].filter(Boolean).join(", ");
-            return (
-              <article
-                key={`${record.registration_no ?? index}`}
-                className="bg-white rounded-2xl p-6 transition-all hover:-translate-y-1"
-                style={{ boxShadow: "var(--shadow-sm)", border: "1px solid var(--neutral-100)" }}
-                data-testid={`directory-card-${index}`}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {records.map((record, index) => (
+            <div
+              key={`${record.accreditation_number ?? record.registration_no ?? index}`}
+              className="flex items-center gap-4 bg-white rounded-2xl px-5 py-4 transition-all hover:-translate-y-0.5"
+              style={{ boxShadow: "var(--shadow-sm)", border: "1px solid var(--neutral-100)" }}
+              data-testid={`directory-item-${index}`}
+            >
+              <span
+                className="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0"
+                style={{ background: "var(--primary-lighter)", color: "var(--primary)" }}
               >
-                <div className="flex items-start gap-4">
-                  <div
-                    className="w-14 h-14 rounded-xl flex items-center justify-center flex-shrink-0"
-                    style={{ background: "var(--primary-lighter)", color: "var(--primary)" }}
-                  >
-                    <Building2 className="w-7 h-7" />
-                  </div>
-                  <div className="min-w-0">
-                    <h3 className="text-lg mb-1 leading-snug" style={{ color: "var(--neutral-800)" }}>
-                      {name}
-                    </h3>
-                    {record.category && (
-                      <div className="flex flex-wrap gap-2 mt-1">
-                        <Chip>{record.category}</Chip>
-                      </div>
-                    )}
-                  </div>
-                </div>
-
-                <div className="mt-4 space-y-2 text-sm" style={{ color: "var(--neutral-600)" }}>
-                  {location && (
-                    <p className="flex items-center gap-2 m-0">
-                      <MapPin className="w-4 h-4 flex-shrink-0" style={{ color: "var(--primary)" }} />
-                      {record.physical_address ? `${record.physical_address}, ${location}` : location}
-                    </p>
-                  )}
-                  {record.phone && (
-                    <p className="flex items-center gap-2 m-0">
-                      <Phone className="w-4 h-4 flex-shrink-0" style={{ color: "var(--primary)" }} />
-                      <a href={`tel:${record.phone}`} style={{ color: "var(--neutral-600)" }}>
-                        {record.phone}
-                      </a>
-                    </p>
-                  )}
-                  {record.email && (
-                    <p className="flex items-center gap-2 m-0 break-all">
-                      <Mail className="w-4 h-4 flex-shrink-0" style={{ color: "var(--primary)" }} />
-                      <a href={`mailto:${record.email}`} style={{ color: "var(--neutral-600)" }}>
-                        {record.email}
-                      </a>
-                    </p>
-                  )}
-                  {record.website && (
-                    <p className="flex items-center gap-2 m-0 break-all">
-                      <Globe className="w-4 h-4 flex-shrink-0" style={{ color: "var(--primary)" }} />
-                      <a
-                        href={record.website.startsWith("http") ? record.website : `https://${record.website}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        style={{ color: "var(--primary)" }}
-                      >
-                        {record.website}
-                      </a>
-                    </p>
-                  )}
-                </div>
-
-                <div className="mt-4">
-                  <DetailRow label="Registration No." value={record.registration_no} />
-                  <DetailRow label="Registered" value={formatDate(record.issued_at)} />
-                  <DetailRow label="Valid Until" value={formatDate(record.expires_at)} />
-                </div>
-              </article>
-            );
-          })}
+                {isPractitioner ? <User className="w-5 h-5" /> : <Building2 className="w-5 h-5" />}
+              </span>
+              <span className="text-base font-semibold leading-snug" style={{ color: "var(--neutral-800)" }}>
+                {displayName(record)}
+              </span>
+            </div>
+          ))}
         </div>
       )}
 

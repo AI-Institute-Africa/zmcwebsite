@@ -3,6 +3,7 @@ import { BadgeCheck, FileText, Camera, Briefcase, CreditCard, CheckCircle, X, Ex
 import { useLanguage } from "../i18n/LanguageContext";
 import PageHero from "../components/PageHero";
 import PublicDirectory from "../components/PublicDirectory";
+import VerifyAccreditation from "../components/VerifyAccreditation";
 import { PORTAL_LOGIN_URL } from "../lib/api";
 
 interface AccreditationPageProps {
@@ -16,7 +17,7 @@ export default function AccreditationPage({ onNavigate }: AccreditationPageProps
   const { t } = useLanguage();
   const [showModal, setShowModal] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
-  const [tab, setTab] = useState<"info" | "directory">("info");
+  const [tab, setTab] = useState<"info" | "directory" | "verify">("info");
 
   useEffect(() => {
     if (showModal) {
@@ -115,6 +116,21 @@ export default function AccreditationPage({ onNavigate }: AccreditationPageProps
               data-testid="tab-accredited-practitioners"
             >
               Accredited Practitioners
+            </button>
+            <button
+              type="button"
+              role="tab"
+              aria-selected={tab === "verify"}
+              onClick={() => setTab("verify")}
+              className="px-5 py-3 rounded-full font-semibold text-sm cursor-pointer border-none transition-all"
+              style={
+                tab === "verify"
+                  ? { background: "linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%)", color: "white" }
+                  : { background: "white", color: "var(--neutral-600)", border: "2px solid var(--neutral-200)" }
+              }
+              data-testid="tab-verify-accreditation"
+            >
+              Verify Accreditation
             </button>
           </div>
 
@@ -239,8 +255,10 @@ export default function AccreditationPage({ onNavigate }: AccreditationPageProps
             </div>
           </div>
           </>
-          ) : (
+          ) : tab === "directory" ? (
             <PublicDirectory variant="practitioners" />
+          ) : (
+            <VerifyAccreditation />
           )}
         </div>
       </div>
