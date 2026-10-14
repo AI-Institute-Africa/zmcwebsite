@@ -14,7 +14,7 @@ import {
 } from "lucide-react";
 import zmcLogo from "@assets/zmc_logo-removebg-preview_1771225841865.png";
 import { useLanguage } from "../i18n/LanguageContext";
-import { PORTAL_LOGIN_URL, TRAINING_HUB_URL } from "../lib/api";
+import { PORTAL_LOGIN_URL } from "../lib/api";
 
 interface HeaderProps {
   currentPage: string;
@@ -409,17 +409,15 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
                   ))}
                 </div>
 
-                <a
-                  href={TRAINING_HUB_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <Link
+                  href="/media-hub"
                   onClick={() => { closeAllDropdowns(); }}
                   className="block py-3.5 px-5 text-[0.9rem] border-b transition-all hover:pl-6 no-underline"
                   style={{ color: "var(--neutral-700)", borderColor: "var(--neutral-100)" }}
                   data-testid="nav-training"
                 >
                   {t.nav.training}
-                </a>
+                </Link>
               </div>
             </li>
 
@@ -449,7 +447,7 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
                 {[
                   { label: t.nav.vacancies, path: "/vacancies", testId: "nav-vacancies" },
                   { label: t.nav.tenders, path: "/tenders", testId: "nav-tenders" },
-                  { label: t.nav.training, path: TRAINING_HUB_URL, external: true, testId: "nav-training" },
+                  { label: t.nav.training, path: "/media-hub", testId: "nav-training" },
                 ].map((item) =>
                   (item as any).external ? (
                     <a
@@ -759,17 +757,15 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
                   ))}
                 </div>
 
-                <a
-                  href={TRAINING_HUB_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={() => handleMobileNavClick("/training")}
+                <Link
+                  href="/media-hub"
+                  onClick={() => handleMobileNavClick("/media-hub")}
                   className="block py-2 px-8 text-sm no-underline"
                   style={{ color: "var(--neutral-600)", background: "var(--neutral-50)" }}
                   data-testid="nav-training"
                 >
                   {t.nav.training}
-                </a>
+                </Link>
               </div>
             </div>
 
@@ -787,7 +783,7 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
                 {[
                   { label: t.nav.vacancies, path: "/vacancies", key: "vacancies" },
                   { label: t.nav.tenders, path: "/tenders", key: "tenders" },
-                  { label: t.nav.training, path: TRAINING_HUB_URL, external: true, key: "training", testId: "nav-training" },
+                  { label: t.nav.training, path: "/media-hub", key: "training", testId: "nav-training" },
                 ].map((item) =>
                   (item as any).external ? (
                     <a
