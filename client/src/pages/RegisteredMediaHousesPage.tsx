@@ -22,7 +22,7 @@ export default function RegisteredMediaHousesPage({ onNavigate }: RegisteredMedi
       />
 
       <div className="py-12 md:py-16 px-4 md:px-8">
-        <div className="max-w-[1000px] mx-auto">
+        <div className="max-w-[1200px] mx-auto">
           <PublicDirectory variant="mediahouses" />
         </div>
       </div>

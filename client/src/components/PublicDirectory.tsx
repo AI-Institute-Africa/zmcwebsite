@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import { Search, Loader2, AlertCircle, Building2, User, Inbox } from "lucide-react";
+import { Search, Loader2, AlertCircle, Inbox, FileDown, Download } from "lucide-react";
 import { portalApi } from "../lib/api";
+import { exportTableToPdf, type PdfColumn } from "../lib/pdfExport";
 
 type DirectoryVariant = "practitioners" | "mediahouses";
 
@@ -13,11 +14,30 @@ interface DirectoryRecord {
   surname?: string;
   full_name?: string;
   organisation_name?: string;
+  organisation?: string;
+  category?: string;
   accreditation_number?: string;
   registration_no?: string;
+  province?: string;
+  issued_at?: string | null;
+  expires_at?: string | null;
 }
 
 const PER_PAGE = 24;
+
+const formatDate = (value?: string | null) => {
+  if (!value) return "—";
+  const d = new Date(value);
+  if (Number.isNaN(d.getTime())) return value;
+  return d.toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" });
+};
+
+const resolveStatus = (expiresAt?: string | null) => {
+  if (!expiresAt) return "Active";
+  const d = new Date(expiresAt);
+  if (Number.isNaN(d.getTime())) return "Active";
+  return d.getTime() < Date.now() ? "Expired" : "Active";
+};
 
 export default function PublicDirectory({ variant }: PublicDirectoryProps) {
   const isPractitioner = variant === "practitioners";
@@ -30,6 +50,8 @@ export default function PublicDirectory({ variant }: PublicDirectoryProps) {
   const [page, setPage] = useState(1);
   const [lastPage, setLastPage] = useState(1);
   const [total, setTotal] = useState(0);
+  const [exporting, setExporting] = useState<null | "pdf" | "legacy">(null);
+  const [exportError, setExportError] = useState("");
 
   useEffect(() => {
     const id = window.setTimeout(() => {
@@ -73,17 +95,128 @@ export default function PublicDirectory({ variant }: PublicDirectoryProps) {
     };
   }, [isPractitioner, page, search]);
 
-  const title = isPractitioner ? "Accredited Practitioners" : "Registered Media Houses";
+  const title = isPractitioner ? "Accredited Media Practitioners" : "Registered Media Houses";
   const blurb = isPractitioner
     ? "Journalists and media practitioners currently accredited by the Zimbabwe Media Commission."
     : "Mass media services currently registered with the Zimbabwe Media Commission.";
   const placeholder = isPractitioner ? "Search by name" : "Search by media house name";
+
+  const columns: PdfColumn[] = isPractitioner
+    ? [
+        { header: "#", key: "index" },
+        { header: "Full Name", key: "fullName" },
+        { header: "Category", key: "category" },
+        { header: "Media House", key: "mediaHouse" },
+        { header: "Accreditation Number", key: "accreditationNumber" },
+        { header: "Approved On", key: "approvedOn" },
+        { header: "Valid Until", key: "validUntil" },
+        { header: "Status", key: "status" },
+      ]
+    : [
+        { header: "#", key: "index" },
+        { header: "Media House", key: "mediaHouse" },
+        { header: "Registration Number", key: "registrationNumber" },
+        { header: "Province", key: "province" },
+        { header: "Approved On", key: "approvedOn" },
+        { header: "Valid Until", key: "validUntil" },
+      ];
 
   const displayName = (record: DirectoryRecord) => {
     if (!isPractitioner) return record.organisation_name?.trim() || "Unnamed media house";
     const firstAndSurname = [record.first_name, record.surname].filter(Boolean).join(" ").trim();
     return firstAndSurname || record.full_name?.trim() || "Unnamed practitioner";
   };
+
+  const toRow = (record: DirectoryRecord, index: number): Record<string, string> =>
+    isPractitioner
+      ? {
+          index: String(index),
+          fullName: displayName(record),
+          category: record.category?.trim() || "—",
+          mediaHouse: record.organisation?.trim() || "—",
+          accreditationNumber: record.accreditation_number?.trim() || "—",
+          approvedOn: formatDate(record.issued_at),
+          validUntil: formatDate(record.expires_at),
+          status: resolveStatus(record.expires_at),
+        }
+      : {
+          index: String(index),
+          mediaHouse: displayName(record),
+          registrationNumber: record.registration_no?.trim() || "—",
+          province: record.province?.trim() || "—",
+          approvedOn: formatDate(record.issued_at),
+          validUntil: formatDate(record.expires_at),
+        };
+
+  const fetchAllRecords = async (applySearch: boolean): Promise<DirectoryRecord[]> => {
+    const all: DirectoryRecord[] = [];
+    let currentPage = 1;
+    let totalPages = 1;
+    do {
+      const params: { page: number; per_page: number; search?: string } = { page: currentPage, per_page: 100 };
+      if (applySearch && search) params.search = search;
+      const res: any = isPractitioner
+        ? await portalApi.getAccreditedPractitioners(params)
+        : await portalApi.getRegisteredMediaHouses(params);
+      const list = Array.isArray(res?.data) ? (res.data as DirectoryRecord[]) : [];
+      all.push(...list);
+      totalPages = res?.meta?.last_page ?? 1;
+      currentPage += 1;
+    } while (currentPage <= totalPages && currentPage <= 100);
+    return all;
+  };
+
+  const runExport = async (mode: "pdf" | "legacy") => {
+    if (exporting) return;
+    setExporting(mode);
+    setExportError("");
+    try {
+      const all = await fetchAllRecords(mode === "pdf");
+      if (all.length === 0) {
+        setExportError("There are no records to export.");
+        return;
+      }
+      const rows = all.map((record, index) => toRow(record, index + 1));
+      if (mode === "legacy") {
+        await exportTableToPdf({
+          title: "Registered Media Houses — Legacy List",
+          subtitle: `${rows.length} ${rows.length === 1 ? "record" : "records"}  •  Zimbabwe Media Commission`,
+          columns,
+          rows,
+          filename: "registered-media-houses-legacy-list.pdf",
+        });
+      } else {
+        await exportTableToPdf({
+          title,
+          subtitle: `${rows.length} ${rows.length === 1 ? "record" : "records"}${
+            search ? `  •  Filtered by "${search}"` : ""
+          }  •  Zimbabwe Media Commission`,
+          columns,
+          rows,
+          filename: isPractitioner ? "accredited-media-practitioners.pdf" : "registered-media-houses.pdf",
+        });
+      }
+    } catch (err: any) {
+      setExportError(err?.message || "We could not generate the PDF. Please try again.");
+    } finally {
+      setExporting(null);
+    }
+  };
+
+  const statusBadge = (value: string) => {
+    const active = value.toLowerCase() === "active";
+    return (
+      <span
+        className="inline-flex px-2.5 py-0.5 rounded-full text-xs font-semibold"
+        style={{ background: active ? "var(--accent-soft)" : "var(--red-light)", color: active ? "var(--accent-dark)" : "var(--red)" }}
+      >
+        {value}
+      </span>
+    );
+  };
+
+  const exportButtonStyle = { background: "linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%)" } as const;
+  const legacyButtonStyle = { background: "#fff", color: "var(--primary-dark)", border: "2px solid var(--primary)" } as const;
 
   return (
     <div>
@@ -100,14 +233,40 @@ export default function PublicDirectory({ variant }: PublicDirectoryProps) {
               {blurb}
             </p>
           </div>
-          {!loading && !error && (
-            <span
-              className="px-4 py-1.5 rounded-full text-sm font-semibold whitespace-nowrap"
-              style={{ background: "var(--accent-soft)", color: "var(--accent-dark)" }}
+          <div className="flex flex-wrap items-center gap-3">
+            {!loading && !error && (
+              <span
+                className="px-4 py-1.5 rounded-full text-sm font-semibold whitespace-nowrap"
+                style={{ background: "var(--accent-soft)", color: "var(--accent-dark)" }}
+              >
+                {total} {total === 1 ? "record" : "records"}
+              </span>
+            )}
+            {!isPractitioner && (
+              <button
+                type="button"
+                onClick={() => runExport("legacy")}
+                disabled={!!exporting || loading}
+                className="py-2.5 px-4 rounded-xl font-semibold cursor-pointer flex items-center gap-2 text-sm disabled:opacity-60 disabled:cursor-not-allowed"
+                style={legacyButtonStyle}
+                data-testid="button-download-legacy-list"
+              >
+                {exporting === "legacy" ? <Loader2 className="w-4 h-4 animate-spin" /> : <FileDown className="w-4 h-4" />}
+                Download Legacy List
+              </button>
+            )}
+            <button
+              type="button"
+              onClick={() => runExport("pdf")}
+              disabled={!!exporting || loading}
+              className="py-2.5 px-4 rounded-xl font-semibold cursor-pointer flex items-center gap-2 text-sm text-white border-none disabled:opacity-60 disabled:cursor-not-allowed"
+              style={exportButtonStyle}
+              data-testid={`button-export-pdf-${variant}`}
             >
-              {total} {total === 1 ? "record" : "records"}
-            </span>
-          )}
+              {exporting === "pdf" ? <Loader2 className="w-4 h-4 animate-spin" /> : <Download className="w-4 h-4" />}
+              Export as PDF
+            </button>
+          </div>
         </div>
 
         <div className="relative">
@@ -123,6 +282,16 @@ export default function PublicDirectory({ variant }: PublicDirectoryProps) {
             data-testid={`input-directory-search-${variant}`}
           />
         </div>
+
+        {exportError && (
+          <div
+            className="flex items-center gap-2 text-sm p-3 rounded-xl mt-4"
+            style={{ background: "#fef2f2", color: "#b91c1c" }}
+            data-testid="text-export-error"
+          >
+            <AlertCircle className="w-4 h-4 flex-shrink-0" /> {exportError}
+          </div>
+        )}
       </div>
 
       {loading && (
@@ -166,25 +335,43 @@ export default function PublicDirectory({ variant }: PublicDirectoryProps) {
       )}
 
       {!loading && !error && records.length > 0 && (
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          {records.map((record, index) => (
-            <div
-              key={`${record.accreditation_number ?? record.registration_no ?? index}`}
-              className="flex items-center gap-4 bg-white rounded-2xl px-5 py-4 transition-all hover:-translate-y-0.5"
-              style={{ boxShadow: "var(--shadow-sm)", border: "1px solid var(--neutral-100)" }}
-              data-testid={`directory-item-${index}`}
-            >
-              <span
-                className="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0"
-                style={{ background: "var(--primary-lighter)", color: "var(--primary)" }}
-              >
-                {isPractitioner ? <User className="w-5 h-5" /> : <Building2 className="w-5 h-5" />}
-              </span>
-              <span className="text-base font-semibold leading-snug" style={{ color: "var(--neutral-800)" }}>
-                {displayName(record)}
-              </span>
-            </div>
-          ))}
+        <div
+          className="overflow-x-auto rounded-2xl bg-white"
+          style={{ boxShadow: "var(--shadow-sm)", border: "1px solid var(--neutral-100)" }}
+        >
+          <table className="w-full border-collapse text-sm" data-testid={`directory-table-${variant}`}>
+            <thead>
+              <tr style={{ background: "var(--primary)" }}>
+                {columns.map((col) => (
+                  <th
+                    key={col.key}
+                    className="text-left font-semibold px-4 py-3 whitespace-nowrap"
+                    style={{ color: "#fff" }}
+                  >
+                    {col.header}
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {records.map((record, index) => {
+                const row = toRow(record, (page - 1) * PER_PAGE + index + 1);
+                return (
+                  <tr
+                    key={`${record.accreditation_number ?? record.registration_no ?? index}`}
+                    style={{ borderTop: "1px solid var(--neutral-100)", background: index % 2 ? "var(--neutral-50)" : "#fff" }}
+                    data-testid={`directory-row-${index}`}
+                  >
+                    {columns.map((col) => (
+                      <td key={col.key} className="px-4 py-3 align-top" style={{ color: "var(--neutral-700)" }}>
+                        {col.key === "status" ? statusBadge(row[col.key]) : row[col.key]}
+                      </td>
+                    ))}
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
         </div>
       )}
 
