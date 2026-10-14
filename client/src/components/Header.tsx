@@ -327,120 +327,99 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
                 }`}
                 style={{ boxShadow: "var(--shadow-lg)" }}
               >
-                {[
-                  { label: t.nav.mediaComplaints, path: "/complaints" },
-                  { label: t.nav.foiaAppeals, path: "/appeals" },
-                  { label: t.nav.training, path: TRAINING_HUB_URL, external: true, testId: "nav-training" },
-                ].map((item) =>
-                  (item as any).external ? (
-                    <a
-                      key={item.path}
-                      href={item.path}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      onClick={() => { closeAllDropdowns(); }}
-                      className="block py-3.5 px-5 text-[0.9rem] border-b transition-all hover:pl-6 no-underline"
-                      style={{ color: "var(--neutral-700)", borderColor: "var(--neutral-100)" }}
-                      data-testid={(item as any).testId}
-                    >
-                      {item.label}
-                    </a>
-                  ) : (
+                <Link
+                  href="/complaints"
+                  onClick={() => { closeAllDropdowns(); }}
+                  className="block py-3.5 px-5 text-[0.9rem] border-b transition-all hover:pl-6 no-underline"
+                  style={{ color: "var(--neutral-700)", borderColor: "var(--neutral-100)" }}
+                  data-testid="nav-complaints"
+                >
+                  {t.nav.mediaComplaints}
+                </Link>
+                <Link
+                  href="/appeals"
+                  onClick={() => { closeAllDropdowns(); }}
+                  className="block py-3.5 px-5 text-[0.9rem] border-b transition-all hover:pl-6 no-underline"
+                  style={{ color: "var(--neutral-700)", borderColor: "var(--neutral-100)" }}
+                  data-testid="nav-appeals"
+                >
+                  {t.nav.foiaAppeals}
+                </Link>
+
+                <button
+                  type="button"
+                  onClick={() => setAccreditationOpen(!accreditationOpen)}
+                  className="w-full py-3.5 px-5 text-[0.9rem] border-b transition-all flex items-center justify-between bg-transparent cursor-pointer"
+                  style={{ color: "var(--neutral-700)", borderColor: "var(--neutral-100)" }}
+                  data-testid="nav-accreditation-group"
+                >
+                  {t.nav.accreditation}
+                  <ChevronDown className={`w-4 h-4 transition-transform ${accreditationOpen ? "rotate-180" : ""}`} />
+                </button>
+                <div
+                  className={`overflow-hidden transition-all ${accreditationOpen ? "max-h-60" : "max-h-0"}`}
+                  style={{ background: "var(--neutral-50)" }}
+                >
+                  {[
+                    { label: t.nav.howToGetAccredited, path: "/accreditation" },
+                    { label: t.nav.accreditedPractitioners, path: "/accredited-practitioners" },
+                    { label: t.nav.verifyAccreditation, path: "/verify-accreditation" },
+                  ].map((item) => (
                     <Link
                       key={item.path}
                       href={item.path}
                       onClick={() => { closeAllDropdowns(); }}
-                      className="block py-3.5 px-5 text-[0.9rem] border-b transition-all hover:pl-6 no-underline"
-                      style={{ color: "var(--neutral-700)", borderColor: "var(--neutral-100)" }}
+                      className="block py-2.5 pl-9 pr-5 text-[0.85rem] no-underline transition-all hover:pl-10"
+                      style={{ color: "var(--neutral-600)" }}
                       data-testid={`nav-${item.path.slice(1)}`}
                     >
                       {item.label}
                     </Link>
-                  )
-                )}
-              </div>
-            </li>
+                  ))}
+                </div>
 
-            {/* Accreditation Dropdown */}
-            <li className="relative">
-              <button
-                onClick={() => {
-                  const next = !accreditationOpen;
-                  closeAllDropdowns();
-                  setAccreditationOpen(next);
-                }}
-                className="block py-6 px-4 font-medium text-[0.95rem] flex items-center gap-1 transition-all hover:text-[var(--primary)] bg-transparent border-none cursor-pointer"
-                style={{ color: "#212121" }}
-                data-testid="nav-accreditation"
-              >
-                {t.nav.accreditation}
-                <ChevronDown
-                  className={`w-3 h-3 transition-transform ${accreditationOpen ? "rotate-180" : ""}`}
-                />
-              </button>
-              <div
-                className={`absolute top-full left-0 bg-white min-w-[220px] rounded-2xl overflow-hidden z-[100] transition-all ${
-                  accreditationOpen ? "opacity-100 visible translate-y-0" : "opacity-0 invisible translate-y-2.5"
-                }`}
-                style={{ boxShadow: "var(--shadow-lg)" }}
-              >
-                {[
-                  { label: t.nav.howToGetAccredited, path: "/accreditation" },
-                  { label: t.nav.accreditedPractitioners, path: "/accredited-practitioners" },
-                  { label: t.nav.verifyAccreditation, path: "/verify-accreditation" },
-                ].map((item) => (
-                  <Link
-                    key={item.path}
-                    href={item.path}
-                    onClick={() => { closeAllDropdowns(); }}
-                    className="block py-3.5 px-5 text-[0.9rem] border-b transition-all hover:pl-6 no-underline"
-                    style={{ color: "var(--neutral-700)", borderColor: "var(--neutral-100)" }}
-                    data-testid={`nav-${item.path.slice(1)}`}
-                  >
-                    {item.label}
-                  </Link>
-                ))}
-              </div>
-            </li>
+                <button
+                  type="button"
+                  onClick={() => setRegistrationOpen(!registrationOpen)}
+                  className="w-full py-3.5 px-5 text-[0.9rem] border-b transition-all flex items-center justify-between bg-transparent cursor-pointer"
+                  style={{ color: "var(--neutral-700)", borderColor: "var(--neutral-100)" }}
+                  data-testid="nav-registration-group"
+                >
+                  {t.nav.registration}
+                  <ChevronDown className={`w-4 h-4 transition-transform ${registrationOpen ? "rotate-180" : ""}`} />
+                </button>
+                <div
+                  className={`overflow-hidden transition-all ${registrationOpen ? "max-h-40" : "max-h-0"}`}
+                  style={{ background: "var(--neutral-50)" }}
+                >
+                  {[
+                    { label: t.nav.howToRegister, path: "/registration" },
+                    { label: t.nav.registeredMediaHouses, path: "/registered-media-houses" },
+                  ].map((item) => (
+                    <Link
+                      key={item.path}
+                      href={item.path}
+                      onClick={() => { closeAllDropdowns(); }}
+                      className="block py-2.5 pl-9 pr-5 text-[0.85rem] no-underline transition-all hover:pl-10"
+                      style={{ color: "var(--neutral-600)" }}
+                      data-testid={`nav-${item.path.slice(1)}`}
+                    >
+                      {item.label}
+                    </Link>
+                  ))}
+                </div>
 
-            {/* Registration Dropdown */}
-            <li className="relative">
-              <button
-                onClick={() => {
-                  const next = !registrationOpen;
-                  closeAllDropdowns();
-                  setRegistrationOpen(next);
-                }}
-                className="block py-6 px-4 font-medium text-[0.95rem] flex items-center gap-1 transition-all hover:text-[var(--primary)] bg-transparent border-none cursor-pointer"
-                style={{ color: "#212121" }}
-                data-testid="nav-registration"
-              >
-                {t.nav.registration}
-                <ChevronDown
-                  className={`w-3 h-3 transition-transform ${registrationOpen ? "rotate-180" : ""}`}
-                />
-              </button>
-              <div
-                className={`absolute top-full left-0 bg-white min-w-[220px] rounded-2xl overflow-hidden z-[100] transition-all ${
-                  registrationOpen ? "opacity-100 visible translate-y-0" : "opacity-0 invisible translate-y-2.5"
-                }`}
-                style={{ boxShadow: "var(--shadow-lg)" }}
-              >
-                {[
-                  { label: t.nav.howToRegister, path: "/registration" },
-                  { label: t.nav.registeredMediaHouses, path: "/registered-media-houses" },
-                ].map((item) => (
-                  <Link
-                    key={item.path}
-                    href={item.path}
-                    onClick={() => { closeAllDropdowns(); }}
-                    className="block py-3.5 px-5 text-[0.9rem] border-b transition-all hover:pl-6 no-underline"
-                    style={{ color: "var(--neutral-700)", borderColor: "var(--neutral-100)" }}
-                    data-testid={`nav-${item.path.slice(1)}`}
-                  >
-                    {item.label}
-                  </Link>
-                ))}
+                <a
+                  href={TRAINING_HUB_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => { closeAllDropdowns(); }}
+                  className="block py-3.5 px-5 text-[0.9rem] border-b transition-all hover:pl-6 no-underline"
+                  style={{ color: "var(--neutral-700)", borderColor: "var(--neutral-100)" }}
+                  data-testid="nav-training"
+                >
+                  {t.nav.training}
+                </a>
               </div>
             </li>
 
@@ -709,94 +688,88 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
                 <span>{t.nav.services}</span>
                 <ChevronDown className={`w-4 h-4 transition-transform ${servicesOpen ? "rotate-180" : ""}`} />
               </button>
-              <div className={`overflow-hidden transition-all ${servicesOpen ? "max-h-60" : "max-h-0"}`}>
-                {[
-                  { label: t.nav.mediaComplaints, path: "/complaints" },
-                  { label: t.nav.foiaAppeals, path: "/appeals" },
-                  { label: t.nav.training, path: TRAINING_HUB_URL, external: true, testId: "nav-training" },
-                ].map((item) =>
-                  (item as any).external ? (
-                    <a
-                      key={item.path}
-                      href={item.path}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      onClick={() => handleMobileNavClick(item.path)}
-                      className="block py-2 px-8 text-sm no-underline"
-                      style={{ color: "var(--neutral-600)", background: "var(--neutral-50)" }}
-                      data-testid={(item as any).testId}
-                    >
-                      {item.label}
-                    </a>
-                  ) : (
+              <div className={`overflow-hidden transition-all ${servicesOpen ? "max-h-[600px]" : "max-h-0"}`}>
+                <Link
+                  href="/complaints"
+                  onClick={() => handleMobileNavClick("/complaints")}
+                  className="block py-2 px-8 text-sm no-underline"
+                  style={{ color: "var(--neutral-600)", background: "var(--neutral-50)" }}
+                >
+                  {t.nav.mediaComplaints}
+                </Link>
+                <Link
+                  href="/appeals"
+                  onClick={() => handleMobileNavClick("/appeals")}
+                  className="block py-2 px-8 text-sm no-underline"
+                  style={{ color: "var(--neutral-600)", background: "var(--neutral-50)" }}
+                >
+                  {t.nav.foiaAppeals}
+                </Link>
+
+                <button
+                  type="button"
+                  onClick={() => setAccreditationOpen(!accreditationOpen)}
+                  className="w-full py-2 px-8 flex justify-between items-center bg-transparent border-none cursor-pointer text-sm"
+                  style={{ color: "var(--neutral-600)", background: "var(--neutral-50)" }}
+                >
+                  <span>{t.nav.accreditation}</span>
+                  <ChevronDown className={`w-4 h-4 transition-transform ${accreditationOpen ? "rotate-180" : ""}`} />
+                </button>
+                <div className={`overflow-hidden transition-all ${accreditationOpen ? "max-h-40" : "max-h-0"}`}>
+                  {[
+                    { label: t.nav.howToGetAccredited, path: "/accreditation" },
+                    { label: t.nav.accreditedPractitioners, path: "/accredited-practitioners" },
+                    { label: t.nav.verifyAccreditation, path: "/verify-accreditation" },
+                  ].map((item) => (
                     <Link
                       key={item.path}
                       href={item.path}
                       onClick={() => handleMobileNavClick(item.path)}
-                      className="block py-2 px-8 text-sm no-underline"
-                      style={{ color: "var(--neutral-600)", background: "var(--neutral-50)" }}
+                      className="block py-2 pl-12 pr-8 text-sm no-underline"
+                      style={{ color: "var(--neutral-500)", background: "var(--neutral-100)" }}
                     >
                       {item.label}
                     </Link>
-                  )
-                )}
-              </div>
-            </div>
+                  ))}
+                </div>
 
-            {/* Accreditation Section */}
-            <div className="border-b" style={{ borderColor: "var(--neutral-100)" }}>
-              <button
-                onClick={() => setAccreditationOpen(!accreditationOpen)}
-                className="w-full py-3 px-4 flex justify-between items-center bg-transparent border-none cursor-pointer"
-                style={{ color: "var(--neutral-700)" }}
-              >
-                <span>{t.nav.accreditation}</span>
-                <ChevronDown className={`w-4 h-4 transition-transform ${accreditationOpen ? "rotate-180" : ""}`} />
-              </button>
-              <div className={`overflow-hidden transition-all ${accreditationOpen ? "max-h-60" : "max-h-0"}`}>
-                {[
-                  { label: t.nav.howToGetAccredited, path: "/accreditation" },
-                  { label: t.nav.accreditedPractitioners, path: "/accredited-practitioners" },
-                  { label: t.nav.verifyAccreditation, path: "/verify-accreditation" },
-                ].map((item) => (
-                  <Link
-                    key={item.path}
-                    href={item.path}
-                    onClick={() => handleMobileNavClick(item.path)}
-                    className="block py-2 px-8 text-sm no-underline"
-                    style={{ color: "var(--neutral-600)", background: "var(--neutral-50)" }}
-                  >
-                    {item.label}
-                  </Link>
-                ))}
-              </div>
-            </div>
+                <button
+                  type="button"
+                  onClick={() => setRegistrationOpen(!registrationOpen)}
+                  className="w-full py-2 px-8 flex justify-between items-center bg-transparent border-none cursor-pointer text-sm"
+                  style={{ color: "var(--neutral-600)", background: "var(--neutral-50)" }}
+                >
+                  <span>{t.nav.registration}</span>
+                  <ChevronDown className={`w-4 h-4 transition-transform ${registrationOpen ? "rotate-180" : ""}`} />
+                </button>
+                <div className={`overflow-hidden transition-all ${registrationOpen ? "max-h-40" : "max-h-0"}`}>
+                  {[
+                    { label: t.nav.howToRegister, path: "/registration" },
+                    { label: t.nav.registeredMediaHouses, path: "/registered-media-houses" },
+                  ].map((item) => (
+                    <Link
+                      key={item.path}
+                      href={item.path}
+                      onClick={() => handleMobileNavClick(item.path)}
+                      className="block py-2 pl-12 pr-8 text-sm no-underline"
+                      style={{ color: "var(--neutral-500)", background: "var(--neutral-100)" }}
+                    >
+                      {item.label}
+                    </Link>
+                  ))}
+                </div>
 
-            {/* Registration Section */}
-            <div className="border-b" style={{ borderColor: "var(--neutral-100)" }}>
-              <button
-                onClick={() => setRegistrationOpen(!registrationOpen)}
-                className="w-full py-3 px-4 flex justify-between items-center bg-transparent border-none cursor-pointer"
-                style={{ color: "var(--neutral-700)" }}
-              >
-                <span>{t.nav.registration}</span>
-                <ChevronDown className={`w-4 h-4 transition-transform ${registrationOpen ? "rotate-180" : ""}`} />
-              </button>
-              <div className={`overflow-hidden transition-all ${registrationOpen ? "max-h-40" : "max-h-0"}`}>
-                {[
-                  { label: t.nav.howToRegister, path: "/registration" },
-                  { label: t.nav.registeredMediaHouses, path: "/registered-media-houses" },
-                ].map((item) => (
-                  <Link
-                    key={item.path}
-                    href={item.path}
-                    onClick={() => handleMobileNavClick(item.path)}
-                    className="block py-2 px-8 text-sm no-underline"
-                    style={{ color: "var(--neutral-600)", background: "var(--neutral-50)" }}
-                  >
-                    {item.label}
-                  </Link>
-                ))}
+                <a
+                  href={TRAINING_HUB_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => handleMobileNavClick("/training")}
+                  className="block py-2 px-8 text-sm no-underline"
+                  style={{ color: "var(--neutral-600)", background: "var(--neutral-50)" }}
+                  data-testid="nav-training"
+                >
+                  {t.nav.training}
+                </a>
               </div>
             </div>
 
