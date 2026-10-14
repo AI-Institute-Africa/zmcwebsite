@@ -21,14 +21,13 @@ export default function AppealsPage({ onNavigate }: AppealsPageProps) {
   const [isPaying, setIsPaying] = useState(false);
   const [paymentError, setPaymentError] = useState("");
 
-  const [appeal, setAppeal] = useState<{ id: string; fee: number } | null>(null);
+  const [appeal, setAppeal] = useState<{ id: string; fee: number; reference?: string } | null>(null);
   const [file, setFile] = useState<File | null>(null);
   const [form, setForm] = useState({
     fullName: "",
     email: "",
     phone: "",
     entity: "",
-    reference: "",
   });
 
   const [paymentBanner, setPaymentBanner] = useState<"paid" | "cancelled" | "unknown" | null>(null);
@@ -67,7 +66,7 @@ export default function AppealsPage({ onNavigate }: AppealsPageProps) {
     setPaymentError("");
     setFileError("");
     setFile(null);
-    setForm({ fullName: "", email: "", phone: "", entity: "", reference: "" });
+    setForm({ fullName: "", email: "", phone: "", entity: "" });
   };
 
   const closeModal = () => {
@@ -111,13 +110,7 @@ export default function AppealsPage({ onNavigate }: AppealsPageProps) {
     setIsSubmitting(true);
     try {
       const entity = form.entity.trim();
-      const message = [
-        "FOIA appeal submitted through the ZMC website.",
-        `Public entity: ${entity}.`,
-        form.reference.trim() ? `Original request reference: ${form.reference.trim()}.` : "",
-      ]
-        .filter(Boolean)
-        .join(" ");
+      const message = `FOIA appeal submitted through the ZMC website. Public entity: ${entity}.`;
 
       const payload = new FormData();
       payload.append("full_name", form.fullName.trim());
@@ -130,8 +123,9 @@ export default function AppealsPage({ onNavigate }: AppealsPageProps) {
       const res: any = await portalApi.submitAppeal(payload);
       const data = res?.data ?? res;
       const id = data?.appeal_id ?? data?.id;
+      const reference = data?.reference ? String(data.reference) : undefined;
       const fee = Number(data?.amount ?? data?.fee ?? data?.appeal_fee) || 10;
-      setAppeal({ id: String(id), fee });
+      setAppeal({ id: String(id), fee, reference });
       setStep("payment");
     } catch (err: any) {
       setFormError(err.message || "Failed to submit your appeal. Please try again.");
@@ -272,9 +266,14 @@ export default function AppealsPage({ onNavigate }: AppealsPageProps) {
                   <CheckCircle className="w-8 h-8 md:w-10 md:h-10" />
                 </div>
                 <h3 className="mb-4 text-lg md:text-xl" style={{ color: "var(--primary)" }}>Appeal Submitted!</h3>
-                <p className="text-sm md:text-base mb-6" style={{ color: "var(--neutral-600)" }}>
+                <p className="text-sm md:text-base mb-2" style={{ color: "var(--neutral-600)" }}>
                   Your FOIA appeal has been received. We will review and contact you within 7–14 business days.
                 </p>
+                {appeal?.reference && (
+                  <p className="text-sm md:text-base mb-6" style={{ color: "var(--neutral-700)" }} data-testid="text-done-reference">
+                    Your reference number is <strong>{appeal.reference}</strong>.
+                  </p>
+                )}
                 <button
                   onClick={closeModal}
                   className="py-2.5 px-6 rounded-xl font-semibold text-white border-none cursor-pointer"
@@ -318,10 +317,6 @@ export default function AppealsPage({ onNavigate }: AppealsPageProps) {
                         <input type="text" required value={form.entity} onChange={update("entity")} placeholder="Name of the public entity you are appealing against" className="w-full py-2.5 px-4 rounded-xl text-sm outline-none" style={inputStyle} data-testid="input-appeal-entity" />
                       </div>
                       <div className="mb-4">
-                        <label className="block mb-1.5 font-medium text-sm" style={{ color: "var(--neutral-700)" }}>Your Request Reference Number</label>
-                        <input type="text" value={form.reference} onChange={update("reference")} placeholder="Reference number of your original information request" className="w-full py-2.5 px-4 rounded-xl text-sm outline-none" style={inputStyle} data-testid="input-appeal-reference" />
-                      </div>
-                      <div className="mb-4">
                         <label className="block mb-1.5 font-medium text-sm" style={{ color: "var(--neutral-700)" }}>Supporting Documents *</label>
                         <input type="file" required accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" onChange={handleFileChange} className="w-full py-2.5 px-4 rounded-xl text-sm file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:cursor-pointer" style={inputStyle} data-testid="input-appeal-file-upload" />
                         <p className="text-xs mt-1" style={{ color: "var(--neutral-500)" }}>Attach the completed FOIA Appeal Form or other supporting documents. Accepted: PDF, DOC, DOCX, JPG, PNG (max 10MB). You may also email documents to {CONTACT_EMAIL}.</p>
@@ -349,7 +344,13 @@ export default function AppealsPage({ onNavigate }: AppealsPageProps) {
                           <span className="text-sm font-medium" style={{ color: "var(--neutral-700)" }}>Appeal Fee</span>
                           <span className="text-2xl font-bold" style={{ color: "var(--primary)" }}>US${appeal?.fee?.toFixed(2) ?? "10.00"}</span>
                         </div>
-                        {appeal && <p className="text-xs mt-2 mb-0" style={{ color: "var(--neutral-500)" }}>Appeal ID: {appeal.id}</p>}
+                        {appeal?.reference ? (
+                          <p className="text-xs mt-2 mb-0" style={{ color: "var(--neutral-500)" }} data-testid="text-appeal-reference">
+                            Reference Number: <strong>{appeal.reference}</strong>
+                          </p>
+                        ) : (
+                          appeal && <p className="text-xs mt-2 mb-0" style={{ color: "var(--neutral-500)" }}>Appeal ID: {appeal.id}</p>
+                        )}
                       </div>
 
                       <p className="text-sm mb-4" style={{ color: "var(--neutral-600)" }}>
