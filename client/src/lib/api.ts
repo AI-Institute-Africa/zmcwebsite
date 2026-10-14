@@ -128,7 +128,9 @@ export const portalApi = {
   submitAppeal: async (data: FormData | object) => {
     const options: RequestInit = {
       method: "POST",
-      headers: data instanceof FormData ? {} : { "Content-Type": "application/json" },
+      headers: data instanceof FormData
+        ? { Accept: "application/json" }
+        : { "Content-Type": "application/json", Accept: "application/json" },
       body: data instanceof FormData ? data : JSON.stringify(data),
     };
     const res = await fetch(`${BASE_URL}/appeals`, options);

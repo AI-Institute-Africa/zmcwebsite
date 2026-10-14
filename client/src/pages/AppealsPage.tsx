@@ -22,13 +22,13 @@ export default function AppealsPage({ onNavigate }: AppealsPageProps) {
   const [paymentError, setPaymentError] = useState("");
 
   const [appeal, setAppeal] = useState<{ id: string; fee: number } | null>(null);
+  const [file, setFile] = useState<File | null>(null);
   const [form, setForm] = useState({
     fullName: "",
     email: "",
     phone: "",
     entity: "",
     reference: "",
-    details: "",
   });
 
   const [paymentBanner, setPaymentBanner] = useState<"paid" | "cancelled" | "unknown" | null>(null);
@@ -66,7 +66,8 @@ export default function AppealsPage({ onNavigate }: AppealsPageProps) {
     setFormError("");
     setPaymentError("");
     setFileError("");
-    setForm({ fullName: "", email: "", phone: "", entity: "", reference: "", details: "" });
+    setFile(null);
+    setForm({ fullName: "", email: "", phone: "", entity: "", reference: "" });
   };
 
   const closeModal = () => {
@@ -76,15 +77,20 @@ export default function AppealsPage({ onNavigate }: AppealsPageProps) {
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
-    if (!files) return;
-    for (let i = 0; i < files.length; i++) {
-      if (files[i].size > MAX_FILE_SIZE) {
-        setFileError(`File "${files[i].name}" exceeds the 10MB size limit.`);
-        e.target.value = "";
-        return;
-      }
+    if (!files || files.length === 0) {
+      setFile(null);
+      setFileError("");
+      return;
+    }
+    const selected = files[0];
+    if (selected.size > MAX_FILE_SIZE) {
+      setFileError(`File "${selected.name}" exceeds the 10MB size limit.`);
+      e.target.value = "";
+      setFile(null);
+      return;
     }
     setFileError("");
+    setFile(selected);
   };
 
   const update = (key: keyof typeof form) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
@@ -93,17 +99,38 @@ export default function AppealsPage({ onNavigate }: AppealsPageProps) {
   const handleDetailsSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (fileError) return;
-    if (!form.fullName.trim() || !form.email.trim() || !form.entity.trim() || !form.details.trim()) {
+    if (!form.fullName.trim() || !form.email.trim() || !form.entity.trim()) {
       setFormError("Please complete all required fields.");
+      return;
+    }
+    if (!file) {
+      setFormError("Please attach at least one supporting document.");
       return;
     }
     setFormError("");
     setIsSubmitting(true);
     try {
-      const res: any = await portalApi.submitAppeal(form);
+      const entity = form.entity.trim();
+      const message = [
+        "FOIA appeal submitted through the ZMC website.",
+        `Public entity: ${entity}.`,
+        form.reference.trim() ? `Original request reference: ${form.reference.trim()}.` : "",
+      ]
+        .filter(Boolean)
+        .join(" ");
+
+      const payload = new FormData();
+      payload.append("full_name", form.fullName.trim());
+      payload.append("email", form.email.trim());
+      payload.append("phone", form.phone.trim());
+      payload.append("subject", `FOIA Appeal - ${entity}`.slice(0, 255));
+      payload.append("message", message);
+      payload.append("attachment", file);
+
+      const res: any = await portalApi.submitAppeal(payload);
       const data = res?.data ?? res;
       const id = data?.appeal_id ?? data?.id;
-      const fee = Number(data?.fee ?? data?.appeal_fee) || 10;
+      const fee = Number(data?.amount ?? data?.fee ?? data?.appeal_fee) || 10;
       setAppeal({ id: String(id), fee });
       setStep("payment");
     } catch (err: any) {
@@ -295,13 +322,9 @@ export default function AppealsPage({ onNavigate }: AppealsPageProps) {
                         <input type="text" value={form.reference} onChange={update("reference")} placeholder="Reference number of your original information request" className="w-full py-2.5 px-4 rounded-xl text-sm outline-none" style={inputStyle} data-testid="input-appeal-reference" />
                       </div>
                       <div className="mb-4">
-                        <label className="block mb-1.5 font-medium text-sm" style={{ color: "var(--neutral-700)" }}>Details of Your Appeal *</label>
-                        <textarea required rows={5} value={form.details} onChange={update("details")} placeholder="Describe the information you requested, the entity's response, and the grounds for your appeal." className="w-full py-2.5 px-4 rounded-xl text-sm outline-none resize-y" style={inputStyle} data-testid="input-appeal-details" />
-                      </div>
-                      <div className="mb-2">
-                        <label className="block mb-1.5 font-medium text-sm" style={{ color: "var(--neutral-700)" }}>Supporting Documents (optional)</label>
-                        <input type="file" multiple accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" onChange={handleFileChange} className="w-full py-2.5 px-4 rounded-xl text-sm file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:cursor-pointer" style={inputStyle} data-testid="input-appeal-file-upload" />
-                        <p className="text-xs mt-1" style={{ color: "var(--neutral-500)" }}>Accepted: PDF, DOC, DOCX, JPG, PNG (max 10MB each). You may also email documents to {CONTACT_EMAIL}.</p>
+                        <label className="block mb-1.5 font-medium text-sm" style={{ color: "var(--neutral-700)" }}>Supporting Documents *</label>
+                        <input type="file" required accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" onChange={handleFileChange} className="w-full py-2.5 px-4 rounded-xl text-sm file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:cursor-pointer" style={inputStyle} data-testid="input-appeal-file-upload" />
+                        <p className="text-xs mt-1" style={{ color: "var(--neutral-500)" }}>Attach the completed FOIA Appeal Form or other supporting documents. Accepted: PDF, DOC, DOCX, JPG, PNG (max 10MB). You may also email documents to {CONTACT_EMAIL}.</p>
                         {fileError && <p className="text-xs mt-1" style={{ color: "#dc2626" }} data-testid="text-file-error-appeal">{fileError}</p>}
                       </div>
                       {formError && (
