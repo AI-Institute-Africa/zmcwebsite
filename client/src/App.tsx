@@ -11,7 +11,10 @@ import SocialSidebar from "./components/SocialSidebar";
 import HomePage from "./pages/HomePage";
 import AboutPage from "./pages/AboutPage";
 import AccreditationPage from "./pages/AccreditationPage";
+import AccreditedPractitionersPage from "./pages/AccreditedPractitionersPage";
+import VerifyAccreditationPage from "./pages/VerifyAccreditationPage";
 import RegistrationPage from "./pages/RegistrationPage";
+import RegisteredMediaHousesPage from "./pages/RegisteredMediaHousesPage";
 import ComplaintsPage from "./pages/ComplaintsPage";
 import AppealsPage from "./pages/AppealsPage";
 import DownloadsPage from "./pages/DownloadsPage";
@@ -57,8 +60,17 @@ function Router() {
       <Route path="/accreditation">
         <AccreditationPage onNavigate={handleNavigate} />
       </Route>
+      <Route path="/accredited-practitioners">
+        <AccreditedPractitionersPage onNavigate={handleNavigate} />
+      </Route>
+      <Route path="/verify-accreditation">
+        <VerifyAccreditationPage onNavigate={handleNavigate} />
+      </Route>
       <Route path="/registration">
         <RegistrationPage onNavigate={handleNavigate} />
+      </Route>
+      <Route path="/registered-media-houses">
+        <RegisteredMediaHousesPage onNavigate={handleNavigate} />
       </Route>
       <Route path="/complaints">
         <ComplaintsPage onNavigate={handleNavigate} />

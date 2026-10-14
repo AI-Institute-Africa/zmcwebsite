@@ -2,8 +2,6 @@ import { useState, useEffect } from "react";
 import { BadgeCheck, FileText, Camera, Briefcase, CreditCard, CheckCircle, X, ExternalLink } from "lucide-react";
 import { useLanguage } from "../i18n/LanguageContext";
 import PageHero from "../components/PageHero";
-import PublicDirectory from "../components/PublicDirectory";
-import VerifyAccreditation from "../components/VerifyAccreditation";
 import { PORTAL_LOGIN_URL } from "../lib/api";
 
 interface AccreditationPageProps {
@@ -17,7 +15,6 @@ export default function AccreditationPage({ onNavigate }: AccreditationPageProps
   const { t } = useLanguage();
   const [showModal, setShowModal] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
-  const [tab, setTab] = useState<"info" | "directory" | "verify">("info");
 
   useEffect(() => {
     if (showModal) {
@@ -85,57 +82,6 @@ export default function AccreditationPage({ onNavigate }: AccreditationPageProps
       {/* Content */}
       <div className="py-12 md:py-16 px-4 md:px-8">
         <div className="max-w-[1000px] mx-auto">
-          {/* Section tabs */}
-          <div className="flex flex-wrap gap-2 mb-8" role="tablist" aria-label="Accreditation information">
-            <button
-              type="button"
-              role="tab"
-              aria-selected={tab === "info"}
-              onClick={() => setTab("info")}
-              className="px-5 py-3 rounded-full font-semibold text-sm cursor-pointer border-none transition-all"
-              style={
-                tab === "info"
-                  ? { background: "linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%)", color: "white" }
-                  : { background: "white", color: "var(--neutral-600)", border: "2px solid var(--neutral-200)" }
-              }
-              data-testid="tab-accreditation-info"
-            >
-              How to Get Accredited
-            </button>
-            <button
-              type="button"
-              role="tab"
-              aria-selected={tab === "directory"}
-              onClick={() => setTab("directory")}
-              className="px-5 py-3 rounded-full font-semibold text-sm cursor-pointer border-none transition-all"
-              style={
-                tab === "directory"
-                  ? { background: "linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%)", color: "white" }
-                  : { background: "white", color: "var(--neutral-600)", border: "2px solid var(--neutral-200)" }
-              }
-              data-testid="tab-accredited-practitioners"
-            >
-              Accredited Practitioners
-            </button>
-            <button
-              type="button"
-              role="tab"
-              aria-selected={tab === "verify"}
-              onClick={() => setTab("verify")}
-              className="px-5 py-3 rounded-full font-semibold text-sm cursor-pointer border-none transition-all"
-              style={
-                tab === "verify"
-                  ? { background: "linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%)", color: "white" }
-                  : { background: "white", color: "var(--neutral-600)", border: "2px solid var(--neutral-200)" }
-              }
-              data-testid="tab-verify-accreditation"
-            >
-              Verify Accreditation
-            </button>
-          </div>
-
-          {tab === "info" ? (
-          <>
           {/* Description */}
           <div className="bg-white rounded-[20px] p-6 md:p-10 mb-8" style={{ boxShadow: "var(--shadow-sm)", border: "1px solid var(--neutral-100)" }}>
             <h2 style={{ color: "var(--primary)", borderBottom: "2px solid var(--primary-lighter)", paddingBottom: "0.75rem" }}>
@@ -254,12 +200,6 @@ export default function AccreditationPage({ onNavigate }: AccreditationPageProps
               </div>
             </div>
           </div>
-          </>
-          ) : tab === "directory" ? (
-            <PublicDirectory variant="practitioners" />
-          ) : (
-            <VerifyAccreditation />
-          )}
         </div>
       </div>
 
