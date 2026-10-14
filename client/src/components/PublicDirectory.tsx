@@ -99,7 +99,7 @@ export default function PublicDirectory({ variant }: PublicDirectoryProps) {
   const blurb = isPractitioner
     ? "Journalists and media practitioners currently accredited by the Zimbabwe Media Commission."
     : "Mass media services currently registered with the Zimbabwe Media Commission.";
-  const placeholder = isPractitioner ? "Search by name" : "Search by media house name";
+  const placeholder = isPractitioner ? "Search by name, media house or accreditation number" : "Search by media house name";
 
   const columns: PdfColumn[] = isPractitioner
     ? [
