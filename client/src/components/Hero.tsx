@@ -19,27 +19,18 @@ export default function Hero({ onNavigate }: HeroProps) {
 
   return (
     <>
-      <section className="min-h-[100svh] flex items-center relative overflow-hidden pt-[140px] md:pt-[180px] pb-8 md:pb-16 px-4 md:px-8">
-        <div className="absolute inset-0" style={{ background: "#0a1a0f" }} />
+      <section className="relative overflow-hidden pt-[140px] md:pt-[180px] pb-8 md:pb-16 px-4 md:px-8 min-h-[100svh] w-full">
+        <div className="absolute inset-0 z-0" style={{
+          backgroundImage: `url(${zmcBuilding})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+          filter: "saturate(1.4) contrast(1.1) brightness(1.05)",
+        }} />
+        <div className="absolute inset-0 z-10" style={{ background: "linear-gradient(135deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.45) 100%)" }} />
 
-        <img
-          src={zmcBuilding}
-          alt=""
-          className="absolute inset-0 w-full h-full"
-          style={{
-            objectFit: "cover",
-            objectPosition: "center",
-            filter: "saturate(1.4) contrast(1.1) brightness(1.05)",
-          }}
-        />
-
-        <div
-          className="absolute inset-0"
-          style={{ background: "linear-gradient(135deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.45) 100%)" }}
-        />
-
-        <div className="max-w-[1200px] mx-auto w-full relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+        <div className="relative z-20 max-w-[1200px] mx-auto w-full">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center h-full min-h-[calc(100svh-140px)] md:min-h-[calc(100svh-180px)]">
             <div className="text-white animate-fadeIn text-center lg:text-left">
               <h1 className="mb-4 md:mb-6 leading-tight text-3xl md:text-4xl lg:text-5xl">
                 <span className="text-white/90">{t.hero.welcomeTo}</span>
@@ -116,7 +107,7 @@ export default function Hero({ onNavigate }: HeroProps) {
         </div>
       </section>
 
-      <section className="py-8 md:py-12 px-4 md:px-8" style={{ background: "rgba(255, 255, 255, 0.7)", backdropFilter: "blur(16px)", WebkitBackdropFilter: "blur(16px)" }}>
+      <section className="py-8 md:py-12 px-4 md:px-8 relative z-30" style={{ background: "rgba(255, 255, 255, 0.7)", backdropFilter: "blur(16px)", WebkitBackdropFilter: "blur(16px)" }}>
         <div className="max-w-[1200px] mx-auto grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
           {stats.map((stat, index) => (
             <div

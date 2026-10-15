@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
-import { Scale, CheckCircle, Download, CreditCard, ExternalLink, Loader2, AlertCircle } from "lucide-react";
+import { Scale, CheckCircle, Download, CreditCard, ExternalLink, Loader2, AlertCircle, Upload } from "lucide-react";
 import { useLanguage } from "../i18n/LanguageContext";
 import PageHero from "../components/PageHero";
 import { portalApi, CONTACT_EMAIL } from "../lib/api";
@@ -20,6 +20,12 @@ export default function AppealsPage({ onNavigate }: AppealsPageProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isPaying, setIsPaying] = useState(false);
   const [paymentError, setPaymentError] = useState("");
+
+  const [proofFile, setProofFile] = useState<File | null>(null);
+  const [proofRef, setProofRef] = useState("");
+  const [proofError, setProofError] = useState("");
+  const [isUploadingProof, setIsUploadingProof] = useState(false);
+  const [proofSubmitted, setProofSubmitted] = useState(false);
 
   const [appeal, setAppeal] = useState<{ id: string; fee: number; reference?: string } | null>(null);
   const [file, setFile] = useState<File | null>(null);
@@ -67,6 +73,10 @@ export default function AppealsPage({ onNavigate }: AppealsPageProps) {
     setFileError("");
     setFile(null);
     setForm({ fullName: "", email: "", phone: "", entity: "" });
+    setProofFile(null);
+    setProofRef("");
+    setProofError("");
+    setProofSubmitted(false);
   };
 
   const closeModal = () => {
@@ -157,6 +167,52 @@ export default function AppealsPage({ onNavigate }: AppealsPageProps) {
     }
   };
 
+  const handleProofFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    if (!files || files.length === 0) {
+      setProofFile(null);
+      setProofError("");
+      return;
+    }
+    const selected = files[0];
+    if (selected.size > MAX_FILE_SIZE) {
+      setProofError(`File "${selected.name}" exceeds the 10MB size limit.`);
+      e.target.value = "";
+      setProofFile(null);
+      return;
+    }
+    setProofError("");
+    setProofFile(selected);
+  };
+
+  const handleProofUpload = async () => {
+    if (!appeal) return;
+    setProofError("");
+    if (!proofFile) {
+      setProofError("Please attach your proof of payment.");
+      return;
+    }
+    setIsUploadingProof(true);
+    try {
+      const payload = new FormData();
+      payload.append("appeal_id", String(appeal.id));
+      if (proofRef.trim()) payload.append("payment_reference", proofRef.trim());
+      payload.append("payment_proof", proofFile);
+
+      const res: any = await portalApi.uploadAppealPaymentProof(payload);
+      const data = res?.data ?? res;
+      if (data?.status === "error") {
+        throw new Error(data?.message || "We could not record your proof of payment.");
+      }
+      setProofSubmitted(true);
+      setStep("done");
+    } catch (err: any) {
+      setProofError(err.message || "Unable to upload your proof of payment. Please try again.");
+    } finally {
+      setIsUploadingProof(false);
+    }
+  };
+
   const inputStyle = { border: "2px solid var(--neutral-200)", background: "var(--neutral-50)" } as const;
 
   return (
@@ -227,7 +283,7 @@ export default function AppealsPage({ onNavigate }: AppealsPageProps) {
               <li>Download the FOIA Appeal Form using the button below</li>
               <li>Fill in the form with details of your request and the entity's response</li>
               <li>Click <strong>"Submit Your Appeal"</strong> and provide your details</li>
-              <li>Pay the appeal fee securely via <strong>Paynow</strong></li>
+              <li>Pay the appeal fee securely via <strong>Paynow</strong> or upload your proof of payment</li>
             </ol>
             <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
               <a
@@ -267,7 +323,9 @@ export default function AppealsPage({ onNavigate }: AppealsPageProps) {
                 </div>
                 <h3 className="mb-4 text-lg md:text-xl" style={{ color: "var(--primary)" }}>Appeal Submitted!</h3>
                 <p className="text-sm md:text-base mb-2" style={{ color: "var(--neutral-600)" }}>
-                  Your FOIA appeal has been received. We will review and contact you within 7–14 business days.
+                  {proofSubmitted
+                    ? "Your proof of payment has been received. Our accounts team will verify it before your appeal is processed."
+                    : "Your FOIA appeal has been received. We will review and contact you within 7–14 business days."}
                 </p>
                 {appeal?.reference && (
                   <p className="text-sm md:text-base mb-6" style={{ color: "var(--neutral-700)" }} data-testid="text-done-reference">
@@ -375,6 +433,50 @@ export default function AppealsPage({ onNavigate }: AppealsPageProps) {
                           <span data-testid="text-payment-error">{paymentError}</span>
                         </div>
                       )}
+
+                      <div className="mt-6 pt-4 border-t" style={{ borderColor: "var(--neutral-100)" }}>
+                        <p className="text-sm font-semibold mb-1" style={{ color: "var(--neutral-700)" }}>
+                          Already paid? Upload your proof of payment
+                        </p>
+                        <p className="text-xs mb-3" style={{ color: "var(--neutral-500)" }}>
+                          Paid by bank transfer, EcoCash, OneMoney or cash? Attach your proof so our accounts team can verify it.
+                          Accepted: PDF, DOC, DOCX, JPG, PNG (max 10MB).
+                        </p>
+                        <input
+                          type="file"
+                          accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
+                          onChange={handleProofFileChange}
+                          className="w-full py-2.5 px-4 rounded-xl text-sm file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:cursor-pointer"
+                          style={inputStyle}
+                          data-testid="input-appeal-proof-upload"
+                        />
+                        <input
+                          type="text"
+                          value={proofRef}
+                          onChange={(e) => setProofRef(e.target.value)}
+                          placeholder="Payment reference (optional) — e.g. bank or EcoCash transaction ref"
+                          className="w-full mt-3 py-2.5 px-4 rounded-xl text-sm outline-none"
+                          style={inputStyle}
+                          data-testid="input-appeal-proof-ref"
+                        />
+                        {proofError && (
+                          <div className="mt-3 p-3 rounded-xl flex items-start gap-2 text-sm" style={{ background: "#fef3c7", color: "#92400e" }}>
+                            <AlertCircle className="w-4 h-4 flex-shrink-0 mt-0.5" />
+                            <span data-testid="text-proof-error">{proofError}</span>
+                          </div>
+                        )}
+                        <button
+                          type="button"
+                          onClick={handleProofUpload}
+                          disabled={isUploadingProof || !proofFile}
+                          className="w-full mt-3 py-3 px-6 rounded-xl font-semibold border-none cursor-pointer flex items-center justify-center gap-2 disabled:opacity-60 text-sm md:text-base"
+                          style={{ background: "var(--neutral-100)", color: "var(--primary)" }}
+                          data-testid="button-upload-proof"
+                        >
+                          {isUploadingProof ? <Loader2 className="w-5 h-5 animate-spin" /> : <Upload className="w-5 h-5" />}
+                          {isUploadingProof ? "Uploading..." : "Submit Proof of Payment"}
+                        </button>
+                      </div>
 
                       <div className="mt-6 pt-4 border-t" style={{ borderColor: "var(--neutral-100)" }}>
                         <p className="text-xs" style={{ color: "var(--neutral-500)" }}>

@@ -144,6 +144,14 @@ export const portalApi = {
     });
     return handleResponse(res);
   },
+  uploadAppealPaymentProof: async (data: FormData) => {
+    const res = await fetch(`${BASE_URL}/appeals/payment/proof`, {
+      method: "POST",
+      headers: { Accept: "application/json" },
+      body: data,
+    });
+    return handleResponse(res);
+  },
   getAppealPaymentStatus: async (data: { appeal_id: number; poll_url: string }) => {
     const res = await fetch(`${BASE_URL}/appeals/payment/status`, {
       method: "POST",

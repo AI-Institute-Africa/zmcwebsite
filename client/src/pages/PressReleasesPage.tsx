@@ -105,13 +105,13 @@ function PressReleaseDetail({ id }: { id: string }) {
               <img src={img} alt={release.image_alt_text || release.title} className="w-full h-full object-cover" />
             </div>
           )}
-
-          <div className="p-6 md:p-10">
+<div
+              className="p-6 md:p-10">
             <span
               className="inline-block py-1 px-3 rounded text-[0.7rem] font-semibold mb-4 uppercase tracking-wide text-white"
               style={{ background: "var(--primary)" }}
             >
-              Press Release
+              {release.notice_category || release.category || "Press Release"}
             </span>
             <h1 className="text-2xl md:text-3xl mb-3 leading-tight" style={{ color: "var(--primary-dark)" }}>
               {release.title}
@@ -234,7 +234,7 @@ function PressReleaseList({ onNavigate }: PressReleasesPageProps) {
                   )}
                   <div className="p-6">
                     <span className="inline-block py-1 px-3 rounded text-[0.7rem] font-semibold mb-3 uppercase tracking-wide text-white" style={{ background: "var(--primary)" }}>
-                      Press Release
+                      {item.notice_category || item.category || "Press Release"}
                     </span>
                     <h3 className="text-lg font-bold mb-2 leading-snug" style={{ color: "var(--primary-dark)" }}>
                       {item.title}
@@ -246,9 +246,6 @@ function PressReleaseList({ onNavigate }: PressReleasesPageProps) {
                       <span className="flex items-center gap-1.5 text-xs" style={{ color: "var(--neutral-400)" }}>
                         <Calendar className="w-3.5 h-3.5" />
                         {item.created_at ? formatDate(item.created_at) : ""}
-                      </span>
-                      <span className="inline-flex items-center gap-1 text-xs font-semibold" style={{ color: "var(--primary)" }}>
-                        Read Full Release <ExternalLink className="w-3.5 h-3.5" />
                       </span>
                     </div>
                   </div>

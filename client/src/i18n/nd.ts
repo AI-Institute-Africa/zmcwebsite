@@ -304,7 +304,7 @@ Sicela ubuze umbuzo oqondileyo kumbe uvakashele ikhasi lokuXhumana ukuthola usiz
       uploadTitle: "Thumela Isikhalazo Sakho",
       uploadText: "Landa ifomu lesikhalazo, uligcwalise, njalo ulayishe kanye lamaphepha ekusekelayo.",
       downloadForm: "Landa Ifomu leSikhalazo",
-      uploadDocuments: "Layisha Amaphepha",
+      uploadDocuments: "Layisha Amaphepha eSikhalazo",
     },
     appeals: {
       title: "Izicelo zeFOIA",

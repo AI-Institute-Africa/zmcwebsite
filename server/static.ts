@@ -3,7 +3,9 @@ import fs from "fs";
 import path from "path";
 
 export function serveStatic(app: Express) {
-  const distPath = path.resolve(__dirname, "public");
+  // In production (esbuild bundle), __dirname/require.main are unreliable.
+  // Use the known deployment path.
+  const distPath = "/home/zmc/app/public";
   if (!fs.existsSync(distPath)) {
     throw new Error(
       `Could not find the build directory: ${distPath}, make sure to build the client first`,

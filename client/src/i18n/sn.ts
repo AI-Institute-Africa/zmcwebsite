@@ -304,7 +304,7 @@ Ndapota bvunzai mubvunzo wakasiyana kana mushanyirei peji yeKutaurirana kuti muw
       uploadTitle: "Tumira Mhiko Yako",
       uploadText: "Dhaunirodha fomu remhiko, rizadze, urorodhe pamwe nemagwaro ekutsigira.",
       downloadForm: "Dhaunirodha Fomu reMhiko",
-      uploadDocuments: "Isa Magwaro",
+      uploadDocuments: "Isa Magwaro reMhiko",
     },
     appeals: {
       title: "Mikumbiro yeFOIA",

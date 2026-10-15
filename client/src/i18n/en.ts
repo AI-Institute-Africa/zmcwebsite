@@ -312,7 +312,7 @@ Please ask a specific question or visit our Contact page for more help.`,
       uploadTitle: "Submit Your Complaint",
       uploadText: "Download the complaint form, fill it in, and upload it along with any supporting documents.",
       downloadForm: "Download Complaint Form",
-      uploadDocuments: "Upload Documents",
+      uploadDocuments: "Upload Complaint Documents",
     },
     appeals: {
       title: "FOIA Appeals",

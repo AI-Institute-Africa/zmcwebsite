@@ -3,6 +3,7 @@ import { createPortal } from "react-dom";
 import { FilePen, CheckCircle, AlertTriangle, Newspaper, Radio, Tv, Globe, Loader2 } from "lucide-react";
 import { useLanguage } from "../i18n/LanguageContext";
 import PageHero from "../components/PageHero";
+import { portalApi } from "../lib/api";
 
 interface ComplaintsPageProps {
   onNavigate: (page: string) => void;
@@ -24,24 +25,6 @@ export default function ComplaintsPage({ onNavigate }: ComplaintsPageProps) {
 
   const MAX_FILE_SIZE = 10 * 1024 * 1024;
 
-  function filesToBase64(files: FileList | File[]): Promise<{ filename: string; type: string; content: string }[]> {
-    return Promise.all(
-      Array.from(files).map(
-        (file) =>
-          new Promise<{ filename: string; type: string; content: string }>((resolve, reject) => {
-            const reader = new FileReader();
-            reader.onload = () => {
-              const dataUrl = String(reader.result || "");
-              const base64 = dataUrl.split(",")[1] || "";
-              resolve({ filename: file.name, type: file.type || "application/octet-stream", content: base64 });
-            };
-            reader.onerror = () => reject(new Error(`Could not read file "${file.name}"`));
-            reader.readAsDataURL(file);
-          }),
-      ),
-    );
-  }
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (fileError) return;
@@ -54,16 +37,22 @@ export default function ComplaintsPage({ onNavigate }: ComplaintsPageProps) {
       const evidenceLink = evidenceLinkRef.current?.value || "";
       const files = fileInputRef.current?.files || [];
 
-      const attachments = files.length > 0 ? await filesToBase64(files) : [];
+      const formData = new FormData();
+      formData.append("full_name", name);
+      formData.append("email", email);
+      formData.append("phone", "");
+      formData.append("subject", "Public Complaint");
+      formData.append("message", description);
+      if (evidenceLink) {
+        formData.append("message", `${description}\n\nEvidence Link: ${evidenceLink}`);
+      }
+      if (files.length > 0) {
+        formData.append("attachment", files[0]);
+      }
 
-      const res = await fetch("/api/complaints", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, description, evidenceLink, attachments }),
-      });
-      const data = await res.json().catch(() => ({}));
-      if (!res.ok) {
-        throw new Error(data.message || "Failed to submit your complaint. Please try again.");
+      const res = await portalApi.submitComplaint(formData);
+      if (res?.status === "error") {
+        throw new Error(res.message || "Failed to submit your complaint. Please try again.");
       }
       setFormSubmitted(true);
       setTimeout(() => {

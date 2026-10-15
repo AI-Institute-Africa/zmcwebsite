@@ -148,13 +148,6 @@ export default function NewsSlider() {
                         className="absolute inset-0"
                         style={{ background: "linear-gradient(180deg, rgba(0,0,0,0.10) 0%, rgba(0,0,0,0.45) 100%)" }}
                       />
-                      <span
-                        className="relative z-10 absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-2 py-2 px-4 rounded-full text-xs md:text-sm font-bold text-white"
-                        style={{ background: "rgba(0,0,0,0.45)", border: "1px solid rgba(255,255,255,0.35)", backdropFilter: "blur(4px)" }}
-                      >
-                        <ExternalLink className="w-4 h-4" />
-                        Read Full Release
-                      </span>
                     </>
                   ) : (
                     <>
@@ -209,7 +202,7 @@ export default function NewsSlider() {
                       className="inline-flex items-center gap-1 text-[0.8rem] font-semibold"
                       style={{ color: "var(--primary)" }}
                     >
-                      Read Full Release <ExternalLink className="w-3.5 h-3.5" />
+                      {slide.badge} <ExternalLink className="w-3.5 h-3.5" />
                     </span>
                   </div>
                 </div>
@@ -268,4 +261,3 @@ export default function NewsSlider() {
     </section>
   );
 }
-
