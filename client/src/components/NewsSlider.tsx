@@ -34,6 +34,13 @@ export default function NewsSlider() {
 
   const slideImage = (item: any) => portalAssetUrl(item.image_path);
 
+  const slideCategory = (item: any) => {
+    const category = item.notice_category || item.category || item.news_category;
+    if (typeof category === "string" && category.trim()) return category.trim();
+    if (category && typeof category === "object") return category.name || category.title || category.label;
+    return t.news.announcement;
+  };
+
   const slideText = (item: any) => {
     const raw = item.excerpt || item.text || "";
     if (raw) return raw;
@@ -45,7 +52,7 @@ export default function NewsSlider() {
     ? news.map((item, index) => ({
         id: item.id,
         icon: index === 0 ? Megaphone : index === 1 ? AlertTriangle : Building2,
-        badge: t.news.announcement,
+        badge: slideCategory(item),
         title: item.title,
         text: slideText(item),
         date: item.created_at ? new Date(item.created_at).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) : new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }),
