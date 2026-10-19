@@ -14,7 +14,7 @@ import {
 } from "lucide-react";
 import zmcLogo from "@assets/zmc_logo-removebg-preview_1771225841865.png";
 import { useLanguage } from "../i18n/LanguageContext";
-import { PORTAL_LOGIN_URL } from "../lib/api";
+import { PORTAL_BASE_URL, PORTAL_LOGIN_URL } from "../lib/api";
 
 interface HeaderProps {
   currentPage: string;
@@ -177,7 +177,7 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
               {t.nav.foiaAppeals}
             </Link>
             <a
-              href={PORTAL_LOGIN_URL}
+              href={`${PORTAL_BASE_URL}/`}
               target="_blank"
               rel="noopener noreferrer"
               className="py-2.5 px-5 rounded-[10px] font-bold text-sm flex items-center gap-2 transition-all no-underline cursor-pointer hover:brightness-110"

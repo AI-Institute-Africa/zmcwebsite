@@ -2,14 +2,11 @@ import { useState, useEffect } from "react";
 import { Building2, FileText, CheckCircle, X, ExternalLink } from "lucide-react";
 import { useLanguage } from "../i18n/LanguageContext";
 import PageHero from "../components/PageHero";
-import { PORTAL_LOGIN_URL } from "../lib/api";
+import { openMediaHouseAuth } from "../lib/portalAuth";
 
 interface RegistrationPageProps {
   onNavigate: (page: string) => void;
 }
-
-// Portal URL for media registration
-const PORTAL_URL = PORTAL_LOGIN_URL;
 
 export default function RegistrationPage({ onNavigate }: RegistrationPageProps) {
   const { t } = useLanguage();
@@ -29,15 +26,6 @@ export default function RegistrationPage({ onNavigate }: RegistrationPageProps) 
       document.documentElement.style.overflow = "";
     };
   }, [showModal]);
-  
-  const openPortal = () => {
-    if (PORTAL_URL) {
-      window.open(PORTAL_URL, "_blank", "noopener,noreferrer");
-    } else {
-      // Fallback to modal if portal URL not yet set
-      setShowModal(true);
-    }
-  };
 
   const steps = [
     { number: 1, title: "Gather Documents", desc: "Prepare all required documents" },
@@ -171,7 +159,7 @@ export default function RegistrationPage({ onNavigate }: RegistrationPageProps) 
               <div
                 className="bg-white rounded-2xl p-6 text-center cursor-pointer transition-all hover:-translate-y-1"
                 style={{ boxShadow: "0 4px 15px rgba(0,0,0,0.08)" }}
-                onClick={openPortal}
+                onClick={() => openMediaHouseAuth("signup")}
               >
                 <div className="w-[70px] h-[70px] rounded-full mx-auto mb-4 flex items-center justify-center" style={{ background: "var(--primary-lighter)", color: "var(--primary)" }}>
                   <Building2 className="w-8 h-8" />
@@ -189,7 +177,7 @@ export default function RegistrationPage({ onNavigate }: RegistrationPageProps) 
               <div
                 className="bg-white rounded-2xl p-6 text-center cursor-pointer transition-all hover:-translate-y-1"
                 style={{ boxShadow: "0 4px 15px rgba(0,0,0,0.08)" }}
-                onClick={openPortal}
+                onClick={() => openMediaHouseAuth("login")}
               >
                 <div className="w-[70px] h-[70px] rounded-full mx-auto mb-4 flex items-center justify-center" style={{ background: "var(--accent-soft)", color: "var(--accent-dark)" }}>
                   <FileText className="w-8 h-8" />

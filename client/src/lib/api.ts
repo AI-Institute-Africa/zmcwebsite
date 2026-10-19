@@ -1,5 +1,7 @@
 export const PORTAL_BASE_URL = "https://portal.zmc.org.zw";
 export const PORTAL_LOGIN_URL = `${PORTAL_BASE_URL}/login`;
+export const PORTAL_CHOOSE_URL = `${PORTAL_BASE_URL}/choose-portal`;
+export const MEDIA_HOUSE_SIGNUP_URL = `${PORTAL_BASE_URL}/media-house-signup`;
 export const TRAINING_HUB_URL = "https://traininghub.zmc.org.zw";
 export const PRAZ_EGP_URL = "https://egp.praz.org.zw/";
 export const CONTACT_EMAIL = "info@zmc.org.zw";
