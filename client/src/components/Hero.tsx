@@ -1,19 +1,72 @@
+import { useEffect, useState } from "react";
 import { Newspaper, Building2, Scale, GraduationCap } from "lucide-react";
 import zmcBuilding from "@assets/486716629_1064504462365594_5654935487513045845_n_1766177505816.jpg";
 import { useLanguage } from "../i18n/LanguageContext";
-import { PORTAL_LOGIN_URL } from "../lib/api";
+import { PORTAL_LOGIN_URL, portalApi } from "../lib/api";
 
 interface HeroProps {
   onNavigate: (page: string) => void;
 }
 
+interface HomeStats {
+  accreditedJournalists: number;
+  registeredMediaHouses: number;
+  complaintsResolved: number;
+}
+
+const FALLBACK_STATS: HomeStats = {
+  accreditedJournalists: 500,
+  registeredMediaHouses: 150,
+  complaintsResolved: 1000,
+};
+
+function toCount(value: unknown): number | null {
+  const count = typeof value === "number" ? value : Number(value);
+  return Number.isFinite(count) ? count : null;
+}
+
+function formatCount(value: number | null | undefined): string {
+  return typeof value === "number" ? value.toLocaleString("en-US") : "—";
+}
+
 export default function Hero({ onNavigate }: HeroProps) {
   const { t } = useLanguage();
+  const [homeStats, setHomeStats] = useState<HomeStats | null>(null);
+
+  useEffect(() => {
+    let active = true;
+
+    portalApi
+      .getHomeStats()
+      .then((response: any) => {
+        const data = response?.data ?? response;
+        if (!active || !data) return;
+        setHomeStats({
+          accreditedJournalists: toCount(data.accredited_journalists) ?? FALLBACK_STATS.accreditedJournalists,
+          registeredMediaHouses: toCount(data.registered_media_houses) ?? FALLBACK_STATS.registeredMediaHouses,
+          complaintsResolved: toCount(data.complaints_resolved) ?? FALLBACK_STATS.complaintsResolved,
+        });
+      })
+      .catch(() => {
+        if (active) setHomeStats(FALLBACK_STATS);
+      });
+
+    return () => {
+      active = false;
+    };
+  }, []);
+
+  const quickStats = [
+    { number: formatCount(homeStats?.accreditedJournalists), label: t.hero.accreditedJournalists },
+    { number: formatCount(homeStats?.registeredMediaHouses), label: t.hero.registeredMedia },
+    { number: "20+", label: t.hero.yearsOfService },
+    { number: "100%", label: t.hero.commitment },
+  ];
 
   const stats = [
-    { icon: Newspaper, number: "500+", label: t.hero.accreditedJournalists },
-    { icon: Building2, number: "150+", label: t.hero.registeredMediaHouses },
-    { icon: Scale, number: "1000+", label: t.hero.complaintsResolved },
+    { icon: Newspaper, number: formatCount(homeStats?.accreditedJournalists), label: t.hero.accreditedJournalists },
+    { icon: Building2, number: formatCount(homeStats?.registeredMediaHouses), label: t.hero.registeredMediaHouses },
+    { icon: Scale, number: formatCount(homeStats?.complaintsResolved), label: t.hero.complaintsResolved },
     { icon: GraduationCap, number: "50+", label: t.hero.trainingPrograms },
   ];
 
@@ -80,12 +133,7 @@ export default function Hero({ onNavigate }: HeroProps) {
               >
                 <h3 className="text-white text-xl md:text-2xl mb-4 md:mb-6 text-center">{t.hero.quickStats}</h3>
                 <div className="grid grid-cols-2 gap-3 md:gap-4">
-                  {[
-                    { number: "500+", label: t.hero.accreditedJournalists },
-                    { number: "150+", label: t.hero.registeredMedia },
-                    { number: "20+", label: t.hero.yearsOfService },
-                    { number: "100%", label: t.hero.commitment },
-                  ].map((stat, index) => (
+                  {quickStats.map((stat, index) => (
                     <div
                       key={index}
                       className="p-3 md:p-5 rounded-xl text-center"

@@ -149,6 +149,12 @@ describe("portalApi directories", () => {
       `${BASE_URL}/registered-mediahouses?province=Harare`,
     );
   });
+
+  it("getHomeStats calls the public stats endpoint", async () => {
+    const fetchMock = mockFetch(jsonResponse({ data: {} }));
+    await portalApi.getHomeStats();
+    expect(fetchMock).toHaveBeenCalledWith(`${BASE_URL}/public-stats`);
+  });
 });
 
 describe("portalApi submissions", () => {

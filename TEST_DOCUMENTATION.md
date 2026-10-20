@@ -195,8 +195,8 @@ Composition: `<Hero/> + <NewsSlider/> + <ServicesCards/>`.
 | HOME-002 | Subtitle | `t.hero.subtitle` present |
 | HOME-003 | LEARN MORE CTA | `button-learn-more` → `onNavigate("about")` |
 | HOME-004 | GET ACCREDITED CTA | `button-get-accredited` href = `PORTAL_LOGIN_URL`, `target=_blank` |
-| HOME-005 | Quick stats panel | "Quick Stats" heading; 500+, 150+, 20+, 100% |
-| HOME-006 | Stats strip | `stat-box-0..3` present with numbers 500+, 150+, 1000+, 50+ |
+| HOME-005 | Quick stats panel | "Quick Stats" heading; accredited + registered counts from `portalApi.getHomeStats()`; 20+, 100% static |
+| HOME-006 | Stats strip | `stat-box-0..3`; accredited, registered media houses and complaints resolved from `getHomeStats()`; 50+ training static |
 
 > Note: number `500+` appears in both the quick-stats panel and the stats strip → use `getAllByText("500+")` in automation.
 
@@ -731,6 +731,7 @@ Composition: `<Hero/> + <NewsSlider/> + <ServicesCards/>`.
 | API-005 | getSingleRecord | `/{type}/{id}` with valid type |
 | API-006 | verifyAccreditation encoding | `encodeURIComponent(number)` |
 | API-007 | List query serialization | URLSearchParams for practitioner/house params |
+| API-008 | getHomeStats | `GET /public-stats` |
 | API-008 | submitContact object | JSON content type |
 | API-009 | submitContact FormData | No forced JSON content type |
 | API-010 | submitAppeal headers | `Accept: application/json` |

@@ -1,11 +1,14 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
-import { screen } from "@testing-library/react";
+import { screen, waitFor } from "@testing-library/react";
 import HomePage from "./HomePage";
 import { renderWithProviders } from "../test/render";
 
 vi.mock("../lib/api", () => ({
   portalApi: {
     getNews: vi.fn().mockResolvedValue({ data: [] }),
+    getHomeStats: vi.fn().mockResolvedValue({
+      data: { accredited_journalists: 1234, registered_media_houses: 56, complaints_resolved: 789 },
+    }),
   },
   portalAssetUrl: (path: string | null | undefined) => (path ? `https://portal.test/${path}` : ""),
   PORTAL_LOGIN_URL: "https://portal.test/login",
@@ -18,10 +21,14 @@ vi.mock("../lib/api", () => ({
 import { portalApi } from "../lib/api";
 
 const getNews = portalApi.getNews as unknown as ReturnType<typeof vi.fn>;
+const getHomeStats = portalApi.getHomeStats as unknown as ReturnType<typeof vi.fn>;
 
 describe("HomePage", () => {
   beforeEach(() => {
     getNews.mockReset().mockResolvedValue({ data: [] });
+    getHomeStats.mockReset().mockResolvedValue({
+      data: { accredited_journalists: 1234, registered_media_houses: 56, complaints_resolved: 789 },
+    });
   });
 
   it("composes the hero, news slider and services sections", async () => {
@@ -31,7 +38,8 @@ describe("HomePage", () => {
 
     renderWithProviders(<HomePage onNavigate={vi.fn()} />);
 
-    expect(screen.getByTestId("stat-box-0")).toHaveTextContent("500+");
+    expect(screen.getByTestId("stat-box-0")).toBeInTheDocument();
+    await waitFor(() => expect(screen.getByTestId("stat-box-0")).toHaveTextContent("1,234"));
     expect(await screen.findByText("Homepage Feature Story")).toBeInTheDocument();
     expect(screen.getByTestId("slide-click-0")).toBeInTheDocument();
     expect(screen.getByTestId("service-card-accreditation")).toBeInTheDocument();

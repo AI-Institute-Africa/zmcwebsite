@@ -108,6 +108,10 @@ export const portalApi = {
     const res = await fetch(`${BASE_URL}/registered-mediahouses?${query}`);
     return handleResponse(res);
   },
+  getHomeStats: async () => {
+    const res = await fetch(`${BASE_URL}/public-stats`);
+    return handleResponse(res);
+  },
 
   // Contact & Submissions
   submitContact: async (data: FormData | object) => {
