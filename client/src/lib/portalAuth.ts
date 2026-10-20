@@ -1,11 +1,21 @@
-import { MEDIA_HOUSE_SIGNUP_URL, PORTAL_CHOOSE_URL } from "./api";
+import { MEDIA_HOUSE_SIGNUP_URL, MEDIA_PRACTITIONER_SIGNUP_URL, PORTAL_CHOOSE_URL } from "./api";
 
-const PORTAL_STREAM = "mass_media";
-const POPUP_NAME = "zmc-media-house";
+type PortalStream = "mass_media" | "journalist";
+type AuthDestination = "login" | "signup";
+
+const SIGNUP_URLS: Record<PortalStream, string> = {
+  mass_media: MEDIA_HOUSE_SIGNUP_URL,
+  journalist: MEDIA_PRACTITIONER_SIGNUP_URL,
+};
+
 const POLL_INTERVAL_MS = 100;
 const POLL_TIMEOUT_MS = 5000;
 
-function submitPortalChoice(target: string): void {
+function popupName(stream: PortalStream): string {
+  return `zmc-${stream}-auth`;
+}
+
+function submitPortalChoice(target: string, stream: PortalStream): void {
   const form = document.createElement("form");
   form.method = "POST";
   form.action = PORTAL_CHOOSE_URL;
@@ -15,7 +25,7 @@ function submitPortalChoice(target: string): void {
   const field = document.createElement("input");
   field.type = "hidden";
   field.name = "portal";
-  field.value = PORTAL_STREAM;
+  field.value = stream;
   form.appendChild(field);
 
   document.body.appendChild(form);
@@ -32,19 +42,20 @@ function hasLeftAboutBlank(popup: Window): boolean {
   }
 }
 
-export function openMediaHouseAuth(destination: "login" | "signup"): void {
+function openPortalAuth(stream: PortalStream, destination: AuthDestination): void {
   if (destination === "login") {
-    submitPortalChoice("_blank");
+    submitPortalChoice("_blank", stream);
     return;
   }
 
-  const popup = window.open("about:blank", POPUP_NAME);
+  const target = popupName(stream);
+  const popup = window.open("about:blank", target);
   if (!popup) {
-    submitPortalChoice("_blank");
+    submitPortalChoice("_blank", stream);
     return;
   }
 
-  submitPortalChoice(POPUP_NAME);
+  submitPortalChoice(target, stream);
 
   let elapsed = 0;
   const timer = window.setInterval(() => {
@@ -57,7 +68,15 @@ export function openMediaHouseAuth(destination: "login" | "signup"): void {
 
     if (hasLeftAboutBlank(popup) || elapsed >= POLL_TIMEOUT_MS) {
       window.clearInterval(timer);
-      window.open(MEDIA_HOUSE_SIGNUP_URL, POPUP_NAME);
+      window.open(SIGNUP_URLS[stream], target);
     }
   }, POLL_INTERVAL_MS);
+}
+
+export function openMediaHouseAuth(destination: AuthDestination): void {
+  openPortalAuth("mass_media", destination);
+}
+
+export function openMediaPractitionerAuth(destination: AuthDestination): void {
+  openPortalAuth("journalist", destination);
 }

@@ -276,7 +276,7 @@ Composition: `<Hero/> + <NewsSlider/> + <ServicesCards/>`.
 
 ### M4.1 AccreditationPage (`/accreditation`) — info + fallback modal
 
-**Features:** legal basis; local/foreign requirements; 4-step process; two CTA cards that open the portal login in a new tab; a fallback application modal (reachable only if `PORTAL_LOGIN_URL` empty).
+**Features:** legal basis; local/foreign requirements; 4-step process; two CTA cards that open the media practitioner portal auth in a new tab; a fallback application modal (unreachable since the portal URL is always set).
 
 | ID | Case | Expected |
 |---|---|---|
@@ -284,8 +284,8 @@ Composition: `<Hero/> + <NewsSlider/> + <ServicesCards/>`.
 | ACC-002 | Requirements lists | Local (6) and Foreign (4) exact items |
 | ACC-003 | Process steps | 4 steps: Gather Documents, Complete Form, Submit & Pay, Get Accredited |
 | ACC-004 | NB fee note | `t.pages.accreditation.nbNote` present |
-| ACC-005 | Apply Now opens portal | Click `button-apply-accreditation` → `window.open(PORTAL_LOGIN_URL)` |
-| ACC-006 | Renew Now opens portal | Click `button-renew-accreditation` → `window.open` |
+| ACC-005 | Apply Now opens portal | `button-apply-accreditation` → `openMediaPractitionerAuth("signup")` (posts `portal=journalist` to `/choose-portal`, then opens `/media-practitioner-signup`) |
+| ACC-006 | Renew Now opens portal | `button-renew-accreditation` → `openMediaPractitionerAuth("login")` (posts `portal=journalist` to `/choose-portal`, lands on `/media-practitioner-login`) |
 | ACC-007 | Modal (conditional) | With `PORTAL_URL` empty, clicking a card opens modal "Accreditation Application" |
 | ACC-008 | Modal fields | `input-first-name`, `input-last-name`, `input-email`, `input-phone`, `select-category`, `input-employer` |
 | ACC-009 | Modal submit | Valid submit → "Application Submitted!" then auto-close after 3s |
