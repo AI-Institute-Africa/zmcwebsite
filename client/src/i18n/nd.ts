@@ -63,9 +63,9 @@ const nd: Translations = {
     appealsTitle: "Izicelo ze-FOIA",
     appealsDesc: "Cela ukuguqulelwa kwezinqumo zamaziko omphakathi awnqabile, alibazisa noma avimba ukufinyelela ulwazi.",
     fileAppeal: "Faka Isicelo",
-    downloadsTitle: "Okulandwayo",
-    downloadsDesc: "Thola amafomu, imigomo, umthetho, lamanye amaphepha abalulekileyo.",
-    browseDownloads: "Hlola Okulandwayo",
+    trainingTitle: "Ukuqeqeshwa",
+    trainingDesc: "Hlakulela amakhono akho ngezifundo lezinhlelo ze-ZMC Media Training Hub.",
+    exploreTraining: "Hlola Ukuqeqeshwa",
   },
   news: {
     title: "Izindaba Ezintsha Zakamuva",

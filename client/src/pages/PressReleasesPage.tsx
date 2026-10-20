@@ -101,8 +101,8 @@ function PressReleaseDetail({ id }: { id: string }) {
           style={{ boxShadow: "var(--shadow-lg)", border: "1px solid var(--neutral-100)" }}
         >
           {img && (
-            <div className="relative h-[240px] md:h-[360px] w-full" style={{ background: "#111" }}>
-              <img src={img} alt={release.image_alt_text || release.title} className="w-full h-full object-cover" />
+            <div className="relative h-[240px] md:h-[360px] w-full" style={{ background: "#0f172a" }}>
+              <img src={img} alt={release.image_alt_text || release.title} className="w-full h-full object-contain" />
             </div>
           )}
 <div
@@ -123,8 +123,7 @@ function PressReleaseDetail({ id }: { id: string }) {
             </div>
 
             <div
-              className="text-[0.975rem] leading-7 whitespace-pre-line"
-              style={{ color: "var(--neutral-700)" }}
+              className={`article-body${containsHtml ? "" : " whitespace-pre-line"}`}
               dangerouslySetInnerHTML={containsHtml ? { __html: release.body } : undefined}
             >
               {containsHtml ? undefined : release.body}
@@ -224,8 +223,8 @@ function PressReleaseList({ onNavigate }: PressReleasesPageProps) {
                   data-testid={`release-card-${item.id}`}
                 >
                   {img ? (
-                    <div className="h-44 w-full overflow-hidden" style={{ background: "#111" }}>
-                      <img src={img} alt={item.image_alt_text || item.title} className="w-full h-full object-cover transition-transform duration-500 hover:scale-105" />
+                    <div className="h-44 w-full overflow-hidden" style={{ background: "#0f172a" }}>
+                      <img src={img} alt={item.image_alt_text || item.title} className="w-full h-full object-contain" />
                     </div>
                   ) : (
                     <div className="h-44 w-full flex items-center justify-center" style={{ background: "linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%)" }}>
@@ -245,7 +244,7 @@ function PressReleaseList({ onNavigate }: PressReleasesPageProps) {
                     <div className="flex items-center justify-between">
                       <span className="flex items-center gap-1.5 text-xs" style={{ color: "var(--neutral-400)" }}>
                         <Calendar className="w-3.5 h-3.5" />
-                        {item.created_at ? formatDate(item.created_at) : ""}
+                        {item.published_at ? formatDate(item.published_at) : item.created_at ? formatDate(item.created_at) : ""}
                       </span>
                     </div>
                   </div>

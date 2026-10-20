@@ -55,7 +55,7 @@ export default function NewsSlider() {
         badge: slideCategory(item),
         title: item.title,
         text: slideText(item),
-        date: item.created_at ? new Date(item.created_at).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) : new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }),
+        date: (item.published_at || item.created_at) ? new Date(item.published_at || item.created_at).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) : new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }),
         imageUrl: slideImage(item),
         bgClass: index === 0 ? "linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%)" : 
                   index === 1 ? "linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)" : 
@@ -142,20 +142,18 @@ export default function NewsSlider() {
                 <div
                   className="min-h-[320px] md:min-h-[340px] flex items-center justify-center relative overflow-hidden cursor-pointer"
                   style={{
-                    background: slide.imageUrl
-                      ? `url("${slide.imageUrl}") center/cover no-repeat`
-                      : slide.bgClass,
+                    background: slide.imageUrl ? "#0f172a" : slide.bgClass,
                   }}
                   onClick={() => setLocation(`/press-releases/${slide.id}`)}
                   data-testid={`slide-click-${index}`}
                 >
                   {slide.imageUrl ? (
-                    <>
-                      <div
-                        className="absolute inset-0"
-                        style={{ background: "linear-gradient(180deg, rgba(0,0,0,0.10) 0%, rgba(0,0,0,0.45) 100%)" }}
-                      />
-                    </>
+                    <img
+                      src={slide.imageUrl}
+                      alt={slide.title}
+                      className="w-full h-auto max-h-[520px] object-contain"
+                      data-testid={`slide-image-${index}`}
+                    />
                   ) : (
                     <>
                       <div className="absolute inset-0 opacity-50">

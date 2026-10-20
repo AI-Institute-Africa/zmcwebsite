@@ -99,6 +99,102 @@ p {
   margin-bottom: 1rem;
 }
 
+/* Standard typography for all news article bodies */
+.article-body {
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.8;
+  color: var(--neutral-700);
+  overflow-wrap: break-word;
+}
+
+.article-body p,
+.article-body li,
+.article-body div,
+.article-body span {
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.8;
+}
+
+.article-body p {
+  color: var(--neutral-700);
+  margin-bottom: 1rem;
+}
+
+.article-body h2 {
+  font-family: var(--font-sans);
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--primary-dark);
+  margin: 1.75rem 0 0.75rem;
+}
+
+.article-body h3 {
+  font-family: var(--font-sans);
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--primary-dark);
+  margin: 1.5rem 0 0.5rem;
+}
+
+.article-body h4 {
+  font-family: var(--font-sans);
+  font-size: 1.05rem;
+  font-weight: 600;
+  line-height: 1.45;
+  color: var(--neutral-800);
+  margin: 1.25rem 0 0.5rem;
+}
+
+.article-body ul,
+.article-body ol {
+  margin: 0 0 1rem 1.5rem;
+  padding-left: 1rem;
+}
+
+.article-body ul {
+  list-style: disc;
+}
+
+.article-body ol {
+  list-style: decimal;
+}
+
+.article-body li {
+  margin-bottom: 0.35rem;
+}
+
+.article-body blockquote {
+  border-left: 3px solid var(--accent);
+  background: var(--primary-soft);
+  margin: 1.5rem 0;
+  padding: 0.75rem 1.25rem;
+  color: var(--neutral-700);
+  font-style: italic;
+}
+
+.article-body a {
+  color: var(--primary);
+  text-decoration: underline;
+}
+
+.article-body img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 1.5rem auto;
+  border-radius: 0.75rem;
+}
+
+.article-body hr {
+  border: 0;
+  border-top: 1px solid var(--neutral-200);
+  margin: 1.75rem 0;
+}
+
 a {
   color: var(--primary);
   text-decoration: none;

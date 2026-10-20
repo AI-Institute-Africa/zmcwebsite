@@ -3,7 +3,7 @@ import { screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import ServicesCards from "./ServicesCards";
 import en from "../i18n/en";
-import { PORTAL_LOGIN_URL } from "../lib/api";
+import { PORTAL_LOGIN_URL, TRAINING_HUB_URL } from "../lib/api";
 import { renderWithProviders } from "../test/render";
 
 describe("ServicesCards", () => {
@@ -13,9 +13,9 @@ describe("ServicesCards", () => {
     expect(screen.getByTestId("service-card-registration")).toBeInTheDocument();
     expect(screen.getByTestId("service-card-complaints")).toBeInTheDocument();
     expect(screen.getByTestId("service-card-appeals")).toBeInTheDocument();
-    expect(screen.getByTestId("service-card-downloads")).toBeInTheDocument();
+    expect(screen.getByTestId("service-card-training")).toBeInTheDocument();
     expect(screen.getByText(en.services.accreditationTitle)).toBeInTheDocument();
-    expect(screen.getByText(en.services.downloadsTitle)).toBeInTheDocument();
+    expect(screen.getByText(en.services.trainingTitle)).toBeInTheDocument();
   });
 
   describe("navigation", () => {
@@ -41,6 +41,15 @@ describe("ServicesCards", () => {
       renderWithProviders(<ServicesCards onNavigate={onNavigate} />);
       await user.click(screen.getByTestId("service-card-appeals"));
       expect(onNavigate).toHaveBeenCalledWith("appeals");
+    });
+
+    it("opens the training hub in a new tab", async () => {
+      const user = userEvent.setup();
+      const onNavigate = vi.fn();
+      renderWithProviders(<ServicesCards onNavigate={onNavigate} />);
+      await user.click(screen.getByTestId("service-card-training"));
+      expect(window.open).toHaveBeenCalledWith(TRAINING_HUB_URL, "_blank", "noopener,noreferrer");
+      expect(onNavigate).not.toHaveBeenCalled();
     });
 
     it("opens the portal in a new tab for accreditation and registration", async () => {

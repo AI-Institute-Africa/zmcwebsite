@@ -1,6 +1,6 @@
-import { FilePen, Building2, Scale, Download, ArrowRight, MessageSquareWarning } from "lucide-react";
+import { FilePen, Building2, Scale, GraduationCap, ArrowRight, MessageSquareWarning } from "lucide-react";
 import { useLanguage } from "../i18n/LanguageContext";
-import { PORTAL_LOGIN_URL } from "../lib/api";
+import { PORTAL_LOGIN_URL, TRAINING_HUB_URL } from "../lib/api";
 
 interface ServicesCardsProps {
   onNavigate: (page: string) => void;
@@ -15,7 +15,7 @@ const PORTAL_URL = PORTAL_LOGIN_URL;
     { icon: Building2, title: t.services.registrationTitle, description: t.services.registrationDesc, action: t.services.registerNow, page: "registration", external: PORTAL_URL },
     { icon: MessageSquareWarning, title: t.services.complaintsTitle, description: t.services.complaintsDesc, action: t.services.fileComplaint, page: "complaints", external: null },
     { icon: Scale, title: t.services.appealsTitle, description: t.services.appealsDesc, action: t.services.fileAppeal, page: "appeals", external: null },
-    { icon: Download, title: t.services.downloadsTitle, description: t.services.downloadsDesc, action: t.services.browseDownloads, page: "downloads", external: null },
+    { icon: GraduationCap, title: t.services.trainingTitle, description: t.services.trainingDesc, action: t.services.exploreTraining, page: "training", external: TRAINING_HUB_URL },
   ];
 
   return (

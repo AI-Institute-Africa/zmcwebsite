@@ -172,8 +172,8 @@ export default function NoticeDetailPage({ onNavigate, backTo }: NoticeDetailPag
                     <FileText className="w-5 h-5" /> Notice Details
                   </h4>
                   <div
-                    className="p-5 rounded-xl leading-relaxed"
-                    style={{ background: "var(--neutral-50)", border: "1px solid var(--neutral-100)", color: "var(--neutral-700)" }}
+                    className="article-body p-5 rounded-xl"
+                    style={{ background: "var(--neutral-50)", border: "1px solid var(--neutral-100)" }}
                     dangerouslySetInnerHTML={{ __html: notice.bodyHtml }}
                   />
                 </div>

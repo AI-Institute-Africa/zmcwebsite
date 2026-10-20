@@ -61,9 +61,9 @@ const en = {
     appealsTitle: "FOIA Appeals",
     appealsDesc: "Appeal decisions from public entities that denied, delayed, or restricted access to information.",
     fileAppeal: "File Appeal",
-    downloadsTitle: "Reports & Documents",
-    downloadsDesc: "Access forms, policies, legislation, and other important documents.",
-    browseDownloads: "Browse Reports & Documents",
+    trainingTitle: "Training",
+    trainingDesc: "Build your skills through the ZMC Media Training Hub's courses and programmes.",
+    exploreTraining: "Explore Training",
   },
   news: {
     title: "Latest News & Updates",

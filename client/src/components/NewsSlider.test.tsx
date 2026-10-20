@@ -86,11 +86,15 @@ describe("NewsSlider", () => {
     expect(screen.getByText("boom")).toBeInTheDocument();
   });
 
-  it("uses the portal asset URL for slide images", async () => {
+  it("uses the portal asset URL for slide images and fits them without cropping", async () => {
     getNews.mockResolvedValue({ data: [newsItem({ image_path: "news/pic.jpg" })] });
     renderWithProviders(<NewsSlider />);
     await waitFor(() => expect(screen.getByText("ZMC launches new programme")).toBeInTheDocument());
     expect(screen.getAllByText("Commission Update").length).toBeGreaterThan(0);
+    const image = screen.getByTestId("slide-image-0");
+    expect(image).toHaveAttribute("src", "https://portal.zmc.org.zw/storage/news/pic.jpg");
+    expect(image.className).toContain("object-contain");
+    expect(image.className).toContain("h-auto");
   });
 
   it("navigates to the release on slide click", async () => {

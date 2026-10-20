@@ -63,9 +63,9 @@ const sn: Translations = {
     appealsTitle: "Mikumbiro yeFOIA",
     appealsDesc: "Kukumbira kuchinjwa kwesarudzo yemitambo yeruzhinji yakuramba, yakunonoka kana yakakudza kuwana ruzivo.",
     fileAppeal: "Ronga Kukumbira",
-    downloadsTitle: "Zvekudhaunirodha",
-    downloadsDesc: "Wana mafomu, mitemo, mutemo, nemamwe magwaro akakosha.",
-    browseDownloads: "Tarisa Zvekudhaunirodha",
+    trainingTitle: "Kudzidziswa",
+    trainingDesc: "Vaka hunyanzvi hwako kuburikidza nezvidzidzo nemapurogiramu eZMC Media Training Hub.",
+    exploreTraining: "Tarisa Kudzidziswa",
   },
   news: {
     title: "Mashoko Matsva Ekupedzisira",
