@@ -20,6 +20,12 @@ export function portalAssetUrl(imagePath?: string | null) {
   return imagePath ? `${PORTAL_BASE_URL}/storage/${imagePath}` : null;
 }
 
+export function portalPublicUrl(path?: string | null) {
+  if (!path) return null;
+  if (/^https?:\/\//i.test(path)) return path;
+  return `${PORTAL_BASE_URL}${path.startsWith("/") ? path : `/${path}`}`;
+}
+
 const BASE_URL = `${PORTAL_BASE_URL}/api/v1`;
 
 async function handleResponse(response: Response) {
@@ -80,6 +86,10 @@ export const portalApi = {
   },
   getDownloads: async () => {
     const res = await fetch(`${BASE_URL}/downloads`);
+    return handleResponse(res);
+  },
+  getWebsitePeople: async (page: "commissioners" | "secretariat") => {
+    const res = await fetch(`${BASE_URL}/website-pages/${page}`);
     return handleResponse(res);
   },
   getSingleRecord: async (type: "news" | "notices" | "events" | "vacancies" | "tenders", id: string | number) => {

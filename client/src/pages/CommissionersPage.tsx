@@ -1,13 +1,38 @@
+import { useEffect, useState } from "react";
 import { Scale, User, GraduationCap } from "lucide-react";
 import { useLanguage } from "../i18n/LanguageContext";
 import PageHero from "../components/PageHero";
+import { portalApi, portalPublicUrl } from "../lib/api";
 
 interface CommissionersPageProps {
   onNavigate: (page: string) => void;
 }
 
+interface WebsitePerson {
+  id: number;
+  name: string;
+  position?: string | null;
+  department?: string | null;
+  biography?: string | null;
+  image_url?: string | null;
+}
+
 export default function CommissionersPage({ onNavigate }: CommissionersPageProps) {
   const { t } = useLanguage();
+  const [managedPeople, setManagedPeople] = useState<WebsitePerson[] | null>(null);
+
+  useEffect(() => {
+    async function fetchPeople() {
+      try {
+        const response = await portalApi.getWebsitePeople("commissioners");
+        const people = Array.isArray(response?.data) ? response.data : [];
+        setManagedPeople(people);
+      } catch (error) {
+        console.error("Unable to load managed commissioner profiles:", error);
+      }
+    }
+    fetchPeople();
+  }, []);
 
   interface Commissioner {
     title: string;
@@ -35,10 +60,11 @@ export default function CommissionersPage({ onNavigate }: CommissionersPageProps
     ] as Commissioner[],
   };
 
-  const PersonCard = ({ title, name, scope, size = "md", highlight = false }: {
+  const PersonCard = ({ title, name, scope, image, size = "md", highlight = false }: {
     title: string;
     name?: string;
     scope?: string;
+    image?: string | null;
     size?: "lg" | "md" | "sm";
     highlight?: boolean;
   }) => {
@@ -62,7 +88,11 @@ export default function CommissionersPage({ onNavigate }: CommissionersPageProps
               : "var(--neutral-100)",
           }}
         >
-          <User className={`${iconSize} ${highlight ? "text-white" : ""}`} style={highlight ? {} : { color: "var(--neutral-400)" }} />
+          {image ? (
+            <img src={portalPublicUrl(image) || ""} alt={name || title} className="w-full h-full object-cover object-top" />
+          ) : (
+            <User className={`${iconSize} ${highlight ? "text-white" : ""}`} style={highlight ? {} : { color: "var(--neutral-400)" }} />
+          )}
         </div>
         <h4
           className={`mb-1 ${size === "lg" ? "text-lg md:text-xl" : size === "md" ? "text-base md:text-lg" : "text-sm md:text-base"}`}
@@ -83,6 +113,11 @@ export default function CommissionersPage({ onNavigate }: CommissionersPageProps
       </div>
     );
   };
+
+  const chairperson = managedPeople?.find((person) => /^chairperson$/i.test(person.position || ""));
+  const deputyChairperson = managedPeople?.find((person) => /deputy chairperson/i.test(person.position || ""));
+  const commissioners = managedPeople?.filter((person) => person.id !== chairperson?.id && person.id !== deputyChairperson?.id);
+  const hasManagedPeople = Boolean(managedPeople?.length);
 
   return (
     <div className="animate-fadeIn pt-[140px] md:pt-[180px]">
@@ -114,44 +149,49 @@ export default function CommissionersPage({ onNavigate }: CommissionersPageProps
             <h2 className="text-xl md:text-2xl mb-4" style={{ color: "var(--primary-dark)" }}>Board of Commissioners</h2>
             <p className="max-w-[700px] mx-auto text-sm md:text-base" style={{ color: "var(--neutral-600)" }}>
               The Commission consists of a Chairperson, Deputy Chairperson, and seven other Commissioners
-              appointed in accordance with Section 237 of the Constitution. Member photos and names will be
-              published here once confirmed.
+              appointed in accordance with Section 237 of the Constitution.
             </p>
           </div>
 
           {/* Chairperson - Top Level */}
-          <div className="flex justify-center mb-8 md:mb-10">
-            <div className="max-w-[380px] w-full">
-              <PersonCard
-                title={board.chair.title}
-                scope={board.chair.scope}
-                size="lg"
-                highlight
-              />
+          {(!hasManagedPeople || chairperson) && (
+            <div className="flex justify-center mb-8 md:mb-10">
+              <div className="max-w-[380px] w-full">
+                {hasManagedPeople && chairperson ? (
+                  <PersonCard title={chairperson.position || board.chair.title} name={chairperson.name} scope={chairperson.biography || undefined} image={chairperson.image_url} size="lg" highlight />
+                ) : (
+                  <PersonCard title={board.chair.title} scope={board.chair.scope} size="lg" highlight />
+                )}
+              </div>
             </div>
-          </div>
+          )}
 
           {/* Connecting Line */}
-          <div className="hidden md:flex justify-center mb-6">
-            <div className="w-0.5 h-8" style={{ background: "var(--primary-light)" }} />
-          </div>
+          {(!hasManagedPeople || chairperson) && (
+            <div className="hidden md:flex justify-center mb-6">
+              <div className="w-0.5 h-8" style={{ background: "var(--primary-light)" }} />
+            </div>
+          )}
 
           {/* Deputy Chairperson */}
-          <div className="flex justify-center mb-8 md:mb-10">
-            <div className="max-w-[340px] w-full">
-              <PersonCard
-                title={board.deputyChair.title}
-                scope={board.deputyChair.scope}
-                size="md"
-                highlight
-              />
+          {(!hasManagedPeople || deputyChairperson) && (
+            <div className="flex justify-center mb-8 md:mb-10">
+              <div className="max-w-[340px] w-full">
+                {hasManagedPeople && deputyChairperson ? (
+                  <PersonCard title={deputyChairperson.position || board.deputyChair.title} name={deputyChairperson.name} scope={deputyChairperson.biography || undefined} image={deputyChairperson.image_url} size="md" highlight />
+                ) : (
+                  <PersonCard title={board.deputyChair.title} scope={board.deputyChair.scope} size="md" highlight />
+                )}
+              </div>
             </div>
-          </div>
+          )}
 
           {/* Connecting Line */}
-          <div className="hidden md:flex justify-center mb-6">
-            <div className="w-0.5 h-8" style={{ background: "var(--neutral-300)" }} />
-          </div>
+          {(!hasManagedPeople || deputyChairperson) && (
+            <div className="hidden md:flex justify-center mb-6">
+              <div className="w-0.5 h-8" style={{ background: "var(--neutral-300)" }} />
+            </div>
+          )}
 
           {/* Commissioners */}
           <div className="mb-12">
@@ -159,11 +199,13 @@ export default function CommissionersPage({ onNavigate }: CommissionersPageProps
               Commissioners
             </h3>
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-3 md:gap-4 max-w-[1100px] mx-auto">
-              {board.commissioners.map((person, index) => (
+              {(hasManagedPeople ? commissioners ?? [] : board.commissioners).map((person, index) => (
                 <PersonCard
-                  key={index}
-                  title={person.title}
-                  name={person.name}
+                  key={hasManagedPeople ? (person as WebsitePerson).id : index}
+                  title={hasManagedPeople ? (person as WebsitePerson).position || "Commissioner" : (person as Commissioner).title}
+                  name={hasManagedPeople ? (person as WebsitePerson).name : (person as Commissioner).name}
+                  scope={hasManagedPeople ? (person as WebsitePerson).biography || undefined : undefined}
+                  image={hasManagedPeople ? (person as WebsitePerson).image_url : undefined}
                   size="sm"
                 />
               ))}
