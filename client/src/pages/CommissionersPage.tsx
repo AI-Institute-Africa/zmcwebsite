@@ -15,6 +15,7 @@ interface WebsitePerson {
   department?: string | null;
   biography?: string | null;
   image_url?: string | null;
+  tier?: number | null;
 }
 
 export default function CommissionersPage({ onNavigate }: CommissionersPageProps) {
@@ -114,12 +115,11 @@ export default function CommissionersPage({ onNavigate }: CommissionersPageProps
   const explicitChairperson = managedPeople?.find((person) => /^chairperson$/i.test(person.position || ""));
   const deputyChairperson = managedPeople?.find((person) => /deputy chairperson/i.test(person.position || ""));
   const hasManagedPeople = Boolean(managedPeople?.length);
-  // Until the PR Officer fills in positions, the first published record is the
-  // chairperson by display order. Explicit Portal positions always take priority.
-  const chairperson = explicitChairperson ?? managedPeople?.[0];
-  const commissioners = managedPeople?.filter((person) => person.id !== chairperson?.id && person.id !== deputyChairperson?.id);
+  const chairperson = managedPeople?.find((person) => person.tier === 1) ?? explicitChairperson;
+  const deputy = managedPeople?.find((person) => person.tier === 2) ?? deputyChairperson;
+  const commissioners = managedPeople?.filter((person) => (person.tier ?? 3) === 3 && person.id !== chairperson?.id && person.id !== deputy?.id);
   const hasChairperson = !hasManagedPeople || Boolean(chairperson);
-  const hasDeputy = !hasManagedPeople || Boolean(deputyChairperson);
+  const hasDeputy = !hasManagedPeople || Boolean(deputy);
 
   return (
     <div className="animate-fadeIn pt-[140px] md:pt-[180px]">
@@ -155,8 +155,29 @@ export default function CommissionersPage({ onNavigate }: CommissionersPageProps
             </p>
           </div>
 
-          {/* Chairperson - Top Level */}
-          {hasChairperson && (
+          {hasManagedPeople && (
+            <>
+              <div className="mb-10">
+                <h3 className="text-center text-lg md:text-xl mb-6" style={{ color: "var(--primary-dark)" }}>Tier 1 — Chairperson</h3>
+                <div className="flex justify-center">
+                  <div className="max-w-[380px] w-full">
+                    {chairperson ? <PersonCard title={chairperson.position || "Chairperson"} name={chairperson.name} scope={chairperson.biography || undefined} image={chairperson.image_url} size="lg" highlight /> : <div className="rounded-2xl border border-dashed p-8 text-center text-sm" style={{ borderColor: "var(--primary-light)", color: "var(--neutral-500)" }}>Position currently vacant</div>}
+                  </div>
+                </div>
+              </div>
+              <div className="mb-10">
+                <h3 className="text-center text-lg md:text-xl mb-6" style={{ color: "var(--primary-dark)" }}>Tier 2 — Vice Chairperson</h3>
+                <div className="flex justify-center">
+                  <div className="max-w-[340px] w-full">
+                    {deputy ? <PersonCard title={deputy.position || "Vice Chairperson"} name={deputy.name} scope={deputy.biography || undefined} image={deputy.image_url} size="md" highlight /> : <div className="rounded-2xl border border-dashed p-8 text-center text-sm" style={{ borderColor: "var(--primary-light)", color: "var(--neutral-500)" }}>Position currently vacant</div>}
+                  </div>
+                </div>
+              </div>
+            </>
+          )}
+
+          {/* Chairperson - Top Level (static fallback) */}
+          {!hasManagedPeople && hasChairperson && (
             <div className="flex justify-center mb-8 md:mb-10">
               <div className="max-w-[380px] w-full">
                 {hasManagedPeople && chairperson ? (
@@ -169,14 +190,14 @@ export default function CommissionersPage({ onNavigate }: CommissionersPageProps
           )}
 
           {/* Connecting Line */}
-          {hasChairperson && (
+          {!hasManagedPeople && hasChairperson && (
             <div className="hidden md:flex justify-center mb-6">
               <div className="w-0.5 h-8" style={{ background: "var(--primary-light)" }} />
             </div>
           )}
 
           {/* Deputy Chairperson */}
-          {hasDeputy && (
+          {!hasManagedPeople && hasDeputy && (
             <div className="flex justify-center mb-8 md:mb-10">
               <div className="max-w-[340px] w-full">
                 {hasManagedPeople && deputyChairperson ? (
@@ -189,7 +210,7 @@ export default function CommissionersPage({ onNavigate }: CommissionersPageProps
           )}
 
           {/* Connecting Line */}
-          {hasDeputy && (
+          {!hasManagedPeople && hasDeputy && (
             <div className="hidden md:flex justify-center mb-6">
               <div className="w-0.5 h-8" style={{ background: "var(--neutral-300)" }} />
             </div>
@@ -198,7 +219,7 @@ export default function CommissionersPage({ onNavigate }: CommissionersPageProps
           {/* Commissioners */}
           <div className="mb-12">
             <h3 className="text-center text-lg md:text-xl mb-6" style={{ color: "var(--primary-dark)" }}>
-              Commissioners
+              {hasManagedPeople ? "Tier 3 — Commissioners" : "Commissioners"}
             </h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 md:gap-6 max-w-[1200px] mx-auto">
               {(hasManagedPeople ? commissioners ?? [] : board.commissioners).map((person, index) => (
