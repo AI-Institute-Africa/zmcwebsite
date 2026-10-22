@@ -200,18 +200,20 @@ export default function SecretariatPage({ onNavigate }: SecretariatPageProps) {
               <div className="mb-10">
                 <h3 className="text-center text-lg md:text-xl mb-6" style={{ color: "var(--primary-dark)" }}>Tier 1 — Executive Secretary</h3>
                 <div className="flex justify-center"><div className="max-w-[380px] w-full">
-                  {executiveSecretary ? <PersonCard title={executiveSecretary.position || "Executive Secretary"} subtitle={executiveSecretary.name} scope={executiveSecretary.biography || undefined} image={portalPublicUrl(executiveSecretary.image_url) || undefined} size="lg" highlight /> : <div className="rounded-2xl border border-dashed p-8 text-center text-sm" style={{ borderColor: "var(--primary-light)", color: "var(--neutral-500)" }}>Position currently vacant</div>}
+                  {executiveSecretary ? <PersonCard title={executiveSecretary.position || "Executive Secretary"} subtitle={executiveSecretary.name} scope={executiveSecretary.biography || undefined} image={portalPublicUrl(executiveSecretary.image_url) || undefined} size="lg" highlight /> : <PersonCard title={secretariatTeam.head.title} scope={secretariatTeam.head.scope} image={secretariatTeam.head.image} size="lg" highlight />}
                 </div></div>
               </div>
               <div className="mb-10">
                 <h3 className="text-center text-lg md:text-xl mb-6" style={{ color: "var(--primary-dark)" }}>Tier 2 — Principal Director</h3>
                 <div className="flex justify-center"><div className="max-w-[340px] w-full">
-                  {principalDirector ? <PersonCard title={principalDirector.position || "Principal Director"} subtitle={principalDirector.name} scope={principalDirector.biography || undefined} image={portalPublicUrl(principalDirector.image_url) || undefined} size="md" highlight /> : <div className="rounded-2xl border border-dashed p-8 text-center text-sm" style={{ borderColor: "var(--primary-light)", color: "var(--neutral-500)" }}>Position currently vacant</div>}
+                  {principalDirector ? <PersonCard title={principalDirector.position || "Principal Director"} subtitle={principalDirector.name} scope={principalDirector.biography || undefined} image={portalPublicUrl(principalDirector.image_url) || undefined} size="md" highlight /> : <PersonCard title={secretariatTeam.principalDirector.title} scope={secretariatTeam.principalDirector.scope} image={secretariatTeam.principalDirector.image} size="md" highlight />}
                 </div></div>
               </div>
               <div className="mb-12">
                 <h3 className="text-center text-lg md:text-xl mb-6" style={{ color: "var(--primary-dark)" }}>Tier 3 — Secretariat</h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 md:gap-6 max-w-[1200px] mx-auto">
+                  {secretariatTeam.managers.map((person, index) => <PersonCard key={`default-manager-${index}`} title={person.title} subtitle={person.department} scope={person.scope} image={person.image} size="md" />)}
+                  {secretariatTeam.staff.map((person, index) => <PersonCard key={`default-staff-${index}`} title={person.title} subtitle={person.department} scope={person.scope} image={person.image} size="sm" />)}
                   {(tierThreePeople ?? []).map((person) => <PersonCard key={person.id} title={person.position || "Secretariat"} subtitle={person.name} scope={person.biography || undefined} image={portalPublicUrl(person.image_url) || undefined} size="md" />)}
                 </div>
               </div>
