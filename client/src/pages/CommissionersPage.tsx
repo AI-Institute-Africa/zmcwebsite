@@ -73,7 +73,7 @@ export default function CommissionersPage({ onNavigate }: CommissionersPageProps
 
     return (
       <div
-        className={`bg-white rounded-2xl text-center transition-all hover:-translate-y-1 ${size === "lg" ? "p-6 md:p-8" : size === "md" ? "p-4 md:p-6" : "p-3 md:p-4"}`}
+        className={`bg-white rounded-2xl text-center transition-all hover:-translate-y-1 h-full min-h-[220px] ${size === "lg" ? "p-6 md:p-8 min-h-[360px]" : size === "md" ? "p-5 md:p-7 min-h-[290px]" : "p-5 md:p-6 min-h-[250px]"}`}
         style={{
           boxShadow: highlight ? "0 8px 32px rgba(46, 125, 86, 0.15)" : "var(--shadow-sm)",
           border: highlight ? "3px solid var(--primary)" : "1px solid var(--neutral-200)",
@@ -94,16 +94,13 @@ export default function CommissionersPage({ onNavigate }: CommissionersPageProps
             <User className={`${iconSize} ${highlight ? "text-white" : ""}`} style={highlight ? {} : { color: "var(--neutral-400)" }} />
           )}
         </div>
-        <h4
-          className={`mb-1 ${size === "lg" ? "text-lg md:text-xl" : size === "md" ? "text-base md:text-lg" : "text-sm md:text-base"}`}
-          style={{ color: "var(--primary-dark)" }}
-        >
+        <p className="inline-flex items-center justify-center rounded-full px-3 py-1 mb-2 text-[11px] md:text-xs font-bold uppercase tracking-wide" style={{ color: "var(--primary-dark)", background: "var(--primary-lighter)" }}>
           {title}
-        </h4>
+        </p>
         {name && (
-          <p className="text-xs md:text-sm font-semibold mb-1" style={{ color: "var(--primary)" }}>
+          <h4 className={`${size === "lg" ? "text-lg md:text-xl" : size === "md" ? "text-base md:text-lg" : "text-base md:text-lg"} font-semibold leading-snug break-words`} style={{ color: "var(--primary)" }}>
             {name}
-          </p>
+          </h4>
         )}
         {scope && (
           <p className="text-xs md:text-sm" style={{ color: "var(--neutral-600)" }}>
@@ -114,10 +111,15 @@ export default function CommissionersPage({ onNavigate }: CommissionersPageProps
     );
   };
 
-  const chairperson = managedPeople?.find((person) => /^chairperson$/i.test(person.position || ""));
+  const explicitChairperson = managedPeople?.find((person) => /^chairperson$/i.test(person.position || ""));
   const deputyChairperson = managedPeople?.find((person) => /deputy chairperson/i.test(person.position || ""));
-  const commissioners = managedPeople?.filter((person) => person.id !== chairperson?.id && person.id !== deputyChairperson?.id);
   const hasManagedPeople = Boolean(managedPeople?.length);
+  // Until the PR Officer fills in positions, the first published record is the
+  // chairperson by display order. Explicit Portal positions always take priority.
+  const chairperson = explicitChairperson ?? managedPeople?.[0];
+  const commissioners = managedPeople?.filter((person) => person.id !== chairperson?.id && person.id !== deputyChairperson?.id);
+  const hasChairperson = !hasManagedPeople || Boolean(chairperson);
+  const hasDeputy = !hasManagedPeople || Boolean(deputyChairperson);
 
   return (
     <div className="animate-fadeIn pt-[140px] md:pt-[180px]">
@@ -154,7 +156,7 @@ export default function CommissionersPage({ onNavigate }: CommissionersPageProps
           </div>
 
           {/* Chairperson - Top Level */}
-          {(!hasManagedPeople || chairperson) && (
+          {hasChairperson && (
             <div className="flex justify-center mb-8 md:mb-10">
               <div className="max-w-[380px] w-full">
                 {hasManagedPeople && chairperson ? (
@@ -167,14 +169,14 @@ export default function CommissionersPage({ onNavigate }: CommissionersPageProps
           )}
 
           {/* Connecting Line */}
-          {(!hasManagedPeople || chairperson) && (
+          {hasChairperson && (
             <div className="hidden md:flex justify-center mb-6">
               <div className="w-0.5 h-8" style={{ background: "var(--primary-light)" }} />
             </div>
           )}
 
           {/* Deputy Chairperson */}
-          {(!hasManagedPeople || deputyChairperson) && (
+          {hasDeputy && (
             <div className="flex justify-center mb-8 md:mb-10">
               <div className="max-w-[340px] w-full">
                 {hasManagedPeople && deputyChairperson ? (
@@ -187,7 +189,7 @@ export default function CommissionersPage({ onNavigate }: CommissionersPageProps
           )}
 
           {/* Connecting Line */}
-          {(!hasManagedPeople || deputyChairperson) && (
+          {hasDeputy && (
             <div className="hidden md:flex justify-center mb-6">
               <div className="w-0.5 h-8" style={{ background: "var(--neutral-300)" }} />
             </div>
@@ -198,7 +200,7 @@ export default function CommissionersPage({ onNavigate }: CommissionersPageProps
             <h3 className="text-center text-lg md:text-xl mb-6" style={{ color: "var(--primary-dark)" }}>
               Commissioners
             </h3>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-3 md:gap-4 max-w-[1100px] mx-auto">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 md:gap-6 max-w-[1200px] mx-auto">
               {(hasManagedPeople ? commissioners ?? [] : board.commissioners).map((person, index) => (
                 <PersonCard
                   key={hasManagedPeople ? (person as WebsitePerson).id : index}
@@ -206,7 +208,7 @@ export default function CommissionersPage({ onNavigate }: CommissionersPageProps
                   name={hasManagedPeople ? (person as WebsitePerson).name : (person as Commissioner).name}
                   scope={hasManagedPeople ? (person as WebsitePerson).biography || undefined : undefined}
                   image={hasManagedPeople ? (person as WebsitePerson).image_url : undefined}
-                  size="sm"
+                  size="md"
                 />
               ))}
             </div>
