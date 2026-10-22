@@ -26,7 +26,6 @@ interface WebsitePerson {
   department?: string | null;
   biography?: string | null;
   image_url?: string | null;
-  tier?: number | null;
 }
 
 export default function SecretariatPage({ onNavigate }: SecretariatPageProps) {
@@ -100,11 +99,18 @@ export default function SecretariatPage({ onNavigate }: SecretariatPageProps) {
     ] as TeamMember[],
   };
 
-  const executiveSecretary = managedPeople?.find((person) => person.tier === 1) ?? managedPeople?.find((person) => /executive secretary/i.test(person.position || ""));
-  const principalDirector = managedPeople?.find((person) => person.tier === 2) ?? managedPeople?.find((person) => /principal director/i.test(person.position || ""));
-  const tierThreePeople = managedPeople?.filter((person) => (person.tier ?? 3) === 3 && person.id !== executiveSecretary?.id && person.id !== principalDirector?.id);
-  const directors = managedPeople?.filter((person) => person.id !== executiveSecretary?.id && person.id !== principalDirector?.id && /director/i.test(person.position || ""));
-  const staff = managedPeople?.filter((person) => person.id !== executiveSecretary?.id && person.id !== principalDirector?.id && !/director/i.test(person.position || ""));
+  const executiveSecretary = managedPeople?.find((person) => /executive secretary/i.test(person.position || ""));
+  const principalDirector = managedPeople?.find((person) => /principal director/i.test(person.position || ""));
+  const directors = managedPeople?.filter((person) =>
+    person.id !== executiveSecretary?.id &&
+    person.id !== principalDirector?.id &&
+    /director/i.test(person.position || ""),
+  );
+  const staff = managedPeople?.filter((person) =>
+    person.id !== executiveSecretary?.id &&
+    person.id !== principalDirector?.id &&
+    !/director/i.test(person.position || ""),
+  );
   const hasManagedPeople = Boolean(managedPeople?.length);
 
   const personSubtitle = (person: WebsitePerson) =>
@@ -195,33 +201,8 @@ export default function SecretariatPage({ onNavigate }: SecretariatPageProps) {
             </p>
           </div>
 
-          {hasManagedPeople && (
-            <>
-              <div className="mb-10">
-                <h3 className="text-center text-lg md:text-xl mb-6" style={{ color: "var(--primary-dark)" }}>Tier 1 — Executive Secretary</h3>
-                <div className="flex justify-center"><div className="max-w-[380px] w-full">
-                  {executiveSecretary ? <PersonCard title={executiveSecretary.position || "Executive Secretary"} subtitle={executiveSecretary.name} scope={executiveSecretary.biography || undefined} image={portalPublicUrl(executiveSecretary.image_url) || undefined} size="lg" highlight /> : <PersonCard title={secretariatTeam.head.title} scope={secretariatTeam.head.scope} image={secretariatTeam.head.image} size="lg" highlight />}
-                </div></div>
-              </div>
-              <div className="mb-10">
-                <h3 className="text-center text-lg md:text-xl mb-6" style={{ color: "var(--primary-dark)" }}>Tier 2 — Principal Director</h3>
-                <div className="flex justify-center"><div className="max-w-[340px] w-full">
-                  {principalDirector ? <PersonCard title={principalDirector.position || "Principal Director"} subtitle={principalDirector.name} scope={principalDirector.biography || undefined} image={portalPublicUrl(principalDirector.image_url) || undefined} size="md" highlight /> : <PersonCard title={secretariatTeam.principalDirector.title} scope={secretariatTeam.principalDirector.scope} image={secretariatTeam.principalDirector.image} size="md" highlight />}
-                </div></div>
-              </div>
-              <div className="mb-12">
-                <h3 className="text-center text-lg md:text-xl mb-6" style={{ color: "var(--primary-dark)" }}>Tier 3 — Secretariat</h3>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 md:gap-6 max-w-[1200px] mx-auto">
-                  {secretariatTeam.managers.map((person, index) => <PersonCard key={`default-manager-${index}`} title={person.title} subtitle={person.department} scope={person.scope} image={person.image} size="md" />)}
-                  {secretariatTeam.staff.map((person, index) => <PersonCard key={`default-staff-${index}`} title={person.title} subtitle={person.department} scope={person.scope} image={person.image} size="sm" />)}
-                  {(tierThreePeople ?? []).map((person) => <PersonCard key={person.id} title={person.position || "Secretariat"} subtitle={person.name} scope={person.biography || undefined} image={portalPublicUrl(person.image_url) || undefined} size="md" />)}
-                </div>
-              </div>
-            </>
-          )}
-
-          {/* Executive Secretary - Top Level (static fallback) */}
-          {!hasManagedPeople && (!hasManagedPeople || executiveSecretary) && (
+          {/* Executive Secretary - Top Level */}
+          {(!hasManagedPeople || executiveSecretary) && (
             <div className="flex justify-center mb-8 md:mb-10">
               <div className="max-w-[380px] w-full">
               {hasManagedPeople && executiveSecretary ? (
@@ -247,14 +228,14 @@ export default function SecretariatPage({ onNavigate }: SecretariatPageProps) {
           )}
 
           {/* Connecting Line */}
-          {!hasManagedPeople && (!hasManagedPeople || executiveSecretary) && (
+          {(!hasManagedPeople || executiveSecretary) && (
             <div className="hidden md:flex justify-center mb-6">
               <div className="w-0.5 h-8" style={{ background: "var(--primary-light)" }} />
             </div>
           )}
 
           {/* Principal Director */}
-          {!hasManagedPeople && (!hasManagedPeople || principalDirector) && (
+          {(!hasManagedPeople || principalDirector) && (
             <div className="flex justify-center mb-8 md:mb-10">
               <div className="max-w-[340px] w-full">
               {hasManagedPeople && principalDirector ? (
@@ -280,14 +261,14 @@ export default function SecretariatPage({ onNavigate }: SecretariatPageProps) {
           )}
 
           {/* Connecting Line */}
-          {!hasManagedPeople && (!hasManagedPeople || principalDirector) && (
+          {(!hasManagedPeople || principalDirector) && (
             <div className="hidden md:flex justify-center mb-6">
               <div className="w-0.5 h-8" style={{ background: "var(--primary-light)" }} />
             </div>
           )}
 
           {/* Directors */}
-          {!hasManagedPeople && (!hasManagedPeople || directors?.length) && (
+          {(!hasManagedPeople || directors?.length) && (
             <div className="mb-10">
             <h3 className="text-center text-lg md:text-xl mb-6" style={{ color: "var(--primary-dark)" }}>
               Directors
@@ -308,14 +289,14 @@ export default function SecretariatPage({ onNavigate }: SecretariatPageProps) {
           )}
 
           {/* Connecting Line */}
-          {!hasManagedPeople && (!hasManagedPeople || directors?.length) && (
+          {(!hasManagedPeople || directors?.length) && (
             <div className="hidden md:flex justify-center mb-6">
               <div className="w-0.5 h-8" style={{ background: "var(--neutral-300)" }} />
             </div>
           )}
 
           {/* Managers / Staff */}
-          {!hasManagedPeople && (!hasManagedPeople || staff?.length) && (
+          {(!hasManagedPeople || staff?.length) && (
             <div className="mb-12">
             <h3 className="text-center text-lg md:text-xl mb-6" style={{ color: "var(--primary-dark)" }}>
               Managers & Senior Staff
