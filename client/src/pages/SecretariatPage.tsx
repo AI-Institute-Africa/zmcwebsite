@@ -202,7 +202,7 @@ export default function SecretariatPage({ onNavigate }: SecretariatPageProps) {
           </div>
 
           {/* Executive Secretary - Top Level */}
-          {(!hasManagedPeople || executiveSecretary) && (
+          {(
             <div className="flex justify-center mb-8 md:mb-10">
               <div className="max-w-[380px] w-full">
               {hasManagedPeople && executiveSecretary ? (
@@ -228,14 +228,14 @@ export default function SecretariatPage({ onNavigate }: SecretariatPageProps) {
           )}
 
           {/* Connecting Line */}
-          {(!hasManagedPeople || executiveSecretary) && (
+          {(
             <div className="hidden md:flex justify-center mb-6">
               <div className="w-0.5 h-8" style={{ background: "var(--primary-light)" }} />
             </div>
           )}
 
           {/* Principal Director */}
-          {(!hasManagedPeople || principalDirector) && (
+          {(
             <div className="flex justify-center mb-8 md:mb-10">
               <div className="max-w-[340px] w-full">
               {hasManagedPeople && principalDirector ? (
@@ -261,57 +261,59 @@ export default function SecretariatPage({ onNavigate }: SecretariatPageProps) {
           )}
 
           {/* Connecting Line */}
-          {(!hasManagedPeople || principalDirector) && (
+          {(
             <div className="hidden md:flex justify-center mb-6">
               <div className="w-0.5 h-8" style={{ background: "var(--primary-light)" }} />
             </div>
           )}
 
           {/* Directors */}
-          {(!hasManagedPeople || directors?.length) && (
+          {(
             <div className="mb-10">
             <h3 className="text-center text-lg md:text-xl mb-6" style={{ color: "var(--primary-dark)" }}>
               Directors
             </h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 max-w-[1100px] mx-auto">
-              {(hasManagedPeople ? directors ?? [] : secretariatTeam.managers).map((person, index) => (
+              {secretariatTeam.managers.map((person, index) => (
                 <PersonCard
-                  key={hasManagedPeople ? (person as WebsitePerson).id : index}
-                  title={hasManagedPeople ? (person as WebsitePerson).name : (person as TeamMember).title}
-                  subtitle={hasManagedPeople ? personSubtitle(person as WebsitePerson) : (person as TeamMember).department}
-                  scope={hasManagedPeople ? (person as WebsitePerson).biography || undefined : (person as TeamMember).scope}
-                  image={hasManagedPeople ? portalPublicUrl((person as WebsitePerson).image_url) || undefined : (person as TeamMember).image}
+                  key={`default-director-${index}`}
+                  title={person.title}
+                  subtitle={person.department}
+                  scope={person.scope}
+                  image={person.image}
                   size="md"
                 />
               ))}
+              {(directors ?? []).map((person) => <PersonCard key={person.id} title={person.name} subtitle={personSubtitle(person)} scope={person.biography || undefined} image={portalPublicUrl(person.image_url) || undefined} size="md" />)}
             </div>
             </div>
           )}
 
           {/* Connecting Line */}
-          {(!hasManagedPeople || directors?.length) && (
+          {(
             <div className="hidden md:flex justify-center mb-6">
               <div className="w-0.5 h-8" style={{ background: "var(--neutral-300)" }} />
             </div>
           )}
 
           {/* Managers / Staff */}
-          {(!hasManagedPeople || staff?.length) && (
+          {(
             <div className="mb-12">
             <h3 className="text-center text-lg md:text-xl mb-6" style={{ color: "var(--primary-dark)" }}>
               Managers & Senior Staff
             </h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-              {(hasManagedPeople ? staff ?? [] : secretariatTeam.staff).map((person, index) => (
+              {secretariatTeam.staff.map((person, index) => (
                 <PersonCard
-                  key={hasManagedPeople ? (person as WebsitePerson).id : index}
-                  title={hasManagedPeople ? (person as WebsitePerson).name : (person as TeamMember).title}
-                  subtitle={hasManagedPeople ? personSubtitle(person as WebsitePerson) : (person as TeamMember).department}
-                  scope={hasManagedPeople ? (person as WebsitePerson).biography || undefined : undefined}
-                  image={hasManagedPeople ? portalPublicUrl((person as WebsitePerson).image_url) || undefined : (person as TeamMember).image}
+                  key={`default-staff-${index}`}
+                  title={person.title}
+                  subtitle={person.department}
+                  scope={person.scope}
+                  image={person.image}
                   size="sm"
                 />
               ))}
+              {(staff ?? []).map((person) => <PersonCard key={person.id} title={person.name} subtitle={personSubtitle(person)} scope={person.biography || undefined} image={portalPublicUrl(person.image_url) || undefined} size="sm" />)}
             </div>
             </div>
           )}
