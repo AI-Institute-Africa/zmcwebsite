@@ -26,6 +26,7 @@ interface WebsitePerson {
   department?: string | null;
   biography?: string | null;
   image_url?: string | null;
+  tier?: number | null;
 }
 
 export default function SecretariatPage({ onNavigate }: SecretariatPageProps) {
@@ -104,12 +105,12 @@ export default function SecretariatPage({ onNavigate }: SecretariatPageProps) {
   const directors = managedPeople?.filter((person) =>
     person.id !== executiveSecretary?.id &&
     person.id !== principalDirector?.id &&
-    /director/i.test(person.position || ""),
+    (person.tier === 3 || (person.tier == null && /director/i.test(person.position || ""))),
   );
   const staff = managedPeople?.filter((person) =>
     person.id !== executiveSecretary?.id &&
     person.id !== principalDirector?.id &&
-    !/director/i.test(person.position || ""),
+    (person.tier === 4 || person.tier === 5 || (person.tier == null && !/director/i.test(person.position || ""))),
   );
   const hasManagedPeople = Boolean(managedPeople?.length);
 
