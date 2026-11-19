@@ -112,6 +112,7 @@
         @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; animation: none !important; transition-duration: .01ms !important; } }
     </style>
     @stack('styles')
+  @include('layouts.favicon')
 </head>
 <body>
     <main class="auth-shell">

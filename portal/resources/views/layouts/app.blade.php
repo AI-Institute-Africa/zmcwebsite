@@ -18,6 +18,7 @@
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+  @include('layouts.favicon')
 </head>
 <body>
     <div class="zmc-pilot-notice" role="status" id="zmcPilotNotice"><span>This portal is currently in a testing phase and is not yet accepting applications. In the meantime, please continue to submit applications at the Commission's head office or Bulawayo regional office. For further information or guidance, kindly contact the Commission.</span><button type="button" id="zmcNoticeClose" aria-label="Close" style="margin-left:auto;background:transparent;border:none;color:#facc15;cursor:pointer;font-size:22px;line-height:1;">&times;</button></div>

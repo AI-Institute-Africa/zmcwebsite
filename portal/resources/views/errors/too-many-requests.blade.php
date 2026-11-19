@@ -10,6 +10,7 @@
         h1 { margin: 0 0 10px; font-size: 24px; }
         p { margin: 0; color: #667085; }
     </style>
+  @include('layouts.favicon')
 </head>
 <body>
     <main>

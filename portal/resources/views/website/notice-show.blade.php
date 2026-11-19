@@ -17,6 +17,7 @@
     .notice-body { padding: 36px; font-size: 15px; line-height: 1.8; white-space: pre-wrap; }
     .notice-image { width: 100%; max-height: 400px; object-fit: cover; }
   </style>
+  @include('layouts.favicon')
 </head>
 <body>
   <div class="zmc-header">

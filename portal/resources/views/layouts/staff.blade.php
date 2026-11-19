@@ -106,6 +106,7 @@
     </style>
 
     @stack('head')
+  @include('layouts.favicon')
 </head>
 <body class="bg-light">
 

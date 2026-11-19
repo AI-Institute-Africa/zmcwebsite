@@ -56,6 +56,7 @@
             margin-bottom: 1rem;
         }
     </style>
+  @include('layouts.favicon')
 </head>
 <body>
 

@@ -507,6 +507,7 @@
       .form-steps-container{padding:20px;}
     }
   </style>
+  @include('layouts.favicon')
 </head>
 <body>
   <!-- SIDEBAR -->

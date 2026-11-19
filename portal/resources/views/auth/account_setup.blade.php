@@ -218,6 +218,7 @@
             .card { padding: 30px 20px; }
         }
     </style>
+  @include('layouts.favicon')
 </head>
 
 <body class="landing-page">

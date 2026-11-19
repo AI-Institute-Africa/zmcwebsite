@@ -9,6 +9,7 @@
         main{max-width:460px;margin:24px;padding:36px;border:1px solid #e5eaf1;border-radius:18px;background:#fff;text-align:center;box-shadow:0 16px 50px #17203312}
         h1{margin:0 0 8px;font-size:24px}p{margin:0;color:#667085}
     </style>
+  @include('layouts.favicon')
 </head>
 <body>
     <main>

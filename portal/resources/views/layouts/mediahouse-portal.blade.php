@@ -578,6 +578,7 @@
 <style>
   .zmc-pilot-notice{position:fixed;top:12px;left:50%;transform:translateX(-50%);z-index:3000;width:min(760px,calc(100% - 24px));display:flex;align-items:center;gap:10px;padding:10px 16px;border:1px solid rgba(250,204,21,.55);border-radius:12px;background:rgba(22,30,35,.96);box-shadow:0 8px 24px rgba(0,0,0,.22);color:#fff;font:600 12px/1.4 Inter,sans-serif}.zmc-pilot-notice i{color:#facc15;font-size:18px;flex:0 0 auto}.zmc-pilot-notice strong{color:#facc15}@media(max-width:600px){.zmc-pilot-notice{top:8px;padding:8px 11px;font-size:11px}}
 </style>
+  @include('layouts.favicon')
 </head>
 <body>
   <div class="zmc-pilot-notice" role="status" id="zmcPilotNotice"><i class="ri-information-line"></i><span>This portal is currently in a testing phase and is not yet accepting applications. In the meantime, please continue to submit applications at the Commission's head office or Bulawayo regional office. For further information or guidance, kindly contact the Commission.</span><button type="button" id="zmcNoticeClose" aria-label="Close" style="margin-left:auto;background:transparent;border:none;color:#facc15;cursor:pointer;font-size:22px;line-height:1;">&times;</button></div>

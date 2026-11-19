@@ -64,6 +64,7 @@
         .back-link:hover{color:var(--accent-dark);text-decoration:underline;}
         input[type="hidden"]{display:none;}
     </style>
+  @include('layouts.favicon')
 </head>
 <body>
 <div class="wrap">

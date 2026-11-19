@@ -2482,6 +2482,7 @@
     *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
   }
 </style>
+  @include('layouts.favicon')
 </head>
 
 @php

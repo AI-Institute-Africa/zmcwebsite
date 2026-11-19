@@ -90,6 +90,7 @@
         .info-box .label{font-size:11px;font-weight:900;text-transform:uppercase;color:var(--muted);margin-bottom:4px;}
         .info-box .value{font-size:14px;font-weight:700;color:var(--text);}
     </style>
+  @include('layouts.favicon')
 </head>
 <body>
 <div class="wrap">

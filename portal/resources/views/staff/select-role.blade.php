@@ -156,6 +156,7 @@
     }
     .back-link:hover{ text-decoration:underline; }
   </style>
+  @include('layouts.favicon')
 </head>
 <body class="landing-page">
 <div class="wrap">
