@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Search,
   Loader2,
@@ -99,6 +99,19 @@ export default function VerifyAccreditation() {
       setLoading(false);
     }
   };
+
+  // QR codes open this page with ?number=... and should verify immediately.
+  useEffect(() => {
+    const value = new URLSearchParams(window.location.search).get("number")?.trim();
+    if (!value) return;
+    setNumber(value);
+    setLoading(true);
+    setError(null);
+    portalApi.verifyAccreditation(value)
+      .then((res) => setResult(res as VerificationResult))
+      .catch((err: any) => setError(err?.message || "Verification failed. Please try again."))
+      .finally(() => setLoading(false));
+  }, []);
 
   const reset = () => {
     setNumber("");
