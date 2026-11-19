@@ -494,9 +494,83 @@
     }
   }
 
+
+  /* ---------------------------------------------------- contrast safety net */
+  // Last line of defence for text that stylesheets can't fix (inline !important, colours buried in custom
+  // properties, third-party blocks): find text under 3:1 against its real solid background and set a readable colour.
+  // Original inline colours are restored on theme change. Skips anything over images/gradients or unknown backgrounds.
+  var cgLin = function (v) { v /= 255; return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4); };
+  var cgLum = function (c) { return 0.2126 * cgLin(c.r) + 0.7152 * cgLin(c.g) + 0.0722 * cgLin(c.b); };
+  var cgParse = function (str) { var m = /rgba?\(([^)]+)\)/.exec(str || ''); if (!m) return null; var q = m[1].split(/[ ,\/]+/).map(Number); return { r: q[0], g: q[1], b: q[2], a: q.length > 3 ? q[3] : 1 }; };
+  function cgBg(el, memo) {
+    if (memo.has(el)) return memo.get(el);
+    var layers = [], result = null, e = el, solid = false;
+    for (; e && e.nodeType === 1; e = e.parentElement) {
+      if (memo.has(e) && e !== el) { result = memo.get(e); layers = null; break; }
+      var cs = getComputedStyle(e);
+      if (cs.backgroundImage && cs.backgroundImage !== 'none') { result = false; layers = null; break; }
+      var c = cgParse(cs.backgroundColor);
+      if (c && c.a > 0) { layers.push(c); if (c.a >= 1) { solid = true; break; } }
+    }
+    if (layers) {
+      if (!solid) { result = false; }
+      else {
+        var out = { r: 0, g: 0, b: 0 };
+        for (var i = layers.length - 1; i >= 0; i--) { var l = layers[i]; out = { r: l.r * l.a + out.r * (1 - l.a), g: l.g * l.a + out.g * (1 - l.a), b: l.b * l.a + out.b * (1 - l.a) }; }
+        result = out;
+      }
+    }
+    memo.set(el, result);
+    return result;
+  }
+  function contrastGuard(scope) {
+    var root = scope || $('.content'); if (!root) return 0;
+    var memo = new Map(), fixed = 0, n = 0;
+    var walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null);
+    var seen = new Set(), node;
+    while ((node = walker.nextNode())) {
+      var el = node.parentElement;
+      if (!el || seen.has(el) || !node.textContent.trim() || el.hasAttribute('data-zmc-nocg')) continue;
+      seen.add(el); if (++n > 5000) break;
+      if (/^(SCRIPT|STYLE|NOSCRIPT|TEXTAREA|OPTION)$/.test(el.tagName) || el.closest('[hidden], .vertical-menu')) continue;
+      var rect = el.getBoundingClientRect(); if (rect.width < 2 || rect.height < 2) continue;
+      var cs = getComputedStyle(el);
+      if (cs.visibility === 'hidden' || cs.display === 'none' || parseFloat(cs.opacity) < 0.3) continue;
+      var fg = cgParse(cs.color), bg = cgBg(el, memo); if (!fg || !bg) continue;
+      var a = fg.a, mix = { r: fg.r * a + bg.r * (1 - a), g: fg.g * a + bg.g * (1 - a), b: fg.b * a + bg.b * (1 - a) };
+      var L1 = cgLum(mix), L2 = cgLum(bg);
+      if ((Math.max(L1, L2) + 0.05) / (Math.min(L1, L2) + 0.05) >= 3) continue;
+      var white = 1.05 / (L2 + 0.05), black = (L2 + 0.05) / 0.05;
+      el.setAttribute('data-zmc-cg', el.style.getPropertyValue('color'));
+      if (el.style.getPropertyPriority('color')) el.setAttribute('data-zmc-cgi', '1');
+      el.style.setProperty('color', white >= black ? '#f8fafc' : '#0f172a', 'important');
+      fixed++;
+    }
+    return fixed;
+  }
+  function contrastReset() {
+    $$('[data-zmc-cg]').forEach(function (el) {
+      var o = el.getAttribute('data-zmc-cg');
+      if (o === '') { el.style.removeProperty('color'); }
+      else { el.style.setProperty('color', o, el.getAttribute('data-zmc-cgi') ? 'important' : ''); }
+      el.removeAttribute('data-zmc-cg'); el.removeAttribute('data-zmc-cgi');
+    });
+  }
+  window.zmcContrastGuard = function (scope) { contrastReset(); return contrastGuard(scope); };
+  function startContrastGuard() {
+    var idle = window.requestIdleCallback || function (f) { setTimeout(f, 60); };
+    var run = function () { idle(function () { contrastReset(); contrastGuard(); }); };
+    setTimeout(run, 900);                                         // after entry animations settle
+    if (window.MutationObserver) {
+      new MutationObserver(function () { setTimeout(run, 450); }).observe(document.documentElement, { attributes: true, attributeFilter: ['data-bs-theme'] });
+    }
+    document.addEventListener('shown.bs.modal', function (e) { contrastGuard(e.target); });
+    document.addEventListener('shown.bs.tab', function () { setTimeout(function () { contrastGuard(); }, 120); });
+  }
+
   /* ---------------------------------------------------------------- boot */
   function boot() {
-    convertFlashAlerts(); enhanceTables(); sidebar(); a11y(); forms();
+    convertFlashAlerts(); enhanceTables(); sidebar(); a11y(); forms(); startContrastGuard();
     // late-rendered tables (AJAX partials)
     if (window.MutationObserver) {
       var t; new MutationObserver(function () { clearTimeout(t); t = setTimeout(enhanceTables, 150); }).observe(document.body, { childList: true, subtree: true });
