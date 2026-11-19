@@ -1,0 +1,21 @@
+{
+    "$schema": "https://www.schemastore.org/package.json",
+    "private": true,
+    "type": "module",
+    "scripts": {
+        "build": "vite build",
+        "dev": "vite",
+        "start": "php artisan migrate --force && php artisan storage:link 2>/dev/null; php artisan config:cache && php artisan route:cache && php artisan view:cache && php artisan event:cache; PHP_CLI_SERVER_WORKERS=8 php -d opcache.enable_cli=1 -d opcache.memory_consumption=192 -d opcache.max_accelerated_files=20000 -d opcache.validate_timestamps=0 -d opcache.jit=tracing -d opcache.jit_buffer_size=64M -d memory_limit=512M -d upload_max_filesize=20M -d post_max_size=25M artisan serve --host=0.0.0.0 --port=5000"
+    },
+    "devDependencies": {
+        "@popperjs/core": "^2.11.6",
+        "@tailwindcss/vite": "^4.0.0",
+        "axios": "^1.11.0",
+        "bootstrap": "^5.2.3",
+        "concurrently": "^9.0.1",
+        "laravel-vite-plugin": "^2.0.0",
+        "sass": "^1.56.1",
+        "tailwindcss": "^4.0.0",
+        "vite": "^7.0.7"
+    }
+}

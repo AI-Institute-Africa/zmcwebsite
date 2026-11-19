@@ -1,0 +1,1026 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=Montserrat:wght@400;500;600;700;800;900&family=Open+Sans:wght@400;500;600;700&family=Source+Sans+3:wght@400;500;600;700&display=swap');
+
+/* ZMC Theme - Black, Yellow & White */
+
+:root {
+  /* Primary Colors - Black */
+  --zmc-primary: #1a1a1a;
+  --zmc-primary-dark: #111111;
+  --zmc-primary-darker: #000000;
+
+  /* Yellow for Accents */
+  --zmc-yellow: #f5c518;
+  --zmc-yellow-dark: #d4a910;
+  --zmc-yellow-darker: #b8920a;
+
+  /* Supporting Colors */
+  --zmc-black: #000000;
+  --zmc-white: #ffffff;
+  --zmc-gray-bg: #f5f5f5;
+  --zmc-gray-light: #fafafa;
+  --zmc-gray: #e0e0e0;
+  --zmc-gray-dark: #6b7280;
+  --zmc-gray-darker: #374151;
+  --zmc-text-dark: #1a1a1a;
+
+  /* Opacity Variations for Black */
+  --zmc-dark-90: rgba(0, 0, 0, 0.72);
+  --zmc-dark-75: rgba(0, 0, 0, 0.6);
+  --zmc-dark-50: rgba(0, 0, 0, 0.5);
+  --zmc-dark-30: rgba(0, 0, 0, 0.3);
+  --zmc-dark-15: rgba(0, 0, 0, 0.15);
+  --zmc-dark-08: rgba(0, 0, 0, 0.08);
+  --zmc-dark-05: rgba(0, 0, 0, 0.05);
+
+  /* Yellow opacity variations */
+  --zmc-yellow-15: rgba(245, 197, 24, 0.15);
+  --zmc-yellow-08: rgba(245, 197, 24, 0.08);
+
+  /* Typography System */
+  --font-primary: 'Inter', 'Montserrat', 'Source Sans Pro', 'Open Sans', Helvetica, -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-heading: 'Montserrat', 'Inter', Helvetica, sans-serif;
+  --font-body: 'Source Sans Pro', 'Open Sans', 'Inter', Helvetica, sans-serif;
+  --font-size-xs: 10px;
+  --font-size-sm: 11px;
+  --font-size-base: 13px;
+  --font-size-lg: 14.5px;
+  --font-size-xl: 17px;
+  --font-size-2xl: 22px;
+  --font-size-3xl: 28px;
+
+  --font-size-dense: 0.7rem;
+  --font-size-dense-sm: 0.65rem;
+
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-black: 900;
+
+  --line-height-tight: 1.2;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.75;
+
+  /* Accent Override */
+  --accent: var(--zmc-yellow);
+  --accent-dark: var(--zmc-yellow-dark);
+  --zmc-accent: var(--zmc-yellow);
+  --zmc-accent-dark: var(--zmc-yellow-dark);
+}
+
+[data-bs-theme="dark"] {
+  /* Override all ZMC CSS variables for dark mode */
+  --zmc-gray-bg: #0F172A;
+  --zmc-gray-light: #1E293B;
+  --zmc-gray: #334155;
+  --zmc-gray-dark: #94A3B8;
+  --zmc-gray-darker: #cbd5e1;
+  --zmc-text-dark: #F8FAFC;
+  --zmc-white: #1E293B;
+  --zmc-black: #ffffff;
+  
+  --zmc-dark-90: rgba(15, 23, 42, 0.90);
+  --zmc-dark-75: rgba(15, 23, 42, 0.75);
+  --zmc-dark-50: rgba(255, 255, 255, 0.2);
+  --zmc-dark-30: rgba(255, 255, 255, 0.15);
+  --zmc-dark-15: rgba(255, 255, 255, 0.1);
+  --zmc-dark-08: rgba(255, 255, 255, 0.05);
+  --zmc-dark-05: rgba(255, 255, 255, 0.02);
+}
+
+/* ===================================================
+   DARK MODE — Component-level overrides
+   All rules below use [data-bs-theme="dark"] selector
+   so they override the !important rules above.
+   =================================================== */
+
+[data-bs-theme="dark"] body:not(.landing-page) {
+  background: #0F172A !important;
+  color: #F8FAFC !important;
+}
+
+[data-bs-theme="dark"] .card {
+  border-color: #334155 !important;
+  background: #1E293B !important;
+  color: #F8FAFC !important;
+}
+
+[data-bs-theme="dark"] .card-header {
+  background: rgba(255,255,255,0.04) !important;
+  border-bottom-color: #334155 !important;
+  color: #F8FAFC !important;
+}
+
+[data-bs-theme="dark"] .card-body {
+  color: #F8FAFC !important;
+}
+
+[data-bs-theme="dark"] .form-control,
+[data-bs-theme="dark"] .form-select {
+  background: #0F172A !important;
+  border-color: #334155 !important;
+  color: #F8FAFC !important;
+}
+
+[data-bs-theme="dark"] .form-label {
+  color: #94A3B8 !important;
+}
+
+[data-bs-theme="dark"] .form-control::placeholder,
+[data-bs-theme="dark"] .form-select::placeholder {
+  color: #64748b !important;
+}
+
+[data-bs-theme="dark"] .table thead th {
+  background: #0F172A !important;
+  border-bottom-color: #334155 !important;
+  color: #94A3B8 !important;
+}
+
+[data-bs-theme="dark"] .table tbody td {
+  color: #F8FAFC !important;
+  border-bottom-color: #1E293B !important;
+}
+
+[data-bs-theme="dark"] .table {
+  border-color: #334155 !important;
+}
+
+[data-bs-theme="dark"] .text-muted {
+  color: #94A3B8 !important;
+}
+
+[data-bs-theme="dark"] .text-dark {
+  color: #F8FAFC !important;
+}
+
+[data-bs-theme="dark"] .text-success {
+  color: #d4a910 !important;
+}
+
+[data-bs-theme="dark"] .bg-light {
+  background-color: #1E293B !important;
+}
+
+[data-bs-theme="dark"] .badge.bg-light {
+  background: rgba(255,255,255,0.08) !important;
+  color: #F8FAFC !important;
+  border-color: rgba(255,255,255,0.15) !important;
+}
+
+[data-bs-theme="dark"] a {
+  color: #f5c518;
+}
+
+[data-bs-theme="dark"] a:hover {
+  color: #d4a910 !important;
+}
+
+[data-bs-theme="dark"] .dropdown-item {
+  color: #F8FAFC !important;
+}
+
+[data-bs-theme="dark"] .dropdown-item:hover {
+  background-color: #334155 !important;
+  color: #F8FAFC !important;
+}
+
+[data-bs-theme="dark"] .list-group-item {
+  color: #F8FAFC !important;
+  background: #1E293B !important;
+  border-color: #334155 !important;
+}
+
+[data-bs-theme="dark"] .nav-tabs .nav-link {
+  color: #94A3B8 !important;
+}
+
+[data-bs-theme="dark"] .nav-tabs .nav-link.active {
+  background: rgba(255,255,255,0.05) !important;
+  color: #F8FAFC !important;
+  border-bottom: 3px solid #f5c518 !important;
+}
+
+[data-bs-theme="dark"] .pagination .page-link {
+  color: #F8FAFC !important;
+  border-color: #334155 !important;
+  background: #1E293B !important;
+}
+
+[data-bs-theme="dark"] .progress {
+  background-color: #334155 !important;
+}
+
+[data-bs-theme="dark"] .alert-info {
+  background-color: rgba(255,255,255,0.05) !important;
+  border-color: #334155 !important;
+  color: #F8FAFC !important;
+}
+
+[data-bs-theme="dark"] .alert-warning {
+  background-color: rgba(245, 197, 24, 0.08) !important;
+  border-color: rgba(245, 197, 24, 0.25) !important;
+  color: #fbbf24 !important;
+}
+
+[data-bs-theme="dark"] .modal-header {
+  background: rgba(255,255,255,0.04) !important;
+  border-bottom-color: #334155 !important;
+  color: #F8FAFC !important;
+}
+
+[data-bs-theme="dark"] .zmc-modal-title {
+  color: #F8FAFC !important;
+}
+
+[data-bs-theme="dark"] .zmc-card {
+  border-color: #334155 !important;
+  background: #1E293B !important;
+  color: #F8FAFC !important;
+}
+
+[data-bs-theme="dark"] .zmc-card .small,
+[data-bs-theme="dark"] .zmc-card h4,
+[data-bs-theme="dark"] .zmc-card h5,
+[data-bs-theme="dark"] .zmc-card h6,
+[data-bs-theme="dark"] .zmc-card .text-muted.fw-bold {
+  color: #F8FAFC !important;
+}
+
+[data-bs-theme="dark"] .dashboard-card .h3,
+[data-bs-theme="dark"] .dashboard-card .h4,
+[data-bs-theme="dark"] .dashboard-card .h5,
+[data-bs-theme="dark"] .dashboard-card .fw-black,
+[data-bs-theme="dark"] .dashboard-card .fw-bold,
+[data-bs-theme="dark"] .zmc-card .h3,
+[data-bs-theme="dark"] .zmc-card .h4,
+[data-bs-theme="dark"] .zmc-card .h5,
+[data-bs-theme="dark"] .zmc-card .fw-black,
+[data-bs-theme="dark"] .zmc-card .fw-bold {
+  color: #F8FAFC !important;
+}
+
+[data-bs-theme="dark"] .step {
+  border-color: #334155 !important;
+  background: rgba(255,255,255,0.03) !important;
+}
+
+[data-bs-theme="dark"] .step .step-label,
+[data-bs-theme="dark"] .step .step-number {
+  color: #94A3B8 !important;
+}
+
+[data-bs-theme="dark"] .app-type-card {
+  border-color: #334155 !important;
+  background: #1E293B !important;
+}
+
+[data-bs-theme="dark"] .app-type-card h4 {
+  color: #F8FAFC !important;
+}
+
+[data-bs-theme="dark"] .zmc-pill {
+  border-color: #334155 !important;
+  color: #F8FAFC !important;
+}
+
+[data-bs-theme="dark"] .zmc-card a.small,
+[data-bs-theme="dark"] .zmc-card a.fw-bold,
+[data-bs-theme="dark"] .zmc-card a.text-decoration-none {
+  color: #f5c518 !important;
+}
+
+[data-bs-theme="dark"] .current-step-info {
+  border-color: rgba(255,255,255,0.2) !important;
+  background: rgba(255,255,255,0.03) !important;
+  color: #F8FAFC !important;
+}
+
+[data-bs-theme="dark"] .badge-pending {
+  background: rgba(245, 197, 24, 0.12) !important;
+  color: #fbbf24 !important;
+}
+
+[data-bs-theme="dark"] h1, [data-bs-theme="dark"] h2, [data-bs-theme="dark"] h3,
+[data-bs-theme="dark"] h4, [data-bs-theme="dark"] h5, [data-bs-theme="dark"] h6 {
+  color: #F8FAFC !important;
+}
+
+/* Global Body */
+body:not(.landing-page) {
+  background: var(--zmc-gray-bg) !important;
+  color: var(--zmc-text-dark) !important;
+  font-family: var(--font-body) !important;
+  font-size: var(--font-size-base) !important;
+  line-height: var(--line-height-normal) !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Headings use Montserrat */
+h1, h2, h3, h4, h5, h6,
+.card-title, .content-header h1 {
+  font-family: var(--font-heading) !important;
+  text-transform: none !important;
+  letter-spacing: normal !important;
+}
+
+/* Base font sizes */
+p, div, span, td, th, li {
+  font-size: var(--font-size-base);
+}
+
+/* Dashboard text normalization — remove all-caps from dashboard labels */
+.content-wrapper h1, .content-wrapper h2, .content-wrapper h3,
+.card-header .card-title,
+.info-box-text,
+.small-box h3, .small-box p,
+.content-header .breadcrumb-item,
+.nav-tabs .nav-link,
+.table th {
+  text-transform: none !important;
+  letter-spacing: normal !important;
+}
+
+/* Buttons - Black Primary with Yellow Accents */
+.btn-primary,
+a.btn-primary {
+  background: var(--zmc-primary) !important;
+  border-color: var(--zmc-yellow) !important;
+  color: var(--zmc-yellow) !important;
+  font-weight: 700 !important;
+  font-size: var(--font-size-base) !important;
+  padding: 8px 16px !important;
+}
+
+.btn-primary:hover {
+  background: var(--zmc-yellow) !important;
+  border-color: var(--zmc-primary) !important;
+  color: var(--zmc-primary) !important;
+  box-shadow: 0 4px 12px rgba(245, 197, 24, 0.35) !important;
+}
+
+.btn-success,
+a.btn-success {
+  background: var(--zmc-primary) !important;
+  border-color: var(--zmc-yellow) !important;
+  color: var(--zmc-yellow) !important;
+  font-weight: 700 !important;
+  font-size: var(--font-size-base) !important;
+}
+
+.btn-success:hover {
+  background: var(--zmc-yellow) !important;
+  border-color: var(--zmc-primary) !important;
+  color: var(--zmc-primary) !important;
+}
+
+.btn-outline-primary {
+  border-color: var(--zmc-primary) !important;
+  color: var(--zmc-primary) !important;
+  background: var(--zmc-white) !important;
+  font-size: var(--font-size-base) !important;
+}
+
+.btn-outline-primary:hover {
+  background: var(--zmc-yellow) !important;
+  border-color: var(--zmc-yellow) !important;
+  color: var(--zmc-primary) !important;
+}
+
+.btn-secondary {
+  background: var(--zmc-white) !important;
+  border-color: var(--zmc-gray) !important;
+  color: var(--zmc-text-dark) !important;
+  font-size: var(--font-size-base) !important;
+}
+
+.btn-secondary:hover {
+  background: var(--zmc-gray-light) !important;
+  border-color: var(--zmc-yellow) !important;
+  color: var(--zmc-text-dark) !important;
+}
+
+.btn-white,
+.btn-light,
+a.btn-white,
+a.btn-light {
+  background: #ffffff !important;
+  border-color: #e2e8f0 !important;
+  color: #1e293b !important;
+  font-weight: 600 !important;
+}
+
+.btn-dark,
+a.btn-dark {
+  background: var(--zmc-primary-dark) !important;
+  border-color: var(--zmc-primary-dark) !important;
+  color: #ffffff !important;
+  font-size: var(--font-size-base) !important;
+}
+
+.btn-dark:hover {
+  background: var(--zmc-primary-darker) !important;
+  border-color: var(--zmc-yellow) !important;
+}
+
+.btn-outline-dark,
+a.btn-outline-dark {
+  color: #000000 !important;
+  border-color: #000000 !important;
+}
+
+.btn-outline-dark:hover,
+a.btn-outline-dark:hover {
+  background: #000000 !important;
+  color: var(--zmc-yellow) !important;
+}
+
+.btn-sm {
+  font-size: var(--font-size-sm) !important;
+  padding: 6px 12px !important;
+}
+
+/* Badges - Yellow Primary */
+.badge {
+  font-size: var(--font-size-xs) !important;
+  padding: 4px 10px !important;
+}
+
+.badge.bg-success,
+.badge-success {
+  background: var(--zmc-yellow) !important;
+  color: var(--zmc-primary) !important;
+}
+
+.badge.bg-success-subtle {
+  background: var(--zmc-yellow-15) !important;
+  color: #78350f !important;
+  border: 1px solid rgba(245, 197, 24, 0.3) !important;
+}
+
+.badge.bg-primary {
+  background: var(--zmc-primary) !important;
+  color: var(--zmc-yellow) !important;
+}
+
+.badge.bg-light {
+  background: var(--zmc-dark-05) !important;
+  color: var(--zmc-text-dark) !important;
+  border: 1px solid var(--zmc-dark-15) !important;
+}
+
+.badge.bg-warning {
+  background: var(--zmc-yellow) !important;
+  color: var(--zmc-primary) !important;
+}
+
+/* Text Colors */
+.text-success {
+  color: var(--zmc-yellow-dark) !important;
+}
+
+.text-primary {
+  color: var(--zmc-primary) !important;
+}
+
+.text-muted {
+  color: var(--zmc-gray-dark) !important;
+  font-size: var(--font-size-sm) !important;
+}
+
+.text-dark {
+  color: var(--zmc-text-dark) !important;
+}
+
+/* Backgrounds */
+.bg-success {
+  background-color: var(--zmc-yellow) !important;
+  color: var(--zmc-primary) !important;
+}
+
+.bg-success-subtle {
+  background-color: var(--zmc-yellow-15) !important;
+  color: #78350f !important;
+}
+
+.bg-primary {
+  background-color: var(--zmc-primary) !important;
+  color: var(--zmc-yellow) !important;
+}
+
+.bg-light {
+  background-color: var(--zmc-gray-bg) !important;
+}
+
+/* Borders */
+.border-success {
+  border-color: var(--zmc-yellow) !important;
+}
+
+.border-success-subtle {
+  border-color: rgba(245, 197, 24, 0.3) !important;
+}
+
+.border-primary {
+  border-color: var(--zmc-primary) !important;
+}
+
+/* Alerts */
+.alert {
+  font-size: var(--font-size-base) !important;
+}
+
+.alert-success {
+  background-color: var(--zmc-yellow-08) !important;
+  border-color: rgba(245, 197, 24, 0.4) !important;
+  color: #78350f !important;
+  border-left: 4px solid var(--zmc-yellow-dark) !important;
+}
+
+.alert-info {
+  background-color: var(--zmc-dark-05) !important;
+  border-color: var(--zmc-dark-15) !important;
+  color: var(--zmc-text-dark) !important;
+}
+
+.alert-warning {
+  background-color: rgba(245, 197, 24, 0.12) !important;
+  border-color: rgba(245, 197, 24, 0.35) !important;
+  color: #92400e !important;
+}
+
+/* Links */
+a {
+  color: var(--zmc-primary);
+  font-size: var(--font-size-base) !important;
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--zmc-yellow-dark) !important;
+}
+
+/* Forms */
+.form-control,
+.form-select {
+  border-color: var(--zmc-gray) !important;
+  color: var(--zmc-text-dark) !important;
+  font-size: var(--font-size-base) !important;
+  padding: 8px 10px !important;
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: var(--zmc-yellow) !important;
+  box-shadow: 0 0 0 0.2rem rgba(245, 197, 24, 0.2) !important;
+}
+
+.form-check-input:checked {
+  background-color: var(--zmc-primary) !important;
+  border-color: var(--zmc-primary) !important;
+}
+
+.form-label {
+  font-size: var(--font-size-sm) !important;
+  font-weight: 600 !important;
+  color: var(--zmc-text-dark) !important;
+}
+
+/* Nav Tabs - Yellow Active */
+.nav-tabs .nav-link {
+  color: var(--zmc-gray-dark) !important;
+  font-size: var(--font-size-base) !important;
+}
+
+.nav-tabs .nav-link.active {
+  border-bottom: 3px solid var(--zmc-yellow) !important;
+  color: var(--zmc-text-dark) !important;
+  background: var(--zmc-yellow-08) !important;
+}
+
+.nav-tabs .nav-link:hover:not(.active) {
+  border-bottom: 3px solid rgba(245, 197, 24, 0.5) !important;
+  color: var(--zmc-text-dark) !important;
+}
+
+.nav-tabs {
+  border-bottom: 2px solid var(--zmc-dark-08) !important;
+}
+
+/* Pagination - Yellow Active */
+.pagination .page-link {
+  color: var(--zmc-text-dark) !important;
+  border-color: var(--zmc-gray) !important;
+  font-size: var(--font-size-base) !important;
+}
+
+.pagination .page-link:hover {
+  background-color: var(--zmc-yellow-15) !important;
+  border-color: var(--zmc-yellow) !important;
+  color: var(--zmc-primary) !important;
+}
+
+.pagination .page-item.active .page-link {
+  background-color: var(--zmc-yellow) !important;
+  border-color: var(--zmc-yellow) !important;
+  color: var(--zmc-primary) !important;
+}
+
+/* Progress Bars */
+.progress-bar {
+  background-color: var(--zmc-yellow) !important;
+}
+
+.progress {
+  background-color: var(--zmc-dark-08) !important;
+}
+
+/* Spinners */
+.spinner-border {
+  color: var(--zmc-yellow) !important;
+}
+
+/* Cards */
+.card {
+  border-color: var(--zmc-gray) !important;
+  background: var(--zmc-white) !important;
+}
+
+.card.zmc-stat-card {
+  border-color: transparent !important;
+}
+.card.zmc-stat-card.zmc-bg-dark { background: #1a1a1a !important; color: #f5c518 !important; }
+.card.zmc-stat-card.zmc-bg-yellow { background: #f5c518 !important; color: #1a1a1a !important; }
+.card.zmc-stat-card.zmc-bg-sky { background: #0ea5e9 !important; color: #fff !important; }
+.card.zmc-stat-card.zmc-bg-blue { background: #2563eb !important; color: #fff !important; }
+.card.zmc-stat-card.zmc-bg-amber { background: #d97706 !important; color: #fff !important; }
+.card.zmc-stat-card.zmc-bg-gray { background: #6b7280 !important; color: #fff !important; }
+.card.zmc-stat-card.zmc-bg-slate { background: #374151 !important; color: #f5c518 !important; }
+.card.zmc-stat-card.zmc-bg-red { background: #dc2626 !important; color: #fff !important; }
+.card.zmc-stat-card .card-body {
+  color: inherit !important;
+}
+
+.card-header {
+  background: var(--zmc-dark-05) !important;
+  border-bottom: 2px solid var(--zmc-dark-15) !important;
+  color: var(--zmc-text-dark) !important;
+  font-size: var(--font-size-base) !important;
+  font-weight: 600 !important;
+}
+
+.card-body {
+  font-size: var(--font-size-base) !important;
+}
+
+/* Sidebar Active States - Yellow */
+.sidebar-menu li a {
+  font-size: var(--font-size-sm) !important;
+  color: rgba(255, 255, 255, 0.86) !important;
+}
+
+.sidebar-menu li.active a,
+.sidebar-menu li a:hover {
+  background: rgba(245, 197, 24, 0.18) !important;
+  color: var(--zmc-yellow) !important;
+  border-left: 3px solid var(--zmc-yellow) !important;
+}
+
+/* Icon Colors */
+.ri-checkbox-circle-line,
+.ri-check-line,
+.fa-check,
+i.text-success {
+  color: var(--zmc-yellow-dark) !important;
+}
+
+i.text-primary {
+  color: var(--zmc-primary) !important;
+}
+
+/* Step Progress - Yellow Active */
+.step {
+  border-color: var(--zmc-gray) !important;
+  font-size: var(--font-size-base) !important;
+}
+
+.step.active {
+  border-color: var(--zmc-yellow) !important;
+  box-shadow: 0 10px 25px rgba(245, 197, 24, 0.2) !important;
+  background: var(--zmc-yellow-08) !important;
+}
+
+.step.active .step-number {
+  background: var(--zmc-yellow) !important;
+  color: var(--zmc-primary) !important;
+  font-size: var(--font-size-base) !important;
+  font-weight: 900 !important;
+}
+
+.step .step-number {
+  background: var(--zmc-dark-08) !important;
+  color: var(--zmc-text-dark) !important;
+  font-size: var(--font-size-base) !important;
+  font-weight: 900 !important;
+}
+
+.step:hover {
+  border-color: var(--zmc-yellow-dark) !important;
+  background: var(--zmc-yellow-08) !important;
+}
+
+.step .step-label {
+  color: var(--zmc-text-dark) !important;
+  font-size: var(--font-size-sm) !important;
+  font-weight: 700 !important;
+}
+
+/* Application Type Cards */
+.app-type-card {
+  border-color: var(--zmc-gray) !important;
+}
+
+.app-type-card:hover {
+  border-color: var(--zmc-yellow) !important;
+  box-shadow: 0 10px 25px rgba(245, 197, 24, 0.2) !important;
+  background: var(--zmc-yellow-08) !important;
+}
+
+.app-type-card.selected {
+  border-color: var(--zmc-yellow) !important;
+  box-shadow: 0 10px 25px rgba(245, 197, 24, 0.25) !important;
+  background: var(--zmc-yellow-08) !important;
+}
+
+.app-type-card h4 {
+  color: var(--zmc-text-dark) !important;
+  font-size: var(--font-size-base) !important;
+}
+
+.app-type-card p {
+  font-size: var(--font-size-sm) !important;
+}
+
+.app-type-card i {
+  color: var(--zmc-primary) !important;
+}
+
+/* Form Headers */
+.form-header {
+  background: linear-gradient(180deg, var(--zmc-primary), var(--zmc-primary-darker)) !important;
+  border-bottom: 3px solid var(--zmc-yellow) !important;
+  padding: 24px 20px !important;
+}
+
+.form-header h1 {
+  color: var(--zmc-yellow) !important;
+  font-size: var(--font-size-xl) !important;
+  font-weight: 900 !important;
+  margin-bottom: 8px !important;
+}
+
+.form-header p {
+  color: var(--zmc-white) !important;
+  font-size: var(--font-size-base) !important;
+  opacity: 0.9;
+}
+
+/* Current Step Info */
+.current-step-info {
+  border: 1px dashed var(--zmc-dark-30) !important;
+  background: var(--zmc-yellow-08) !important;
+  color: var(--zmc-text-dark) !important;
+  font-size: var(--font-size-sm) !important;
+}
+
+/* Modal Headers */
+.zmc-modal-header::before {
+  background: var(--zmc-yellow) !important;
+}
+
+.modal-header {
+  background: var(--zmc-dark-05) !important;
+  border-bottom: 2px solid var(--zmc-dark-15) !important;
+}
+
+.zmc-modal-title {
+  color: var(--zmc-text-dark) !important;
+  font-size: var(--font-size-lg) !important;
+}
+
+.modal-body {
+  font-size: var(--font-size-base) !important;
+}
+
+/* Icon Buttons — encircled */
+.zmc-icon-btn {
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50% !important;
+  font-size: 14px;
+  line-height: 1;
+  flex-shrink: 0;
+}
+.zmc-icon-btn:hover {
+  border-color: var(--zmc-yellow-dark) !important;
+  color: var(--zmc-primary) !important;
+  background: var(--zmc-yellow-08) !important;
+}
+
+/* Dropdown Items */
+.dropdown-item {
+  color: var(--zmc-text-dark) !important;
+  font-size: var(--font-size-base) !important;
+}
+
+.dropdown-item.active,
+.dropdown-item:active {
+  background-color: var(--zmc-yellow) !important;
+  color: var(--zmc-primary) !important;
+}
+
+.dropdown-item:hover {
+  background-color: var(--zmc-yellow-08) !important;
+  color: var(--zmc-text-dark) !important;
+}
+
+/* List Group Items */
+.list-group-item {
+  color: var(--zmc-text-dark) !important;
+  font-size: var(--font-size-base) !important;
+}
+
+.list-group-item.active {
+  background-color: var(--zmc-yellow) !important;
+  border-color: var(--zmc-yellow) !important;
+  color: var(--zmc-primary) !important;
+}
+
+.list-group-item:hover {
+  background-color: var(--zmc-yellow-08) !important;
+}
+
+/* Tables */
+.table {
+  font-size: var(--font-size-base) !important;
+}
+
+.table-hover tbody tr:hover {
+  background-color: var(--zmc-yellow-08) !important;
+}
+
+.table thead th {
+  background: var(--zmc-dark-05) !important;
+  border-bottom: 2px solid var(--zmc-dark-15) !important;
+  color: var(--zmc-text-dark) !important;
+  font-size: var(--font-size-sm) !important;
+  font-weight: 700 !important;
+}
+
+.table tbody td {
+  color: var(--zmc-text-dark) !important;
+  font-size: var(--font-size-base) !important;
+  font-weight: 400 !important;
+}
+
+/* ZMC Cards */
+.zmc-card {
+  border-color: var(--zmc-gray) !important;
+  background: var(--zmc-white) !important;
+  padding: 24px !important;
+  border-radius: 12px !important;
+  transition: all 0.3s ease !important;
+}
+
+.zmc-card .small,
+.zmc-card h4,
+.zmc-card h5,
+.zmc-card h6,
+.zmc-card .text-muted.fw-bold {
+  font-size: 15px !important;
+  font-weight: 700 !important;
+  text-transform: none !important;
+  letter-spacing: normal !important;
+  color: var(--zmc-text-dark) !important;
+  margin-bottom: 6px !important;
+  font-family: var(--font-heading) !important;
+}
+
+.zmc-card:hover {
+  border-color: var(--zmc-yellow) !important;
+  box-shadow: 0 4px 12px rgba(245, 197, 24, 0.15) !important;
+}
+
+.icon-box {
+  background: var(--zmc-yellow-15) !important;
+  color: var(--zmc-primary) !important;
+  width: 52px !important;
+  height: 52px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-radius: 12px !important;
+  font-size: 24px !important;
+}
+
+.icon-box i {
+  color: var(--zmc-primary) !important;
+}
+
+/* Logo Text */
+.logo-text {
+  font-size: var(--font-size-base) !important;
+}
+
+.logo-text span.commission {
+  color: var(--zmc-yellow) !important;
+}
+
+.logo-text span.media,
+.logo-text span.zimbabwe {
+  color: var(--zmc-white) !important;
+}
+
+/* ZMC Pills */
+.zmc-pill {
+  border-color: var(--zmc-gray) !important;
+  color: var(--zmc-text-dark) !important;
+  font-size: var(--font-size-sm) !important;
+}
+
+.zmc-pill:hover {
+  background: var(--zmc-yellow-08) !important;
+  border-color: var(--zmc-yellow) !important;
+}
+
+.zmc-pill-dark {
+  background: var(--zmc-primary) !important;
+  color: var(--zmc-yellow) !important;
+  border-color: var(--zmc-primary) !important;
+}
+
+/* Status badges */
+.badge-pending {
+  background: rgba(245, 197, 24, 0.15) !important;
+  color: #92400e !important;
+}
+
+.badge-approved {
+  background: var(--zmc-yellow) !important;
+  color: var(--zmc-primary) !important;
+}
+
+.badge-active {
+  background: var(--zmc-yellow-dark) !important;
+  color: var(--zmc-primary) !important;
+}
+
+/* Headings */
+h1 { font-size: var(--font-size-2xl) !important; }
+h2 { font-size: var(--font-size-xl) !important; }
+h3 { font-size: var(--font-size-lg) !important; }
+h4 { font-size: var(--font-size-base) !important; }
+h5 { font-size: var(--font-size-base) !important; font-weight: 600 !important; }
+h6 { font-size: var(--font-size-sm) !important; }
+
+/* Small text adjustments */
+.small, small { font-size: var(--font-size-sm) !important; }
+
+/* ZMC Label */
+.zmc-lbl { font-size: var(--font-size-sm) !important; }
+
+/* Step title */
+.step-title { font-size: var(--font-size-base) !important; }
+
+/* Dashboard specific overrides */
+.dashboard-card .h3,
+.dashboard-card .h4,
+.dashboard-card .h5,
+.dashboard-card .fw-black,
+.dashboard-card .fw-bold,
+.zmc-card .h3,
+.zmc-card .h4,
+.zmc-card .h5,
+.zmc-card .fw-black,
+.zmc-card .fw-bold {
+  color: #1e293b !important;
+}
+
+/* Dashboard icons */
+.dashboard-card i,
+.zmc-card i,
+.icon-box i {
+  color: var(--zmc-primary) !important;
+}
+
+/* Specific "View all" and card link color adjustments */
+.zmc-card a.small,
+.zmc-card a.fw-bold,
+.zmc-card a.text-decoration-none {
+  color: #000000 !important;
+}

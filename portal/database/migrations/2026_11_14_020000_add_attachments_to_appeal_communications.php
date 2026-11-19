@@ -1,0 +1,26 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    public function up(): void
+    {
+        if (Schema::hasTable('appeal_communications') && !Schema::hasColumn('appeal_communications', 'attachments')) {
+            Schema::table('appeal_communications', function (Blueprint $table) {
+                $table->json('attachments')->nullable()->after('body');
+            });
+        }
+    }
+
+    public function down(): void
+    {
+        if (Schema::hasTable('appeal_communications') && Schema::hasColumn('appeal_communications', 'attachments')) {
+            Schema::table('appeal_communications', function (Blueprint $table) {
+                $table->dropColumn('attachments');
+            });
+        }
+    }
+};
