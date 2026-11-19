@@ -122,7 +122,7 @@
                       <div class="text-muted" style="font-size: var(--font-size-xs);">{{ $application->applicant->email ?? '' }}</div>
                     </td>
                     <td>{{ ucfirst($application->application_type ?: '—') }}</td>
-                    <td><span class="badge bg-secondary">{{ ucwords(str_replace('_', ' ', $application->status ?: '—')) }}</span></td>
+                    <td>@include('staff.partials.status-chip', ['status' => $application->status])</td>
                     <td>{{ optional($application->created_at)->format('Y-m-d H:i') ?: '—' }}</td>
                   </tr>
                 @empty

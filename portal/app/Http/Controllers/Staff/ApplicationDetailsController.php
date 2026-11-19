@@ -340,6 +340,16 @@ class ApplicationDetailsController extends Controller
 
         // 1. Check for exact reference
         $app = Application::where('reference', trim($q))->first();
+
+        // Partial reference (e.g. the last digits): jump straight to it when it is unambiguous.
+        // The region/role checks below still apply to the match.
+        if (!$app && mb_strlen(trim($q)) >= 4) {
+            $like = '%' . addcslashes(trim($q), '%_\\') . '%';
+            $partial = Application::where('reference', 'like', $like)->limit(2)->get();
+            if ($partial->count() === 1) {
+                $app = $partial->first();
+            }
+        }
         if ($app) {
             // Region authorization: officers/production may only land on
             // applications inside their assigned regions.

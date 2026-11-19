@@ -93,4 +93,5 @@
     </div>
   </div>
 </div>
+<div class="mt-3">@include('staff.partials.application-timeline', ['application' => $application])</div>
 @endsection

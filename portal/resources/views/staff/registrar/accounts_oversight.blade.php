@@ -68,7 +68,7 @@
           <tr>
             <td class="fw-bold small">{{ $app->reference ?? 'APP-' . str_pad($app->id, 5, '0', STR_PAD_LEFT) }}</td>
             <td class="small">{{ $app->applicant?->name ?? '—' }}</td>
-            <td><span class="badge bg-info rounded-pill">{{ ucwords(str_replace('_', ' ', $app->status)) }}</span></td>
+            <td>@include('staff.partials.status-chip', ['status' => $app->status])</td>
             <td class="small">{{ $app->paynow_reference ?? $app->paynow_ref_submitted ?? '—' }}</td>
             <td class="small">
               @if($app->payment_proof_path)

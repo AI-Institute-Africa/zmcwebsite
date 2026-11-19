@@ -3,6 +3,7 @@
 
 @section('content')
 @include('staff.partials.tabs', ['label' => 'Accounts and payments sections', 'tabs' => [['staff.accounts.dashboard','Overview','ri-dashboard-3-line'],['staff.accounts.app-fee-verifications','App fees','ri-time-line'],['staff.accounts.reg-fee-verifications','Reg fees','ri-checkbox-circle-line'],['staff.accounts.paynow.transactions','PayNow','ri-bank-card-line'],['staff.accounts.reconciliation','Reconciliation','ri-git-merge-line'],['staff.accounts.waivers.requests','Waivers','ri-inbox-line']]])
+@include('staff.partials.queue-strip', ['role' => 'accounts_payments'])
 @include('staff.partials.dashboard_theme')
 <div class="staff-dashboard-theme">
 <div class="zmc-dashboard-wrapper" style="font-family: var(--font-primary); color: var(--zmc-text-dark);">

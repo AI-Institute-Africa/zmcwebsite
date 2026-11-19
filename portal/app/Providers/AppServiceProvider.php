@@ -142,6 +142,26 @@ class AppServiceProvider extends ServiceProvider
                 // ignore (sidebar should still render)
             }
         });
+
+        /*
+        |--------------------------------------------------------------------------
+        | Per-role queue badges for the staff sidebar
+        |--------------------------------------------------------------------------
+        | [url path => waiting count], rendered by public/js/zmc-ux.js as a small
+        | count badge on the matching sidebar link. Cached for 60s per user.
+        */
+        View::composer('layouts.portal', function ($view) {
+            try {
+                $user = Auth::user();
+                $role = session('active_staff_role');
+                $badges = ($user && $role)
+                    ? \App\Support\StaffQueue::sidebarBadges($user, $role)
+                    : [];
+                $view->with('queue_badges', $badges);
+            } catch (\Throwable $e) {
+                $view->with('queue_badges', []);
+            }
+        });
     }
 
     private function replaceSymfonyMimeGuessers(): void

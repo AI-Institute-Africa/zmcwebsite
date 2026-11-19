@@ -28,6 +28,13 @@
       <button class="topbar-toggle" type="button" id="sidebarToggle" aria-label="Toggle menu">
         <i class="ri-menu-2-line"></i>
       </button>
+      @if($isStaff && \Illuminate\Support\Facades\Route::has('staff.search'))
+        <form class="zmc-search" action="{{ route('staff.search') }}" method="GET" role="search">
+          <i class="ri-search-line" aria-hidden="true"></i>
+          <input id="zmcGlobalSearch" type="search" name="q" value="{{ request()->routeIs('staff.search') ? request('q') : '' }}" placeholder="Search by reference or name" aria-label="Search applications by reference or name" autocomplete="off">
+          <kbd aria-hidden="true">/</kbd>
+        </form>
+      @endif
     </div>
 
     <!-- Right Section: Utility Actions -->

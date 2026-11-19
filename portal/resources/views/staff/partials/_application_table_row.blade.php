@@ -45,7 +45,7 @@
 <td class="small">{{ $date }}@if($time !== '—') <span class="text-muted ms-1">{{ $time }}</span>@endif</td>
 <td class="small">{{ $requestType }}</td>
 <td class="small">{{ $scope }}</td>
-<td class="small text-muted">{{ $statusLabel }}</td>
+<td class="small">@include('staff.partials.status-chip', ['status' => $app->status ?? ''])</td>
 <td class="small">{{ $payStatus }}</td>
 <td class="small">{{ $category }}</td>
 <td class="small text-muted">{{ $officer }}</td>

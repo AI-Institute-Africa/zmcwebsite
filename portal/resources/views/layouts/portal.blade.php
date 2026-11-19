@@ -1945,6 +1945,7 @@
 <style>
   .zmc-pilot-notice{position:fixed;top:12px;left:50%;transform:translateX(-50%);z-index:3000;width:min(760px,calc(100% - 24px));display:flex;align-items:center;gap:10px;padding:10px 16px;border:1px solid rgba(250,204,21,.55);border-radius:12px;background:rgba(22,30,35,.96);box-shadow:0 8px 24px rgba(0,0,0,.22);color:#fff;font:600 12px/1.4 Inter,sans-serif}.zmc-pilot-notice i{color:#facc15;font-size:18px;flex:0 0 auto}.zmc-pilot-notice strong{color:#facc15}@media(max-width:600px){.zmc-pilot-notice{top:8px;padding:8px 11px;font-size:11px}}
 </style>
+<link rel="stylesheet" href="{{ asset('css/zmc-ux.css') }}?v={{ @filemtime(public_path('css/zmc-ux.css')) }}">
 <style id="zmc-uiux-2026">
   /* UI/UX quick wins (2026-11-19): visible scrollbars, readable type, focus rings, tabs */
   :root { --font-size-xs: 11px; --font-size-sm: 12px; --font-size-base: 14px; }
@@ -2588,6 +2589,8 @@
       }
     });
   </script>
+  <script>window.ZMC_BADGES = @json($queue_badges ?? []);</script>
+  <script defer src="{{ asset('js/zmc-ux.js') }}?v={{ @filemtime(public_path('js/zmc-ux.js')) }}"></script>
   @stack('scripts')
   @if($formBuilderPreview ?? false)
     <script>

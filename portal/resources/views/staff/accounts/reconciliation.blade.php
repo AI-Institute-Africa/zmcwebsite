@@ -172,7 +172,7 @@
                   <span class="badge bg-secondary-subtle text-secondary border">Other</span>
                 @endif
               </td>
-              <td><span class="badge bg-success-subtle text-success border border-success-subtle">{{ ucfirst(str_replace('_', ' ', $app->status)) }}</span></td>
+              <td>@include('staff.partials.status-chip', ['status' => $app->status])</td>
               <td class="text-end pe-3">{{ $app->paynow_confirmed_at ? \Carbon\Carbon::parse($app->paynow_confirmed_at)->format('d M Y H:i') : ($app->updated_at?->format('d M Y H:i') ?? '—') }}</td>
             </tr>
             @endforeach

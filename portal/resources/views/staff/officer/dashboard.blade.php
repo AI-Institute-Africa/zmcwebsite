@@ -3,6 +3,7 @@
 
 @section('content')
 @include('staff.partials.tabs', ['label' => 'Accreditation officer sections', 'tabs' => [['staff.officer.dashboard','Overview','ri-dashboard-3-line'],['staff.officer.applications.new-apps','New','ri-add-circle-line'],['staff.officer.applications.renewals','Renewals','ri-refresh-line'],['staff.officer.applications.replacements','Replacements','ri-swap-line'],['staff.officer.applications.pending','Pending accounts review','ri-time-line'],['staff.officer.applications.approved','Approved','ri-checkbox-circle-line'],['staff.officer.applications.rejected','Returned','ri-arrow-go-back-line'],['staff.officer.processed','Processed','ri-stack-line']]])
+@include('staff.partials.queue-strip', ['role' => 'accreditation_officer'])
 @include('staff.partials.dashboard_theme')
 <div class="staff-dashboard-theme">
 <div class="zmc-dashboard-wrapper" style="font-family: var(--font-primary); color: var(--zmc-text-dark);">

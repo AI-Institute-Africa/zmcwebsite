@@ -255,4 +255,5 @@ document.getElementById('reasonType')?.addEventListener('change', function() {
 });
 </script>
 
+<div class="mt-3">@include('staff.partials.application-timeline', ['application' => $application])</div>
 @endsection

@@ -2,6 +2,7 @@
 @section('title', 'Production Dashboard')
 
 @section('content')
+@include('staff.partials.queue-strip', ['role' => 'production'])
 @include('staff.partials.dashboard_theme')
 <div class="staff-dashboard-theme">
 <div class="zmc-dashboard-wrapper" style="font-family: var(--font-primary); color: var(--zmc-text-dark);">

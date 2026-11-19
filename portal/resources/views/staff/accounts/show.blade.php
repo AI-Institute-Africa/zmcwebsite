@@ -181,7 +181,7 @@
                       @endphp
                       <span class="badge bg-{{ $pReqBadge }}">{{ ucfirst($pReqType) }}</span>
                     </td>
-                    <td><span class="badge bg-secondary">{{ ucwords(str_replace('_', ' ', $prevApp->status)) }}</span></td>
+                    <td>@include('staff.partials.status-chip', ['status' => $prevApp->status])</td>
                     <td class="small text-muted">{{ $prevApp->created_at?->format('d M Y H:i') ?? '—' }}</td>
                   </tr>
                 @endforeach
@@ -270,6 +270,7 @@
     </div>
   </div>
 </div>
+<div class="mt-3">@include('staff.partials.application-timeline', ['application' => $application])</div>
 @endsection
 
 @if(session('download_receipt_url'))
