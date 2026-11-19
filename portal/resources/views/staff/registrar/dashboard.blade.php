@@ -2,6 +2,7 @@
 @section('title', 'Registrar Dashboard')
 
 @section('content')
+@include('staff.partials.tabs', ['label' => 'Registrar sections', 'tabs' => [['staff.registrar.dashboard','Overview','ri-dashboard-3-line'],['staff.registrar.applications.list','Applications','ri-file-list-3-line'],['staff.registrar.payment-oversight','Payment statuses','ri-eye-line'],['staff.registrar.processed','Processed','ri-stack-line']]])
 <div class="zmc-dashboard-wrapper" style="font-family: var(--font-primary); color: var(--zmc-text-dark);">
 
   {{-- Header --}}

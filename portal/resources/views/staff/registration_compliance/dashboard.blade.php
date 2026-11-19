@@ -1,4 +1,4 @@
-@extends('layouts.staff')
+@extends('layouts.portal')
 
 @section('title', 'Registration Compliance')
 

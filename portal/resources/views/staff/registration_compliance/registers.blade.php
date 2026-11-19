@@ -1,4 +1,4 @@
-@extends('layouts.staff')
+@extends('layouts.portal')
 @section('title','Compliance Registers')
 @section('content')
 @php($mediaHouses = $type === 'media_houses')

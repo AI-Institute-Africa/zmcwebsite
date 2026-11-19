@@ -5,11 +5,11 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="csrf-token" content="{{ csrf_token() }}">
-  <title>@yield('title') | ZMC Applicant</title>
+  <title>@yield('title') | {{ (request()->is('staff/*') || request()->routeIs('staff.*')) ? 'ZMC Staff Portal' : 'ZMC Applicant' }}</title>
   
   {{-- Bootstrap 5 (required for dropdowns/modals in dashboards) --}}
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <link href="{{ asset('vendor/zmc/bootstrap/bootstrap.min.css') }}" rel="stylesheet">
+  <script defer src="{{ asset('vendor/zmc/bootstrap/bootstrap.bundle.min.js') }}"></script>
 
   {{-- Chart Libraries for Director Media Development and Governance Dashboard --}}
   <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
@@ -22,7 +22,7 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Montserrat:wght@400;500;600;700;800;900&display=swap"
     rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css" rel="stylesheet">
+  <link href="{{ asset('vendor/zmc/remixicon/remixicon.css') }}" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@latest/css/all.min.css" rel="stylesheet">
 
   {{-- Green Theme CSS --}}
@@ -1945,6 +1945,62 @@
 <style>
   .zmc-pilot-notice{position:fixed;top:12px;left:50%;transform:translateX(-50%);z-index:3000;width:min(760px,calc(100% - 24px));display:flex;align-items:center;gap:10px;padding:10px 16px;border:1px solid rgba(250,204,21,.55);border-radius:12px;background:rgba(22,30,35,.96);box-shadow:0 8px 24px rgba(0,0,0,.22);color:#fff;font:600 12px/1.4 Inter,sans-serif}.zmc-pilot-notice i{color:#facc15;font-size:18px;flex:0 0 auto}.zmc-pilot-notice strong{color:#facc15}@media(max-width:600px){.zmc-pilot-notice{top:8px;padding:8px 11px;font-size:11px}}
 </style>
+<style id="zmc-uiux-2026">
+  /* UI/UX quick wins (2026-11-19): visible scrollbars, readable type, focus rings, tabs */
+  :root { --font-size-xs: 11px; --font-size-sm: 12px; --font-size-base: 14px; }
+
+  /* Scrollbars: thin, visible, consistent (page, sidebar, scrollable regions) */
+  html { scrollbar-width: thin; scrollbar-color: #94a3b8 #e2e8f0; }
+  html::-webkit-scrollbar, body *::-webkit-scrollbar { width: 10px; height: 10px; }
+  html::-webkit-scrollbar-track, body *::-webkit-scrollbar-track { background: #e2e8f0; }
+  html::-webkit-scrollbar-thumb, body *::-webkit-scrollbar-thumb { background: #94a3b8; border-radius: 8px; border: 2px solid #e2e8f0; }
+  html::-webkit-scrollbar-thumb:hover, body *::-webkit-scrollbar-thumb:hover { background: #64748b; }
+  .sidebar-menu { scrollbar-width: thin; scrollbar-color: #facc15 rgba(255,255,255,.15); padding-bottom: 28px;
+    -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - 28px), transparent);
+            mask-image: linear-gradient(to bottom, #000 calc(100% - 28px), transparent); }
+  .sidebar-menu::-webkit-scrollbar { width: 8px; }
+  .sidebar-menu::-webkit-scrollbar-track { background: rgba(255,255,255,.12); border-radius: 8px; border: 0; }
+  .sidebar-menu::-webkit-scrollbar-thumb { background: #facc15; border-radius: 8px; border: 0; }
+  .table-responsive { scrollbar-width: thin; }
+
+  /* Readable sidebar and table text */
+  .sidebar-menu li a { font-size: 13px !important; }
+  .sidebar-menu li.menu-title { font-size: 11px !important; }
+  .staff-page-surface .table thead th, .table thead th { font-size: 12px; }
+
+  /* Keyboard focus is always visible */
+  a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible,
+  textarea:focus-visible, summary:focus-visible, [tabindex]:focus-visible {
+    outline: 2px solid #facc15 !important; outline-offset: 2px !important; box-shadow: 0 0 0 4px rgba(26,26,26,.55) !important;
+  }
+
+  /* In-page tab bar (links or buttons) */
+  .zmc-tabs { display: flex; gap: 4px; overflow-x: auto; margin: 0 0 16px; padding: 6px; background: #fff;
+    border: 1px solid #e2e8f0; border-radius: 14px; box-shadow: 0 2px 8px rgba(15,35,48,.05); list-style: none; }
+  .zmc-tabs a, .zmc-tabs button { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; padding: 9px 14px;
+    border: 0; border-radius: 10px; background: transparent; color: #334155; font-size: 13px; font-weight: 600; text-decoration: none; }
+  .zmc-tabs a:hover, .zmc-tabs button:hover { background: #f1f5f9; color: #0f172a; }
+  .zmc-tabs a[aria-selected="true"], .zmc-tabs button[aria-selected="true"] { background: #1a1a1a; color: #facc15; }
+  .zmc-tabs .zmc-tab-count { font-size: 11px; padding: 1px 7px; border-radius: 999px; background: rgba(100,116,139,.18); }
+  .zmc-tabs [aria-selected="true"] .zmc-tab-count { background: rgba(250,204,21,.22); }
+
+  /* Menu section titles (replaces repeated inline styles in sidebar_staff) */
+  .sidebar-menu li.menu-title { padding: 10px 18px; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: rgba(255,255,255,.7); }
+
+  /* Colour semantics: success = green again (brand yellow stays for primary actions/accents) */
+  :root { --zmc-success: #15803d; --zmc-success-dark: #166534; --zmc-success-soft: rgba(21,128,61,.12); }
+  .btn-success { background: var(--zmc-success) !important; border-color: var(--zmc-success) !important; color: #fff !important; }
+  .btn-success:hover, .btn-success:focus-visible { background: var(--zmc-success-dark) !important; border-color: var(--zmc-success-dark) !important; color: #fff !important; }
+  .btn-outline-success { color: var(--zmc-success) !important; border-color: var(--zmc-success) !important; }
+  .btn-outline-success:hover { background: var(--zmc-success) !important; color: #fff !important; }
+  .text-success { color: var(--zmc-success) !important; }
+  .bg-success { background-color: var(--zmc-success) !important; color: #fff; }
+  .border-success { border-color: var(--zmc-success) !important; }
+  .bg-success-subtle, .badge.bg-success-subtle { background-color: var(--zmc-success-soft) !important; color: var(--zmc-success-dark) !important; }
+  .border-success-subtle { border-color: rgba(21,128,61,.3) !important; }
+  /* accent yellow used as text on light backgrounds fails contrast: use a darker amber */
+  .text-warning { color: #a16207 !important; }
+</style>
 </head>
 
 @php
@@ -1995,6 +2051,14 @@
     // toggleZMCTheme is defined in topbar.blade.php (data-bs-theme on <html>)
 
     document.addEventListener('DOMContentLoaded', function () {
+      // Accessibility: label the sidebar nav and mark the current page
+      const sideNav = document.querySelector('.sidebar-menu');
+      if (sideNav) {
+        sideNav.setAttribute('role', 'navigation');
+        sideNav.setAttribute('aria-label', 'Staff portal navigation');
+        sideNav.querySelectorAll('li.active > a').forEach(a => a.setAttribute('aria-current', 'page'));
+        sideNav.querySelectorAll('li > a > i').forEach(i => i.setAttribute('aria-hidden', 'true'));
+      }
       // Sync theme icon on load based on data-bs-theme
       if (typeof toggleZMCTheme !== 'undefined') {
         const currentTheme = document.documentElement.getAttribute('data-bs-theme') || 'light';

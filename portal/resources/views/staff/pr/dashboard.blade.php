@@ -124,6 +124,20 @@
 
     @endif
 
+    <nav class="zmc-tabs" role="tablist" aria-label="Public Relations sections">
+        @foreach([
+            [null, 'Overview', 'staff.pr.dashboard', 'ri-dashboard-3-line'],
+            ['notices', 'Notices', 'staff.pr.notices', 'ri-megaphone-line'],
+            ['events', 'Events', 'staff.pr.events', 'ri-calendar-event-line'],
+            ['news', 'News', 'staff.pr.news', 'ri-newspaper-line'],
+            ['tenders', 'Tenders', 'staff.pr.tenders', 'ri-file-text-line'],
+            ['vacancies', 'Vacancies', 'staff.pr.vacancies', 'ri-briefcase-line'],
+            ['downloads', 'Reports & Documents', 'staff.pr.documents', 'ri-folder-2-line'],
+        ] as [$tabKey, $tabLabel, $tabRoute, $tabIcon])
+            <a href="{{ route($tabRoute) }}" role="tab" aria-selected="{{ ($activeTab ?: null) === $tabKey ? 'true' : 'false' }}"><i class="{{ $tabIcon }}"></i> {{ $tabLabel }}</a>
+        @endforeach
+    </nav>
+
     @if($activeTab)
     @php
         $workspace = [

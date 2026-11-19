@@ -2,6 +2,7 @@
 @section('title', 'Auditor Dashboard')
 
 @section('content')
+@include('staff.partials.tabs', ['label' => 'Auditor sections', 'tabs' => [['staff.auditor.dashboard','Overview','ri-eye-line'],['staff.auditor.analytics','Analytics','ri-line-chart-line'],['staff.auditor.applications','Application audits','ri-file-search-line'],['staff.auditor.reconciliation','Payments','ri-exchange-dollar-line'],['staff.auditor.complaints','Complaints','ri-chat-check-line']]])
 <div class="zmc-dashboard-wrapper" style="font-family: var(--font-primary); color: var(--zmc-text-dark);">
 
   <div class="d-flex justify-content-between align-items-start flex-wrap gap-2 mb-4">

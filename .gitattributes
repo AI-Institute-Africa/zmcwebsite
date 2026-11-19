@@ -1,0 +1,5 @@
+# Staff-portal files must stay LF (deploy.sh runs on Linux). Scoped so the React app is unaffected.
+portal/** text=auto eol=lf
+portal/**/*.woff2 binary
+portal/**/*.woff binary
+portal/**/*.ttf binary

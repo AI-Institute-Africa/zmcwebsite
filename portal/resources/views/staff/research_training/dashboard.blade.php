@@ -1,4 +1,4 @@
-@extends('layouts.staff')
+@extends('layouts.portal')
 
 @section('title', $page === 'register' ? 'Complaints Register' : 'Complaints Dashboard')
 

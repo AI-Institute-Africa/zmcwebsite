@@ -1,4 +1,4 @@
-@extends('layouts.staff')
+@extends('layouts.portal')
 
 @section('content')
 <div class="container-fluid px-4 py-6 max-w-6xl">

@@ -1,4 +1,4 @@
-@extends('layouts.staff')
+@extends('layouts.portal')
 @section('title','Complaints Reports and Analytics')
 @section('content')
 <div class="container-fluid py-4" style="font-family:Inter,sans-serif;background:#f8fafc;min-height:100vh;">

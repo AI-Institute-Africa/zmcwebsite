@@ -37,8 +37,7 @@
 
   <ul class="sidebar-menu">
     @if(!$showItOnly && !$isAdminPanel && $role === 'accreditation_officer')
-      <li class="menu-title"
-        style="padding:10px 18px; font-size:var(--font-size-xs); letter-spacing:.08em; text-transform:uppercase; color:rgba(255,255,255,.55);">
+      <li class="menu-title">
         Accreditation Officer
       </li>
 
@@ -48,8 +47,7 @@
         </a>
       </li>
 
-      <li class="menu-title"
-        style="padding:10px 18px; font-size:var(--font-size-xs); letter-spacing:.08em; text-transform:uppercase; color:rgba(255,255,255,.55);">
+      <li class="menu-title">
         Applications
       </li>
       <li class="{{ request()->routeIs('staff.officer.applications.index') ? 'active' : '' }}">
@@ -97,8 +95,7 @@
             Applications</span></a>
       </li>
 
-      <li class="menu-title"
-        style="padding:10px 18px; font-size:var(--font-size-xs); letter-spacing:.08em; text-transform:uppercase; color:rgba(255,255,255,.55);">
+      <li class="menu-title">
         Intake
       </li>
       @if(Route::has('staff.officer.physical-intake'))
@@ -108,8 +105,7 @@
         </li>
       @endif
 
-      <li class="menu-title"
-        style="padding:10px 18px; font-size:var(--font-size-xs); letter-spacing:.08em; text-transform:uppercase; color:rgba(255,255,255,.55);">
+      <li class="menu-title">
         Records
       </li>
       <li class="{{ request()->routeIs('staff.officer.records.journalists') ? 'active' : '' }}">
@@ -121,8 +117,7 @@
             Media Houses</span></a>
       </li>
 
-      <li class="menu-title"
-        style="padding:10px 18px; font-size:var(--font-size-xs); letter-spacing:.08em; text-transform:uppercase; color:rgba(255,255,255,.55);">
+      <li class="menu-title">
         Document Verification
       </li>
       <li class="{{ request()->routeIs('staff.officer.documents.uploaded') ? 'active' : '' }}">
@@ -138,8 +133,7 @@
           <span>Verified</span></a>
       </li>
 
-      <li class="menu-title"
-        style="padding:10px 18px; font-size:var(--font-size-xs); letter-spacing:.08em; text-transform:uppercase; color:rgba(255,255,255,.55);">
+      <li class="menu-title">
         Design Studio
       </li>
       <li class="{{ request()->routeIs('staff.design-studio.*') ? 'active' : '' }}">
@@ -151,8 +145,7 @@
     @endif
 
     @if(!$showItOnly && !$isAdminPanel && $role === 'accounts_payments')
-      <li class="menu-title"
-        style="padding:10px 18px; font-size:var(--font-size-xs); letter-spacing:.08em; text-transform:uppercase; color:rgba(255,255,255,.55);">
+      <li class="menu-title">
         Accounts / Payments
       </li>
 
@@ -162,8 +155,7 @@
         </a>
       </li>
 
-      <li class="menu-title"
-        style="padding:10px 18px; font-size:var(--font-size-xs); letter-spacing:.08em; text-transform:uppercase; color:rgba(255,255,255,.55);">
+      <li class="menu-title">
         Payments
       </li>
       <li class="{{ request()->routeIs('staff.accounts.paynow.transactions') ? 'active' : '' }}">
@@ -182,8 +174,7 @@
         </a>
       </li>
 
-      <li class="menu-title"
-        style="padding:10px 18px; font-size:var(--font-size-xs); letter-spacing:.08em; text-transform:uppercase; color:rgba(255,255,255,.55);">
+      <li class="menu-title">
         Fee Verifications
       </li>
       <li class="{{ request()->routeIs('staff.accounts.app-fee-verifications') ? 'active' : '' }}">
@@ -202,8 +193,7 @@
         </a>
       </li>
 
-      <li class="menu-title"
-        style="padding:10px 18px; font-size:var(--font-size-xs); letter-spacing:.08em; text-transform:uppercase; color:rgba(255,255,255,.55);">
+      <li class="menu-title">
         Waivers
       </li>
       <li class="{{ request()->routeIs('staff.accounts.waivers.requests') ? 'active' : '' }}">
@@ -218,8 +208,7 @@
       </li>
       --}}
 
-      <li class="menu-title"
-        style="padding:10px 18px; font-size:var(--font-size-xs); letter-spacing:.08em; text-transform:uppercase; color:rgba(255,255,255,.55);">
+      <li class="menu-title">
         Applications
       </li>
       {{-- Removed 'Approved (Paid)' per request --}}
@@ -246,8 +235,7 @@
         </a>
       </li>
 
-      <li class="menu-title"
-        style="padding:10px 18px; font-size:var(--font-size-xs); letter-spacing:.08em; text-transform:uppercase; color:rgba(255,255,255,.55);">
+      <li class="menu-title">
         Renewals
       </li>
       <li class="{{ request()->routeIs('staff.accounts.renewals.*') ? 'active' : '' }}">
@@ -256,8 +244,7 @@
         </a>
       </li>
 
-      <li class="menu-title"
-        style="padding:10px 18px; font-size:var(--font-size-xs); letter-spacing:.08em; text-transform:uppercase; color:rgba(255,255,255,.55);">
+      <li class="menu-title">
         Reports
       </li>
       <li class="{{ request()->routeIs('staff.accounts.reports.revenue') ? 'active' : '' }}">
@@ -271,8 +258,7 @@
         </a>
       </li>
 
-      <li class="menu-title"
-        style="padding:10px 18px; font-size:var(--font-size-xs); letter-spacing:.08em; text-transform:uppercase; color:rgba(255,255,255,.55);">
+      <li class="menu-title">
         Tools
       </li>
       <li class="{{ request()->routeIs('staff.accounts.alerts') ? 'active' : '' }}">
@@ -294,8 +280,7 @@
     @endif
 
     @if(!$showItOnly && !$isAdminPanel && $role === 'registrar')
-      <li class="menu-title"
-        style="padding:10px 18px; font-size:var(--font-size-xs); letter-spacing:.08em; text-transform:uppercase; color:rgba(255,255,255,.55);">
+      <li class="menu-title">
         Registrar
       </li>
 
@@ -319,8 +304,7 @@
         </a>
       </li>
 
-      <li class="menu-title"
-        style="padding:10px 18px; font-size:var(--font-size-xs); letter-spacing:.08em; text-transform:uppercase; color:rgba(255,255,255,.55);">
+      <li class="menu-title">
         Applications Management
       </li>
       <li
@@ -344,8 +328,7 @@
             class="ri-arrow-go-back-line"></i> <span>Returned for Correction</span></a>
       </li>
 
-      <li class="menu-title"
-        style="padding:10px 18px; font-size:var(--font-size-xs); letter-spacing:.08em; text-transform:uppercase; color:rgba(255,255,255,.55);">
+      <li class="menu-title">
         Production Tracking
       </li>
       <li class="{{ request()->routeIs('staff.registrar.processed') ? 'active' : '' }}">
@@ -353,8 +336,7 @@
             Applications</span></a>
       </li>
 
-      <li class="menu-title"
-        style="padding:10px 18px; font-size:var(--font-size-xs); letter-spacing:.08em; text-transform:uppercase; color:rgba(255,255,255,.55);">
+      <li class="menu-title">
         Reports
       </li>
       <li class="{{ request()->routeIs('staff.reports.*') ? 'active' : '' }}">
@@ -363,8 +345,7 @@
         </a>
       </li>
 
-      <li class="menu-title"
-        style="padding:10px 18px; font-size:var(--font-size-xs); letter-spacing:.08em; text-transform:uppercase; color:rgba(255,255,255,.55);">
+      <li class="menu-title">
         Records
       </li>
       <li class="{{ request()->routeIs('staff.officer.records.journalists') ? 'active' : '' }}">
@@ -376,16 +357,14 @@
             Media Houses</span></a>
       </li>
 
-      <li class="menu-title"
-        style="padding:10px 18px; font-size:var(--font-size-xs); letter-spacing:.08em; text-transform:uppercase; color:rgba(255,255,255,.55);">
+      <li class="menu-title">
         System Settings
       </li>
       <li class="{{ request()->routeIs('admin.regions.index') ? 'active' : '' }}">
         <a href="{{ route('admin.regions.index') }}"><i class="ri-map-pin-line"></i> <span>Regional Offices</span></a>
       </li>
 
-      <li class="menu-title"
-        style="padding:10px 18px; font-size:var(--font-size-xs); letter-spacing:.08em; text-transform:uppercase; color:rgba(255,255,255,.55);">
+      <li class="menu-title">
         Design Studio
       </li>
       <li class="{{ request()->routeIs('staff.design-studio.*') ? 'active' : '' }}">
@@ -396,8 +375,7 @@
     @endif
 
     @if(!$showItOnly && !$isAdminPanel && in_array($role, ['production', 'accreditation_officer'], true))
-      <li class="menu-title"
-        style="padding:10px 18px; font-size:var(--font-size-xs); letter-spacing:.08em; text-transform:uppercase; color:rgba(255,255,255,.55);">
+      <li class="menu-title">
         Production
       </li>
       <li class="{{ request()->routeIs('staff.production.dashboard') ? 'active' : '' }}">
@@ -441,8 +419,7 @@
         </a>
       </li>
 
-      <li class="menu-title"
-        style="padding:10px 18px; font-size:var(--font-size-xs); letter-spacing:.08em; text-transform:uppercase; color:rgba(255,255,255,.55);">
+      <li class="menu-title">
         Design Studio
       </li>
       <li class="{{ request()->routeIs('staff.design-studio.*') ? 'active' : '' }}">
@@ -464,8 +441,7 @@
         ];
       @endphp
 
-      <li class="menu-title"
-        style="padding:10px 18px; font-size:var(--font-size-xs); letter-spacing:.08em; text-transform:uppercase; color:rgba(255,255,255,.55);">
+      <li class="menu-title">
         System Oversight & Admin
       </li>
 
@@ -540,8 +516,7 @@
         </a>
       </li>
 
-      <li class="menu-title"
-        style="padding:10px 18px; font-size:var(--font-size-xs); letter-spacing:.08em; text-transform:uppercase; color:rgba(255,255,255,.55);">
+      <li class="menu-title">
         Accreditation Performance
       </li>
       @if(Route::has('staff.director.reports.staff'))
@@ -551,8 +526,7 @@
         </li>
       @endif
 
-      <li class="menu-title"
-        style="padding:10px 18px; font-size:var(--font-size-xs); letter-spacing:.08em; text-transform:uppercase; color:rgba(255,255,255,.55);">
+      <li class="menu-title">
         System Oversight
       </li>
       <li class="zmc-has-submenu">
@@ -594,8 +568,7 @@
         </a>
       </li>
 
-      <li class="menu-title"
-        style="padding:10px 18px; font-size:var(--font-size-xs); letter-spacing:.08em; text-transform:uppercase; color:rgba(255,255,255,.55);">
+      <li class="menu-title">
         Design Studio
       </li>
       <li class="{{ request()->routeIs('staff.design-studio.dashboard') ? 'active' : '' }}">
@@ -611,8 +584,7 @@
     @endif
 
     @if($showItOnly || $role === 'it_admin')
-      <li class="menu-title"
-        style="padding:10px 18px; font-size:var(--font-size-xs); letter-spacing:.08em; text-transform:uppercase; color:rgba(255,255,255,.55);">
+      <li class="menu-title">
         IT Administration
       </li>
       <li class="{{ request()->routeIs('staff.it.dashboard') ? 'active' : '' }}">
@@ -628,8 +600,7 @@
             Incidents</span></a>
       </li>
 
-      <li class="menu-title"
-        style="padding:10px 18px; font-size:var(--font-size-xs); letter-spacing:.08em; text-transform:uppercase; color:rgba(255,255,255,.55);">
+      <li class="menu-title">
         User & Access
       </li>
       <li class="{{ request()->routeIs('staff.it.users-mgmt') ? 'active' : '' }}">
@@ -655,8 +626,7 @@
             Control</span></a>
       </li>
 
-      <li class="menu-title"
-        style="padding:10px 18px; font-size:var(--font-size-xs); letter-spacing:.08em; text-transform:uppercase; color:rgba(255,255,255,.55);">
+      <li class="menu-title">
         Configuration
       </li>
       <li class="{{ request()->routeIs('staff.it.form-builder*') ? 'active' : '' }}">
@@ -667,8 +637,7 @@
             Builder</span></a>
       </li>
 
-      <li class="menu-title"
-        style="padding:10px 18px; font-size:var(--font-size-xs); letter-spacing:.08em; text-transform:uppercase; color:rgba(255,255,255,.55);">
+      <li class="menu-title">
         Operations
       </li>
       @if(auth()->user()?->hasRole('it_admin') && !auth()->user()?->hasRole('super_admin'))
@@ -678,8 +647,7 @@
         </li>
       @endif
 
-      <li class="menu-title"
-        style="padding:10px 18px; font-size:var(--font-size-xs); letter-spacing:.08em; text-transform:uppercase; color:rgba(255,255,255,.55);">
+      <li class="menu-title">
         System Health
       </li>
       @if(auth()->user()?->hasRole('it_admin') && !auth()->user()?->hasRole('super_admin'))
@@ -691,8 +659,7 @@
         <a href="{{ route('staff.it.performance') }}"><i class="ri-speed-line"></i> <span>System Performance</span></a>
       </li>
 
-      <li class="menu-title"
-        style="padding:10px 18px; font-size:var(--font-size-xs); letter-spacing:.08em; text-transform:uppercase; color:rgba(255,255,255,.55);">
+      <li class="menu-title">
         Audit & Reports
       </li>
       <li class="{{ request()->routeIs('staff.it.audit-mgmt') ? 'active' : '' }}">
@@ -702,8 +669,7 @@
         <a href="{{ route('staff.it.reports-mgmt') }}"><i class="ri-bar-chart-boxed-line"></i> <span>Reports</span></a>
       </li>
 
-      <li class="menu-title"
-        style="padding:10px 18px; font-size:var(--font-size-xs); letter-spacing:.08em; text-transform:uppercase; color:rgba(255,255,255,.55);">
+      <li class="menu-title">
         Configuration
       </li>
       <li class="{{ request()->routeIs('staff.it.system-mgmt') ? 'active' : '' }}">
@@ -810,8 +776,7 @@
 
     {{-- PR Officer Section --}}
     @if(!$showItOnly && !$isAdminPanel && $role === 'pr_officer')
-      <li class="menu-title"
-        style="padding:10px 18px; font-size:var(--font-size-xs); letter-spacing:.08em; text-transform:uppercase; color:rgba(255,255,255,.55);">
+      <li class="menu-title">
         Public Relations
       </li>
       <li class="{{ request()->routeIs('staff.pr.dashboard') ? 'active' : '' }}">
@@ -844,7 +809,7 @@
     @endif
 
     @if(!$showItOnly && !$isAdminPanel && $role === 'registration_compliance_officer')
-      <li class="menu-title" style="padding:10px 18px; font-size:var(--font-size-xs); letter-spacing:.08em; text-transform:uppercase; color:rgba(255,255,255,.55);">
+      <li class="menu-title">
         Registration Compliance
       </li>
       <li class="{{ request()->routeIs('staff.registration-compliance.dashboard') ? 'active' : '' }}">
@@ -881,8 +846,7 @@
 
     {{-- PUBLIC INFORMATION COMPLIANCE Section --}}
     @if(!$showItOnly && !$isAdminPanel && $role === 'public_info_compliance')
-      <li class="menu-title"
-        style="padding:10px 18px; font-size:var(--font-size-xs); letter-spacing:.08em; text-transform:uppercase; color:rgba(255,255,255,.55);">
+      <li class="menu-title">
         Public Information Compliance
       </li>
       
@@ -954,8 +918,7 @@
 
     {{-- Complaints Handling Section --}}
     @if(!$showItOnly && !$isAdminPanel && in_array($role, ['research_training', 'complaints_officer'], true))
-      <li class="menu-title"
-        style="padding:10px 18px; font-size:var(--font-size-xs); letter-spacing:.08em; text-transform:uppercase; color:rgba(255,255,255,.55);">
+      <li class="menu-title">
         Complaints Handling
       </li>
       <li class="{{ request()->routeIs('staff.research.dashboard') ? 'active' : '' }}">

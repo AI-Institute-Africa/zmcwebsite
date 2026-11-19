@@ -1,4 +1,4 @@
-@extends('layouts.staff')
+@extends('layouts.portal')
 @section('title','Auditor - Complaints & Appeals Oversight')
 @section('content')
 <div class="zmc-dashboard-wrapper" style="font-family:'Roboto', sans-serif; color:#334155;">
@@ -180,7 +180,7 @@
 
 @endsection
 
-@section('scripts')
+@push('scripts')
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
   // Doughnut charts for statistics
@@ -259,4 +259,4 @@
     }
   });
 </script>
-@endsection
+@endpush

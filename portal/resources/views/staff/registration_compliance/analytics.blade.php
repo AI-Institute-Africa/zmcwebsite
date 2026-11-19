@@ -1,4 +1,4 @@
-@extends('layouts.staff')
+@extends('layouts.portal')
 @section('title','Compliance Analytics')
 @section('content')
 <div class="container-fluid py-3">
