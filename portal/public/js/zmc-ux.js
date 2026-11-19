@@ -168,7 +168,10 @@
     table.dataset.zmcEnhanced = '1';
     table.classList.add('zmc-table');
     var ths = $$('th', thead.rows[thead.rows.length - 1]);
-    ths.forEach(function (th) { if (!th.getAttribute('scope')) th.setAttribute('scope', 'col'); });
+    ths.forEach(function (th) {
+      if (!th.getAttribute('scope')) th.setAttribute('scope', 'col');
+      if (!cellText(th) && !th.getAttribute('aria-label') && !th.querySelector('input,button,select')) th.setAttribute('aria-label', tbody.querySelector('a.btn, button') ? 'Actions' : 'Column');
+    });
 
     // empty state
     var allRows = $$(':scope > tr', tbody);
@@ -265,6 +268,7 @@
     }
   }
   function enhanceTables() { $$('.content table.table').forEach(enhanceTable); }
+  window.zmcEnhanceTables = enhanceTables;
 
   /* -------------------------------------------------------------- sidebar */
   function sidebar() {
@@ -346,28 +350,55 @@
   }
 
   /* --------------------------------------------------------- accessibility */
-  function a11y() {
-    var content = $('section.content, .content');
-    if (content && !content.id) { content.id = 'main-content'; content.setAttribute('tabindex', '-1'); }
-    if (content && !$('.zmc-skip')) {
-      var s = document.createElement('a'); s.className = 'zmc-skip'; s.href = '#main-content'; s.textContent = 'Skip to main content';
-      s.addEventListener('click', function () { setTimeout(function () { content.focus(); }, 0); });
-      document.body.insertBefore(s, document.body.firstChild);
-    }
+  function a11yFixes() {
     var words = function (c) { var m = /ri-([a-z0-9-]+?)(-line|-fill)?(\s|$)/.exec(c || ''); return m ? m[1].replace(/-/g, ' ') : ''; };
     $$('button, a.btn, a.icon-btn').forEach(function (b) {
       if (b.getAttribute('aria-label') || b.getAttribute('aria-labelledby')) return;
       var txt = (b.textContent || '').replace(/\s+/g, '').length;
       if (txt) return;
       var label = b.getAttribute('title') || words((b.querySelector('i') || {}).className);
-      if (label) b.setAttribute('aria-label', label.charAt(0).toUpperCase() + label.slice(1));
+      if (!label) label = 'Action';
+      b.setAttribute('aria-label', label.charAt(0).toUpperCase() + label.slice(1));
     });
     $$('input:not([type=hidden]):not([type=submit]):not([type=button]), select, textarea').forEach(function (f) {
       if (f.getAttribute('aria-label') || f.getAttribute('aria-labelledby')) return;
       if (f.id && document.querySelector('label[for="' + f.id + '"]')) return;
       if (f.closest('label')) return;
       var l = f.getAttribute('placeholder') || f.getAttribute('title') || f.name;
-      if (l) f.setAttribute('aria-label', l.replace(/[_\[\]]+/g, ' ').trim());
+      if (!l && f.tagName === 'SELECT' && f.options && f.options.length) l = (f.options[0].textContent || '').trim();
+      if (!l) l = f.tagName === 'SELECT' ? 'Select an option' : (f.type === 'checkbox' ? 'Checkbox' : 'Field');
+      f.setAttribute('aria-label', String(l).replace(/[_\[\]]+/g, ' ').trim());
+    });
+    // icon-only links need a name; images need an alt (decorative when nothing better is known)
+    $$('a[href]').forEach(function (a) {
+      if (a.getAttribute('aria-label') || a.getAttribute('aria-labelledby')) return;
+      if ((a.textContent || '').replace(/\s+/g, '').length || a.querySelector('img[alt]:not([alt=""])')) return;
+      var nm = a.getAttribute('title') || words((a.querySelector('i') || {}).className) || String(a.getAttribute('href') || '').split('/').filter(Boolean).pop();
+      if (nm) a.setAttribute('aria-label', String(nm).replace(/[-_]+/g, ' '));
+    });
+    $$('img:not([alt])').forEach(function (img) { img.setAttribute('alt', img.getAttribute('title') || ''); });
+    // Bootstrap tab strips: <li> inside role=tablist must be presentational (fixes aria-required-parent/children + listitem)
+    $$('[role=tablist] > li:not([role])').forEach(function (li) { li.setAttribute('role', 'presentation'); });
+    $$('[role=tablist] .nav-link:not([role])').forEach(function (a) {
+      a.setAttribute('role', 'tab'); a.setAttribute('aria-selected', a.classList.contains('active') ? 'true' : 'false');
+    });
+    // keyboard users must be able to scroll scrollable regions (cheap size check first, computed style only if it overflows)
+    var scan = $$('.content *'), budget = 4000;
+    for (var si = 0; si < scan.length && budget > 0; si++, budget--) {
+      var el = scan[si];
+      if (el.hasAttribute('tabindex') || el.scrollWidth <= el.clientWidth + 1 && el.scrollHeight <= el.clientHeight + 1) continue;
+      if (el.closest('.vertical-menu, [hidden], .modal:not(.show)') || /^(HTML|BODY|TEXTAREA|SELECT|INPUT|IFRAME|SVG|CANVAS)$/i.test(el.tagName)) continue;
+      var ocs = getComputedStyle(el);
+      if (!/(auto|scroll)/.test(ocs.overflowY + ocs.overflowX)) continue;
+      if (el.querySelector('a[href], button, input, select, textarea, [tabindex]')) continue;
+      el.setAttribute('tabindex', '0');
+      if (!el.getAttribute('role')) el.setAttribute('role', 'region');
+      if (!el.getAttribute('aria-label')) el.setAttribute('aria-label', 'Scrollable content');
+    }
+    headingLevels();
+    $$('th').forEach(function (th) {
+      if ((th.textContent || '').trim() || th.getAttribute('aria-label') || th.querySelector('input,button,select')) return;
+      th.setAttribute('aria-label', th.closest('table') && th.closest('table').querySelector('tbody a.btn, tbody button') ? 'Actions' : 'Column');
     });
     // server-side validation errors: connect message to field + announce
     $$('.is-invalid').forEach(function (f, i) {
@@ -376,6 +407,38 @@
       if (fb) { if (!fb.id) fb.id = 'zmcerr' + i + Math.random().toString(36).slice(2, 5); f.setAttribute('aria-describedby', fb.id); }
     });
     $$('.icon-btn i, .btn i[class^=ri-], .btn i[class*=" ri-"], .sidebar-menu i').forEach(function (i) { i.setAttribute('aria-hidden', 'true'); });
+  }
+
+
+  /* Heading outline for assistive tech: exactly one level-1 heading per page and no skipped levels.
+     Uses aria-level only, so nothing changes visually. */
+  function headingLevels() {
+    var root = $('.content'); if (!root) return;
+    var hs = $$('h1, h2, h3, h4, h5, h6, [role=heading]', root).filter(function (h) { return !h.closest('.modal, [hidden]'); });
+    if (!hs.length) return;
+    var hasH1 = hs.some(function (h) { return h.tagName === 'H1' || h.getAttribute('aria-level') === '1' && !h.hasAttribute('data-zmc-lvl'); });
+    var prev = 0;
+    hs.forEach(function (h, i) {
+      var natural = /^H[1-6]$/.test(h.tagName) ? +h.tagName[1] : (+h.getAttribute('aria-level') || 2);
+      var want = natural;
+      if (i === 0 && !hasH1) want = 1;                       // first heading is the page title
+      else if (prev && want > prev + 1) want = prev + 1;      // never skip a level
+      if (want !== natural || h.hasAttribute('data-zmc-lvl')) {
+        h.setAttribute('role', 'heading'); h.setAttribute('aria-level', String(want)); h.setAttribute('data-zmc-lvl', '1');
+      }
+      prev = want;
+    });
+  }
+
+  function a11yInit() {
+    var content = $('section.content, .content');
+    if (content && !content.id) { content.id = 'main-content'; content.setAttribute('tabindex', '-1'); }
+    if (content && !$('.zmc-skip')) {
+      var s = document.createElement('a'); s.className = 'zmc-skip'; s.href = '#main-content'; s.textContent = 'Skip to main content';
+      s.addEventListener('click', function () { setTimeout(function () { content.focus(); }, 0); });
+      document.body.insertBefore(s, document.body.firstChild);
+    }
+    a11yFixes();
     var first = $('.is-invalid'); if (first && first.focus) { try { first.focus({ preventScroll: false }); } catch (e) { /* ignore */ } }
   }
 
@@ -387,10 +450,7 @@
   });
 
   /* ------------------------------------------- forms: drafts + validation */
-  function forms() {
-    var steps = $$('.step-content');
-    var main = steps.length ? steps[0].closest('form') : null;
-
+  function bindValidation() {
     // inline validation for any form
     $$('form').forEach(function (form) {
       if (form.dataset.zmcValidated || form.hasAttribute('novalidate') || form.closest('.modal')) return;
@@ -418,6 +478,14 @@
       form.addEventListener('input', function (e) { if (e.target.classList && e.target.classList.contains('is-invalid')) show(e.target); });
       form.addEventListener('invalid', function (e) { show(e.target); }, true);
     });
+
+  }
+
+  function forms() {
+    var steps = $$('.step-content');
+    var main = steps.length ? steps[0].closest('form') : null;
+
+    bindValidation();
 
     if (!main) return;
     // draft autosave (this browser only)
@@ -502,6 +570,20 @@
   var cgLin = function (v) { v /= 255; return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4); };
   var cgLum = function (c) { return 0.2126 * cgLin(c.r) + 0.7152 * cgLin(c.g) + 0.0722 * cgLin(c.b); };
   var cgParse = function (str) { var m = /rgba?\(([^)]+)\)/.exec(str || ''); if (!m) return null; var q = m[1].split(/[ ,\/]+/).map(Number); return { r: q[0], g: q[1], b: q[2], a: q.length > 3 ? q[3] : 1 }; };
+
+  // Inline !important always beats stylesheet rules (including the generated dark remaps), but writing through el.style
+  // would re-serialise the whole style attribute ("background:#e0e7ff" -> "background: rgb(224, 231, 255)") and the
+  // attribute-selector remaps would stop matching. So we APPEND to the original attribute text with setAttribute: the
+  // original declarations stay byte-for-byte intact, and the later declaration wins.
+  var cgOrig = new Map();
+  function cgApply(el, color) {
+    if (!cgOrig.has(el)) cgOrig.set(el, el.getAttribute('style') || '');
+    var base = cgOrig.get(el), sep = base && !/;\s*$/.test(base) ? ';' : '';
+    el.setAttribute('style', base + sep + 'color:' + color + ' !important');
+    el.setAttribute('data-zmc-cg', '1');
+  }
+  function cgFlush() { /* nothing to flush: colours are written inline */ }
+
   function cgBg(el, memo) {
     if (memo.has(el)) return memo.get(el);
     var layers = [], result = null, e = el, solid = false;
@@ -523,6 +605,28 @@
     memo.set(el, result);
     return result;
   }
+
+  function cgNudge(fg, bg, L2, target) {
+    var r = fg.r / 255, g = fg.g / 255, b = fg.b / 255, mx = Math.max(r, g, b), mn = Math.min(r, g, b), l = (mx + mn) / 2, h = 0, sat = 0;
+    if (mx !== mn) {
+      var d = mx - mn; sat = l > 0.5 ? d / (2 - mx - mn) : d / (mx + mn);
+      h = mx === r ? (g - b) / d + (g < b ? 6 : 0) : mx === g ? (b - r) / d + 2 : (r - g) / d + 4; h /= 6;
+    }
+    var hue2 = function (p, q, t) { if (t < 0) t += 1; if (t > 1) t -= 1; return t < 1 / 6 ? p + (q - p) * 6 * t : t < 1 / 2 ? q : t < 2 / 3 ? p + (q - p) * (2 / 3 - t) * 6 : p; };
+    var toRgb = function (hh, ss, ll) {
+      if (ss === 0) return { r: ll * 255, g: ll * 255, b: ll * 255 };
+      var q = ll < 0.5 ? ll * (1 + ss) : ll + ss - ll * ss, p = 2 * ll - q;
+      return { r: hue2(p, q, hh + 1 / 3) * 255, g: hue2(p, q, hh) * 255, b: hue2(p, q, hh - 1 / 3) * 255 };
+    };
+    var dir = L2 < 0.4 ? 1 : -1;                                           // light bg: darken text; dark bg: lighten text
+    for (var step = 1; step <= 60; step++) {
+      var c = toRgb(h, sat, Math.min(1, Math.max(0, l + dir * step * 0.01)));
+      var Lc = cgLum(c); var cr = (Math.max(Lc, L2) + 0.05) / (Math.min(Lc, L2) + 0.05);
+      if (cr >= target) return 'rgb(' + Math.round(c.r) + ',' + Math.round(c.g) + ',' + Math.round(c.b) + ')';
+    }
+    return null;
+  }
+
   function contrastGuard(scope) {
     var root = scope || $('.content'); if (!root) return 0;
     var memo = new Map(), fixed = 0, n = 0;
@@ -539,22 +643,27 @@
       var fg = cgParse(cs.color), bg = cgBg(el, memo); if (!fg || !bg) continue;
       var a = fg.a, mix = { r: fg.r * a + bg.r * (1 - a), g: fg.g * a + bg.g * (1 - a), b: fg.b * a + bg.b * (1 - a) };
       var L1 = cgLum(mix), L2 = cgLum(bg);
-      if ((Math.max(L1, L2) + 0.05) / (Math.min(L1, L2) + 0.05) >= 3) continue;
+      var ratio = (Math.max(L1, L2) + 0.05) / (Math.min(L1, L2) + 0.05);
+      var px = parseFloat(cs.fontSize) || 14, bold = (parseInt(cs.fontWeight, 10) || 400) >= 700;
+      var need = (px >= 24 || (px >= 18.66 && bold)) ? 3 : 4.5;          // WCAG large-text threshold
+      if (ratio >= need) continue;
+      if (ratio >= 3) {                                                    // close: nudge lightness, keep the hue
+        var nudged = cgNudge(fg, bg, L2, need + 0.15);
+        if (nudged) { cgApply(el, nudged); fixed++; continue; }
+      }
       var white = 1.05 / (L2 + 0.05), black = (L2 + 0.05) / 0.05;
-      el.setAttribute('data-zmc-cg', el.style.getPropertyValue('color'));
-      if (el.style.getPropertyPriority('color')) el.setAttribute('data-zmc-cgi', '1');
-      el.style.setProperty('color', white >= black ? '#f8fafc' : '#0f172a', 'important');
+      cgApply(el, white >= black ? '#f8fafc' : '#0f172a');
       fixed++;
     }
+    cgFlush();
     return fixed;
   }
   function contrastReset() {
-    $$('[data-zmc-cg]').forEach(function (el) {
-      var o = el.getAttribute('data-zmc-cg');
-      if (o === '') { el.style.removeProperty('color'); }
-      else { el.style.setProperty('color', o, el.getAttribute('data-zmc-cgi') ? 'important' : ''); }
-      el.removeAttribute('data-zmc-cg'); el.removeAttribute('data-zmc-cgi');
+    cgOrig.forEach(function (orig, el) {
+      if (orig === '') { el.removeAttribute('style'); } else { el.setAttribute('style', orig); }
+      el.removeAttribute('data-zmc-cg');
     });
+    cgOrig.clear();
   }
   window.zmcContrastGuard = function (scope) { contrastReset(); return contrastGuard(scope); };
   function startContrastGuard() {
@@ -568,12 +677,81 @@
     document.addEventListener('shown.bs.tab', function () { setTimeout(function () { contrastGuard(); }, 120); });
   }
 
+
+  /* ------------------------------------------------------------ chart theming */
+  // ApexCharts / Chart.js colours are set in JS and ignore stylesheets, so in dark mode their text and grids stay dark grey.
+  // We set library-wide defaults (for charts created later) and update the ones that already exist.
+  function chartPalette() {
+    var dark = document.documentElement.getAttribute('data-bs-theme') === 'dark';
+    return { dark: dark, fore: dark ? '#cbd5e1' : '#334155', grid: dark ? '#334155' : '#e2e8f0' };
+  }
+  // ApexCharts keeps no public registry for ungrouped charts, so we record each chart when it renders.
+  var apexRegistry = [];
+  function trackApex() {
+    var A = window.ApexCharts;
+    if (!A || !A.prototype || A.prototype.__zmcTracked) return;
+    var origRender = A.prototype.render;
+    A.prototype.render = function () { if (apexRegistry.indexOf(this) < 0) apexRegistry.push(this); return origRender.apply(this, arguments); };
+    A.prototype.__zmcTracked = true;
+  }
+  function applyChartTheme() {
+    var pal = chartPalette(), mode = pal.dark ? 'dark' : 'light';
+    try {
+      if (window.Apex) {
+        var A = window.Apex;
+        A.chart = Object.assign({}, A.chart, { foreColor: pal.fore, background: 'transparent' });
+        A.grid = Object.assign({}, A.grid, { borderColor: pal.grid });
+        A.tooltip = Object.assign({}, A.tooltip, { theme: mode });
+        A.theme = Object.assign({}, A.theme, { mode: mode });
+      }
+    } catch (e) { /* defaults are best effort */ }
+    apexRegistry.slice().forEach(function (chart) {
+      try {
+        if (!chart.el || !document.body.contains(chart.el)) { apexRegistry.splice(apexRegistry.indexOf(chart), 1); return; }
+        chart.updateOptions({ chart: { foreColor: pal.fore, background: 'transparent' }, grid: { borderColor: pal.grid }, tooltip: { theme: mode }, theme: { mode: mode } }, false, false);
+      } catch (e) { /* chart may be destroyed */ }
+    });
+    try {
+      var C = window.Chart;
+      if (C && C.defaults) {
+        C.defaults.color = pal.fore; C.defaults.borderColor = pal.grid;       // defaults only: per-axis writes recurse inside Chart.js 4's options proxy
+        // Existing charts resolved their scale options at creation, so write the colours into each chart's own user config
+        // (writing through chart.options recurses inside Chart.js 4's proxy). Colours the page set itself are left alone.
+        var themeOwned = ['#cbd5e1', '#334155', '#e2e8f0'];
+        Object.keys(C.instances || {}).forEach(function (k) {
+          try {
+            var ch = C.instances[k]; if (!ch || !ch.update || !ch.config || !ch.config.options) return;
+            var uo = ch.config.options; uo.scales = uo.scales || {};
+            Object.keys(ch.scales || {}).forEach(function (id) {
+              var sc = uo.scales[id] = uo.scales[id] || {};
+              var tk = sc.ticks || {}, gd = sc.grid || {};
+              if (tk.color === undefined || themeOwned.indexOf(tk.color) >= 0) sc.ticks = Object.assign({}, tk, { color: pal.fore });
+              if (gd.color === undefined || themeOwned.indexOf(gd.color) >= 0) sc.grid = Object.assign({}, gd, { color: pal.grid });
+            });
+            ch.update('none');
+          } catch (e) { /* ignore */ }
+        });
+      }
+    } catch (e) { /* charts are optional */ }
+  }
+  function startChartTheme() {
+    trackApex();
+    applyChartTheme();                                               // defaults first: charts created afterwards pick them up
+    window.addEventListener('load', function () { setTimeout(applyChartTheme, 250); });
+    window.addEventListener('zmc:theme-changed', function () { setTimeout(applyChartTheme, 50); });
+    if (window.MutationObserver) {
+      new MutationObserver(function () { setTimeout(applyChartTheme, 50); }).observe(document.documentElement, { attributes: true, attributeFilter: ['data-bs-theme'] });
+    }
+    window.zmcApplyChartTheme = applyChartTheme;
+  }
+
   /* ---------------------------------------------------------------- boot */
   function boot() {
-    convertFlashAlerts(); enhanceTables(); sidebar(); a11y(); forms(); startContrastGuard();
+    convertFlashAlerts(); enhanceTables(); sidebar(); a11yInit(); forms(); startContrastGuard(); startChartTheme();
     // late-rendered tables (AJAX partials)
     if (window.MutationObserver) {
-      var t; new MutationObserver(function () { clearTimeout(t); t = setTimeout(enhanceTables, 150); }).observe(document.body, { childList: true, subtree: true });
+      var t; new MutationObserver(function () { clearTimeout(t); t = setTimeout(function () { enhanceTables(); a11yFixes(); bindValidation(); }, 150); }).observe(document.body, { childList: true, subtree: true });
+      window.zmcA11y = a11yFixes; window.zmcBindValidation = bindValidation;
     }
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot); else boot();

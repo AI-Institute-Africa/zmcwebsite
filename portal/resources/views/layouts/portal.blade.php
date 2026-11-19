@@ -2008,6 +2008,10 @@
   .badge.bg-info, .btn-info, .bg-info:not(.bg-info-subtle) { color: #082f3a !important; }
   .pagination .page-item.active .page-link { color: #111 !important; }
   .alert-warning { color: #9a3412 !important; }
+  /* Bootstrap's default red fails AA with white text (4.4:1): slightly deeper red passes (5.9:1) */
+  .btn-danger, .badge.bg-danger { background-color: #c62828 !important; border-color: #c62828 !important; color: #fff !important; }
+  .badge.bg-primary.text-dark { color: #fff !important; }
+  .text-primary { color: #0a58ca !important; }
 
   /* ===== DARK MODE FIXES (2026-11-19) ===== */
   [data-bs-theme="dark"] { --dm-surface-2: #263449; --dm-text-strong: #f1f5f9; color-scheme: dark; }
