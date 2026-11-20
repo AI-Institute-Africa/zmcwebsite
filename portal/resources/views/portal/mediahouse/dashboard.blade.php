@@ -90,7 +90,7 @@
                   data-app-ref="{{ $pendingAppFee->reference }}"
                   data-payment-stage="application_fee"
                   data-application-type="mediahouse"
-                  style="background:#22c55e;color:#fff;">
+                  style="background:#15803d;color:#fff;">
             <i class="ri-bank-card-line me-1"></i> Pay Application Fee
           </button>
         </div>

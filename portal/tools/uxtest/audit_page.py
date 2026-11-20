@@ -28,6 +28,7 @@ page = r'''<!doctype html><html data-bs-theme="__THEME__"><head><meta charset=ut
 <script>__UXJS__</script>
 <script>
 const THEME = "__THEME__", LITE = __LITE__;
+window.__zmcCgPause = true;   // the audit measures the raw CSS first, then calls the guard explicitly
 const errs = []; window.addEventListener('error', e => errs.push(String(e.message).slice(0, 120)));
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 const lin = v => { v /= 255; return v <= .03928 ? v / 12.92 : Math.pow((v + .055) / 1.055, 2.4); };
@@ -51,6 +52,40 @@ const AXE_OFF = ['region', 'page-has-heading-one', 'landmark-one-main', 'documen
 function dataRows(tbody) { return [...tbody.children].filter(tr => tr.tagName === 'TR' && tr.children.length > 1 && !tr.querySelector('td[colspan]:only-child')); }
 function csvLine(l) { const out = []; let cur = '', q = false; for (let i = 0; i < l.length; i++) { const c = l[i]; if (q) { if (c === '"' && l[i + 1] === '"') { cur += '"'; i++; } else if (c === '"') q = false; else cur += c; } else if (c === '"') q = true; else if (c === ',') { out.push(cur); cur = ''; } else cur += c; } out.push(cur); return out; }
 
+function contrastScan() {
+  const stage = document.getElementById('stage'); const m = { severe: 0, low: 0, ex: [] };
+  stage.querySelectorAll('*').forEach(el => {
+    if (el.closest('.modal:not(.show)') || el.closest('[hidden], template, script, style')) return;
+    const own = [...el.childNodes].some(n => n.nodeType === 3 && n.textContent.trim().length > 1);
+    if (!own) return;
+    const rect = el.getBoundingClientRect(); if (rect.width < 2 || rect.height < 2) return;
+    const cs = getComputedStyle(el); if (cs.visibility === 'hidden' || cs.display === 'none' || parseFloat(cs.opacity) < 0.3) return;
+    const fg = parse(cs.color), bg = effectiveBg(el); if (!fg || !bg) return;
+    const a = fg.a, mix = { r: fg.r * a + bg.r * (1 - a), g: fg.g * a + bg.g * (1 - a), b: fg.b * a + bg.b * (1 - a) };
+    const L1 = lum(mix), L2 = lum(bg), ratio = (Math.max(L1, L2) + .05) / (Math.min(L1, L2) + .05);
+    if (ratio < 3) { m.severe++; m.low++; if (m.ex.length < 4) m.ex.push(ratio.toFixed(1) + ' "' + el.textContent.trim().slice(0, 24) + '" ' + el.tagName.toLowerCase() + '.' + String(el.className).trim().replace(/\s+/g, '.') + ' fg=' + cs.color + ' bg=' + Math.round(bg.r) + ',' + Math.round(bg.g) + ',' + Math.round(bg.b)); }
+    else if (ratio < 4.5) { m.low++; if (m.ex.length < 4) m.ex.push(ratio.toFixed(1) + ' "' + el.textContent.trim().slice(0, 24) + '" ' + el.tagName.toLowerCase() + '.' + String(el.className).trim().replace(/\s+/g, '.') + ' fg=' + cs.color + ' bg=' + Math.round(bg.r) + ',' + Math.round(bg.g) + ',' + Math.round(bg.b)); }
+  });
+  return m;
+}
+// light boxes on a dark page: large, nearly opaque, light-coloured surfaces that are not deliberate accents
+function lightBoxScan() {
+  const stage = document.getElementById('stage'); let n = 0; const ex = [];
+  stage.querySelectorAll('*').forEach(el => {
+    if (el.closest('.modal:not(.show)') || el.closest('[hidden], template, script, style, svg, canvas, img, .btn, [class*="btn"], .badge, .alert, [class*="bg-warning"], [class*="bg-info"], [class*="bg-success"], [class*="bg-danger"], [class*="bg-primary"], .progress, .form-check-input, .form-switch')) return;
+    const rc = el.getBoundingClientRect(); if (rc.width * rc.height < 3000 || rc.width < 60 || rc.height < 24) return;
+    const cs = getComputedStyle(el); if (cs.visibility === 'hidden' || cs.display === 'none') return;
+    let c = parse(cs.backgroundColor);
+    if (cs.backgroundImage && cs.backgroundImage.indexOf('gradient') >= 0) {     // gradient box: average the colour stops
+      const stops = (cs.backgroundImage.match(/rgba?\([^)]+\)/g) || []).map(parse).filter(Boolean);
+      if (stops.length && stops.every(s => s.a >= 0.9)) c = { r: stops.reduce((a, s) => a + s.r, 0) / stops.length, g: stops.reduce((a, s) => a + s.g, 0) / stops.length, b: stops.reduce((a, s) => a + s.b, 0) / stops.length, a: 1 };
+    }
+    if (!c || c.a < 0.9) return;
+    if (lum(c) > 0.45) { n++; if (ex.length < 3) ex.push(el.tagName.toLowerCase() + '.' + String(el.className).trim().replace(/\s+/g, '.').slice(0, 50) + ' bg=' + cs.backgroundColor); }
+  });
+  return { n, ex };
+}
+
 (async () => {
   const manifest = await (await fetch('/frag/manifest.json')).json();
   const stage = document.getElementById('stage');
@@ -64,27 +99,18 @@ function csvLine(l) { const out = []; let cur = '', q = false; for (let i = 0; i
     stage.querySelectorAll('.modal.show, .modal-backdrop').forEach(n => n.remove());
     document.querySelectorAll('.modal-backdrop').forEach(n => n.remove());
     await sleep(700);
-    const r = { v: manifest[i], severe: 0, low: 0, ex: [], fixed: 0, ms_guard: 0, ms_enh: 0, tables: 0, tableBad: [], modals: 0, modalBad: [], confirmBad: 0, confirms: 0, ddBad: 0, dds: 0, reqBad: 0, reqs: 0, axe: [], h1: 0, hskip: 0, overflowX: 0, overflowEx: [], errors: [] };
+    const r = { v: manifest[i], severe: 0, low: 0, ex: [], fixed: 0, ms_guard: 0, ms_enh: 0, tables: 0, tableBad: [], modals: 0, modalBad: [], confirmBad: 0, confirms: 0, ddBad: 0, dds: 0, reqBad: 0, reqs: 0, axe: [], lightBox: 0, lightBoxEx: [], rawSevere: 0, rawLow: 0, rawEx: [], h1: 0, hskip: 0, overflowX: 0, overflowEx: [], errors: [] };
 
     // performance of the two scanners (re-run on a clean state)
     let t0 = performance.now(); window.zmcEnhanceTables && window.zmcEnhanceTables(); r.ms_enh = +(performance.now() - t0).toFixed(1);
     t0 = performance.now(); window.zmcA11y && window.zmcA11y(); window.zmcBindValidation && window.zmcBindValidation(); r.ms_a11y = +(performance.now() - t0).toFixed(1);
+    { const rw = contrastScan(); r.rawSevere = rw.severe; r.rawLow = rw.low; r.rawEx = rw.ex; }   // BEFORE the guard: what the CSS alone delivers
     t0 = performance.now(); r.fixed = window.zmcContrastGuard ? window.zmcContrastGuard(stage) : 0; r.ms_guard = +(performance.now() - t0).toFixed(1);
     await sleep(350);                                   // let CSS colour transitions finish before measuring (computed style is mid-transition otherwise)
 
     // contrast (after guard, as a real user sees it)
-    stage.querySelectorAll('*').forEach(el => {
-      if (el.closest('.modal:not(.show)') || el.closest('[hidden], template, script, style')) return;
-      const own = [...el.childNodes].some(n => n.nodeType === 3 && n.textContent.trim().length > 1);
-      if (!own) return;
-      const rect = el.getBoundingClientRect(); if (rect.width < 2 || rect.height < 2) return;
-      const cs = getComputedStyle(el); if (cs.visibility === 'hidden' || cs.display === 'none' || parseFloat(cs.opacity) < 0.3) return;
-      const fg = parse(cs.color), bg = effectiveBg(el); if (!fg || !bg) return;
-      const a = fg.a, mix = { r: fg.r * a + bg.r * (1 - a), g: fg.g * a + bg.g * (1 - a), b: fg.b * a + bg.b * (1 - a) };
-      const L1 = lum(mix), L2 = lum(bg), ratio = (Math.max(L1, L2) + .05) / (Math.min(L1, L2) + .05);
-      if (ratio < 3) { r.severe++; r.low++; if (r.ex.length < 4) r.ex.push(ratio.toFixed(1) + ' "' + el.textContent.trim().slice(0, 24) + '" ' + el.tagName.toLowerCase() + '.' + String(el.className).trim().replace(/\s+/g, '.') + ' fg=' + cs.color + ' bg=' + Math.round(bg.r) + ',' + Math.round(bg.g) + ',' + Math.round(bg.b)); }
-      else if (ratio < 4.5) { r.low++; if (r.ex.length < 4) r.ex.push(ratio.toFixed(1) + ' "' + el.textContent.trim().slice(0, 24) + '" ' + el.tagName.toLowerCase() + '.' + String(el.className).trim().replace(/\s+/g, '.') + ' fg=' + cs.color + ' bg=' + Math.round(bg.r) + ',' + Math.round(bg.g) + ',' + Math.round(bg.b)); }
-    });
+    { const m = contrastScan(); r.severe = m.severe; r.low = m.low; r.ex = m.ex; }
+    if (THEME === 'dark') { const lb = lightBoxScan(); r.lightBox = lb.n; r.lightBoxEx = lb.ex; }
 
     // overflow (horizontal) + headings
     const vw = document.documentElement.clientWidth;

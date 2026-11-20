@@ -592,12 +592,32 @@
   // would re-serialise the whole style attribute ("background:#e0e7ff" -> "background: rgb(224, 231, 255)") and the
   // attribute-selector remaps would stop matching. So we APPEND to the original attribute text with setAttribute: the
   // original declarations stay byte-for-byte intact, and the later declaration wins.
-  var cgOrig = new Map();
-  function cgApply(el, color, fullOpacity) {
+  var cgOrig = new Map(), cgAdd = new Map();
+  function cgWrite(el, decl) {
     if (!cgOrig.has(el)) cgOrig.set(el, el.getAttribute('style') || '');
+    var add = (cgAdd.get(el) || '') + decl + ';'; cgAdd.set(el, add);        // several fixes on one element accumulate
     var base = cgOrig.get(el), sep = base && !/;\s*$/.test(base) ? ';' : '';
-    el.setAttribute('style', base + sep + 'color:' + color + ' !important' + (fullOpacity ? ';opacity:1 !important' : ''));
+    el.setAttribute('style', base + sep + add);
     el.setAttribute('data-zmc-cg', '1');
+  }
+  function cgApply(el, color, fullOpacity) { cgWrite(el, 'color:' + color + ' !important' + (fullOpacity ? ';opacity:1 !important' : '')); }
+
+  // Inline light gradients (style="background:linear-gradient(#f8fafc,#fff)") cannot be matched by a stylesheet: in dark mode they
+  // stay as bright panels. Replace pale, fully opaque gradients with the dark card surface. Brand/coloured gradients are untouched.
+  function cgLightGradients(root) {
+    if (document.documentElement.getAttribute('data-bs-theme') !== 'dark') return 0;
+    var fixed = 0;
+    $$('[style*="gradient"]', root).forEach(function (el) {
+      if (el.hasAttribute('data-zmc-nocg') || el.closest('.vertical-menu') || /^(SVG|CANVAS|IMG|PATH)$/i.test(el.tagName)) return;
+      var rc = el.getBoundingClientRect(); if (rc.width * rc.height < 1500) return;
+      var bi = getComputedStyle(el).backgroundImage || ''; if (bi.indexOf('gradient(') < 0 || bi.indexOf('url(') >= 0) return;
+      var stops = (bi.match(/rgba?\([^)]+\)/g) || []).map(cgParse).filter(Boolean);
+      if (!stops.length) return;
+      var pale = stops.every(function (c) { var mx = Math.max(c.r, c.g, c.b), mn = Math.min(c.r, c.g, c.b); return c.a >= 0.9 && cgLum(c) > 0.75 && (mx ? (mx - mn) / mx : 0) < 0.3; });
+      if (!pale) return;
+      cgWrite(el, 'background:#1e293b !important;background-image:none !important'); fixed++;
+    });
+    return fixed;
   }
   function cgFlush() { /* nothing to flush: colours are written inline */ }
 
@@ -645,14 +665,14 @@
   }
 
   function contrastGuard(scope) {
-    var root = scope || $('.content'); if (!root) return 0;
-    var memo = new Map(), fixed = 0, n = 0;
+    var root = scope || document.body; if (!root) return 0;      // whole page: top bar, dropdowns and modals too, not just .content
+    var memo = new Map(), fixed = cgLightGradients(root), n = 0;
     var walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null);
     var seen = new Set(), node;
     while ((node = walker.nextNode())) {
       var el = node.parentElement;
       if (!el || seen.has(el) || !node.textContent.trim() || el.hasAttribute('data-zmc-nocg')) continue;
-      seen.add(el); if (++n > 5000) break;
+      seen.add(el); if (++n > 15000) break;
       if (/^(SCRIPT|STYLE|NOSCRIPT|TEXTAREA|OPTION)$/.test(el.tagName) || el.closest('[hidden], .vertical-menu')) continue;
       var rect = el.getBoundingClientRect(); if (rect.width < 2 || rect.height < 2) continue;
       var cs = getComputedStyle(el);
@@ -688,20 +708,45 @@
       if (orig === '') { el.removeAttribute('style'); } else { el.setAttribute('style', orig); }
       el.removeAttribute('data-zmc-cg');
     });
-    cgOrig.clear();
+    cgOrig.clear(); cgAdd.clear();
   }
-  window.zmcContrastGuard = function (scope) { contrastReset(); return contrastGuard(scope); };
+  // Reset + re-measure must run with colour transitions OFF: .btn fades colour over 180ms, so right after the reset the computed
+  // colour is still the previous (fixed) one, the guard would think the text is fine and leave it unreadable once the fade ends.
+  function noTransitions(fn) {
+    var de = document.documentElement, had = de.classList.contains('zmc-theme-switching');
+    de.classList.add('zmc-theme-switching'); void de.offsetWidth;          // flush styles with transitions disabled
+    try { return fn(); } finally { if (!had) setTimeout(function () { de.classList.remove('zmc-theme-switching'); }, 80); }
+  }
+  window.zmcContrastGuard = function (scope) { return noTransitions(function () { contrastReset(); return contrastGuard(scope); }); };
   function startContrastGuard() {
     var idle = window.requestIdleCallback || function (f) { setTimeout(f, 60); };
-    var run = function () { idle(function () { contrastReset(); contrastGuard(); }); };
-    setTimeout(run, 900);                                         // after entry animations settle
-    if (window.MutationObserver) {
-      new MutationObserver(function () { setTimeout(run, 450); }).observe(document.documentElement, { attributes: true, attributeFilter: ['data-bs-theme'] });
+    var de = document.documentElement;
+    function fixNow() { if (window.__zmcCgPause) return; noTransitions(function () { contrastReset(); contrastGuard(); }); }   // __zmcCgPause: test harness measures the raw CSS
+    // Theme switch: fix text BEFORE the browser paints the new theme. Transitions are switched off for a moment so computed
+    // colours are final (not mid-fade), and a mutation observer callback runs before rendering, so nobody sees dark-on-dark text.
+    function onTheme() {
+      de.classList.add('zmc-theme-switching');
+      fixNow();
+      setTimeout(function () { de.classList.remove('zmc-theme-switching'); fixNow(); }, 120);
+      setTimeout(fixNow, 700);                                    // late CSS (lazy stylesheets, chart redraws)
     }
-    document.addEventListener('shown.bs.modal', function (e) { contrastGuard(e.target); });
-    document.addEventListener('shown.bs.tab', function () { setTimeout(function () { contrastGuard(); }, 120); });
+    fixNow();                                                    // first paint: no wait for animations
+    setTimeout(function () { idle(fixNow); }, 900);              // again after entry animations settle (opacity > 0.3)
+    if (window.MutationObserver) {
+      new MutationObserver(onTheme).observe(de, { attributes: true, attributeFilter: ['data-bs-theme'] });
+      // content added later (AJAX tables, rendered modals, injected widgets)
+      var t;
+      new MutationObserver(function (muts) {
+        if (!muts.some(function (m) { return m.addedNodes && m.addedNodes.length; })) return;
+        clearTimeout(t); t = setTimeout(function () { idle(function () { if (!window.__zmcCgPause) contrastGuard(); }); }, 250);
+      }).observe(document.body, { childList: true, subtree: true });
+    }
+    window.addEventListener('zmc:theme-changed', function () { setTimeout(fixNow, 60); });
+    ['shown.bs.modal', 'shown.bs.dropdown', 'shown.bs.collapse', 'shown.bs.offcanvas'].forEach(function (ev) {
+      document.addEventListener(ev, function (e) { if (!window.__zmcCgPause) contrastGuard(e.target); });
+    });
+    document.addEventListener('shown.bs.tab', function () { setTimeout(function () { if (!window.__zmcCgPause) contrastGuard(); }, 120); });
   }
-
 
   /* ------------------------------------------------------------ chart theming */
   // ApexCharts / Chart.js colours are set in JS and ignore stylesheets, so in dark mode their text and grids stay dark grey.

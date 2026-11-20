@@ -75,7 +75,7 @@ BLOCK = r"""
   .text-primary { color: #0a58ca !important; }
 
   /* ===== DARK MODE FIXES (2026-11-19) ===== */
-  [data-bs-theme="dark"] { --dm-surface-2: #263449; --dm-text-strong: #f1f5f9; color-scheme: dark; }
+  [data-bs-theme="dark"] { --dm-surface-2: #263449; --dm-hover: #324259; --dm-text-strong: #f1f5f9; color-scheme: dark; }
   [data-bs-theme="dark"] body { background: var(--c-bg) !important; color: var(--c-text); }
 
   /* Inline light colours in views -> dark equivalents (generated, exact-terminated selectors) */

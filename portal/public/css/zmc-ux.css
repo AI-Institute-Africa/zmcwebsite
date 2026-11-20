@@ -207,3 +207,51 @@ label.zmc-required::after { content: " *"; color: #dc2626; font-weight: 700; }
 /* The visually-hidden label added to empty table headers is absolutely positioned: its header must be its containing block,
    otherwise in a wide scrolling table it escapes the clipping and widens the whole page. */
 .zmc-table th:has(> .visually-hidden), table th:has(> .visually-hidden) { position: relative; }
+
+/* theme switch: no colour fades while the contrast guard measures (set by zmc-ux.js for ~120ms) */
+html.zmc-theme-switching *, html.zmc-theme-switching *::before, html.zmc-theme-switching *::after { transition: none !important; }
+
+/* ------------------------------------------------------------ dark mode hardening
+   Hand-written rules for things the generator in tools/uxtest cannot know (zmc-dark.css is generated, do not edit it). */
+[data-bs-theme="dark"] a.btn.btn-white, [data-bs-theme="dark"] button.btn.btn-white, [data-bs-theme="dark"] .btn-white {
+  background: var(--dm-surface-2, #263449) !important; border-color: var(--c-border, #334155) !important; color: var(--c-text, #f1f5f9) !important; }
+[data-bs-theme="dark"] a.btn.btn-white:hover, [data-bs-theme="dark"] button.btn.btn-white:hover, [data-bs-theme="dark"] .btn-white:hover,
+[data-bs-theme="dark"] a.btn.btn-white:focus-visible, [data-bs-theme="dark"] button.btn.btn-white:focus-visible {
+  background: var(--dm-hover, #324259) !important; border-color: #facc15 !important; color: #fff !important; }
+/* hover/focus feedback that is visibly different from the resting surface */
+[data-bs-theme="dark"] .table-hover > tbody > tr:hover > * { --bs-table-hover-bg: rgba(148,163,184,.16); --bs-table-hover-color: var(--c-text, #f1f5f9); }   /* Bootstrap paints this overlay once; translucent keeps muted text readable */
+[data-bs-theme="dark"] .zmc-table:not(.table-hover) tbody tr:hover > * { background-color: rgba(148,163,184,.16) !important; }
+[data-bs-theme="dark"] .list-group-item-action:hover, [data-bs-theme="dark"] .list-group-item-action:focus,
+[data-bs-theme="dark"] .dropdown-item:hover, [data-bs-theme="dark"] .dropdown-item:focus { background: var(--dm-hover, #324259) !important; color: #fff !important; }
+[data-bs-theme="dark"] .nav-pills .nav-link:not(.active):hover, [data-bs-theme="dark"] .nav-tabs .nav-link:not(.active):hover { background: var(--dm-hover, #324259) !important; color: #fff !important; }
+[data-bs-theme="dark"] .btn-warning:hover { color: #111 !important; }
+[data-bs-theme="dark"] .btn-outline-secondary:focus-visible, [data-bs-theme="dark"] .btn-light:focus-visible { outline: 2px solid #facc15; outline-offset: 2px; }
+/* muted text on a dark panel (bg-dark / table-dark / bg-secondary) must stay readable */
+[data-bs-theme="dark"] .bg-dark .text-muted, [data-bs-theme="dark"] .table-dark .text-muted, [data-bs-theme="dark"] .bg-secondary .text-muted,
+[data-bs-theme="dark"] .bg-dark small, [data-bs-theme="dark"] .bg-dark .small { color: #cbd5e1 !important; }
+/* Bootstrap 5.3 variables the generated rules never remapped */
+[data-bs-theme="dark"] { --bs-body-color: #e2e8f0; --bs-secondary-color: #94a3b8; --bs-tertiary-bg: #1e293b; --bs-border-color: #334155; --bs-emphasis-color: #f8fafc; --bs-heading-color: #f1f5f9;
+  --bs-card-bg: #1e293b; --bs-card-cap-bg: #263449; --bs-modal-bg: #1e293b; --bs-modal-color: #e2e8f0; --bs-dropdown-bg: #1e293b; --bs-dropdown-color: #e2e8f0; --bs-dropdown-link-color: #e2e8f0;
+  --bs-dropdown-link-hover-bg: #324259; --bs-dropdown-link-hover-color: #fff; --bs-list-group-action-hover-bg: #324259; --bs-list-group-action-hover-color: #fff; }
+[data-bs-theme="dark"] .toast, [data-bs-theme="dark"] .offcanvas { background: #1e293b; color: #e2e8f0; border-color: #334155; }
+[data-bs-theme="dark"] .form-check-label, [data-bs-theme="dark"] .form-label, [data-bs-theme="dark"] .form-text { color: #cbd5e1; }
+[data-bs-theme="dark"] .tooltip { --bs-tooltip-bg: #475569; --bs-tooltip-color: #fff; }
+/* white text on Bootstrap blue/grey/green fills is 4.3-4.5:1 with the slightly off-white theme text colour: use true white */
+[data-bs-theme="dark"] .badge.bg-primary, [data-bs-theme="dark"] .badge.bg-secondary, [data-bs-theme="dark"] .badge.text-bg-primary, [data-bs-theme="dark"] .badge.text-bg-secondary,
+[data-bs-theme="dark"] .badge.text-bg-success, [data-bs-theme="dark"] .badge.bg-success:not(.bg-opacity-10):not(.bg-opacity-25), [data-bs-theme="dark"] .progress-bar { color: #fff !important; }
+/* muted links keep a visible hover (the .text-muted colour is forced !important, which also froze the link hover colour) */
+a.text-muted:hover, a.text-secondary:hover, a.text-body-secondary:hover { text-decoration: underline !important; }
+[data-bs-theme="dark"] a.text-muted:hover, [data-bs-theme="dark"] a.text-secondary:hover, [data-bs-theme="dark"] a.text-body-secondary:hover { color: #f1f5f9 !important; }
+[data-bs-theme="light"] a.text-muted:hover, [data-bs-theme="light"] a.text-secondary:hover { color: #0f172a !important; }
+/* muted text inside a hovered row / list item / dropdown item gets lighter so it stays readable on the hover colour */
+[data-bs-theme="dark"] tr:hover .text-muted, [data-bs-theme="dark"] tr:hover .text-muted *, [data-bs-theme="dark"] tr:hover small,
+[data-bs-theme="dark"] .list-group-item-action:hover .text-muted, [data-bs-theme="dark"] .dropdown-item:hover .text-muted { color: #cbd5e1 !important; }
+
+/* ------------------------------------------------ light mode: outline buttons that failed AA on a light page
+   (Bootstrap's defaults are 1.5-4.4:1). Set via the button variables so hover/active/disabled states keep working. */
+[data-bs-theme="light"] .btn-outline-warning { --bs-btn-color: #8a4b0a; --bs-btn-border-color: #a16207; }
+[data-bs-theme="light"] .btn-outline-secondary { --bs-btn-color: #565e64; --bs-btn-border-color: #6c757d; }
+[data-bs-theme="light"] .btn-outline-primary { --bs-btn-color: #0a58ca; }
+[data-bs-theme="light"] .btn-outline-info { --bs-btn-color: #087990; --bs-btn-border-color: #087990; }
+[data-bs-theme="light"] .btn-outline-danger { --bs-btn-color: #b02a37; }
+[data-bs-theme="light"] .btn-outline-success { --bs-btn-color: #146c43; }

@@ -1844,13 +1844,13 @@
     [data-bs-theme="dark"] .dashboard-card .h3,
     [data-bs-theme="dark"] .dashboard-card .h4,
     [data-bs-theme="dark"] .dashboard-card .h5,
-    [data-bs-theme="dark"] .dashboard-card .fw-black,
-    [data-bs-theme="dark"] .dashboard-card .fw-bold,
+    [data-bs-theme="dark"] .dashboard-card .fw-black:not(.btn):not(.badge):not(.alert),
+    [data-bs-theme="dark"] .dashboard-card .fw-bold:not(.btn):not(.badge):not(.alert),
     [data-bs-theme="dark"] .zmc-card .h3,
     [data-bs-theme="dark"] .zmc-card .h4,
     [data-bs-theme="dark"] .zmc-card .h5,
-    [data-bs-theme="dark"] .zmc-card .fw-black,
-    [data-bs-theme="dark"] .zmc-card .fw-bold {
+    [data-bs-theme="dark"] .zmc-card .fw-black:not(.btn):not(.badge):not(.alert),
+    [data-bs-theme="dark"] .zmc-card .fw-bold:not(.btn):not(.badge):not(.alert) {
       color: #f1f5f9 !important;
     }
 
@@ -2014,7 +2014,7 @@
   .text-primary { color: #0a58ca !important; }
 
   /* ===== DARK MODE FIXES (2026-11-19) ===== */
-  [data-bs-theme="dark"] { --dm-surface-2: #263449; --dm-text-strong: #f1f5f9; color-scheme: dark; }
+  [data-bs-theme="dark"] { --dm-surface-2: #263449; --dm-hover: #324259; --dm-text-strong: #f1f5f9; color-scheme: dark; }
   [data-bs-theme="dark"] body { background: var(--c-bg) !important; color: var(--c-text); }
 
   /* Inline light colours in views -> dark equivalents (generated, exact-terminated selectors) */

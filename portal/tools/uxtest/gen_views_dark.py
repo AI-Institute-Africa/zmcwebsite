@@ -59,6 +59,10 @@ def hexval(v):
 decl_re = re.compile(r'([a-z-]+)\s*:\s*([^;{}]+?)\s*(?:!important)?\s*(?:;|$)', re.I)
 rule_re = re.compile(r'([^{}@]+)\{([^{}]*)\}')
 
+VAR_SKIP = re.compile(r'(accent|primary|gold|yellow|success|danger|info|warn|brand|tone|sidebar|green|red|blue|orange|purple)', re.I)
+VAR_LINE = re.compile(r'(line|border|hair|divider|rule)', re.I)
+VAR_TEXT = re.compile(r'(ink|text|muted|fg|heading|title|strong|body|label|slate|dark)', re.I)
+VAR_BG = re.compile(r'(^--bg|bg$|surface|card|panel|paper|soft|white)', re.I)
 SKIP_COLOR = re.compile(r'(btn|button|badge|chip|pill|cta|alert|toast|tooltip|page-link|stat-pill|tag\b)', re.I)
 
 def build():
@@ -88,14 +92,28 @@ def build():
                 own_bg = None
                 for prop in ('background', 'background-color'):
                     if prop in decls:
-                        if 'gradient' in decls[prop] or 'url(' in decls[prop]: own_bg = 'complex'; continue
+                        if 'gradient' in decls[prop]:
+                            # a gradient whose stops are ALL light/pale (e.g. linear-gradient(#FFFCF3, #fff)) is a light box on a dark page:
+                            # replace it with the dark card surface. Gradients with any dark/saturated stop are brand fills: leave alone.
+                            stops = [hexval(x) for x in re.findall(r'#[0-9a-fA-F]{3,8}|white', decls[prop])]
+                            stops = [x for x in stops if x]
+                            if stops and 'rgb' not in decls[prop] and all(lum(x) > .75 and hsv_s(x) < .30 for x in stops):
+                                out.append("background: var(--c-card) !important"); out.append("background-image: none !important"); own_bg = 'dark'
+                            else:
+                                own_bg = 'complex'
+                            continue
+                        if 'url(' in decls[prop]: own_bg = 'complex'; continue
+                        mw = re.match(r'rgba\(\s*255\s*,\s*255\s*,\s*255\s*,\s*(0?\.\d+|1)\s*\)', decls[prop].strip(), re.I)
+                        if mw and float(mw.group(1)) >= 0.3:         # translucent white panel: stays a grey slab on a dark page
+                            out.append('background-color: rgba(255,255,255,.06) !important'); own_bg = 'dark'; continue
                         m = re.match(HEX, decls[prop].split()[0]) if decls[prop] else None
                         hv = hexval(m.group(1)) if m else None
                         if hv:
                             tgt = map_bg(hv)
                             if tgt: out.append(f"background-color: {tgt} !important"); own_bg = 'dark'
                             else: own_bg = 'kept'
-                if 'color' in decls and own_bg not in ('kept', 'complex') and not SKIP_COLOR.search(sel):
+                if 'color' in decls and own_bg not in ('kept', 'complex') and (own_bg == 'dark' or not SKIP_COLOR.search(sel)):
+                    # (a rule that also gets a dark background must get readable text even for btn/badge/pill/tag classes)
                     hv = hexval(decls['color'])
                     if hv:
                         tgt = map_text(hv)
@@ -107,13 +125,34 @@ def build():
                             side = prop if prop != 'border' else 'border-color'
                             side = side.replace('border-', 'border-') + ('-color' if prop in ('border-top', 'border-bottom', 'border-left', 'border-right') else '')
                             out.append(f"{side}: var(--c-border) !important")
+                # custom properties holding page colours (e.g. --mh-ink:#0B0F17, --zd-muted, --card): remap by NAME so
+                # everything that reads them follows the theme. Brand/accent colours are left alone.
+                for k_, v_ in decls.items():
+                    if not k_.startswith('--') or VAR_SKIP.search(k_): continue
+                    mfb_ = re.match(r'var\(\s*--[\w-]+\s*,\s*(#[0-9a-fA-F]{3,8})\s*\)', v_.strip())      # var(--x, #fallback)
+                    hv_ = hexval(mfb_.group(1)) if mfb_ else (hexval(v_.split()[0]) if v_ and re.match(HEX, v_.split()[0]) else None)
+                    if not hv_: continue
+                    if VAR_LINE.search(k_):
+                        if lum(hv_) > .6 and hsv_s(hv_) < .25: out.append(f"{k_}: var(--c-border)")
+                    elif VAR_TEXT.search(k_):
+                        if lum(hv_) < .4:
+                            tgt_ = map_text(hv_)
+                            if tgt_: out.append(f"{k_}: {tgt_}")
+                    elif VAR_BG.search(k_):
+                        tgt_ = map_bg(hv_)
+                        if tgt_: out.append(f"{k_}: {tgt_}")
                 if not out: continue
                 css = "; ".join(sorted(set(out))) + ";"
                 for one in [x.strip() for x in sel.split(',') if x.strip()]:
+                    if 'data-bs-theme' in one: continue                     # the view already styles dark itself
                     if ':root' in one or '@' in one or re.search(r'#(\s|$)|^[#.]?\s*$', one): continue
                     if one.count('(') != one.count(')') or one.count('[') != one.count(']'): continue
                     if one.startswith(('>', '+', '~')) or '\n' in one: continue
-                    rules[(one, css)] = rules.get((one, css), 0) + 1
+                    css_one = css
+                    if ':hover' in one or ':focus' in one:
+                        # hover/focus feedback must differ from the resting surface, or the state looks dead
+                        css_one = re.sub(r'background-color: var\(--(?:c-card|dm-surface-2)\) !important', 'background-color: var(--dm-hover) !important', css)
+                    rules[(one, css_one)] = rules.get((one, css_one), 0) + 1
     lines = []
     for (sel, css), n in sorted(rules.items()):
         lines.append(f'[data-bs-theme="dark"] {sel} {{ {css} }}')
