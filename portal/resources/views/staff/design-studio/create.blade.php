@@ -6,9 +6,9 @@
 
   <div class="d-flex justify-content-between align-items-start flex-wrap gap-2 mb-4">
     <div>
-      <h4 class="fw-bold m-0" style="font-size:var(--font-size-2xl);color:#1e293b;">
+      <h1 class="fw-bold m-0" style="font-size:var(--font-size-2xl);color:#1e293b;">
         <i class="ri-add-circle-line me-2" style="color:var(--zmc-accent)"></i>New Template
-      </h4>
+      </h1>
       <div class="text-muted mt-1">Define the template details. You will design the layout on the next screen.</div>
     </div>
     <a href="{{ route('staff.design-studio.index') }}" class="btn btn-white border shadow-sm btn-sm px-3">
@@ -25,7 +25,7 @@
   <div class="row g-4">
     <div class="col-12 col-lg-7">
       <div class="zmc-card">
-        <h6 class="fw-bold mb-4"><i class="ri-file-settings-line me-2" style="color:var(--zmc-accent-dark)"></i>Template Details</h6>
+        <h2 class="fw-bold mb-4"><i class="ri-file-settings-line me-2" style="color:var(--zmc-accent-dark)"></i>Template Details</h2>
 
         <form method="POST" action="{{ route('staff.design-studio.store') }}" enctype="multipart/form-data">
           @csrf
@@ -109,7 +109,7 @@
 
     <div class="col-12 col-lg-5">
       <div class="zmc-card border-0" style="background:#f8fafc;">
-        <h6 class="fw-bold mb-3"><i class="ri-information-line me-2" style="color:var(--zmc-accent)"></i>Guidelines</h6>
+        <h3 class="fw-bold mb-3"><i class="ri-information-line me-2" style="color:var(--zmc-accent)"></i>Guidelines</h3>
         <ul class="small text-muted mb-0" style="line-height:1.8;">
           <li>Card templates are for accreditation cards (CR80 / ID-1 size: 85.6 × 54 mm).</li>
           <li>Certificate templates are for A4 registration certificates (210 × 297 mm).</li>

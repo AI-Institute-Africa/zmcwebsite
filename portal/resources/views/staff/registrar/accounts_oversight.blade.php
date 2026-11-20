@@ -7,9 +7,9 @@
 
   <div class="d-flex justify-content-between align-items-start flex-wrap gap-2 mb-4">
     <div>
-      <h4 class="fw-bold m-0" style="font-size:22px; color:#1e293b;">
+      <h1 class="fw-bold m-0" style="font-size:22px; color:#1e293b;">
         <i class="ri-eye-line me-2"></i> Accounts Oversight
-      </h4>
+      </h1>
       <div class="text-muted mt-1" style="font-size:13px;">
         <i class="ri-information-line me-1"></i>
         Read-only view of Accounts activity. You cannot approve or reject payments from this screen.
@@ -48,7 +48,7 @@
   </div>
 
   <div class="zmc-card mb-4">
-    <h6 class="fw-bold mb-3"><i class="ri-time-line me-1"></i> Payments Queue</h6>
+    <h2 class="fw-bold mb-3"><i class="ri-time-line me-1"></i> Payments Queue</h2>
     <div class="table-responsive">
       <table class="table table-sm table-hover mb-0">
         <thead>
@@ -99,7 +99,7 @@
   </div>
 
   <div class="zmc-card mb-4">
-    <h6 class="fw-bold mb-3"><i class="ri-money-dollar-circle-line me-1"></i> Recent Payments</h6>
+    <h3 class="fw-bold mb-3"><i class="ri-money-dollar-circle-line me-1"></i> Recent Payments</h3>
     <div class="table-responsive">
       <table class="table table-sm table-hover mb-0">
         <thead>
@@ -143,7 +143,7 @@
   <div class="row g-3 mb-4">
     <div class="col-md-6">
       <div class="zmc-card h-100">
-        <h6 class="fw-bold mb-3"><i class="ri-file-shield-line me-1"></i> Waiver Applications</h6>
+        <h4 class="fw-bold mb-3"><i class="ri-file-shield-line me-1"></i> Waiver Applications</h4>
         <div class="table-responsive">
           <table class="table table-sm mb-0">
             <thead>
@@ -171,7 +171,7 @@
 
     <div class="col-md-6">
       <div class="zmc-card h-100">
-        <h6 class="fw-bold mb-3"><i class="ri-history-line me-1"></i> Payment Audit Log</h6>
+        <h5 class="fw-bold mb-3"><i class="ri-history-line me-1"></i> Payment Audit Log</h5>
         <div class="table-responsive" style="max-height:400px; overflow-y:auto;">
           <table class="table table-sm mb-0">
             <thead>

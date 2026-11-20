@@ -4,7 +4,7 @@
 <div class="zmc-dashboard-wrapper" style="font-family:'Roboto', sans-serif; color:#334155;">
   <div class="d-flex justify-content-between align-items-start flex-wrap gap-2 mb-4">
     <div>
-      <h4 class="fw-bold m-0" style="font-size:22px; color:#1e293b;">Notices, Events, Vacancies & Tenders</h4>
+      <h1 class="fw-bold m-0" style="font-size:22px; color:#1e293b;">Notices, Events, Vacancies & Tenders</h1>
       <div class="text-muted mt-1" style="font-size:13px;">
         @hasanyrole('pr_officer')
           Manage public announcements for Media Practitioner Accreditation Portal and Media House Registration Portal.
@@ -57,7 +57,7 @@
     <div class="col-12 col-lg-6">
       <div class="zmc-card h-100">
         <div class="d-flex justify-content-between align-items-center mb-2">
-          <h6 class="fw-bold m-0"><i class="ri-megaphone-line me-2" style="color:var(--zmc-accent)"></i>Notices</h6>
+          <h2 class="fw-bold m-0"><i class="ri-megaphone-line me-2" style="color:var(--zmc-accent)"></i>Notices</h2>
           @hasanyrole('pr_officer')
             <button class="btn btn-sm btn-dark" data-bs-toggle="modal" data-bs-target="#createNotice"><i class="ri-add-line me-1"></i>New</button>
           @endhasanyrole
@@ -101,7 +101,7 @@
     <div class="col-12 col-lg-6">
       <div class="zmc-card h-100">
         <div class="d-flex justify-content-between align-items-center mb-2">
-          <h6 class="fw-bold m-0"><i class="ri-calendar-event-line me-2" style="color:var(--zmc-accent)"></i>Events</h6>
+          <h3 class="fw-bold m-0"><i class="ri-calendar-event-line me-2" style="color:var(--zmc-accent)"></i>Events</h3>
           @hasanyrole('pr_officer')
             <button class="btn btn-sm btn-dark" data-bs-toggle="modal" data-bs-target="#createEvent"><i class="ri-add-line me-1"></i>New</button>
           @endhasanyrole
@@ -145,7 +145,7 @@
     <div class="col-12 col-lg-6">
       <div class="zmc-card h-100">
         <div class="d-flex justify-content-between align-items-center mb-2">
-          <h6 class="fw-bold m-0"><i class="ri-id-card-line me-2" style="color:var(--zmc-accent)"></i>Vacancies</h6>
+          <h4 class="fw-bold m-0"><i class="ri-id-card-line me-2" style="color:var(--zmc-accent)"></i>Vacancies</h4>
           @hasanyrole('pr_officer')
             <button class="btn btn-sm btn-dark" data-bs-toggle="modal" data-bs-target="#createVacancy"><i class="ri-add-line me-1"></i>New</button>
           @endhasanyrole
@@ -184,7 +184,7 @@
     <div class="col-12 col-lg-6">
       <div class="zmc-card h-100">
         <div class="d-flex justify-content-between align-items-center mb-2">
-          <h6 class="fw-bold m-0"><i class="ri-briefcase-line me-2" style="color:var(--zmc-accent)"></i>Tenders</h6>
+          <h5 class="fw-bold m-0"><i class="ri-briefcase-line me-2" style="color:var(--zmc-accent)"></i>Tenders</h5>
           @hasanyrole('pr_officer')
             <button class="btn btn-sm btn-dark" data-bs-toggle="modal" data-bs-target="#createTender"><i class="ri-add-line me-1"></i>New</button>
           @endhasanyrole

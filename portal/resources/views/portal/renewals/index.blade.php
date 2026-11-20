@@ -42,7 +42,7 @@
       @if($renewals->count() > 0)
         <div class="card shadow-sm mb-4">
           <div class="card-body">
-            <h6 class="fw-bold mb-3"><i class="ri-file-list-3-line me-1"></i>My Renewal Applications</h6>
+            <h2 class="fw-bold mb-3"><i class="ri-file-list-3-line me-1"></i>My Renewal Applications</h2>
             <div class="table-responsive">
               <table class="table table-sm align-middle mb-0">
                 <thead>

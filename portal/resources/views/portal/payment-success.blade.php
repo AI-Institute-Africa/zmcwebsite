@@ -21,9 +21,9 @@
                     </div>
 
                     {{-- Success Message --}}
-                    <h2 class="text-success fw-bold mb-3">
+                    <h1 class="text-success fw-bold mb-3">
                         <i class="ri-checkbox-circle-line"></i> Payment Successful!
-                    </h2>
+                    </h1>
                     
                     <p class="lead text-muted mb-4">
                         {{ $message }}
@@ -58,9 +58,9 @@
 
                     {{-- Next Steps --}}
                     <div class="alert alert-info border-0 text-start mb-4">
-                        <h6 class="fw-bold mb-2">
+                        <h2 class="fw-bold mb-2">
                             <i class="ri-information-line"></i> What Happens Next?
-                        </h6>
+                        </h2>
                         <ul class="mb-0 small">
                             <li>Your payment has been verified and confirmed</li>
                             <li>Your application is now being processed</li>

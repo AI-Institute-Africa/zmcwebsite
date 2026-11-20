@@ -5,9 +5,9 @@
 <div class="zmc-dashboard-wrapper" style="font-family: var(--font-primary); color: var(--zmc-text-dark);">
   <div class="d-flex justify-content-between align-items-start flex-wrap gap-2 mb-4">
     <div>
-      <h4 class="fw-bold m-0" style="font-size: var(--font-size-2xl); color: var(--zmc-text-dark);">
+      <h1 class="fw-bold m-0" style="font-size: var(--font-size-2xl); color: var(--zmc-text-dark);">
         <i class="ri-discuss-line me-2"></i>Staff Comments Audit
-      </h4>
+      </h1>
       <div class="text-muted mt-1" style="font-size: var(--font-size-base);">
         All staff comments on applications, fully audited with timestamps, roles, and IP addresses.
       </div>

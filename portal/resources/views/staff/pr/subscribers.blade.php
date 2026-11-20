@@ -22,7 +22,7 @@
                     <i class="ri-arrow-left-line"></i> Back to Dashboard
                 </a>
             </div>
-            <h2 class="fw-bold m-0" style="letter-spacing:-0.02em; color:#0f172a;">Website Subscribers</h2>
+            <h1 class="fw-bold m-0" style="letter-spacing:-0.02em; color:#0f172a;">Website Subscribers</h1>
             <p class="text-muted m-0 small mt-1">Manage newsletter subscribers from the ZMC Website</p>
         </div>
         <div class="d-flex gap-2 align-items-center">

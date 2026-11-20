@@ -150,7 +150,7 @@
     <div class="col-12 col-lg-6">
       <div class="zd-card h-100">
         <div class="zd-card-head">
-          <h6 class="zd-card-title"><i class="ri-megaphone-line"></i>Notices</h6>
+          <h2 class="zd-card-title"><i class="ri-megaphone-line"></i>Notices</h2>
           <a href="{{ route('mediahouse.notices') }}" class="zd-link">View all</a>
         </div>
 
@@ -164,7 +164,7 @@
               </div>
             </div>
           @empty
-            <div class="zd-empty"><div class="zd-empty-icon"><i class="ri-megaphone-line"></i></div><h6>No notices yet</h6><p>Announcements from ZMC will appear here.</p></div>
+            <div class="zd-empty"><div class="zd-empty-icon"><i class="ri-megaphone-line"></i></div><h3>No notices yet</h3><p>Announcements from ZMC will appear here.</p></div>
           @endforelse
         </div>
       </div>
@@ -173,7 +173,7 @@
     <div class="col-12 col-lg-6">
       <div class="zd-card h-100">
         <div class="zd-card-head">
-          <h6 class="zd-card-title"><i class="ri-calendar-event-line"></i>Events</h6>
+          <h4 class="zd-card-title"><i class="ri-calendar-event-line"></i>Events</h4>
           <a href="{{ route('mediahouse.notices') }}" class="zd-link">View all</a>
         </div>
 
@@ -190,7 +190,7 @@
               </div>
             </div>
           @empty
-            <div class="zd-empty"><div class="zd-empty-icon"><i class="ri-calendar-event-line"></i></div><h6>No events yet</h6><p>Upcoming ZMC events will be listed here.</p></div>
+            <div class="zd-empty"><div class="zd-empty-icon"><i class="ri-calendar-event-line"></i></div><h5>No events yet</h5><p>Upcoming ZMC events will be listed here.</p></div>
           @endforelse
         </div>
       </div>
@@ -750,7 +750,7 @@
           <div class="col-md-9">
             <div class="p-4 p-md-4">
               <div class="d-flex justify-content-between align-items-center mb-3">
-                <h5 class="fw-black m-0" id="mhWelcomeModalLabel" style="color: #1e293b;">Registration Requirements</h5>
+                <h4 class="fw-black m-0" id="mhWelcomeModalLabel" style="color: #1e293b;">Registration Requirements</h4>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
 

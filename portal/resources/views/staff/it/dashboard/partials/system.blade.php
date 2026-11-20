@@ -2,7 +2,7 @@
     <div class="col-xl-8">
         <div class="card border-0 shadow-sm rounded-4">
             <div class="card-header bg-white border-0 p-4">
-                <h6 class="fw-bold m-0">Environment & System Variables</h6>
+                <h1 class="fw-bold m-0">Environment & System Variables</h1>
             </div>
             <div class="card-body p-4 pt-0">
                 <div class="row g-3">
@@ -22,7 +22,7 @@
                     <div class="position-absolute" style="top: -10px; right: -10px; opacity: 0.05;">
                         <i class="ri-command-line" style="font-size: 80px;"></i>
                     </div>
-                    <h6 class="fw-bold mb-3"><i class="ri-terminal-box-line me-2 text-info"></i> Cache & Optimization</h6>
+                    <h2 class="fw-bold mb-3"><i class="ri-terminal-box-line me-2 text-info"></i> Cache & Optimization</h2>
                     <div class="d-flex gap-2">
                         <form action="{{ route('staff.it.system.clear_cache') }}" method="POST">
                             @csrf
@@ -37,7 +37,7 @@
     </div>
     <div class="col-xl-4">
         <div class="card border-0 shadow-sm rounded-4 p-4 bg-white border-top border-5 border-info">
-             <h6 class="fw-bold mb-3">Cron Job Health</h6>
+             <h3 class="fw-bold mb-3">Cron Job Health</h3>
              <div class="d-flex align-items-center gap-3 mb-4 p-3 bg-info-subtle rounded-4">
                  <div class="spinner-grow text-info spinner-grow-sm"></div>
                  <div class="small fw-bold">Scheduler is RUNNING</div>

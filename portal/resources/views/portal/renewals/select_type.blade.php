@@ -42,7 +42,7 @@
 
       {{-- Step Content --}}
       <div class="step-content active">
-        <h3 class="step-title">Select Renewal Type</h3>
+        <h2 class="step-title">Select Renewal Type</h2>
         <div class="current-step-info">
           <i class="ri-information-line me-2"></i>
           Choose the type of renewal you want to apply for. Different requirements apply to each type.
@@ -56,7 +56,7 @@
               <label class="app-type-card" style="cursor: pointer;">
                 <input type="radio" name="renewal_type" value="accreditation" required style="display: none;">
                 <i class="ri-user-3-line"></i>
-                <h4>Journalist / Media Practitioner Accreditation Renewal</h4>
+                <h3>Journalist / Media Practitioner Accreditation Renewal</h3>
                 <p>Renew your individual accreditation card</p>
                 <div style="margin-top:15px;">
                   <span class="badge bg-light text-dark">Individual</span>

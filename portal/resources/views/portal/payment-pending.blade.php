@@ -12,7 +12,7 @@
                         <i class="ri-time-line text-warning" style="font-size:64px;"></i>
                     </div>
 
-                    <h2 class="text-warning fw-bold mb-3">Payment Pending</h2>
+                    <h1 class="text-warning fw-bold mb-3">Payment Pending</h1>
 
                     <p class="lead text-muted mb-4">
                         Paynow has not confirmed this payment yet.

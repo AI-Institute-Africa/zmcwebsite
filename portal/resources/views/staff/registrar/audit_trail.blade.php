@@ -5,7 +5,7 @@
 @include('staff.partials.dashboard_theme')
 <div class="zmc-dashboard-wrapper" style="font-family: var(--font-primary); color: var(--zmc-text-dark);">
     <div class="mb-4">
-        <h4 class="fw-bold m-0">System Audit Trail</h4>
+        <h1 class="fw-bold m-0">System Audit Trail</h1>
         <div class="text-muted small">Chronological chain of custody and action logs.</div>
     </div>
 

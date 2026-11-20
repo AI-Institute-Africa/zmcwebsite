@@ -5,7 +5,7 @@
 <div class="container py-3" style="font-family: var(--font-primary); color: var(--zmc-text-dark);">
   <div class="d-flex justify-content-between align-items-start flex-wrap gap-2 mb-3">
     <div>
-      <h4 class="fw-bold m-0">{{ $title ?? 'Audit Trail' }}</h4>
+      <h1 class="fw-bold m-0">{{ $title ?? 'Audit Trail' }}</h1>
       <div class="text-muted small mt-1"><i class="ri-information-line me-1"></i>Filter by application id using <code>?application_id=...</code>.</div>
     </div>
     <div class="d-flex gap-2">

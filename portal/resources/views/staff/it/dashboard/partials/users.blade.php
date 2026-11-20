@@ -2,7 +2,7 @@
     <div class="col-xl-8">
         <div class="card border-0 shadow-sm rounded-4">
             <div class="card-header bg-white border-0 p-4 d-flex justify-content-between align-items-center">
-                <h6 class="fw-bold m-0">User Directory</h6>
+                <h1 class="fw-bold m-0">User Directory</h1>
                 <button class="btn btn-primary btn-sm rounded-pill px-3 fw-bold">+ Add Service User</button>
             </div>
             <div class="card-body p-0">
@@ -72,7 +72,7 @@
     </div>
     <div class="col-xl-4">
         <div class="card border-0 shadow-sm rounded-4 p-4">
-            <h6 class="fw-bold mb-4">RBAC Roles</h6>
+            <h2 class="fw-bold mb-4">RBAC Roles</h2>
             <div class="d-flex flex-column gap-3">
                 @foreach($roles as $role)
                 <div class="d-flex align-items-center justify-content-between p-3 rounded-4 bg-slate-50 border border-slate-100">

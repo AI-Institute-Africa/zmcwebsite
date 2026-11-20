@@ -4,7 +4,7 @@
 <div class="zmc-dashboard-wrapper" style="font-family:'Roboto',sans-serif; color:#334155;">
     <div class="zmc-card text-center py-5" style="max-width:680px; margin:40px auto;">
         <i class="ri-file-damage-line" style="font-size:64px; color:#f59e0b;"></i>
-        <h4 class="fw-bold mt-3 mb-2" style="color:#1e293b;">Document File Not Available</h4>
+        <h1 class="fw-bold mt-3 mb-2" style="color:#1e293b;">Document File Not Available</h1>
         <p class="text-muted">
             We could not retrieve <strong>{{ $document->original_name ?: ('Document #'.$document->id) }}</strong> from storage.
             The record exists in the database, but the underlying file is missing on the server.

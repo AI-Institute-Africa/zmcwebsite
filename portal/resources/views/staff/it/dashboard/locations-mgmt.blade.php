@@ -18,7 +18,7 @@
 
     <div class="d-flex justify-content-between align-items-start flex-wrap gap-2 mb-4">
         <div>
-            <h4 class="fw-bold m-0" style="font-size:22px; color:#1e293b;">Region & Location Management</h4>
+            <h1 class="fw-bold m-0" style="font-size:22px; color:#1e293b;">Region & Location Management</h1>
             <div class="text-muted mt-1" style="font-size:13px;">Manage service delivery points and operational locations</div>
         </div>
         <div class="d-flex gap-2">
@@ -35,7 +35,7 @@
         <div class="col-6 col-md-3">
             <div class="card border-0 shadow-sm rounded-4">
                 <div class="card-body text-center py-3">
-                    <h4 class="mb-0 fw-bold text-dark">{{ $totalCount }}</h4>
+                    <h2 class="mb-0 fw-bold text-dark">{{ $totalCount }}</h2>
                     <small class="text-muted fw-medium">Total Locations</small>
                 </div>
             </div>
@@ -43,7 +43,7 @@
         <div class="col-6 col-md-3">
             <div class="card border-0 shadow-sm rounded-4">
                 <div class="card-body text-center py-3">
-                    <h4 class="mb-0 fw-bold text-success">{{ $activeCount }}</h4>
+                    <h3 class="mb-0 fw-bold text-success">{{ $activeCount }}</h3>
                     <small class="text-muted fw-medium">Active</small>
                 </div>
             </div>
@@ -68,7 +68,7 @@
 
     <div class="card border-0 shadow-sm rounded-4 mb-4">
         <div class="card-header bg-white border-0 py-3 px-4 d-flex justify-content-between align-items-center">
-            <h6 class="fw-bold mb-0"><i class="ri-global-line me-2 text-primary"></i>Regions</h6>
+            <h5 class="fw-bold mb-0"><i class="ri-global-line me-2 text-primary"></i>Regions</h5>
             <button class="btn btn-sm btn-outline-dark rounded-pill px-3" data-bs-toggle="modal" data-bs-target="#createRegionModal">
                 <i class="ri-add-line me-1"></i> Add Region
             </button>

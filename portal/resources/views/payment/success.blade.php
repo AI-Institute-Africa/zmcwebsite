@@ -6,7 +6,7 @@
         <div class="col-md-8">
             <div class="card border-success">
                 <div class="card-header bg-success text-white">
-                    <h5 class="mb-0">✓ Payment Successful</h5>
+                    <h1 class="mb-0">✓ Payment Successful</h1>
                 </div>
                 <div class="card-body">
                     <div class="alert alert-success" role="alert">

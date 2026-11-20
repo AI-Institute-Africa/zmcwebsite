@@ -22,7 +22,7 @@
               <div class="portal-icon mb-4" style="width: 80px; height: 80px; background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); border-radius: 20px; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 1.5rem;">
                 <i class="ri-id-card-line text-warning" style="font-size: 2.5rem;"></i>
               </div>
-              <h3 class="fw-bold text-dark mb-2" style="font-size: 1.5rem;">Media Practitioner</h3>
+              <h2 class="fw-bold text-dark mb-2" style="font-size: 1.5rem;">Media Practitioner</h2>
               <p class="text-muted mb-4" style="line-height: 1.7;">
                 For individual journalists, freelancers, and media practitioners seeking accreditation, renewals, amendments, and official documentation.
               </p>

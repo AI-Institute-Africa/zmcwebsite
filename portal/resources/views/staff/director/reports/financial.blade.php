@@ -7,14 +7,14 @@
         <a href="{{ route('executive.dashboard') }}" class="btn btn-sm btn-link p-0 text-muted mb-2 text-decoration-none">
             <i class="ri-arrow-left-line"></i> Back to Overview
         </a>
-        <h4 class="fw-bold m-0" style="font-size: var(--font-size-2xl); color:#1e293b;">Revenue & Financial Overview</h4>
+        <h1 class="fw-bold m-0" style="font-size: var(--font-size-2xl); color:#1e293b;">Revenue & Financial Overview</h1>
     </div>
 
     <div class="row g-4">
         <!-- Monthly Revenue Trend -->
         <div class="col-md-12">
             <div class="zmc-card">
-                <h6 class="fw-bold mb-3">Revenue Trend · Last 12 Months</h6>
+                <h2 class="fw-bold mb-3">Revenue Trend · Last 12 Months</h2>
                 <div style="height: 300px;">
                     <canvas id="revenueTrendChart"></canvas>
                 </div>
@@ -24,7 +24,7 @@
         <!-- Revenue by Service Type -->
         <div class="col-md-6">
             <div class="zmc-card">
-                <h6 class="fw-bold mb-3">Revenue by Service Type</h6>
+                <h3 class="fw-bold mb-3">Revenue by Service Type</h3>
                 <div style="height: 250px;">
                     <canvas id="serviceTypeChart"></canvas>
                 </div>
@@ -34,7 +34,7 @@
         <!-- Revenue by Applicant Type -->
         <div class="col-md-6">
             <div class="zmc-card">
-                <h6 class="fw-bold mb-3">Revenue by Applicant Category</h6>
+                <h4 class="fw-bold mb-3">Revenue by Applicant Category</h4>
                 <div style="height: 250px;">
                     <canvas id="applicantTypeChart"></canvas>
                 </div>
@@ -44,7 +44,7 @@
         <!-- Revenue by Residency -->
         <div class="col-md-6">
             <div class="zmc-card">
-                <h6 class="fw-bold mb-3">Revenue by Residency Type</h6>
+                <h5 class="fw-bold mb-3">Revenue by Residency Type</h5>
                 <div style="height: 250px;">
                     <canvas id="residencyChart"></canvas>
                 </div>

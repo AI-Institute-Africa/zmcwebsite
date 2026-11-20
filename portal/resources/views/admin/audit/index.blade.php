@@ -6,7 +6,7 @@
 <div class="zmc-dashboard-wrapper" style="font-family:'Roboto', sans-serif; color:#334155;">
   <div class="d-flex justify-content-between align-items-start flex-wrap gap-2 mb-4">
     <div>
-      <h4 class="fw-bold m-0" style="font-size:22px; color:#1e293b;">Audit & Logs</h4>
+      <h1 class="fw-bold m-0" style="font-size:22px; color:#1e293b;">Audit & Logs</h1>
       <div class="text-muted mt-1" style="font-size:13px;">Traceability for approvals, user actions, and system events.</div>
     </div>
     <a href="{{ route('executive.dashboard') }}" class="btn btn-sm btn-outline-secondary"><i class="ri-arrow-left-line me-1"></i>Back</a>

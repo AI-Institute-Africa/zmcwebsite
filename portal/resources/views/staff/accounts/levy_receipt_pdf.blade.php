@@ -199,7 +199,7 @@
     </div>
 
     <div class="details-section">
-        <h3>Media Entity Details</h3>
+        <h2>Media Entity Details</h2>
         <table class="details-table">
             <tr>
                 <td>Entity Name:</td>

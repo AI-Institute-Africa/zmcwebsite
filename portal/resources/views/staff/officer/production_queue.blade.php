@@ -3,7 +3,7 @@
 
 @section('content')
   <div class="d-flex justify-content-between align-items-center mb-3">
-    <h4 class="fw-bold mb-0">Production Queue</h4>
+    <h1 class="fw-bold mb-0">Production Queue</h1>
     <a href="{{ route('staff.officer.dashboard') }}" class="btn btn-secondary btn-sm">Back to Dashboard</a>
   </div>
 

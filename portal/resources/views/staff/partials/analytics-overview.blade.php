@@ -10,7 +10,7 @@
 
 <div class="analytics-section mb-4">
   <div class="d-flex justify-content-between align-items-center mb-3">
-    <h5 class="fw-bold m-0"><i class="ri-bar-chart-box-line me-2"></i>Analytics Overview</h5>
+    <h1 class="fw-bold m-0"><i class="ri-bar-chart-box-line me-2"></i>Analytics Overview</h1>
     @php
       $analyticsUser = auth()->user();
       $canSeeFullAnalytics = $analyticsUser

@@ -6,7 +6,7 @@
 @section('content')
 <div id="communication-page">
   <div class="d-flex justify-content-between align-items-center mb-4">
-    <h4 class="fw-bold text-dark m-0" style="font-size:18px;">Communication (Email)</h4>
+    <h1 class="fw-bold text-dark m-0" style="font-size:18px;">Communication (Email)</h1>
     <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#composeEmailModal">
       <i class="ri-mail-add-line me-2"></i>Compose
     </button>
@@ -14,7 +14,7 @@
 
   <div class="form-container">
     <div class="form-header">
-      <h5 class="m-0"><i class="ri-inbox-line me-2"></i>Inbox (Demo)</h5>
+      <h2 class="m-0"><i class="ri-inbox-line me-2"></i>Inbox (Demo)</h2>
       <p class="mt-2">In production: messages are stored in DB and linked to applications.</p>
     </div>
 
@@ -45,7 +45,7 @@
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title"><i class="ri-mail-add-line me-2"></i>Compose Email</h5>
+        <h3 class="modal-title"><i class="ri-mail-add-line me-2"></i>Compose Email</h3>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">

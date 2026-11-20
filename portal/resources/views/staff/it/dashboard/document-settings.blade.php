@@ -8,7 +8,7 @@
     <!-- Hero Header -->
     <div class="d-flex justify-content-between align-items-center mb-4 bg-white p-4 rounded-4 shadow-sm border border-slate-100">
         <div>
-            <h2 class="fw-bold m-0" style="letter-spacing: -0.02em; color: #0f172a;">Document Settings & Rules</h2>
+            <h1 class="fw-bold m-0" style="letter-spacing: -0.02em; color: #0f172a;">Document Settings & Rules</h1>
             <p class="text-slate-600 m-0 small mt-1">Configure Required Documents & Validation Logic</p>
         </div>
         <div>
@@ -22,7 +22,7 @@
         <div class="col-xl-8">
             <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
                 <div class="card-header bg-white border-0 p-4 d-flex justify-content-between align-items-center">
-                    <h6 class="fw-bold m-0">Document Type Matrix</h6>
+                    <h2 class="fw-bold m-0">Document Type Matrix</h2>
                     <button class="btn btn-dark btn-sm rounded-pill px-3 fw-bold">Add Document Type</button>
                 </div>
                 <div class="table-responsive">
@@ -58,7 +58,7 @@
         </div>
         <div class="col-xl-4">
             <div class="card border-0 shadow-sm rounded-4 p-4">
-                <h6 class="fw-bold mb-4">Storage Rules</h6>
+                <h3 class="fw-bold mb-4">Storage Rules</h3>
                 <div class="small text-slate-600">
                     <p class="mb-3 d-flex justify-content-between">
                         <span>Allowed Formats:</span>

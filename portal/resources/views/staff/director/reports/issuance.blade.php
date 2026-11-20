@@ -7,14 +7,14 @@
         <a href="{{ route('staff.director.dashboard') }}" class="btn btn-sm btn-link p-0 text-muted mb-2 text-decoration-none">
             <i class="ri-arrow-left-line"></i> Back to Overview
         </a>
-        <h4 class="fw-bold m-0" style="font-size: var(--font-size-2xl); color:#1e293b;">Issuance & Print Oversight</h4>
+        <h1 class="fw-bold m-0" style="font-size: var(--font-size-2xl); color:#1e293b;">Issuance & Print Oversight</h1>
     </div>
 
     <div class="row g-4">
         <!-- Monthly Issuance Counts -->
         <div class="col-md-12">
             <div class="zmc-card">
-                <h6 class="fw-bold mb-3">Monthly Issuance Trend (Last 12 Months)</h6>
+                <h2 class="fw-bold mb-3">Monthly Issuance Trend (Last 12 Months)</h2>
                 <div style="height: 300px;">
                     <canvas id="issuanceChart"></canvas>
                 </div>
@@ -24,7 +24,7 @@
         <!-- Print vs Reprint Ratio -->
         <div class="col-md-6">
             <div class="zmc-card">
-                <h6 class="fw-bold mb-3">Print vs Reprint Ratio</h6>
+                <h3 class="fw-bold mb-3">Print vs Reprint Ratio</h3>
                 <div style="height: 250px;">
                     <canvas id="printRatioChart"></canvas>
                 </div>
@@ -50,9 +50,9 @@
         <!-- Outstanding Unprinted Approvals -->
         <div class="col-md-6">
             <div class="zmc-card">
-                <h6 class="fw-bold mb-3">
+                <h4 class="fw-bold mb-3">
                     <i class="ri-alert-line text-danger me-2"></i>Outstanding Unprinted Approvals
-                </h6>
+                </h4>
                 @if($outstandingUnprinted->count() > 0)
                 <div class="alert alert-danger alert-sm mb-3">
                     <strong>{{ $outstandingUnprinted->count() }}</strong> approved applications awaiting print
@@ -92,7 +92,7 @@
         <!-- Print Actions by Staff -->
         <div class="col-md-12">
             <div class="zmc-card">
-                <h6 class="fw-bold mb-3">Print Actions by Production Staff</h6>
+                <h5 class="fw-bold mb-3">Print Actions by Production Staff</h5>
                 <div class="table-responsive">
                     <table class="table table-sm table-hover mb-0">
                         <thead>

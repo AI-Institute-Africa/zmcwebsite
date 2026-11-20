@@ -14,9 +14,9 @@
 
     <div class="d-flex justify-content-between align-items-start flex-wrap gap-2 mb-4">
         <div>
-            <h4 class="fw-bold m-0" style="font-size:22px; color:#1e293b;">
+            <h1 class="fw-bold m-0" style="font-size:22px; color:#1e293b;">
                 <i class="ri-pencil-ruler-2-line me-2"></i>Edit: {{ $dashboard->name }}
-            </h4>
+            </h1>
             <div class="text-muted mt-1" style="font-size:13px;">Configure dashboard settings and widgets</div>
         </div>
         <div class="d-flex gap-2">
@@ -33,7 +33,7 @@
         <div class="col-lg-5">
             <div class="card border-0 shadow-sm mb-4">
                 <div class="card-header bg-white">
-                    <h6 class="fw-bold m-0">Dashboard Settings</h6>
+                    <h2 class="fw-bold m-0">Dashboard Settings</h2>
                 </div>
                 <div class="card-body">
                     <form action="{{ route('staff.it.dashboard-builder.update', $dashboard) }}" method="POST">
@@ -70,7 +70,7 @@
 
             <div class="card border-0 shadow-sm">
                 <div class="card-header bg-white">
-                    <h6 class="fw-bold m-0">Add Widget</h6>
+                    <h3 class="fw-bold m-0">Add Widget</h3>
                 </div>
                 <div class="card-body">
                     <form action="{{ route('staff.it.dashboard-builder.add-widget', $dashboard) }}" method="POST">
@@ -139,7 +139,7 @@
         <div class="col-lg-7">
             <div class="card border-0 shadow-sm">
                 <div class="card-header bg-white d-flex justify-content-between align-items-center">
-                    <h6 class="fw-bold m-0">Widgets ({{ $dashboard->widgets->count() }})</h6>
+                    <h4 class="fw-bold m-0">Widgets ({{ $dashboard->widgets->count() }})</h4>
                 </div>
                 <div class="card-body p-0">
                     @if($dashboard->widgets->isEmpty())

@@ -12,7 +12,7 @@
         <!-- Applicant Info -->
         <div class="card mb-4">
             <div class="card-header bg-light">
-                <h5>Applicant Information</h5>
+                <h2>Applicant Information</h2>
             </div>
             <div class="card-body">
                 <div class="row">
@@ -33,7 +33,7 @@
         @if($decision = $application->intakeDecision)
             <div class="card mb-4">
                 <div class="card-header bg-light">
-                    <h5>Intake Decision</h5>
+                    <h3>Intake Decision</h3>
                 </div>
                 <div class="card-body">
                     <div class="row">
@@ -57,7 +57,7 @@
         <!-- Documents -->
         <div class="card mb-4">
             <div class="card-header bg-light">
-                <h5>Documents</h5>
+                <h4>Documents</h4>
             </div>
             <div class="card-body">
                 <table class="table table-sm">

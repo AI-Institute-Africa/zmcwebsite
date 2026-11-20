@@ -6,7 +6,7 @@
     <div class="container-fluid py-4">
         <div class="d-flex justify-content-between align-items-center mb-4">
             <div>
-                <h4 class="fw-bold m-0">Returned Applications</h4>
+                <h1 class="fw-bold m-0">Returned Applications</h1>
                 <p class="text-muted small mb-0">Track applications returned from the Registrar</p>
             </div>
             <a href="{{ route('staff.registrar.dashboard') }}" class="btn btn-light border btn-sm">

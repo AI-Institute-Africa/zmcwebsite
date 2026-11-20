@@ -39,7 +39,7 @@
 
         {{-- STEP 1: Contact --}}
         <div class="step-content active" id="ap2-step-1">
-          <h3 class="step-title">Contact Person Details</h3>
+          <h2 class="step-title">Contact Person Details</h2>
           <div class="current-step-info">
             <i class="ri-information-line me-2"></i>
             Provide the contact person details and collection office preference.

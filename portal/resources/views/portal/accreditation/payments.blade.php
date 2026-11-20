@@ -6,12 +6,12 @@
 @section('content')
 <div id="payment-history-page">
   <div class="d-flex justify-content-between align-items-center mb-4">
-    <h4 class="fw-bold text-dark m-0" style="font-size:18px;">Payment History</h4>
+    <h1 class="fw-bold text-dark m-0" style="font-size:18px;">Payment History</h1>
   </div>
 
   <div class="form-container">
     <div class="form-header" style="background: transparent !important; border-bottom: 2px solid #e5e7eb !important;">
-      <h5 class="m-0" style="color: #1f2937 !important;"><i class="ri-bank-card-line me-2"></i>Transaction History</h5>
+      <h2 class="m-0" style="color: #1f2937 !important;"><i class="ri-bank-card-line me-2"></i>Transaction History</h2>
     </div>
 
     <div class="form-steps-container">

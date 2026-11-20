@@ -5,7 +5,7 @@
                 <div class="icon-box bg-primary-subtle text-primary p-4 rounded-circle d-inline-block mb-3">
                     <i class="ri-database-2-line fs-1"></i>
                 </div>
-                <h5 class="fw-bold m-0">Database Backup</h5>
+                <h1 class="fw-bold m-0">Database Backup</h1>
                 <p class="text-slate-600 small fw-bold">Snapshots of the entire system state</p>
             </div>
             
@@ -40,7 +40,7 @@
                 <div class="icon-box bg-danger-subtle text-danger p-4 rounded-circle d-inline-block mb-3">
                     <i class="ri-history-line fs-1"></i>
                 </div>
-                <h5 class="fw-bold m-0">Disaster Recovery</h5>
+                <h2 class="fw-bold m-0">Disaster Recovery</h2>
                 <p class="text-slate-600 small fw-bold">Restore system to a known good state</p>
             </div>
 

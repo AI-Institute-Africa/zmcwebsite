@@ -47,7 +47,7 @@
       @endif
 
       <div class="step-content active">
-        <h3 class="step-title">Enter Your Registration Number</h3>
+        <h2 class="step-title">Enter Your Registration Number</h2>
         <div class="current-step-info">
           <i class="ri-information-line me-2"></i>
           Enter the exact registration number as it appears on your certificate.

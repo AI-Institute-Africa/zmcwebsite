@@ -41,7 +41,7 @@
       </div>
 
       <div class="step-content active">
-        <h3 class="step-title">Select Application Type</h3>
+        <h2 class="step-title">Select Application Type</h2>
         <div class="current-step-info">
           <i class="ri-information-line me-2"></i>
           Choose whether you are renewing your registration or requesting a replacement.
@@ -55,7 +55,7 @@
               <label class="app-type-card" style="cursor: pointer;">
                 <input type="radio" name="renewal_type" value="renewal" required style="display: none;">
                 <i class="ri-refresh-line"></i>
-                <h4>Renewal of Registration</h4>
+                <h3>Renewal of Registration</h3>
                 <p>Renew your existing media house registration for another period.</p>
                 <div style="margin-top:15px;">
                   <span class="badge bg-light text-dark">Annual Renewal</span>

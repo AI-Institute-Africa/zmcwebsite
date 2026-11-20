@@ -6,7 +6,7 @@
 <div class="container-fluid py-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <div>
-            <h2 class="mb-1">{{ $title }}</h2>
+            <h1 class="mb-1">{{ $title }}</h1>
             <p class="text-muted mb-0">Unrestricted system overview. You can navigate to any module from here.</p>
         </div>
         <div class="btn-group">

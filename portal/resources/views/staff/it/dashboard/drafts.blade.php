@@ -5,7 +5,7 @@
 
     <div class="d-flex justify-content-between align-items-center mb-4 bg-white p-4 rounded-4 shadow-sm border">
         <div>
-            <h2 class="fw-bold m-0" style="color:#0f172a;">Applicant Drafts</h2>
+            <h1 class="fw-bold m-0" style="color:#0f172a;">Applicant Drafts</h1>
             <p class="text-muted m-0 small mt-1">Monitor draft and incomplete applications</p>
         </div>
         <span class="badge bg-warning-subtle text-warning border px-3 py-2 rounded-pill fw-bold">{{ $totalDrafts }} Total Drafts</span>

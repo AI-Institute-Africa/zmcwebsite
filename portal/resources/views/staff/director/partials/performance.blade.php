@@ -1,11 +1,11 @@
 <div class="zmc-card bg-white shadow-sm border-0 rounded-4 p-4 mb-4">
     <div class="row g-4 align-items-center">
         <div class="col-md-8 border-end">
-            <h5 class="fw-bold mb-4">Accreditation Trends (12 Months)</h5>
+            <h1 class="fw-bold mb-4">Accreditation Trends (12 Months)</h1>
             <div id="accreditationTrendChart" style="min-height: 350px;"></div>
         </div>
         <div class="col-md-4">
-            <h5 class="fw-bold mb-4 px-3">Approval Ratios</h5>
+            <h2 class="fw-bold mb-4 px-3">Approval Ratios</h2>
             <div class="px-3 mb-4">
                 <div class="text-muted small fw-bold text-uppercase mb-1">Media Practitioner Accreditation</div>
                 <div class="d-flex justify-content-between align-items-end mb-2">
@@ -32,7 +32,7 @@
 </div>
 
 <div class="zmc-card bg-white shadow-sm border-0 rounded-4 p-4">
-    <h5 class="fw-bold mb-4">Category Distribution</h5>
+    <h3 class="fw-bold mb-4">Category Distribution</h3>
     <div class="row">
         @foreach($categories as $cat)
             <div class="col-md-3 mb-3">

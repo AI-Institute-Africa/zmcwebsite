@@ -32,12 +32,12 @@
 <div class="custom-fields-section mt-4 mb-3" data-custom-form-section data-step-prefix="{{ $stepPrefix }}" data-step-number="{{ $stepNumber }}" @if($isPreview) data-form-preview="true" @endif>
     <div class="d-flex align-items-center gap-2 mb-3">
         <i class="ri-file-edit-line text-muted"></i>
-        <h6 class="fw-bold m-0" style="font-size:14px; color:#475569;">
+        <h1 class="fw-bold m-0" style="font-size:14px; color:#475569;">
             Additional Information
             @if($stepGroups->count() > 1)
                 — Step {{ $stepNumber }}
             @endif
-        </h6>
+        </h1>
     </div>
     <div class="row g-3">
         @foreach($fieldsForStep as $cf)

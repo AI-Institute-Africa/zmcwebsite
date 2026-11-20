@@ -14,7 +14,7 @@
                             <i class="{{ $icon }}" style="font-size:22px; color:var(--bs-{{ $color }}, #333);"></i>
                         </div>
                         <div>
-                            <h3 class="fw-bold mb-0">{{ is_numeric($data) ? number_format($data) : ($data ?? 0) }}</h3>
+                            <h1 class="fw-bold mb-0">{{ is_numeric($data) ? number_format($data) : ($data ?? 0) }}</h1>
                             <div class="text-muted" style="font-size:13px;">{{ $widget->title }}</div>
                         </div>
                     </div>
@@ -23,7 +23,7 @@
             @elseif(in_array($widget->widget_type, ['bar_chart', 'pie_chart', 'line_chart']))
                 <div class="card border-0 shadow-sm">
                     <div class="card-header bg-white">
-                        <h6 class="fw-bold m-0" style="font-size:14px;">{{ $widget->title }}</h6>
+                        <h2 class="fw-bold m-0" style="font-size:14px;">{{ $widget->title }}</h2>
                     </div>
                     <div class="card-body">
                         <canvas id="widgetChart{{ $widget->id }}" height="200"></canvas>
@@ -64,7 +64,7 @@
             @elseif($widget->widget_type === 'table' || $widget->widget_type === 'recent_list')
                 <div class="card border-0 shadow-sm">
                     <div class="card-header bg-white">
-                        <h6 class="fw-bold m-0" style="font-size:14px;">{{ $widget->title }}</h6>
+                        <h3 class="fw-bold m-0" style="font-size:14px;">{{ $widget->title }}</h3>
                     </div>
                     <div class="card-body p-0">
                         @if(is_array($data) && !empty($data))

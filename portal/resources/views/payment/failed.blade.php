@@ -6,7 +6,7 @@
         <div class="col-md-8">
             <div class="card border-danger">
                 <div class="card-header bg-danger text-white">
-                    <h5 class="mb-0">✗ Payment Failed</h5>
+                    <h1 class="mb-0">✗ Payment Failed</h1>
                 </div>
                 <div class="card-body">
                     <div class="alert alert-danger" role="alert">

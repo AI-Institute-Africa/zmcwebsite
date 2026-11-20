@@ -124,7 +124,7 @@
 <div class="zmc-dashboard-wrapper" style="font-family: var(--font-primary); color: var(--zmc-text-dark);">
   <div class="card-preview-header d-flex justify-content-between align-items-start flex-wrap gap-2 mb-3">
     <div>
-      <h4 class="fw-bold m-0" style="font-size: var(--font-size-2xl); color:#1e293b;">Card Preview</h4>
+      <h1 class="fw-bold m-0" style="font-size: var(--font-size-2xl); color:#1e293b;">Card Preview</h1>
       <div class="text-muted mt-1" style="font-size: var(--font-size-base);">
         <i class="ri-information-line me-1"></i>
         Preview & edit the accreditation card before printing.
@@ -144,7 +144,7 @@
   <div class="row g-3">
     <div class="col-12 col-lg-5">
       <div class="zmc-card">
-        <h6 class="fw-bold mb-3"><i class="ri-edit-2-line me-2" style="color:var(--zmc-accent-dark)"></i> Edit fields</h6>
+        <h2 class="fw-bold mb-3"><i class="ri-edit-2-line me-2" style="color:var(--zmc-accent-dark)"></i> Edit fields</h2>
 
         <form method="POST" action="{{ route('staff.production.applications.card.print', $application) }}" target="_blank" id="cardForm">
           @csrf
@@ -223,7 +223,7 @@
 
     <div class="col-12 col-lg-7">
       <div class="zmc-card">
-        <h6 class="fw-bold mb-3"><i class="ri-eye-line me-2" style="color:var(--zmc-accent-dark)"></i> Live preview (3D View)</h6>
+        <h3 class="fw-bold mb-3"><i class="ri-eye-line me-2" style="color:var(--zmc-accent-dark)"></i> Live preview (3D View)</h3>
 
         <div class="d-flex flex-column align-items-center mb-4">
           <div class="zmc-3d-card-wrap">

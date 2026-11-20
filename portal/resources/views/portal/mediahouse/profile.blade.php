@@ -5,7 +5,7 @@
 
 <div id="org-profile-page">
   <div class="d-flex justify-content-between align-items-center mb-4">
-    <h4 class="fw-bold text-dark m-0" style="font-size:18px;">Organization Profile</h4>
+    <h1 class="fw-bold text-dark m-0" style="font-size:18px;">Organization Profile</h1>
     <button class="btn btn-primary" id="editOrgProfileBtn">
       <i class="ri-edit-line me-2"></i>Edit Profile
     </button>
@@ -13,7 +13,7 @@
 
   <div class="form-container">
     <div class="form-header" style="background: transparent !important; border-bottom: 1px solid #e2e8f0;">
-      <h5 class="m-0" style="color: #334155;"><i class="ri-building-2-line me-2"></i>Registered Entity Information</h5>
+      <h2 class="m-0" style="color: #334155;"><i class="ri-building-2-line me-2"></i>Registered Entity Information</h2>
       <p class="mt-2" style="color: #64748b;">Maintain your organization details. (In production this should sync from your database.)</p>
     </div>
 
@@ -21,7 +21,7 @@
       <div class="text-center mb-4">
         <img src="https://ui-avatars.com/api/?name={{ urlencode(Auth::user()->profile_data['organization_name'] ?? Auth::user()->name) }}&size=120&background=facc15&color=000&bold=true"
              class="rounded-circle" alt="Profile" width="120" height="120">
-        <h5 class="mt-3 mb-1" id="orgNameHeading">{{ Auth::user()->profile_data['organization_name'] ?? Auth::user()->name }}</h5>
+        <h3 class="mt-3 mb-1" id="orgNameHeading">{{ Auth::user()->profile_data['organization_name'] ?? Auth::user()->name }}</h3>
         <p class="text-muted mb-1">Applicant Account Account</p>
         <div class="d-flex justify-content-center gap-2">
           <span class="badge bg-light text-dark">Ref: {{ Auth::user()->email }}</span>

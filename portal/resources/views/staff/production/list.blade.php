@@ -6,9 +6,9 @@
 
   <div class="d-flex justify-content-between align-items-start flex-wrap gap-2 mb-4">
     <div>
-      <h4 class="fw-bold m-0" style="font-size: var(--font-size-2xl); color:#1e293b;">
+      <h1 class="fw-bold m-0" style="font-size: var(--font-size-2xl); color:#1e293b;">
         {{ $pageTitle ?? 'Production' }}
-      </h4>
+      </h1>
       @if(!empty($pageNote))
         <div class="text-muted mt-1" style="font-size: var(--font-size-base);">
           <i class="ri-information-line me-1"></i> {!! $pageNote !!}
@@ -92,10 +92,10 @@
 
   <div class="zmc-card p-0 shadow-sm border-0">
     <div class="p-3 border-bottom d-flex justify-content-between align-items-center flex-wrap gap-2">
-      <h6 class="fw-bold m-0">
+      <h2 class="fw-bold m-0">
         <i class="ri-list-check-2 me-2" style="color:var(--zmc-accent)"></i>
         {{ $pageTitle ?? 'Items' }}
-      </h6>
+      </h2>
 
       @if(($mode ?? '') === 'printing')
         <form id="batchForm" method="POST" action="{{ route('staff.production.batch.print') }}" class="d-flex align-items-center gap-2">

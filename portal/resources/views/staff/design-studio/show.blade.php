@@ -6,9 +6,9 @@
 
   <div class="d-flex justify-content-between align-items-start flex-wrap gap-2 mb-4">
     <div>
-      <h4 class="fw-bold m-0" style="font-size:var(--font-size-2xl);color:#1e293b;">
+      <h1 class="fw-bold m-0" style="font-size:var(--font-size-2xl);color:#1e293b;">
         {{ $template->name }}
-      </h4>
+      </h1>
       <div class="mt-1 d-flex align-items-center gap-2 flex-wrap">
         <span class="badge {{ $template->statusBadgeClass() }} px-3 py-2">{{ $template->statusLabel() }}</span>
         <span class="badge bg-light text-dark border">{{ ucfirst($template->type) }}</span>
@@ -94,7 +94,7 @@
     {{-- Details --}}
     <div class="col-12 col-lg-5">
       <div class="zmc-card mb-4">
-        <h6 class="fw-bold mb-3"><i class="ri-file-info-line me-2" style="color:var(--zmc-accent-dark)"></i>Template Details</h6>
+        <h2 class="fw-bold mb-3"><i class="ri-file-info-line me-2" style="color:var(--zmc-accent-dark)"></i>Template Details</h2>
         <table class="table table-sm small mb-0">
           <tbody>
             <tr><td class="text-muted fw-bold" style="width:40%;">Type</td><td>{{ ucfirst($template->type) }}</td></tr>
@@ -120,7 +120,7 @@
       {{-- Background preview --}}
       @if($template->backgroundUrl())
       <div class="zmc-card mb-4">
-        <h6 class="fw-bold mb-3"><i class="ri-image-line me-2" style="color:var(--zmc-accent-dark)"></i>Background</h6>
+        <h3 class="fw-bold mb-3"><i class="ri-image-line me-2" style="color:var(--zmc-accent-dark)"></i>Background</h3>
         <img src="{{ $template->backgroundUrl() }}" class="img-fluid rounded border" alt="Background">
       </div>
       @endif
@@ -132,7 +132,7 @@
       {{-- Canvas preview --}}
       @if($template->layout_config)
       <div class="zmc-card mb-4">
-        <h6 class="fw-bold mb-3"><i class="ri-eye-line me-2" style="color:var(--zmc-accent-dark)"></i>Canvas Preview</h6>
+        <h4 class="fw-bold mb-3"><i class="ri-eye-line me-2" style="color:var(--zmc-accent-dark)"></i>Canvas Preview</h4>
         @php
           $cw = $template->type === 'card' ? 340 : 595;
           $ch = $template->type === 'card' ? 215 : 842;
@@ -147,7 +147,7 @@
       {{-- Version history --}}
       @if($template->versions->count())
       <div class="zmc-card">
-        <h6 class="fw-bold mb-3"><i class="ri-history-line me-2" style="color:var(--zmc-accent-dark)"></i>Version History</h6>
+        <h5 class="fw-bold mb-3"><i class="ri-history-line me-2" style="color:var(--zmc-accent-dark)"></i>Version History</h5>
         <div class="table-responsive">
           <table class="table table-sm small mb-0">
             <thead class="bg-light">

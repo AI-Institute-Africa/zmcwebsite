@@ -457,7 +457,7 @@
   <div class="modal-dialog modal-xl modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
-        <h6 class="modal-title fw-bold" id="dsPreviewModalTitle">Preview (Sample Data)</h6>
+        <h1 class="modal-title fw-bold" id="dsPreviewModalTitle">Preview (Sample Data)</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body" style="background:#0f172a;">
@@ -476,7 +476,7 @@
   <div class="modal-dialog modal-lg modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
-        <h6 class="modal-title fw-bold">Preview Data Editor</h6>
+        <h2 class="modal-title fw-bold">Preview Data Editor</h2>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">

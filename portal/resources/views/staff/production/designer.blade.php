@@ -6,10 +6,10 @@
 
   <div class="d-flex justify-content-between align-items-start flex-wrap gap-2 mb-4">
     <div>
-      <h4 class="fw-bold m-0" style="font-size:22px; color:#1e293b;">
+      <h1 class="fw-bold m-0" style="font-size:22px; color:#1e293b;">
         <i class="ri-palette-line me-2" style="color:var(--zmc-accent)"></i>
         {{ isset($template) ? 'Edit Template: ' . $template->name : 'Template Designer' }}
-      </h4>
+      </h1>
       <div class="text-muted mt-1" style="font-size:13px;">
         Design card/certificate templates by uploading a background and placing dynamic fields.
       </div>
@@ -38,7 +38,7 @@
   <div class="row g-4">
     <div class="col-lg-4">
       <div class="zmc-card shadow-sm">
-        <h6 class="fw-bold mb-3"><i class="ri-settings-3-line me-1"></i> Template Settings</h6>
+        <h2 class="fw-bold mb-3"><i class="ri-settings-3-line me-1"></i> Template Settings</h2>
 
         <form id="templateForm"
               method="POST"
@@ -82,7 +82,7 @@
 
           <hr>
 
-          <h6 class="fw-bold mb-3"><i class="ri-drag-move-2-line me-1"></i> Dynamic Fields</h6>
+          <h3 class="fw-bold mb-3"><i class="ri-drag-move-2-line me-1"></i> Dynamic Fields</h3>
           <p class="small text-muted mb-2">Click a field to add it to the canvas. Drag fields to position them.</p>
 
           <div class="d-flex flex-wrap gap-2 mb-3" id="fieldPalette">
@@ -107,7 +107,7 @@
           </div>
 
           <div id="fieldProperties" class="d-none mb-3 p-3 border rounded bg-light">
-            <h6 class="fw-bold small mb-2">Field Properties <span id="propFieldName" class="badge bg-primary"></span></h6>
+            <h4 class="fw-bold small mb-2">Field Properties <span id="propFieldName" class="badge bg-primary"></span></h4>
             <div class="row g-2">
               <div class="col-6">
                 <label class="form-label small">X (px)</label>
@@ -194,7 +194,7 @@
     <div class="col-lg-8">
       <div class="zmc-card shadow-sm">
         <div class="d-flex justify-content-between align-items-center mb-3">
-          <h6 class="fw-bold m-0"><i class="ri-artboard-2-line me-1"></i> Canvas</h6>
+          <h5 class="fw-bold m-0"><i class="ri-artboard-2-line me-1"></i> Canvas</h5>
           <div class="d-flex gap-2 align-items-center">
             <span class="badge bg-light text-dark border" id="canvasSize">850 × 540</span>
             <button type="button" class="btn btn-sm btn-outline-secondary" onclick="clearCanvas()">

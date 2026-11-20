@@ -6,7 +6,7 @@
 
   <div class="d-flex justify-content-between align-items-start flex-wrap gap-2 mb-4">
     <div>
-      <h4 class="fw-bold m-0" style="font-size: var(--font-size-2xl); color:#1e293b;">Application & Accreditation Audits</h4>
+      <h1 class="fw-bold m-0" style="font-size: var(--font-size-2xl); color:#1e293b;">Application & Accreditation Audits</h1>
       <div class="text-muted mt-1" style="font-size: var(--font-size-base);">
         <i class="ri-information-line me-1"></i>
         Verify decisions, consistency and workflow compliance. Flag irregularities for follow-up.
@@ -62,7 +62,7 @@
 
   <div class="zmc-card shadow-sm border-0 p-0">
     <div class="p-3 border-bottom d-flex justify-content-between align-items-center">
-      <h6 class="fw-bold m-0"><i class="ri-file-search-line me-2" style="color:var(--zmc-accent)"></i>Applications</h6>
+      <h2 class="fw-bold m-0"><i class="ri-file-search-line me-2" style="color:var(--zmc-accent)"></i>Applications</h2>
       <div class="small text-muted">Showing {{ $applications->count() }} of {{ $applications->total() }}</div>
     </div>
 
@@ -115,9 +115,9 @@
     <div class="modal-content border-0 shadow-lg">
       <div class="modal-header bg-dark text-white border-0 py-3">
         <div>
-          <h5 class="modal-title fw-bold m-0" id="appDetailsModalLabel">
+          <h3 class="modal-title fw-bold m-0" id="appDetailsModalLabel">
             <i class="ri-file-list-3-line me-2"></i> Application Audit Review
-          </h5>
+          </h3>
           <div class="small opacity-75 mt-1" id="mdl_meta">—</div>
         </div>
         <button type="button" class="btn-close btn-close-white shadow-none" data-bs-dismiss="modal" aria-label="Close"></button>

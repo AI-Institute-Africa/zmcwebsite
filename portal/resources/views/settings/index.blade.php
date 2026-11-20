@@ -6,7 +6,7 @@
 <div class="zmc-dashboard-wrapper" style="font-family:'Roboto', sans-serif; color:#334155;">
   <div class="d-flex justify-content-between align-items-start flex-wrap gap-2 mb-3">
     <div>
-      <h4 class="fw-bold m-0" style="font-size:22px; color:#1e293b;">Settings</h4>
+      <h1 class="fw-bold m-0" style="font-size:22px; color:#1e293b;">Settings</h1>
       <div class="text-muted mt-1" style="font-size:13px;">Manage your account, security and preferences.</div>
     </div>
     <a href="{{ url()->previous() }}" class="btn btn-sm btn-outline-dark"><i class="ri-arrow-left-line me-1"></i> Back</a>

@@ -4,7 +4,7 @@
 @section('content')
 <div class="container-fluid py-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h4 class="fw-bold mb-0">Financial Reporting</h4>
+        <h1 class="fw-bold mb-0">Financial Reporting</h1>
     </div>
 
     {{-- Filters --}}
@@ -65,13 +65,13 @@
     <div class="row g-4">
         <div class="col-md-8">
             <div class="card border-0 shadow-sm mb-4">
-                <div class="card-header bg-white py-3"><h6 class="mb-0 fw-bold">Revenue Trend</h6></div>
+                <div class="card-header bg-white py-3"><h2 class="mb-0 fw-bold">Revenue Trend</h2></div>
                 <div class="card-body"><canvas id="revenueTrendChart" style="height: 300px;"></canvas></div>
             </div>
         </div>
         <div class="col-md-4">
             <div class="card border-0 shadow-sm mb-4">
-                <div class="card-header bg-white py-3"><h6 class="mb-0 fw-bold">Payment Status Breakdown</h6></div>
+                <div class="card-header bg-white py-3"><h3 class="mb-0 fw-bold">Payment Status Breakdown</h3></div>
                 <div class="card-body"><canvas id="statusPieChart" style="height: 300px;"></canvas></div>
             </div>
         </div>
@@ -80,13 +80,13 @@
     <div class="row g-4">
         <div class="col-md-4">
             <div class="card border-0 shadow-sm">
-                <div class="card-header bg-white py-3"><h6 class="mb-0 fw-bold">Revenue by Service Type</h6></div>
+                <div class="card-header bg-white py-3"><h4 class="mb-0 fw-bold">Revenue by Service Type</h4></div>
                 <div class="card-body"><canvas id="serviceBarChart"></canvas></div>
             </div>
         </div>
         <div class="col-md-4">
             <div class="card border-0 shadow-sm">
-                <div class="card-header bg-white py-3"><h6 class="mb-0 fw-bold">Revenue by Category</h6></div>
+                <div class="card-header bg-white py-3"><h5 class="mb-0 fw-bold">Revenue by Category</h5></div>
                 <div class="card-body"><canvas id="categoryBarChart"></canvas></div>
             </div>
         </div>

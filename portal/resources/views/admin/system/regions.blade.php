@@ -21,7 +21,7 @@
   </style>
   <div class="regions-heading d-flex justify-content-between align-items-start flex-wrap gap-2">
     <div>
-      <h4 class="fw-bold m-0">Regions & Offices</h4>
+      <h1 class="fw-bold m-0">Regions & Offices</h1>
       <div class="text-muted mt-1"><i class="ri-map-pin-line me-1"></i>Manage the regional offices used for assignments, records, and reporting.</div>
     </div>
     <a href="{{ route('executive.dashboard') }}" class="btn btn-sm"><i class="ri-arrow-left-line me-1"></i>Back to dashboard</a>

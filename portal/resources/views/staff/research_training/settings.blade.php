@@ -2,7 +2,7 @@
 @section('title','Complaints Settings')
 @section('content')
 <div class="container-fluid py-4" style="font-family:Inter,sans-serif;background:#f8fafc;min-height:100vh;">
-  <div class="mb-4"><h2 class="fw-bold mb-1">Settings</h2><p class="text-muted mb-0">Configure acknowledgement and response workflow for complaints.</p></div>
+  <div class="mb-4"><h1 class="fw-bold mb-1">Settings</h1><p class="text-muted mb-0">Configure acknowledgement and response workflow for complaints.</p></div>
   @if(session('success'))<div class="alert alert-success">{{ session('success') }}</div>@endif
   <div class="card border-0 shadow-sm rounded-4" style="max-width:720px;"><div class="card-body"><form method="POST" action="{{ route('staff.research.settings.save') }}">@csrf
     <div class="form-check form-switch mb-4"><input class="form-check-input" type="checkbox" name="acknowledgement_enabled" value="1" id="ack" @checked($settings['acknowledgement_enabled'] ?? true)><label class="form-check-label fw-semibold" for="ack">Send acknowledgement email automatically</label><div class="small text-muted mt-1">Uses the approved Complaints Desk acknowledgement and includes the dated reference number.</div></div>

@@ -5,7 +5,7 @@
 
     <div class="d-flex justify-content-between align-items-center mb-4 bg-white p-4 rounded-4 shadow-sm border">
         <div>
-            <h2 class="fw-bold m-0" style="color:#0f172a;">Performance Dashboard</h2>
+            <h1 class="fw-bold m-0" style="color:#0f172a;">Performance Dashboard</h1>
             <p class="text-muted m-0 small mt-1">Server metrics, response times, and login trends</p>
         </div>
         <div class="d-flex gap-2">
@@ -43,7 +43,7 @@
 
     @if(count($recentLogins) > 0)
     <div class="card border-0 shadow-sm rounded-4 p-4">
-        <h6 class="fw-bold mb-3">Login Activity (Last 30 Days)</h6>
+        <h2 class="fw-bold mb-3">Login Activity (Last 30 Days)</h2>
         <div style="height:200px; position:relative;">
             <canvas id="loginChart"></canvas>
         </div>

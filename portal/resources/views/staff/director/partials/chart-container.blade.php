@@ -17,9 +17,9 @@
 <div class="chart-container-wrapper">
     <div class="card">
         <div class="card-header d-flex justify-content-between align-items-center">
-            <h5 class="mb-0">
+            <h1 class="mb-0">
                 <i class="ri-bar-chart-line me-2"></i>{{ $title }}
-            </h5>
+            </h1>
             @if(isset($drilldown))
                 <a href="{{ $drilldown }}" class="btn btn-sm zmc-icon-btn btn-outline-primary">
                     <i class="ri-external-link-line"></i> Details

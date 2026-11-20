@@ -29,7 +29,7 @@
             <p>We are pleased to inform you that your annual levy payment has been <strong>successfully verified</strong>.</p>
             
             <div class="box">
-                <h3 style="margin-top:0; color:#4caf50;">Payment Details</h3>
+                <h2 style="margin-top:0; color:#4caf50;">Payment Details</h2>
                 <table>
                     <tr>
                         <td>Receipt Number:</td>

@@ -8,7 +8,7 @@
         <div class="col-12">
             <div class="d-flex justify-content-between align-items-center mb-3">
                 <div>
-                    <h2 class="mb-1 fw-bold">IT Administration</h2>
+                    <h1 class="mb-1 fw-bold">IT Administration</h1>
                     <p class="text-muted mb-0">User management, roles, permissions, and system notices</p>
                 </div>
                 <div class="badge bg-primary fs-6 py-2 px-3">
@@ -27,7 +27,7 @@
                             <i class="ri-user-line text-primary fs-4"></i>
                         </div>
                         <div>
-                            <h3 class="mb-0 fw-bold">{{ $stats['total_users'] ?? 0 }}</h3>
+                            <h2 class="mb-0 fw-bold">{{ $stats['total_users'] ?? 0 }}</h2>
                             <small class="text-muted">Total Users</small>
                         </div>
                     </div>
@@ -86,7 +86,7 @@
             <div class="card border-0 shadow-sm">
                 <div class="card-header bg-white border-0 py-3">
                     <div class="d-flex justify-content-between align-items-center">
-                        <h5 class="mb-0 fw-bold"><i class="ri-user-settings-line me-2"></i>User Management</h5>
+                        <h4 class="mb-0 fw-bold"><i class="ri-user-settings-line me-2"></i>User Management</h4>
                         <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#createUserModal">
                             <i class="ri-user-add-line me-1"></i> Create User
                         </button>

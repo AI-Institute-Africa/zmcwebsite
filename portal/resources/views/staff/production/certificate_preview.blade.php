@@ -76,7 +76,7 @@
   {{-- Header --}}
   <div class="d-flex justify-content-between align-items-start flex-wrap gap-2 mb-4">
     <div>
-      <h4 class="fw-bold m-0" style="font-size: var(--font-size-2xl); color:#1e293b;">Certificate Preview</h4>
+      <h1 class="fw-bold m-0" style="font-size: var(--font-size-2xl); color:#1e293b;">Certificate Preview</h1>
       <div class="text-muted mt-1" style="font-size: var(--font-size-base);">
         <i class="ri-information-line me-1"></i>
         Review and edit the certificate details before printing.
@@ -93,7 +93,7 @@
     {{-- LEFT: Edit Form --}}
     <div class="col-12 col-lg-4">
       <div class="zmc-card">
-        <h6 class="fw-bold mb-3"><i class="ri-edit-2-line me-2" style="color:var(--zmc-accent-dark)"></i>Edit Fields</h6>
+        <h2 class="fw-bold mb-3"><i class="ri-edit-2-line me-2" style="color:var(--zmc-accent-dark)"></i>Edit Fields</h2>
 
         <form method="POST"
               action="{{ route('staff.production.applications.certificate.print', $application) }}"

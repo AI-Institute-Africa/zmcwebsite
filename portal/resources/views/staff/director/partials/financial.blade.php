@@ -1,7 +1,7 @@
 <div class="zmc-card bg-white shadow-sm border-0 rounded-4 p-4 mb-4">
     <div class="row g-4 align-items-center">
         <div class="col-md-8 border-end">
-            <h5 class="fw-bold mb-4">Revenue Trends (12 Months)</h5>
+            <h1 class="fw-bold mb-4">Revenue Trends (12 Months)</h1>
             <div id="revenueTrendChart" style="min-height: 350px;">
                 @if(!isset($revenueTrend) || $revenueTrend->isEmpty())
                     <div class="d-flex align-items-center justify-content-center h-100 text-muted">
@@ -14,7 +14,7 @@
             </div>
         </div>
         <div class="col-md-4">
-            <h5 class="fw-bold mb-4 px-3">Receivables Ageing</h5>
+            <h2 class="fw-bold mb-4 px-3">Receivables Ageing</h2>
             <div class="px-3">
                 <div class="d-flex justify-content-between align-items-center mb-3 p-3 bg-light rounded-4">
                     <span class="text-muted small fw-bold">0 - 30 Days</span>
@@ -36,7 +36,7 @@
 <div class="row g-4 mb-4">
     <div class="col-md-6">
         <div class="zmc-card bg-white shadow-sm border-0 rounded-4 p-4 h-100">
-            <h5 class="fw-bold mb-4">Revenue Breakdown (Service)</h5>
+            <h3 class="fw-bold mb-4">Revenue Breakdown (Service)</h3>
             <div id="revenueServiceChart" style="min-height: 250px;">
                 @if(!isset($breakdown['service']) || $breakdown['service']->isEmpty())
                     <div class="d-flex align-items-center justify-content-center h-100 text-muted">
@@ -51,7 +51,7 @@
     </div>
     <div class="col-md-6">
         <div class="zmc-card bg-white shadow-sm border-0 rounded-4 p-4 h-100">
-            <h5 class="fw-bold mb-4">Waiver Analytics</h5>
+            <h4 class="fw-bold mb-4">Waiver Analytics</h4>
             <div class="d-flex justify-content-between align-items-center mb-4">
                 <div class="text-center flex-grow-1 border-end">
                     <div class="text-muted small fw-bold text-uppercase">Count (All Time)</div>
@@ -65,7 +65,7 @@
             </div>
             
             <div class="mt-4">
-                <h6 class="small fw-bold text-muted text-uppercase mb-3">Top Approving Staff</h6>
+                <h5 class="small fw-bold text-muted text-uppercase mb-3">Top Approving Staff</h5>
                 @if(isset($waivers['by_approver']) && $waivers['by_approver']->isNotEmpty())
                     @foreach($waivers['by_approver'] as $approver)
                         <div class="d-flex justify-content-between align-items-center border-bottom py-2 mt-1">

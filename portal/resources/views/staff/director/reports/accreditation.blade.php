@@ -7,13 +7,13 @@
         <a href="{{ route('executive.dashboard') }}" class="btn btn-sm btn-link p-0 text-muted mb-2 text-decoration-none">
             <i class="ri-arrow-left-line"></i> Back to Overview
         </a>
-        <h4 class="fw-bold m-0" style="font-size: var(--font-size-2xl); color:#1e293b;">Accreditation Performance Overview</h4>
+        <h1 class="fw-bold m-0" style="font-size: var(--font-size-2xl); color:#1e293b;">Accreditation Performance Overview</h1>
     </div>
 
     <div class="row g-4">
         <div class="col-md-8">
             <div class="zmc-card h-100">
-                <h6 class="fw-bold mb-3">Accreditation Demand Trend · Last 12 Months</h6>
+                <h2 class="fw-bold mb-3">Accreditation Demand Trend · Last 12 Months</h2>
                 <div style="height: 300px;">
                     <canvas id="trendsChart"></canvas>
                 </div>
@@ -22,7 +22,7 @@
 
         <div class="col-md-6">
             <div class="zmc-card">
-                <h6 class="fw-bold mb-3">Accreditation Category Distribution</h6>
+                <h3 class="fw-bold mb-3">Accreditation Category Distribution</h3>
                 <div style="height: 250px;">
                     <canvas id="categoryChart"></canvas>
                 </div>
@@ -31,7 +31,7 @@
 
         <div class="col-md-6">
             <div class="zmc-card">
-                <h6 class="fw-bold mb-3">Application Type Overview</h6>
+                <h4 class="fw-bold mb-3">Application Type Overview</h4>
                 <div class="row g-3 mt-2">
                     @foreach($categories as $cat)
                         <div class="col-6">
@@ -55,7 +55,7 @@
 
         <div class="col-md-12">
             <div class="zmc-card">
-                <h6 class="fw-bold mb-3">Monthly Accreditation Outcomes</h6>
+                <h5 class="fw-bold mb-3">Monthly Accreditation Outcomes</h5>
                 <div class="table-responsive">
                     <table class="table table-sm table-hover mb-0">
                         <thead>

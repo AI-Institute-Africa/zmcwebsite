@@ -6,7 +6,7 @@
 <div class="zmc-dashboard-wrapper" style="font-family:'Roboto', sans-serif; color:#334155;">
   <div class="d-flex justify-content-between align-items-start flex-wrap gap-2 mb-3">
     <div>
-      <h4 class="fw-bold m-0" style="font-size:22px; color:#1e293b;">Create Staff User</h4>
+      <h1 class="fw-bold m-0" style="font-size:22px; color:#1e293b;">Create Staff User</h1>
       <div class="text-muted mt-1" style="font-size:13px;">Users created here are marked as <strong>Staff</strong> by default.</div>
     </div>
     <div class="d-flex gap-2">

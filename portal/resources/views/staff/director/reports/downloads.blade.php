@@ -6,7 +6,7 @@
 <div class="container-fluid">
     <div class="row mb-4">
         <div class="col-12">
-            <h4>Executive Reports &amp; Downloads</h4>
+            <h1>Executive Reports &amp; Downloads</h1>
             <p class="text-muted">Generate board-ready reports for accreditation, registration, finance and risk oversight.</p>
         </div>
     </div>
@@ -16,7 +16,7 @@
         <div class="col-md-6">
             <div class="card">
                 <div class="card-header">
-                    <h5>Monthly Accreditation Report</h5>
+                    <h2>Monthly Accreditation Report</h2>
                 </div>
                 <div class="card-body">
                     <form action="{{ route('staff.director.generate.monthly-accreditation') }}" method="POST">
@@ -42,7 +42,7 @@
         <div class="col-md-6">
             <div class="card">
                 <div class="card-header">
-                    <h5>Revenue & Financial Report</h5>
+                    <h3>Revenue & Financial Report</h3>
                 </div>
                 <div class="card-body">
                     <form action="{{ route('staff.director.generate.revenue-financial') }}" method="POST">
@@ -72,7 +72,7 @@
         <div class="col-md-6">
             <div class="card">
                 <div class="card-header">
-                    <h5>Compliance & Audit Report</h5>
+                    <h4>Compliance & Audit Report</h4>
                 </div>
                 <div class="card-body">
                     <form action="{{ route('staff.director.generate.compliance-audit') }}" method="POST">

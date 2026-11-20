@@ -6,7 +6,7 @@
 <div class="zmc-dashboard-wrapper" style="font-family: var(--font-primary); color: var(--zmc-text-dark);">
     <div class="d-flex justify-content-between align-items-start flex-wrap gap-2 mb-4">
         <div>
-            <h4 class="fw-bold m-0" style="font-size: var(--font-size-2xl); color:#1e293b;">Renewals Production</h4>
+            <h1 class="fw-bold m-0" style="font-size: var(--font-size-2xl); color:#1e293b;">Renewals Production</h1>
             <div class="text-muted mt-1" style="font-size: var(--font-size-base);">
                 <i class="ri-information-line me-1"></i>Generate renewed certificates for renewals whose payment has been
                 verified.
@@ -99,7 +99,7 @@
 
     <div class="card shadow-sm border-0">
         <div class="card-body">
-            <h6 class="fw-bold mb-3">Queue ({{ number_format($renewals->total()) }})</h6>
+            <h2 class="fw-bold mb-3">Queue ({{ number_format($renewals->total()) }})</h2>
             <div class="table-responsive">
                 <table class="table table-hover align-middle mb-0">
                     <thead>

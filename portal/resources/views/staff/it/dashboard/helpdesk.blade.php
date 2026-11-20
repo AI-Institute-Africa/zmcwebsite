@@ -5,7 +5,7 @@
 
     <div class="d-flex justify-content-between align-items-center mb-4 bg-white p-4 rounded-4 shadow-sm border">
         <div>
-            <h2 class="fw-bold m-0" style="color:#0f172a;">Helpdesk / Support</h2>
+            <h1 class="fw-bold m-0" style="color:#0f172a;">Helpdesk / Support</h1>
             <p class="text-muted m-0 small mt-1">IT Admin support queue · assignment, progress, history, and email updates</p>
         </div>
         <div class="d-flex gap-2">
@@ -81,7 +81,7 @@
         <form action="{{ route('staff.it.helpdesk.update', $t) }}" method="POST" class="modal-content border-0 shadow-lg rounded-4">
             @csrf
             <div class="modal-header border-0 p-4 pb-2">
-                <h5 class="modal-title fw-bold">Update: {{ Str::limit($t->subject, 40) }}</h5>
+                <h2 class="modal-title fw-bold">Update: {{ Str::limit($t->subject, 40) }}</h2>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body p-4">
@@ -143,7 +143,7 @@
         <form action="{{ route('staff.it.helpdesk.store') }}" method="POST" enctype="multipart/form-data" class="modal-content border-0 shadow-lg rounded-4">
             @csrf
             <div class="modal-header border-0 p-4 pb-2">
-                <h5 class="modal-title fw-bold">Create Support Ticket</h5>
+                <h3 class="modal-title fw-bold">Create Support Ticket</h3>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body p-4">

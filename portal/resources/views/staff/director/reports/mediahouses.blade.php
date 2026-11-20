@@ -7,7 +7,7 @@
         <a href="{{ route('executive.dashboard') }}" class="btn btn-sm btn-link p-0 text-muted mb-2 text-decoration-none">
             <i class="ri-arrow-left-line"></i> Back to Overview
         </a>
-        <h4 class="fw-bold m-0" style="font-size: var(--font-size-2xl); color:#1e293b;">Registration & Media House Overview</h4>
+        <h1 class="fw-bold m-0" style="font-size: var(--font-size-2xl); color:#1e293b;">Registration & Media House Overview</h1>
     </div>
 
     <div class="row g-4">
@@ -45,7 +45,7 @@
             <div class="zmc-card">
                 <div class="row align-items-center">
                     <div class="col-md-8">
-                        <h6 class="fw-bold mb-2">Average Staff Accreditations per Media House</h6>
+                        <h2 class="fw-bold mb-2">Average Staff Accreditations per Media House</h2>
                         <p class="text-muted mb-0">Monitoring organizational capacity and compliance thresholds</p>
                     </div>
                     <div class="col-md-4 text-end">
@@ -59,9 +59,9 @@
         <!-- Houses Exceeding Thresholds -->
         <div class="col-md-12">
             <div class="zmc-card">
-                <h6 class="fw-bold mb-3">
+                <h3 class="fw-bold mb-3">
                     <i class="ri-alert-line text-warning me-2"></i>Media Houses Exceeding Staff Thresholds
-                </h6>
+                </h3>
                 @if($housesExceedingThresholds->count() > 0)
                 <div class="alert alert-warning alert-sm mb-3">
                     <strong>{{ $housesExceedingThresholds->count() }}</strong> media houses have exceeded the staff threshold of {{ config('director-dashboard.media_house_staff_threshold', 50) }}
@@ -105,9 +105,9 @@
         <!-- Accreditations Nearing Expiry -->
         <div class="col-md-6">
             <div class="zmc-card">
-                <h6 class="fw-bold mb-3">
+                <h4 class="fw-bold mb-3">
                     <i class="ri-time-line text-danger me-2"></i>Accreditations Nearing Expiry (30 Days)
-                </h6>
+                </h4>
                 @if($accreditationsNearingExpiry->count() > 0)
                 <div class="alert alert-danger alert-sm mb-3">
                     <strong>{{ $accreditationsNearingExpiry->count() }}</strong> accreditations expiring soon
@@ -147,9 +147,9 @@
         <!-- High-Risk Non-Renewals -->
         <div class="col-md-6">
             <div class="zmc-card">
-                <h6 class="fw-bold mb-3">
+                <h5 class="fw-bold mb-3">
                     <i class="ri-error-warning-line text-danger me-2"></i>High-Risk Non-Renewal Cases
-                </h6>
+                </h5>
                 @if($highRiskNonRenewals->count() > 0)
                 <div class="alert alert-danger alert-sm mb-3">
                     <strong>{{ $highRiskNonRenewals->count() }}</strong> high-risk non-renewal cases identified

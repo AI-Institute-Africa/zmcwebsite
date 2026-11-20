@@ -5,7 +5,7 @@
 <div class="zmc-dashboard-wrapper" style="font-family: var(--font-primary); color: var(--zmc-text-dark);">
 
   <div class="d-flex justify-content-between align-items-center mb-4">
-    <h4 class="fw-bold m-0" style="font-size: var(--font-size-2xl); color:#1e293b;">Applicant Account Management</h4>
+    <h1 class="fw-bold m-0" style="font-size: var(--font-size-2xl); color:#1e293b;">Applicant Account Management</h1>
     <a href="{{ route('staff.it.dashboard') }}" class="btn btn-outline-dark btn-sm">
       <i class="ri-arrow-left-line me-1"></i> Back to Dashboard
     </a>
@@ -20,7 +20,7 @@
 
   <div class="zmc-card p-0 shadow-sm border-0">
     <div class="p-3 border-bottom bg-light d-flex justify-content-between align-items-center">
-      <h6 class="fw-bold m-0">Applicants List</h6>
+      <h2 class="fw-bold m-0">Applicants List</h2>
       <div class="small text-muted">{{ $applicants->total() }} total accounts</div>
     </div>
     <div class="table-responsive">
@@ -55,7 +55,7 @@
               <form action="{{ route('staff.it.applicants.reset', $u) }}" method="POST" class="modal-content text-start">
                 @csrf
                 <div class="modal-header">
-                  <h5 class="modal-title">Reset Profile: {{ $u->name }}</h5>
+                  <h3 class="modal-title">Reset Profile: {{ $u->name }}</h3>
                   <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">

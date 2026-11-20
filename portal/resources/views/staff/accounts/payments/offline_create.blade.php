@@ -7,7 +7,7 @@
         <div class="col-md-8">
             <div class="card shadow-sm border-0">
                 <div class="card-header bg-white py-3">
-                    <h5 class="fw-bold mb-0">Record Offline Payment</h5>
+                    <h1 class="fw-bold mb-0">Record Offline Payment</h1>
                 </div>
                 <div class="card-body">
                     <form action="{{ route('staff.accounts.payments.offline.store') }}" method="POST" enctype="multipart/form-data">

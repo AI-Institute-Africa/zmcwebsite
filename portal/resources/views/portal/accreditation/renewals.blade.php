@@ -23,7 +23,7 @@
   @if(isset($drafts) && $drafts->count())
     <div class="card shadow-sm mb-4">
       <div class="card-body">
-        <h6 class="fw-bold mb-3"><i class="ri-draft-line me-1"></i>My Saved Drafts</h6>
+        <h5 class="fw-bold mb-3"><i class="ri-draft-line me-1"></i>My Saved Drafts</h5>
         <div class="table-responsive">
           <table class="table table-sm align-middle mb-0">
             <thead>
@@ -86,7 +86,7 @@
 
         @if(!$presetType)
         <div class="step-content active" id="ap5-step-type">
-          <h3 class="step-title">Select Application Type</h3>
+          <h2 class="step-title">Select Application Type</h2>
           <div class="current-step-info">
             <i class="ri-information-line me-2"></i>
             Choose Renewal or Replacement. For Replacement, select the reason.
@@ -96,7 +96,7 @@
             <div class="app-type-cards">
               <div class="app-type-card" data-type="renewal">
                 <i class="ri-refresh-line"></i>
-                <h4>Renewal</h4>
+                <h3>Renewal</h3>
                 <p>Annual renewal of your accreditation card.</p>
               </div>
 
@@ -191,7 +191,7 @@
           </div>
 
           <div id="ap5ManualEntry" style="display:none; margin-top:20px; padding-top:20px; border-top:1px solid #e2e8f0;">
-            <h6 class="fw-bold mb-3">Enter Your Details Manually</h6>
+            <h4 class="fw-bold mb-3">Enter Your Details Manually</h4>
             <div class="form-row">
               <div class="form-field">
                 <label class="form-label required">Surname</label>
@@ -361,7 +361,7 @@
                 <label class="form-label required">Employer Letter (Renewal)</label>
                 <div class="upload-area">
                   <i class="ri-file-text-line"></i>
-                  <h5>Upload Employer Letter</h5>
+                  <h4>Upload Employer Letter</h4>
                   <p>PDF / JPG / PNG</p>
                   <input type="file" name="renewal_employer_letter" accept=".pdf,.jpg,.jpeg,.png" style="display:none;">
                   <button type="button" class="upload-btn">Choose File</button>
@@ -426,7 +426,7 @@
           <div class="current-step-info"><i class="ri-information-line me-2"></i>Confirm and submit.</div>
 
           <div class="alert alert-warning">
-            <h6 class="fw-bold"><i class="ri-file-text-line me-2"></i>Declaration</h6>
+            <h4 class="fw-bold"><i class="ri-file-text-line me-2"></i>Declaration</h4>
             <p class="mb-2">I declare that all the information given above, to the best of my knowledge is true and complete.</p>
             <div class="form-check mt-3">
               <input class="form-check-input" type="checkbox" id="ap5-declare" name="declaration_confirmed" value="1" required>

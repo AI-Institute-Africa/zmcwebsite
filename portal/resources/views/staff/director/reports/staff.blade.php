@@ -13,7 +13,7 @@
             <a href="{{ route('staff.director.dashboard') }}" class="btn btn-sm btn-link p-0 text-muted mb-2 text-decoration-none">
                 <i class="ri-arrow-left-line"></i> Back to Overview
             </a>
-            <h4 class="fw-bold m-0" style="font-size: var(--font-size-2xl); color:#1e293b;">Accreditation Performance & Productivity Metrics</h4>
+            <h1 class="fw-bold m-0" style="font-size: var(--font-size-2xl); color:#1e293b;">Accreditation Performance & Productivity Metrics</h1>
             <div class="text-muted small mt-1">Period: <strong>{{ $periodLabel }}</strong></div>
         </div>
         <form method="GET" class="d-flex flex-wrap gap-2 align-items-center">
@@ -63,7 +63,7 @@
         <!-- Applications Processed Per Officer -->
         <div class="col-md-12">
             <div class="zmc-card">
-                <h6 class="fw-bold mb-3">Applications Processed by Accreditation Officers & Registrars</h6>
+                <h2 class="fw-bold mb-3">Applications Processed by Accreditation Officers & Registrars</h2>
                 @if($applicationsProcessed->where('processed_count','>',0)->count() === 0)
                     <div class="text-center text-muted py-4"><i class="ri-inbox-line" style="font-size:2rem;"></i><div class="mt-2">No processing activity in {{ strtolower($periodLabel) }}.</div></div>
                 @else
@@ -85,7 +85,7 @@
         <!-- Payment Verification Volume -->
         <div class="col-md-6">
             <div class="zmc-card h-100">
-                <h6 class="fw-bold mb-3">Payment Verification Volume (Accounts Staff)</h6>
+                <h3 class="fw-bold mb-3">Payment Verification Volume (Accounts Staff)</h3>
                 @if($paymentVerificationVolume->isEmpty())
                     <div class="text-center text-muted py-4"><i class="ri-inbox-line" style="font-size:2rem;"></i><div class="mt-2">No accounts staff on record.</div></div>
                 @elseif($paymentVerificationVolume->where('verified_count','>',0)->count() === 0)
@@ -108,7 +108,7 @@
         <!-- Approval Distribution Per Officer -->
         <div class="col-md-6">
             <div class="zmc-card h-100">
-                <h6 class="fw-bold mb-3">Approval Distribution by Officers</h6>
+                <h4 class="fw-bold mb-3">Approval Distribution by Officers</h4>
                 @if($approvalDistribution->where('total_reviewed','>',0)->count() === 0)
                     <div class="text-center text-muted py-4"><i class="ri-pie-chart-line" style="font-size:2rem;"></i><div class="mt-2">No approval decisions in {{ strtolower($periodLabel) }}.</div></div>
                 @else
@@ -139,7 +139,7 @@
         <!-- Category Reassignment Frequency -->
         <div class="col-md-12">
             <div class="zmc-card">
-                <h6 class="fw-bold mb-3"><i class="ri-exchange-line text-warning me-2"></i>Category Reassignment Frequency</h6>
+                <h5 class="fw-bold mb-3"><i class="ri-exchange-line text-warning me-2"></i>Category Reassignment Frequency</h5>
                 @if($reassignmentFrequency->isEmpty())
                     <div class="text-center text-muted py-4"><i class="ri-checkbox-circle-line text-success" style="font-size:2rem;"></i><div class="mt-2">No category reassignments in {{ strtolower($periodLabel) }} — clean processing.</div></div>
                 @else

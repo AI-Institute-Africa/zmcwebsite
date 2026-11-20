@@ -7,7 +7,7 @@
     <i class="ri-arrow-left-line me-1"></i> Back
   </a>
   <div>
-    <h4 class="fw-bold mb-1">{{ $application->reference }}</h4>
+    <h1 class="fw-bold mb-1">{{ $application->reference }}</h1>
     <div class="text-muted">{{ strtoupper($application->application_type) }} • {{ str_replace('_',' ', $application->status) }}</div>
   </div>
   <div class="d-flex align-items-center gap-2">
@@ -279,7 +279,7 @@
   <div class="modal-dialog modal-xl">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Payment Receipt</h5>
+        <h2 class="modal-title">Payment Receipt</h2>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body p-0" style="height: 80vh;">

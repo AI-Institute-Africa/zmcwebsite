@@ -8,7 +8,7 @@
     <!-- Hero Header -->
     <div class="d-flex justify-content-between align-items-center mb-4 bg-white p-4 rounded-4 shadow-sm border border-slate-100">
         <div>
-            <h2 class="fw-bold m-0" style="letter-spacing: -0.02em; color: #0f172a;">Automatic Numbering Configuration</h2>
+            <h1 class="fw-bold m-0" style="letter-spacing: -0.02em; color: #0f172a;">Automatic Numbering Configuration</h1>
             <p class="text-slate-600 m-0 small mt-1">Configure ID & Certificate Numbering Formats</p>
         </div>
         <div>
@@ -22,7 +22,7 @@
         <div class="col-xl-8">
             <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
                 <div class="card-header bg-white border-0 p-4 d-flex justify-content-between align-items-center">
-                    <h6 class="fw-bold m-0">Numbering Rules</h6>
+                    <h2 class="fw-bold m-0">Numbering Rules</h2>
                     <button class="btn btn-dark btn-sm rounded-pill px-3 fw-bold">New Numbering Rule</button>
                 </div>
                 <div class="table-responsive">
@@ -51,7 +51,7 @@
         </div>
         <div class="col-xl-4">
             <div class="card border-0 shadow-sm rounded-4 p-4">
-                <h6 class="fw-bold mb-4">Pattern Placeholders</h6>
+                <h3 class="fw-bold mb-4">Pattern Placeholders</h3>
                 <div class="small text-slate-600">
                     <div class="mb-3"><code>{YYYY}</code> - Current Year (4 digits)</div>
                     <div class="mb-3"><code>{MM}</code> - Current Month (2 digits)</div>

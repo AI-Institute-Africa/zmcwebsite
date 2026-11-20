@@ -1,7 +1,7 @@
 <div class="zmc-card bg-white shadow-sm border-0 rounded-4 p-4 mb-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <div>
-            <h5 class="fw-bold mb-1">Strategic Risk Indicators</h5>
+            <h1 class="fw-bold mb-1">Strategic Risk Indicators</h1>
             <div class="text-muted small">Real-time monitoring of operational thresholds</div>
         </div>
         <span class="badge bg-danger bg-opacity-10 text-danger px-3 py-2 rounded-pill">

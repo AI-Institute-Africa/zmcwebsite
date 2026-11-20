@@ -7,7 +7,7 @@
 
     <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
         <div>
-            <h4 class="fw-bold m-0">Approved Applications</h4>
+            <h1 class="fw-bold m-0">Approved Applications</h1>
             <div class="text-muted small">
                 Applications you have already approved. Tracks where each one is in the downstream pipeline.
             </div>
@@ -21,11 +21,11 @@
 
     <div class="zmc-card p-0 shadow-sm border-0">
         <div class="p-3 border-bottom d-flex justify-content-between align-items-center flex-wrap gap-2">
-            <h6 class="fw-bold m-0">
+            <h2 class="fw-bold m-0">
                 <i class="ri-checkbox-circle-line me-2" style="color:#16a34a"></i>
                 Approved &amp; In Progress
                 <span class="badge bg-light text-dark border ms-2">{{ $applications->total() }}</span>
-            </h6>
+            </h2>
 
     {{-- Filter Section --}}
     <div class="zmc-card mb-4 bg-light border-0 shadow-none">

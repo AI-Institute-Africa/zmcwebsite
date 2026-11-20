@@ -29,7 +29,7 @@
                 {{ strtoupper($level) }}
             </span>
             <i class="{{ $icon }} fs-5"></i>
-            <h6>{{ $title }}</h6>
+            <h1>{{ $title }}</h1>
         </div>
         <div class="risk-body">
             <div class="risk-value">{{ $value }}</div>

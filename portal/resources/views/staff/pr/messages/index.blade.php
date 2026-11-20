@@ -10,7 +10,7 @@
   @if(session('success'))<div class="alert alert-success border-0 shadow-sm rounded-3"><i class="ri-checkbox-circle-line me-1"></i>{{ session('success') }}</div>@endif
   @if(session('error'))<div class="alert alert-danger border-0 shadow-sm rounded-3"><i class="ri-error-warning-line me-1"></i>{{ session('error') }}</div>@endif
   <div class="d-flex justify-content-between align-items-center mb-4 bg-white p-4 rounded-4 shadow-sm border">
-    <div><a href="{{ route('staff.pr.dashboard') }}" class="btn btn-sm btn-light border rounded-pill mb-2"><i class="ri-arrow-left-line"></i> Back to Dashboard</a><h2 class="fw-bold m-0" style="letter-spacing:-.02em;color:#0f172a;">Contact Messages</h2><p class="text-muted m-0 small mt-1">Manage enquiries received through the public contact form.</p></div>
+    <div><a href="{{ route('staff.pr.dashboard') }}" class="btn btn-sm btn-light border rounded-pill mb-2"><i class="ri-arrow-left-line"></i> Back to Dashboard</a><h1 class="fw-bold m-0" style="letter-spacing:-.02em;color:#0f172a;">Contact Messages</h1><p class="text-muted m-0 small mt-1">Manage enquiries received through the public contact form.</p></div>
     <div class="d-flex gap-2 align-items-center"><span class="badge bg-light text-secondary border px-3 py-2 rounded-pill"><i class="ri-mail-line me-1"></i>{{ number_format($stats['total']) }} messages</span><a class="btn btn-success btn-sm" href="{{ route('staff.pr.messages.export') }}"><i class="ri-download-line me-1"></i>Export CSV</a></div>
   </div>
   <div class="row g-3 mb-4">

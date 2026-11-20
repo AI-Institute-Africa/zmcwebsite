@@ -4,9 +4,9 @@
 <div class="zmc-dashboard-wrapper" style="font-family:'Roboto', sans-serif; color:#334155;">
   <div class="d-flex justify-content-between align-items-start flex-wrap gap-2 mb-4">
     <div>
-      <h4 class="fw-bold m-0" style="font-size:22px; color:#1e293b;">
+      <h1 class="fw-bold m-0" style="font-size:22px; color:#1e293b;">
         <i class="ri-chat-1-line me-2" style="color:var(--zmc-accent);"></i>Complaints & Appeals Oversight
-      </h4>
+      </h1>
       <div class="text-muted mt-1" style="font-size:13px;">
         Read-only view of all complaints and appeals for auditing purposes.
       </div>
@@ -23,7 +23,7 @@
         <div class="mb-2" style="width:100px;height:100px;margin:0 auto;">
           <canvas id="totalChart"></canvas>
         </div>
-        <h3 class="fw-bold m-0" style="color:var(--zmc-primary);">{{ number_format($stats['total']) }}</h3>
+        <h2 class="fw-bold m-0" style="color:var(--zmc-primary);">{{ number_format($stats['total']) }}</h2>
         <p class="text-muted small m-0">Total Records</p>
       </div>
     </div>

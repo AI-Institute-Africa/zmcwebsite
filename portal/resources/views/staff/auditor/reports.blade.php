@@ -6,7 +6,7 @@
 
   <div class="d-flex justify-content-between align-items-start flex-wrap gap-2 mb-4">
     <div>
-      <h4 class="fw-bold m-0" style="font-size: var(--font-size-2xl); color:#1e293b;">Audit Reports</h4>
+      <h1 class="fw-bold m-0" style="font-size: var(--font-size-2xl); color:#1e293b;">Audit Reports</h1>
       <div class="text-muted mt-1" style="font-size: var(--font-size-base);">
         <i class="ri-information-line me-1"></i>
         Generate time-based audit summaries with visual analytics. Export to CSV or print to PDF.
@@ -55,7 +55,7 @@
   @endif
 
   <div class="zmc-card shadow-sm border-0 p-4 mb-4">
-    <div class="d-flex justify-content-between align-items-center mb-3"><div><h5 class="fw-bold mb-1"><i class="ri-dashboard-3-line me-2 text-primary"></i>Consolidated oversight report</h5><div class="small text-muted">Operational activity, security events and audit findings in one read-only report.</div></div><a class="btn btn-sm btn-outline-primary" href="{{ route('staff.auditor.flags') }}">Open findings</a></div>
+    <div class="d-flex justify-content-between align-items-center mb-3"><div><h2 class="fw-bold mb-1"><i class="ri-dashboard-3-line me-2 text-primary"></i>Consolidated oversight report</h2><div class="small text-muted">Operational activity, security events and audit findings in one read-only report.</div></div><a class="btn btn-sm btn-outline-primary" href="{{ route('staff.auditor.flags') }}">Open findings</a></div>
     <div class="row g-3">
       @foreach([['registrations','Registrations','ri-building-line'],['accreditations','Accreditations','ri-user-star-line'],['complaints','Complaints','ri-chat-1-line'],['appeals','Appeals','ri-scales-3-line'],['public_info_cases','Public information cases','ri-information-line'],['audit_logs','Audit log events','ri-file-list-3-line'],['security_events','Security events','ri-shield-check-line'],['open_flags','Open findings','ri-flag-2-line']] as [$key,$label,$icon])
         <div class="col-6 col-md-3 col-xl"><div class="border rounded-3 p-3 h-100"><div class="small text-muted">{{ $label }}</div><div class="fw-bold fs-4 mt-1">{{ number_format($stats[$key] ?? 0) }}</div><i class="{{ $icon }} text-primary"></i></div></div>
@@ -127,13 +127,13 @@
   <div class="row g-3 mb-4">
     <div class="col-md-6">
       <div class="zmc-card shadow-sm border-0 p-4">
-        <h5 class="fw-bold mb-4"><i class="ri-pie-chart-line me-2 text-primary"></i>Application Status Distribution</h5>
+        <h3 class="fw-bold mb-4"><i class="ri-pie-chart-line me-2 text-primary"></i>Application Status Distribution</h3>
         <div id="statusDistributionChart" style="min-height: 300px;"></div>
       </div>
     </div>
     <div class="col-md-6">
       <div class="zmc-card shadow-sm border-0 p-4">
-        <h5 class="fw-bold mb-4"><i class="ri-bar-chart-line me-2 text-success"></i>Approval vs Rejection</h5>
+        <h4 class="fw-bold mb-4"><i class="ri-bar-chart-line me-2 text-success"></i>Approval vs Rejection</h4>
         <div id="approvalRejectionChart" style="min-height: 300px;"></div>
       </div>
     </div>

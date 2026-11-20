@@ -2,7 +2,7 @@
 
 @section('content')
 <div style="padding:20px;max-width:980px">
-  <h2>Edit role: {{ $role->name }}</h2>
+  <h1>Edit role: {{ $role->name }}</h1>
 
   @if(session('success'))
     <div style="background:#dcfce7;color:#166534;padding:10px;border-radius:8px;margin:10px 0;">

@@ -7,7 +7,7 @@
 
   <div class="d-flex justify-content-between align-items-start flex-wrap gap-2 mb-4">
     <div>
-      <h4 class="fw-bold m-0" style="font-size: var(--font-size-2xl); color: var(--zmc-text-dark);">Auditor Dashboard</h4>
+      <h1 class="fw-bold m-0" style="font-size: var(--font-size-2xl); color: var(--zmc-text-dark);">Auditor Dashboard</h1>
       <div class="text-muted mt-1" style="font-size: var(--font-size-base);">
         <i class="ri-information-line me-1"></i>
         Read-only oversight across applications, payments, logs, and reports. Auditors can <b>flag anomalies</b> but cannot approve/reject.
@@ -85,7 +85,7 @@
     <div class="col-lg-7">
       <div class="zmc-card shadow-sm border-0 p-0">
         <div class="p-3 border-bottom d-flex justify-content-between align-items-center">
-          <h6 class="fw-bold m-0"><i class="ri-briefcase-4-line me-2" style="color:var(--zmc-accent)"></i>Quick Links</h6>
+          <h2 class="fw-bold m-0"><i class="ri-briefcase-4-line me-2" style="color:var(--zmc-accent)"></i>Quick Links</h2>
         </div>
         <div class="p-3">
           <div class="d-flex flex-wrap gap-2">
@@ -106,7 +106,7 @@
     <div class="col-lg-5">
       <div class="zmc-card shadow-sm border-0 p-0">
         <div class="p-3 border-bottom d-flex justify-content-between align-items-center">
-          <h6 class="fw-bold m-0"><i class="ri-flag-2-line me-2" style="color:#dc2626"></i>Recent Flags</h6>
+          <h3 class="fw-bold m-0"><i class="ri-flag-2-line me-2" style="color:#dc2626"></i>Recent Flags</h3>
           <a class="small" href="{{ route('staff.auditor.flags') }}">View findings</a>
         </div>
         <div class="p-3">

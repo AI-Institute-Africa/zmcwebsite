@@ -5,7 +5,7 @@
 <div class="zmc-dashboard-wrapper" style="font-family: var(--font-primary); color: var(--zmc-text-dark);">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <div>
-            <h4 class="fw-bold m-0">{{ $application->reference }}</h4>
+            <h1 class="fw-bold m-0">{{ $application->reference }}</h1>
             <div class="text-muted small">
                 {{ strtoupper($application->application_type) }} •
                 <span class="badge bg-primary-subtle text-primary border-primary">
@@ -59,7 +59,7 @@
                     </div>
 
                     <div class="p-3 bg-light rounded">
-                        <h6 class="small fw-bold mb-2">Supporting Evidence Summary</h6>
+                        <h2 class="small fw-bold mb-2">Supporting Evidence Summary</h2>
                         <ul class="small mb-0">
                             <li>Designation: {{ $application->form_data['designation'] ?? '—' }}</li>
                             <li>Medium Type: {{ $application->form_data['medium_type'] ?? '—' }}</li>

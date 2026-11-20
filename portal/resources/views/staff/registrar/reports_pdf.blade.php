@@ -15,7 +15,7 @@
     </style>
 </head>
 <body>
-    <h2>Registrar Operational Report</h2>
+    <h1>Registrar Operational Report</h1>
     <div class="meta">
         Date range: {{ request('date_from', 'N/A') }} to {{ request('date_to', 'N/A') }}<br>
         Generated: {{ now()->format('Y-m-d H:i:s') }}

@@ -157,10 +157,10 @@
  </div>
  
  <div class="glass-card mb-4" style="padding:40px;">
-   <h4 class="fw-bold mb-4 d-flex align-items-center gap-3">
+   <h2 class="fw-bold mb-4 d-flex align-items-center gap-3">
      <i class="ri-list-check-2 ri-lg text-primary"></i>
      Core Requirements Checklist
-   </h4>
+   </h2>
    
    <div class="req-grid">
      <div class="req-list">
@@ -214,14 +214,14 @@
    <div class="d-flex gap-3">
      <i class="ri-information-fill ri-2x text-warning"></i>
      <div>
-       <h6 class="fw-bold text-dark">Fees & Statutory Compliance</h6>
+       <h3 class="fw-bold text-dark">Fees & Statutory Compliance</h3>
        <p class="mb-0 small text-muted">Fees are governed by <strong>{{ config('legislation.fee_schedule') }}</strong>. Payments are accepted in local currency at the prevailing official bank rate on the day of transaction.</p>
      </div>
    </div>
  </div>
  
  <div class="glass-card contact-box">
-   <h5 class="fw-bold mb-1">Need Assistance?</h5>
+   <h4 class="fw-bold mb-1">Need Assistance?</h4>
    <p class="text-muted small">Our support teams are available to guide you through the registration process.</p>
    
    <div class="contact-grid">

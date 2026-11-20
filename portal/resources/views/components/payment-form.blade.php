@@ -4,14 +4,14 @@
 <div class="payment-form-container">
     <div class="card">
         <div class="card-header bg-primary text-white">
-            <h5 class="mb-0">💳 Complete Your Payment</h5>
+            <h1 class="mb-0">💳 Complete Your Payment</h1>
         </div>
         <div class="card-body">
             <!-- Web Payment Option -->
             <div class="row mb-4">
                 <div class="col-md-6">
                     <div class="payment-method-card">
-                        <h6>🌐 Pay via PayNow (Web)</h6>
+                        <h2>🌐 Pay via PayNow (Web)</h2>
                         <p class="text-muted small">Secure payment gateway with multiple payment options</p>
                         <form action="{{ route('payment.initiate') }}" method="POST" class="mt-3">
                             @csrf
@@ -29,7 +29,7 @@
                 <!-- Mobile Payment Options -->
                 <div class="col-md-6">
                     <div class="payment-method-card">
-                        <h6>📱 Mobile Money Express</h6>
+                        <h3>📱 Mobile Money Express</h3>
                         <p class="text-muted small">Quick payment directly from your phone</p>
                         
                         <ul class="nav nav-pills mt-3" role="tablist">

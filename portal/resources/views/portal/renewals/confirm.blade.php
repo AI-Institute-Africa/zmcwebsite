@@ -40,7 +40,7 @@
       </div>
 
       <div class="step-content active">
-        <h3 class="step-title">Current Record Information</h3>
+        <h2 class="step-title">Current Record Information</h2>
         
         @if($renewal->originalApplication)
           <div class="card shadow-sm mb-4">

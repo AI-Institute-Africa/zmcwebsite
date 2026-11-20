@@ -30,7 +30,7 @@
             <p>We regret to inform you that your annual levy payment submission has been <strong>rejected</strong> by our Accounts Department.</p>
             
             <div class="box">
-                <h3 style="margin-top:0; color:#f44336;">Submission Details</h3>
+                <h2 style="margin-top:0; color:#f44336;">Submission Details</h2>
                 <table>
                     <tr>
                         <td>Levy Reference:</td>

@@ -1,7 +1,7 @@
 <div class="zmc-card bg-white shadow-sm border-0 rounded-4 p-4 mb-4">
     <div class="row g-4 align-items-center">
         <div class="col-md-6 border-end">
-            <h5 class="fw-bold mb-4">Issuance Hub (MTD)</h5>
+            <h1 class="fw-bold mb-4">Issuance Hub (MTD)</h1>
             <div class="row text-center g-3">
                 <div class="col-6">
                     <div class="p-3 bg-success-subtle rounded-4 h-100">
@@ -40,7 +40,7 @@
         </div>
         
         <div class="col-md-6">
-            <h5 class="fw-bold mb-4 px-3">Print Quality & Waste</h5>
+            <h2 class="fw-bold mb-4 px-3">Print Quality & Waste</h2>
             
             @php
                 $totalPrints = ($issuance['prints_vs_reprints']['prints'] ?? 0);

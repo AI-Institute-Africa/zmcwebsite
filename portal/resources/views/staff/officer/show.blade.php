@@ -12,7 +12,7 @@
         ? ($application->form_data['org_name'] ?? $application->form_data['organization_name'] ?? $application->applicant?->name)
         : (($application->form_data['first_name'] ?? '') . ' ' . ($application->form_data['surname'] ?? '') ?: $application->applicant?->name);
     @endphp
-    <h4 class="fw-bold mb-0">{{ $application->reference }}</h4>
+    <h1 class="fw-bold mb-0">{{ $application->reference }}</h1>
     <div class="fw-bold text-dark my-1" style="font-size: var(--font-size-lg);"><i class="ri-user-line me-1"></i> {{ $name }}</div>
     <div class="text-muted small text-uppercase">
       {{ str_replace('_', ' ', $application->application_type) }} • {{ $application->request_type }} • {{ $application->journalist_scope ?? $application->residency_type ?? 'local' }}
@@ -194,9 +194,9 @@
   <div class="modal-dialog">
     <div class="modal-content" style="background: #000000; color: #facc15; border: 2px solid #facc15;">
       <div class="modal-header" style="border-bottom: 1px solid #facc15;">
-        <h5 class="modal-title" id="forwardNoApprovalModalLabel">
+        <h2 class="modal-title" id="forwardNoApprovalModalLabel">
           <i class="ri-alert-line me-2"></i>Forward to Registrar for Review
-        </h5>
+        </h2>
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <form method="POST" action="{{ route('staff.officer.applications.forward-no-approval', $application) }}">

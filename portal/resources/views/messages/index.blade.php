@@ -7,7 +7,7 @@
 
   <div class="d-flex justify-content-between align-items-start flex-wrap gap-2 mb-4">
     <div>
-      <h4 class="fw-bold m-0" style="font-size:22px;color:#1e293b;">Messages</h4>
+      <h1 class="fw-bold m-0" style="font-size:22px;color:#1e293b;">Messages</h1>
       <div class="text-muted mt-1" style="font-size:13px;">
         <i class="ri-mail-line me-1"></i> Your conversations per application.
       </div>
@@ -23,7 +23,7 @@
 
   <div class="zmc-card p-0 shadow-sm border-0">
     <div class="p-3 border-bottom d-flex justify-content-between align-items-center">
-      <h6 class="fw-bold m-0"><i class="ri-list-check-2 me-2" style="color:var(--zmc-accent)"></i>Latest threads</h6>
+      <h2 class="fw-bold m-0"><i class="ri-list-check-2 me-2" style="color:var(--zmc-accent)"></i>Latest threads</h2>
     </div>
     <div class="table-responsive">
       <table class="table table-hover align-middle mb-0 zmc-mini-table">

@@ -18,7 +18,7 @@
 
     <div class="d-flex justify-content-between align-items-start flex-wrap gap-2 mb-4">
         <div>
-            <h4 class="fw-bold m-0" style="font-size:22px; color:#1e293b;">Temporary Role Assignments</h4>
+            <h1 class="fw-bold m-0" style="font-size:22px; color:#1e293b;">Temporary Role Assignments</h1>
             <div class="text-muted mt-1" style="font-size:13px;">Manage time-bound role delegations for staff coverage</div>
         </div>
         <div class="d-flex gap-2">
@@ -35,7 +35,7 @@
         <div class="col-6 col-md-3">
             <div class="card border-0 shadow-sm rounded-4">
                 <div class="card-body text-center py-3">
-                    <h4 class="mb-0 fw-bold text-primary">{{ $activeCount }}</h4>
+                    <h2 class="mb-0 fw-bold text-primary">{{ $activeCount }}</h2>
                     <small class="text-muted fw-medium">Active Assignments</small>
                 </div>
             </div>
@@ -43,7 +43,7 @@
         <div class="col-6 col-md-3">
             <div class="card border-0 shadow-sm rounded-4">
                 <div class="card-body text-center py-3">
-                    <h4 class="mb-0 fw-bold text-warning">{{ $expiredCount }}</h4>
+                    <h3 class="mb-0 fw-bold text-warning">{{ $expiredCount }}</h3>
                     <small class="text-muted fw-medium">Expired (Pending Cleanup)</small>
                 </div>
             </div>
@@ -68,7 +68,7 @@
 
     <div class="card border-0 shadow-sm rounded-4">
         <div class="card-header bg-white border-0 py-3 px-4">
-            <h6 class="fw-bold mb-0"><i class="ri-swap-line me-2 text-primary"></i>Assignment History</h6>
+            <h5 class="fw-bold mb-0"><i class="ri-swap-line me-2 text-primary"></i>Assignment History</h5>
         </div>
         <div class="table-responsive">
             <table class="table table-hover mb-0" style="font-size:13px;">

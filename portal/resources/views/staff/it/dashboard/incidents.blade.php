@@ -5,7 +5,7 @@
 
     <div class="d-flex justify-content-between align-items-center mb-4 bg-white p-4 rounded-4 shadow-sm border">
         <div>
-            <h2 class="fw-bold m-0" style="color:#0f172a;">Alerts & Incidents</h2>
+            <h1 class="fw-bold m-0" style="color:#0f172a;">Alerts & Incidents</h1>
             <p class="text-muted m-0 small mt-1">Incident tracking, escalation, and resolution center</p>
         </div>
         <div class="d-flex gap-2 align-items-center">
@@ -91,7 +91,7 @@
         <form action="{{ route('staff.it.incidents.update', $inc) }}" method="POST" class="modal-content border-0 shadow-lg rounded-4">
             @csrf
             <div class="modal-header border-0 p-4 pb-2">
-                <h5 class="modal-title fw-bold">Update: {{ Str::limit($inc->title, 40) }}</h5>
+                <h2 class="modal-title fw-bold">Update: {{ Str::limit($inc->title, 40) }}</h2>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body p-4">
@@ -135,7 +135,7 @@
         <form action="{{ route('staff.it.incidents.store') }}" method="POST" class="modal-content border-0 shadow-lg rounded-4">
             @csrf
             <div class="modal-header border-0 p-4 pb-2">
-                <h5 class="modal-title fw-bold">Log New Incident</h5>
+                <h3 class="modal-title fw-bold">Log New Incident</h3>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body p-4">

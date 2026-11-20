@@ -4,7 +4,7 @@
 <div class="zmc-dashboard-wrapper" style="font-family:'Inter', sans-serif;">
   <div class="d-flex justify-content-between align-items-center mb-4">
     <div>
-      <h3 class="fw-bold m-0" style="color:#0f172a;">Settings</h3>
+      <h1 class="fw-bold m-0" style="color:#0f172a;">Settings</h1>
       <div class="text-muted small">Manage appeal categories and configurations</div>
     </div>
   </div>
@@ -30,7 +30,7 @@
     <div class="col-lg-8">
       <div class="zmc-card h-100">
         <div class="d-flex justify-content-between align-items-center mb-3 border-bottom pb-2">
-          <h6 class="fw-bold m-0">Appeal Categories</h6>
+          <h2 class="fw-bold m-0">Appeal Categories</h2>
           <button class="btn btn-sm btn-dark" data-bs-toggle="modal" data-bs-target="#addCategoryModal">
             <i class="ri-add-line me-1"></i>Add Category
           </button>
@@ -73,7 +73,7 @@
                     <form class="modal-content" method="POST" action="{{ route('staff.appeals.settings.category.update', $category) }}">
                       @csrf @method('PUT')
                       <div class="modal-header">
-                        <h5 class="modal-title fw-bold">Edit Category</h5>
+                        <h3 class="modal-title fw-bold">Edit Category</h3>
                         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                       </div>
                       <div class="modal-body">
@@ -112,7 +112,7 @@
     {{-- System Config placeholders --}}
     <div class="col-lg-4">
       <div class="zmc-card mb-4">
-        <h6 class="fw-bold border-bottom pb-2 mb-3">Email Configuration</h6>
+        <h4 class="fw-bold border-bottom pb-2 mb-3">Email Configuration</h4>
         <p class="small text-muted mb-3">Manage automated email templates sent to applicants.</p>
         @if(Route::has('staff.it.templates-mgmt'))
           <a href="{{ route('staff.it.templates-mgmt') }}" class="btn btn-sm btn-outline-dark w-100">
@@ -124,7 +124,7 @@
       </div>
       
       <div class="zmc-card">
-        <h6 class="fw-bold border-bottom pb-2 mb-3">Roles & Permissions</h6>
+        <h5 class="fw-bold border-bottom pb-2 mb-3">Roles & Permissions</h5>
         <p class="small text-muted mb-0">User accounts, roles and permissions are managed by the ICT Department. This dashboard is limited to appeal categories and communications settings.</p>
       </div>
     </div>

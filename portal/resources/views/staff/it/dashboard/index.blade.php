@@ -18,7 +18,7 @@
 
     <div class="d-flex justify-content-between align-items-center mb-4 bg-white p-4 rounded-4 shadow-sm border border-slate-100">
         <div>
-            <h2 class="fw-bold m-0" style="letter-spacing: -0.02em; color: #0f172a;">IT Dashboard</h2>
+            <h1 class="fw-bold m-0" style="letter-spacing: -0.02em; color: #0f172a;">IT Dashboard</h1>
             <p class="text-muted m-0 small mt-1">Unified System Administration & Monitoring</p>
         </div>
         <div class="d-flex gap-2 align-items-center">
@@ -70,7 +70,7 @@
                                 <span class="badge bg-success-subtle text-success border rounded-pill" style="font-size:10px;">{{ $stats['active_count'] }} active</span>
                             </div>
                         </div>
-                        <h3 class="fw-bold mb-1" style="color: #0f172a;">{{ number_format($stats['total_users']) }}</h3>
+                        <h2 class="fw-bold mb-1" style="color: #0f172a;">{{ number_format($stats['total_users']) }}</h2>
                         <p class="text-muted small m-0 fw-medium">Total Users</p>
                         <div class="mt-2 d-flex gap-2" style="font-size:11px;">
                             <span class="text-primary fw-bold">{{ $stats['staff_count'] }} staff</span>
@@ -123,9 +123,9 @@
                 <div class="col-lg-4">
                     <div class="card border-0 shadow-sm rounded-4 h-100">
                         <div class="card-body p-4">
-                            <h6 class="fw-bold mb-3 d-flex align-items-center gap-2">
+                            <h4 class="fw-bold mb-3 d-flex align-items-center gap-2">
                                 <i class="ri-heart-pulse-line text-success"></i> System Health
-                            </h6>
+                            </h4>
                             <div class="d-flex flex-column gap-3">
                                 <div class="d-flex align-items-center justify-content-between p-3 rounded-3 border" style="background:#f8fafc;">
                                     <div class="d-flex align-items-center gap-2">
@@ -161,9 +161,9 @@
                 <div class="col-lg-4">
                     <div class="card border-0 shadow-sm rounded-4 h-100">
                         <div class="card-body p-4">
-                            <h6 class="fw-bold mb-3 d-flex align-items-center gap-2">
+                            <h5 class="fw-bold mb-3 d-flex align-items-center gap-2">
                                 <i class="ri-pie-chart-line text-primary"></i> Users by Role
-                            </h6>
+                            </h5>
                             <div id="rolesPieChart" style="min-height:200px;"></div>
                         </div>
                     </div>
@@ -218,9 +218,9 @@
 
                     <div class="card border-0 shadow-sm rounded-4">
                         <div class="card-body p-4">
-                            <h6 class="fw-bold mb-3 d-flex align-items-center gap-2">
+                            <h3 class="fw-bold mb-3 d-flex align-items-center gap-2">
                                 <i class="ri-hard-drive-2-line text-primary"></i> Upload Storage
-                            </h6>
+                            </h3>
                             <div class="mb-3">
                                 <div class="d-flex justify-content-between small mb-2">
                                     <span class="text-muted">Documents Volume</span>
@@ -248,7 +248,7 @@
                 <div class="col-xl-8">
                     <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
                         <div class="card-header bg-white p-4 border-0 d-flex justify-content-between align-items-center">
-                            <h6 class="fw-bold m-0"><i class="ri-map-pin-line me-2 text-primary"></i>Regions Management</h6>
+                            <h4 class="fw-bold m-0"><i class="ri-map-pin-line me-2 text-primary"></i>Regions Management</h4>
                             <button type="button" class="btn btn-sm btn-dark rounded-pill px-3" data-bs-toggle="modal" data-bs-target="#addRegionModal">
                                 <i class="ri-add-line"></i> New Region
                             </button>
@@ -295,9 +295,9 @@
 
                 <div class="col-xl-4">
                     <div class="card border-0 shadow-sm rounded-4 p-4 mb-3">
-                        <h6 class="fw-bold mb-3 d-flex align-items-center gap-2">
+                        <h5 class="fw-bold mb-3 d-flex align-items-center gap-2">
                             <i class="ri-shield-check-line text-success"></i> Security Status
-                        </h6>
+                        </h5>
                         <ul class="list-unstyled m-0">
                             <li class="d-flex align-items-center gap-3 mb-3">
                                 <i class="ri-checkbox-circle-fill text-success fs-5"></i>

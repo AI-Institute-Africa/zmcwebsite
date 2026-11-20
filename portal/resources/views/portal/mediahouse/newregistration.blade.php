@@ -19,7 +19,7 @@
 
   @if((isset($returnReasons) && $returnReasons->isNotEmpty()) || filled($draft?->correction_notes) || filled($draft?->proof_review_notes))
   <div class="alert alert-warning border-start border-4 border-warning mb-4" style="background:#fff8e1;">
-    <h6 class="fw-bold mb-2"><i class="ri-error-warning-line me-1"></i> Your application was returned for the following reason(s):</h6>
+    <h5 class="fw-bold mb-2"><i class="ri-error-warning-line me-1"></i> Your application was returned for the following reason(s):</h5>
     @foreach($returnReasons ?? collect() as $reason)
     <div class="mb-2 ps-3 border-start border-2 border-secondary" style="border-color:#e0c100!important;">
       <small class="text-muted">{{ $reason->created_at->format('d M Y H:i') }} &mdash; {{ ucfirst(str_replace('_', ' ', $reason->comment_type)) }}</small>
@@ -79,7 +79,7 @@
 
         {{-- STEP 1 --}}
         <div class="step-content active" id="ap1-step-1">
-          <h3 class="step-title">Contact Person Details</h3>
+          <h2 class="step-title">Contact Person Details</h2>
           <div class="current-step-info">
             <i class="ri-information-line me-2"></i>
             Provide the Contact Person details and Organization details.
@@ -658,7 +658,7 @@
                   <label class="form-label {{ $d['required'] ? 'required' : '' }}">{{ $d['label'] }}</label>
                   <div class="upload-area">
                     <i class="ri-folder-upload-line"></i>
-                    <h5>Upload File</h5>
+                    <h4>Upload File</h4>
                     <p class="m-0">{{ $d['hint'] ?? 'PDF/JPG/PNG/ZIP' }}</p>
                     <input
                       type="file"
@@ -686,7 +686,7 @@
           </div>
 
           <div class="alert alert-warning mt-3">
-            <h6 class="mb-2"><i class="ri-file-text-line me-2"></i>DECLARATION</h6>
+            <h4 class="mb-2"><i class="ri-file-text-line me-2"></i>DECLARATION</h4>
             <p class="mb-2">I declare that all the information given above, to the best of my knowledge is true and complete.</p>
 
             <div class="form-check mt-2">

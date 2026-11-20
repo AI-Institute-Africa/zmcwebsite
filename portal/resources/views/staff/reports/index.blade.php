@@ -10,7 +10,7 @@
       .reports-shell{border:1px solid #e5ede9!important;border-radius:22px!important;overflow:hidden;box-shadow:0 10px 24px rgba(15,35,48,.07)}.reports-shell .card-header{background:#fff!important}.reports-shell .nav-tabs-custom{overflow:auto;flex-wrap:nowrap}.reports-shell .nav-link{white-space:nowrap;padding:13px 15px!important;border-bottom:3px solid transparent!important}.reports-shell .nav-link.active{background:#fbfdfc!important;border-bottom-color:var(--zmc-accent)!important;color:#6d5a00!important}.reports-filter{background:#f8faf9!important}.reports-filter .form-control,.reports-filter .form-select{height:40px;border-radius:10px;border-color:#dce7e1}.reports-filter .btn{height:40px;border-radius:10px;font-weight:700}.reports-summary .report-kpi{border:1px solid #e8edf1!important;border-radius:18px!important;box-shadow:0 8px 20px rgba(15,35,48,.06)!important;padding:18px!important;min-height:142px;position:relative;overflow:hidden}.reports-summary .report-kpi:after{content:"";position:absolute;width:80px;height:80px;right:-28px;bottom:-28px;border-radius:50%;background:rgba(250,204,21,.11)}.reports-summary .report-kpi-icon{width:36px;height:36px;border-radius:11px;display:grid;place-items:center;background:#fff8d9;color:#9a7900;font-size:1.05rem;position:relative;z-index:1}.reports-summary .report-kpi-label{margin-top:14px;font-size:.72rem;text-transform:uppercase;letter-spacing:.05em;color:#64756f;font-weight:800}.reports-summary .report-kpi-value{font-size:1.8rem;line-height:1.05;font-weight:850;color:#172b2b;margin-top:4px}.reports-table{border:1px solid #e8edf1!important;border-radius:22px!important;overflow:hidden;box-shadow:0 10px 24px rgba(15,35,48,.07)!important}.reports-table .card-header{background:#fff!important}.reports-table .table thead th{background:#f4f8f6!important;font-size:.68rem;text-transform:uppercase;letter-spacing:.05em}.reports-table .table tbody tr:hover{background:#fbfdfc}.reports-chart{border:1px solid #e8edf1!important;border-radius:22px!important;box-shadow:0 10px 24px rgba(15,35,48,.07)!important}.reports-heading{padding:18px 0 4px}.reports-heading h4{font-size:var(--font-size-2xl);font-weight:800;margin:0;color:var(--zmc-text-dark)}.reports-heading p{margin:5px 0 0;color:#71817b;font-size:var(--font-size-base)}
     </style>
     {{-- Header --}}
-    <div class="reports-heading d-flex justify-content-between align-items-start flex-wrap gap-3"><div><h4>Operational Reports</h4><p>Monitor applications, payments, processing performance, levies, printing, collection, and user activity.</p></div><div class="d-flex gap-2"><button class="btn btn-white border shadow-sm btn-sm px-3" @click="reloadData"><i class="ri-refresh-line me-1"></i> Refresh</button><button class="btn btn-white border shadow-sm btn-sm px-3" @click="printReport"><i class="ri-printer-line me-1"></i> Print</button></div></div>
+    <div class="reports-heading d-flex justify-content-between align-items-start flex-wrap gap-3"><div><h1>Operational Reports</h1><p>Monitor applications, payments, processing performance, levies, printing, collection, and user activity.</p></div><div class="d-flex gap-2"><button class="btn btn-white border shadow-sm btn-sm px-3" @click="reloadData"><i class="ri-refresh-line me-1"></i> Refresh</button><button class="btn btn-white border shadow-sm btn-sm px-3" @click="printReport"><i class="ri-printer-line me-1"></i> Print</button></div></div>
 
     {{-- Tabs --}}
     <div class="reports-shell card mb-4">
@@ -120,7 +120,7 @@
     {{-- Main Data Table --}}
     <div class="reports-table zmc-card p-0 bg-white mb-4" v-if="!loading">
         <div class="card-header bg-white py-3 px-4 border-bottom d-flex justify-content-between align-items-center">
-            <h6 class="fw-bold m-0 text-uppercase" style="letter-spacing: 0.05em;">@{{ config.tabs[activeTab] }} Details</h6>
+            <h2 class="fw-bold m-0 text-uppercase" style="letter-spacing: 0.05em;">@{{ config.tabs[activeTab] }} Details</h2>
             <div class="small text-muted">Showing latest @{{ tableData.length }} records</div>
         </div>
         
@@ -161,7 +161,7 @@
     <div class="row g-4 mb-4" v-if="chartsData">
         <div class="col-md-6" v-for="(chart, key) in chartsData" :key="key">
             <div class="reports-chart zmc-card p-4 bg-white" style="border-radius: 12px;">
-                <h6 class="fw-bold mb-3">@{{ formatSummaryKey(key) }}</h6>
+                <h3 class="fw-bold mb-3">@{{ formatSummaryKey(key) }}</h3>
                 <div :id="'chart-' + key" style="min-height: 250px;"></div>
             </div>
         </div>

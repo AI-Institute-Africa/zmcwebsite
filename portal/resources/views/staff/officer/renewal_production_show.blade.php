@@ -6,7 +6,7 @@
 <div class="zmc-dashboard-wrapper" style="font-family: var(--font-primary); color: var(--zmc-text-dark);">
     <div class="d-flex justify-content-between align-items-start flex-wrap gap-2 mb-4">
         <div>
-            <h4 class="fw-bold m-0" style="font-size: var(--font-size-2xl); color:#1e293b;">Renewal Production</h4>
+            <h1 class="fw-bold m-0" style="font-size: var(--font-size-2xl); color:#1e293b;">Renewal Production</h1>
             <div class="text-muted mt-1" style="font-size: var(--font-size-base);">
                 <i class="ri-information-line me-1"></i>{{ $renewal->getRenewalTypeLabel() }}
                 &middot; {{ $renewal->original_number ?: 'No original number' }}
@@ -33,7 +33,7 @@
         <div class="col-12 col-xl-8">
             <div class="card shadow-sm border-0 mb-4">
                 <div class="card-body">
-                    <h6 class="fw-bold mb-3">Applicant information</h6>
+                    <h2 class="fw-bold mb-3">Applicant information</h2>
                     <div class="row g-3 small">
                         <div class="col-6 col-md-3">
                             <div class="text-muted">Name</div>
@@ -76,7 +76,7 @@
             @if($renewal->originalApplication)
                 <div class="card shadow-sm border-0 mb-4">
                     <div class="card-body">
-                        <h6 class="fw-bold mb-3">Original application</h6>
+                        <h3 class="fw-bold mb-3">Original application</h3>
                         <div class="row g-3 small">
                             <div class="col-6 col-md-3">
                                 <div class="text-muted">Reference</div>
@@ -112,7 +112,7 @@
             @if($renewal->has_changes && $renewal->changeRequests->count() > 0)
                 <div class="card shadow-sm border-0 mb-4">
                     <div class="card-body">
-                        <h6 class="fw-bold mb-3">Changes to apply</h6>
+                        <h4 class="fw-bold mb-3">Changes to apply</h4>
                         <div class="table-responsive">
                             <table class="table table-sm align-middle mb-0">
                                 <thead>
@@ -147,7 +147,7 @@
         <div class="col-12 col-xl-4">
             <div class="card shadow-sm border-0 mb-4">
                 <div class="card-body">
-                    <h6 class="fw-bold mb-3">Production actions</h6>
+                    <h5 class="fw-bold mb-3">Production actions</h5>
 
                     @if($renewal->status === \App\Models\RenewalApplication::RENEWAL_PAYMENT_VERIFIED)
                         <form method="POST" action="{{ route('staff.officer.renewals.production.generate', $renewal) }}"

@@ -8,7 +8,7 @@
     <!-- Hero Header -->
     <div class="d-flex justify-content-between align-items-center mb-4 bg-white p-4 rounded-4 shadow-sm border border-slate-100">
         <div>
-            <h2 class="fw-bold m-0" style="letter-spacing: -0.02em; color: #0f172a;">IT System Reports</h2>
+            <h1 class="fw-bold m-0" style="letter-spacing: -0.02em; color: #0f172a;">IT System Reports</h1>
             <p class="text-slate-600 m-0 small mt-1">Technical Insights & Environment Statistics</p>
         </div>
         <div>

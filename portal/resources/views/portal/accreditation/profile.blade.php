@@ -7,7 +7,7 @@
 @php $user = Auth::user(); @endphp
 <div id="profile-page">
   <div class="d-flex justify-content-between align-items-center mb-4">
-    <h4 class="fw-bold text-dark m-0" style="font-size:18px;">Media Practitioner Profile</h4>
+    <h1 class="fw-bold text-dark m-0" style="font-size:18px;">Media Practitioner Profile</h1>
   </div>
 
   @if(session('success'))
@@ -21,7 +21,7 @@
 
   <div class="form-container">
     <div class="form-header" style="background: transparent !important; border-bottom: 1px solid #e2e8f0;">
-      <h5 class="m-0" style="color: #334155;"><i class="ri-user-settings-line me-2"></i>Personal Information</h5>
+      <h2 class="m-0" style="color: #334155;"><i class="ri-user-settings-line me-2"></i>Personal Information</h2>
     </div>
 
     <form method="POST" action="{{ route('accreditation.profile.update') }}" id="profileForm">
@@ -30,7 +30,7 @@
         <div class="text-center mb-4">
           <img src="https://ui-avatars.com/api/?name={{ urlencode($user->name ?? 'User') }}&size=120&background=facc15&color=000&bold=true"
                class="rounded-circle" alt="Profile" width="120" height="120">
-          <h5 class="mt-3 mb-1">{{ $user->name ?? 'User' }}</h5>
+          <h3 class="mt-3 mb-1">{{ $user->name ?? 'User' }}</h3>
           <p class="text-muted">Accredited Media Practitioner</p>
         </div>
 

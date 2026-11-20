@@ -5,7 +5,7 @@
 <div id="notices-page" style="color:#334155;">
   <div class="d-flex justify-content-between align-items-center mb-4">
     <div>
-      <h4 class="fw-bold m-0" style="font-size:22px; color:#1e293b;">Notices & Events</h4>
+      <h1 class="fw-bold m-0" style="font-size:22px; color:#1e293b;">Notices & Events</h1>
       <div class="text-muted mt-1" style="font-size:13px;">
         <i class="ri-information-line me-1"></i>
         Stay updated with the latest announcements from ZMC.
@@ -21,7 +21,7 @@
     @unless($isMedia)
     <div class="col-12 col-lg-3">
       <div class="zmc-card">
-        <h6 class="fw-bold mb-3"><i class="ri-menu-line me-2" style="color:var(--zmc-accent)"></i>Navigation</h6>
+        <h2 class="fw-bold mb-3"><i class="ri-menu-line me-2" style="color:var(--zmc-accent)"></i>Navigation</h2>
         <div class="list-group list-group-flush">
           <a href="{{ route('accreditation.home') }}" class="list-group-item list-group-item-action border-0 px-0 py-2 small">
             <i class="ri-dashboard-line me-2"></i> Dashboard
@@ -51,7 +51,7 @@
 
     <div class="col-12 {{ $isMedia ? 'col-lg-7' : 'col-lg-5' }}">
       <div class="zmc-card">
-        <h6 class="fw-bold mb-3"><i class="ri-megaphone-line me-2" style="color:var(--zmc-accent)"></i>Notices</h6>
+        <h3 class="fw-bold mb-3"><i class="ri-megaphone-line me-2" style="color:var(--zmc-accent)"></i>Notices</h3>
         @forelse($notices as $n)
           <div class="border-bottom pb-3 mb-3">
             @if($n->image_path)
@@ -74,7 +74,7 @@
 
     <div class="col-12 {{ $isMedia ? 'col-lg-5' : 'col-lg-4' }}">
       <div class="zmc-card">
-        <h6 class="fw-bold mb-3"><i class="ri-calendar-event-line me-2" style="color:var(--zmc-accent)"></i>Events</h6>
+        <h4 class="fw-bold mb-3"><i class="ri-calendar-event-line me-2" style="color:var(--zmc-accent)"></i>Events</h4>
         @forelse($events as $e)
           <div class="border-bottom pb-3 mb-3">
             @if($e->image_path)

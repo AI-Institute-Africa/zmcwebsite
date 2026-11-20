@@ -5,9 +5,9 @@
 <div class="zmc-dashboard-wrapper" style="font-family:'Roboto', sans-serif; color:#334155; padding: 20px;">
     <div class="d-flex justify-content-between align-items-start flex-wrap gap-2 mb-4">
         <div>
-            <h4 class="fw-bold m-0" style="font-size:22px; color:#1e293b;">
+            <h1 class="fw-bold m-0" style="font-size:22px; color:#1e293b;">
                 Edit Application: {{ $application->reference }}
-            </h4>
+            </h1>
             <div class="text-muted mt-1" style="font-size:13px;">
                 <i class="ri-information-line me-1"></i>
                 Update all form fields for this physical intake application.
@@ -76,7 +76,7 @@
         @if($application->application_type === 'accreditation')
         <div class="card shadow-sm mb-4 border-0 rounded-4">
             <div class="card-header bg-primary text-white rounded-top-4">
-                <h6 class="fw-bold m-0"><i class="ri-user-line me-2"></i>Applicant Personal Details</h6>
+                <h2 class="fw-bold m-0"><i class="ri-user-line me-2"></i>Applicant Personal Details</h2>
             </div>
             <div class="card-body">
                 <div class="row g-3">
@@ -141,7 +141,7 @@
 
         <div class="card shadow-sm mb-4 border-0 rounded-4">
             <div class="card-header bg-white border-bottom rounded-top-4">
-                <h6 class="fw-bold m-0"><i class="ri-building-line me-2"></i>Employment Details</h6>
+                <h3 class="fw-bold m-0"><i class="ri-building-line me-2"></i>Employment Details</h3>
             </div>
             <div class="card-body">
                 <div class="row g-3">
@@ -172,7 +172,7 @@
         @elseif($application->application_type === 'registration')
         <div class="card shadow-sm mb-4 border-0 rounded-4">
             <div class="card-header bg-primary text-white rounded-top-4">
-                <h6 class="fw-bold m-0"><i class="ri-building-line me-2"></i>Media House Details</h6>
+                <h4 class="fw-bold m-0"><i class="ri-building-line me-2"></i>Media House Details</h4>
             </div>
             <div class="card-body">
                 <div class="row g-3">
@@ -280,7 +280,7 @@
 
         <div class="card shadow-sm mb-4 border-0 rounded-4">
             <div class="card-header bg-white border-bottom rounded-top-4">
-                <h6 class="fw-bold m-0"><i class="ri-map-pin-line me-2"></i>Contact & Address</h6>
+                <h5 class="fw-bold m-0"><i class="ri-map-pin-line me-2"></i>Contact & Address</h5>
             </div>
             <div class="card-body">
                 <div class="row g-3">

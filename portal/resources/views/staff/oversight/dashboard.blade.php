@@ -4,7 +4,7 @@
 @section('content')
 <div class="d-flex justify-content-between align-items-center mb-3">
   <div>
-    <h4 class="fw-bold m-0">Oversight</h4>
+    <h1 class="fw-bold m-0">Oversight</h1>
     <div class="text-muted small">Read-only visibility across the entire process. Search + filters + view logs.</div>
   </div>
 </div>

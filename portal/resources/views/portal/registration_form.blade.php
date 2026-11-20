@@ -697,7 +697,7 @@
 
             <!-- STEP 1: CONTACT -->
             <div class="step-content active" id="ap1-step-1">
-              <h3 class="step-title">Contact Person for This Application</h3>
+              <h2 class="step-title">Contact Person for This Application</h2>
               <div class="current-step-info">
                 <i class="ri-information-line me-2"></i>
                 Provide the name, address and telephone number of the person(s) who may be contacted regarding questions in respect of this application.
@@ -803,7 +803,7 @@
                 Provide directors and senior managers details. You can add rows where necessary.
               </div>
 
-              <h6 class="fw-bold">Directors (CR6 / CR14)</h6>
+              <h4 class="fw-bold">Directors (CR6 / CR14)</h4>
               <div class="mini-table mb-3">
                 <table class="table table-hover align-middle">
                   <thead>
@@ -830,7 +830,7 @@
                 <i class="ri-add-line me-1"></i>Add Director
               </button>
 
-              <h6 class="fw-bold">CEO Details</h6>
+              <h5 class="fw-bold">CEO Details</h5>
               <div class="form-row">
                 <div class="form-field">
                   <label class="form-label required">CEO Full Name</label>
@@ -948,7 +948,7 @@
                   <label class="form-label required">Certificate of Incorporation (Certified)</label>
                   <div class="upload-area">
                     <i class="ri-file-text-line"></i>
-                    <h5>Upload Certificate</h5>
+                    <h4>Upload Certificate</h4>
                     <p>PDF/JPG/PNG</p>
                     <input type="file" accept=".pdf,.jpg,.jpeg,.png" style="display:none;" required>
                     <button type="button" class="upload-btn">Choose File</button>
@@ -1137,7 +1137,7 @@
               </div>
 
               <div class="alert alert-warning">
-                <h6><i class="ri-file-text-line me-2"></i>Declaration</h6>
+                <h4><i class="ri-file-text-line me-2"></i>Declaration</h4>
                 <p class="mb-2">I declare that all the information given above, to the best of my knowledge is true and complete.</p>
                 <div class="form-check mt-3">
                   <input class="form-check-input" type="checkbox" id="ap1-declaration-agree" required>
@@ -1256,7 +1256,7 @@
 
             <!-- STEP 1 -->
             <div class="step-content active" id="ap5-step-1">
-              <h3 class="step-title">Contact Person</h3>
+              <h2 class="step-title">Contact Person</h2>
               <div class="current-step-info">
                 <i class="ri-information-line me-2"></i>
                 Provide the name, address and telephone number of the person(s) who may be contacted regarding questions in respect of this application.
@@ -1374,7 +1374,7 @@
                   <label class="form-label">Updated CR6 / CR14 (if applicable)</label>
                   <div class="upload-area">
                     <i class="ri-folder-shared-line"></i>
-                    <h5>Upload CR6/CR14</h5>
+                    <h4>Upload CR6/CR14</h4>
                     <p>Optional</p>
                     <input type="file" accept=".pdf,.jpg,.jpeg,.png" style="display:none;">
                     <button type="button" class="upload-btn">Choose File</button>
@@ -1405,7 +1405,7 @@
               </div>
 
               <div class="alert alert-warning">
-                <h6><i class="ri-file-text-line me-2"></i>Declaration</h6>
+                <h4><i class="ri-file-text-line me-2"></i>Declaration</h4>
                 <p class="mb-2">I declare that all the information given above, to the best of my knowledge is true and complete.</p>
                 <div class="form-check mt-3">
                   <input class="form-check-input" type="checkbox" id="ap5-declaration-agree" required>

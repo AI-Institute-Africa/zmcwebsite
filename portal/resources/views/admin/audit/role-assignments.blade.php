@@ -6,9 +6,9 @@
 <div class="zmc-dashboard-wrapper" style="font-family:'Roboto', sans-serif; color:#334155;">
   <div class="d-flex justify-content-between align-items-start flex-wrap gap-2 mb-4">
     <div>
-      <h4 class="fw-bold m-0" style="font-size:22px; color:#1e293b;">
+      <h1 class="fw-bold m-0" style="font-size:22px; color:#1e293b;">
         <i class="ri-shield-user-line me-2"></i>Role Assignment Audit Trail
-      </h4>
+      </h1>
       <div class="text-muted mt-1" style="font-size:13px;">
         Audit trail of all IT role assignments and user access changes with timestamps
       </div>

@@ -7,16 +7,16 @@
         <a href="{{ route('executive.dashboard') }}" class="btn btn-sm btn-link p-0 text-muted mb-2 text-decoration-none">
             <i class="ri-arrow-left-line"></i> Back to Overview
         </a>
-        <h4 class="fw-bold m-0" style="font-size: var(--font-size-2xl); color:#1e293b;">Compliance & Risk Overview</h4>
+        <h1 class="fw-bold m-0" style="font-size: var(--font-size-2xl); color:#1e293b;">Compliance & Risk Overview</h1>
     </div>
 
     <div class="row g-4">
         <!-- Category Reassignments -->
         <div class="col-md-6">
             <div class="zmc-card">
-                <h6 class="fw-bold mb-3">
+                <h2 class="fw-bold mb-3">
                     <i class="ri-exchange-line text-warning me-2"></i>Category Reassignments
-                </h6>
+                </h2>
                 <div class="alert alert-warning alert-sm mb-3">
                     <strong>{{ $categoryReassignments['total'] }}</strong> reassignments this month
                 </div>
@@ -44,9 +44,9 @@
         <!-- Reopened Applications -->
         <div class="col-md-6">
             <div class="zmc-card">
-                <h6 class="fw-bold mb-3">
+                <h3 class="fw-bold mb-3">
                     <i class="ri-refresh-line text-info me-2"></i>Reopened Applications
-                </h6>
+                </h3>
                 <div class="alert alert-info alert-sm mb-3">
                     <strong>{{ $reopenedApplications['total'] }}</strong> applications reopened
                 </div>
@@ -74,9 +74,9 @@
         <!-- Manual Overrides -->
         <div class="col-md-6">
             <div class="zmc-card">
-                <h6 class="fw-bold mb-3">
+                <h4 class="fw-bold mb-3">
                     <i class="ri-shield-keyhole-line text-danger me-2"></i>Manual Overrides
-                </h6>
+                </h4>
                 <div class="alert alert-danger alert-sm mb-3">
                     <strong>{{ $manualOverrides['total'] }}</strong> manual overrides recorded
                 </div>
@@ -104,9 +104,9 @@
         <!-- Certificate Edits -->
         <div class="col-md-6">
             <div class="zmc-card">
-                <h6 class="fw-bold mb-3">
+                <h5 class="fw-bold mb-3">
                     <i class="ri-edit-line text-warning me-2"></i>Certificate Edits After Approval
-                </h6>
+                </h5>
                 <div class="alert alert-warning alert-sm mb-3">
                     <strong>{{ $certificateEdits['total'] }}</strong> post-approval edits
                 </div>

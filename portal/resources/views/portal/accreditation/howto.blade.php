@@ -294,7 +294,7 @@
 
    <div class="form-container" style="margin-bottom: 30px;">
      <div class="form-header">
-       <h3 style="margin: 0; color: #111827; font-weight: 700; font-size: 18px;">New Accreditation</h3>
+       <h2 style="margin: 0; color: #111827; font-weight: 700; font-size: 18px;">New Accreditation</h2>
        <p style="margin: 6px 0 0 0; color: #64748b; font-size: 13px;">Apply for your first-time media practitioner accreditation</p>
      </div>
      <div class="form-steps-container">

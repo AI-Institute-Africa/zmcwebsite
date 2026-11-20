@@ -215,9 +215,9 @@
     <div class="modal-content" style="border-radius:16px; overflow:hidden;">
       <div class="modal-header" style="background:#1e293b; color:#fff; padding:20px 28px;">
         <div>
-          <h5 class="modal-title fw-bold m-0" id="ap6ReviewModalLabel">
+          <h2 class="modal-title fw-bold m-0" id="ap6ReviewModalLabel">
             <i class="ri-file-search-line me-2"></i>Review Your Levy Declaration
-          </h5>
+          </h2>
           <div class="mt-1" style="font-size:12px; opacity:0.8;">Please review all details below before submitting</div>
         </div>
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>

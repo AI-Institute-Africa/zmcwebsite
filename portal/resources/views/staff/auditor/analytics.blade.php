@@ -6,7 +6,7 @@
 
     <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-4">
         <div>
-            <h4 class="fw-bold m-0 text-slate-900" style="font-size:24px; letter-spacing: -0.02em;">Auditor Analytics</h4>
+            <h1 class="fw-bold m-0 text-slate-900" style="font-size:24px; letter-spacing: -0.02em;">Auditor Analytics</h1>
             <div class="text-slate-500 mt-1 d-flex align-items-center" style="font-size:14px;">
                 <i class="ri-shield-check-line me-2 text-primary"></i>
                 Advanced oversight & integrity metrics

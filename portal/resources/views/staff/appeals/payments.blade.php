@@ -4,7 +4,7 @@
 <div class="zmc-dashboard-wrapper" style="font-family:'Inter', sans-serif;">
   <div class="d-flex justify-content-between align-items-center mb-4">
     <div>
-      <h3 class="fw-bold m-0" style="color:#0f172a;">Appeal Payments</h3>
+      <h1 class="fw-bold m-0" style="color:#0f172a;">Appeal Payments</h1>
       <div class="text-muted small">Manage payments and transactions for appeals</div>
     </div>
   </div>

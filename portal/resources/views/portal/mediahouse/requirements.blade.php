@@ -8,7 +8,7 @@
 
   <div class="d-flex justify-content-between align-items-start flex-wrap gap-2 mb-4">
     <div>
-      <h4 class="fw-bold m-0" style="font-size:22px; color:#1e293b;">Registration Requirements</h4>
+      <h1 class="fw-bold m-0" style="font-size:22px; color:#1e293b;">Registration Requirements</h1>
       <div class="text-muted mt-1" style="font-size:13px;">
         <i class="ri-information-line me-1"></i>
         Documents and information needed for media house registration.
@@ -22,9 +22,9 @@
   <div class="row g-3 mb-4">
     <div class="col-12 col-lg-6">
       <div class="zmc-card h-100" style="border-left:4px solid #166534;">
-        <h6 class="fw-bold mb-1" style="color:#166534;">
+        <h2 class="fw-bold mb-1" style="color:#166534;">
           <i class="ri-home-4-line me-2"></i>Local Media House Requirements
-        </h6>
+        </h2>
         <div class="text-muted small mb-3">AP1 (Mass Media Service) &amp; AP2 (News Agency)</div>
         <ul class="list-unstyled mb-0">
           <li class="d-flex align-items-start gap-2 mb-3">
@@ -85,9 +85,9 @@
 
     <div class="col-12 col-lg-6">
       <div class="zmc-card h-100" style="border-left:4px solid #1e40af;">
-        <h6 class="fw-bold mb-1" style="color:#1e40af;">
+        <h3 class="fw-bold mb-1" style="color:#1e40af;">
           <i class="ri-global-line me-2"></i>Foreign Media House Requirements
-        </h6>
+        </h3>
         <div class="text-muted small mb-3">AP4 (Foreign Representative Office)</div>
         <ul class="list-unstyled mb-0">
           <li class="d-flex align-items-start gap-2 mb-3">
@@ -138,9 +138,9 @@
   <div class="row g-3 mb-4">
     <div class="col-12 col-lg-6">
       <div class="zmc-card h-100">
-        <h6 class="fw-bold mb-3" style="color:#1a1a1a;">
+        <h4 class="fw-bold mb-3" style="color:#1a1a1a;">
           <i class="ri-refresh-line me-2" style="color:var(--zmc-accent)"></i>Renewal (AP5)
-        </h6>
+        </h4>
         <ul class="list-unstyled mb-0">
           <li class="d-flex align-items-start gap-2 mb-3">
             <i class="ri-checkbox-circle-fill text-success mt-1"></i>
@@ -164,9 +164,9 @@
 
     <div class="col-12 col-lg-6">
       <div class="zmc-card h-100">
-        <h6 class="fw-bold mb-3" style="color:#1a1a1a;">
+        <h5 class="fw-bold mb-3" style="color:#1a1a1a;">
           <i class="ri-exchange-line me-2" style="color:var(--zmc-accent)"></i>Replacement (AP5)
-        </h6>
+        </h5>
         <ul class="list-unstyled mb-0">
           <li class="d-flex align-items-start gap-2 mb-3">
             <i class="ri-checkbox-circle-fill text-success mt-1"></i>

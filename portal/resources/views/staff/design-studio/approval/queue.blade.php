@@ -6,9 +6,9 @@
 
   <div class="d-flex justify-content-between align-items-start flex-wrap gap-2 mb-4">
     <div>
-      <h4 class="fw-bold m-0" style="font-size:var(--font-size-2xl);color:#1e293b;">
+      <h1 class="fw-bold m-0" style="font-size:var(--font-size-2xl);color:#1e293b;">
         <i class="ri-shield-check-line me-2" style="color:var(--zmc-accent)"></i>Template Approval Queue
-      </h4>
+      </h1>
       <div class="text-muted mt-1">Review and approve or reject templates submitted by designers.</div>
     </div>
     <div class="d-flex gap-2">

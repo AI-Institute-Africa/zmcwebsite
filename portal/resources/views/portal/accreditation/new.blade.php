@@ -660,7 +660,7 @@
   {{-- ====================== RETURN REASONS ====================== --}}
       @if((isset($returnReasons) && $returnReasons->isNotEmpty()) || filled($draft?->correction_notes) || filled($draft?->proof_review_notes))
     <div class="af-return">
-      <h6><i class="ri-error-warning-line"></i> Your application was returned for the following reason(s)</h6>
+      <h5><i class="ri-error-warning-line"></i> Your application was returned for the following reason(s)</h5>
         @foreach($returnReasons ?? collect() as $reason)
         <div class="af-reason">
           <small>{{ $reason->created_at->format('d M Y H:i') }} &mdash; {{ ucfirst(str_replace('_', ' ', $reason->comment_type)) }}</small>
@@ -722,7 +722,7 @@
 
         {{-- ===================== STEP 1: TYPE ===================== --}}
         <div class="step-content af-step-content active" id="ap3-step-1">
-          <h3 class="af-step-title">Select Applicant Type</h3>
+          <h2 class="af-step-title">Select Applicant Type</h2>
           <div class="af-info">
             <i class="ri-information-line"></i>
             <div>Select whether you are a Local or Foreign media practitioner. Different requirements apply.</div>
@@ -732,7 +732,7 @@
             <div class="app-type-card af-type-card" data-type="local">
               <div class="af-checkmark"><i class="ri-check-line"></i></div>
               <div class="af-type-icon"><i class="ri-user-3-line"></i></div>
-              <h4>Local Media Practitioner</h4>
+              <h3>Local Media Practitioner</h3>
               <p>Zimbabwean citizens or residents applying for accreditation.</p>
               <span class="af-type-tag"><i class="ri-id-card-line"></i> National ID Required</span>
             </div>
@@ -1097,7 +1097,7 @@
               <label class="af-lbl">Academic / Educational Certificate</label>
               <div class="upload-area af-upload">
                 <div class="af-upload-icon"><i class="ri-award-line"></i></div>
-                <h5>Upload Academic Certificate</h5>
+                <h4>Upload Academic Certificate</h4>
                 <p>PDF / JPG / PNG &mdash; Max 10MB</p>
                 <input type="file" name="educational_certificate[]" id="edu_cert" accept=".pdf,.jpg,.jpeg,.png" multiple style="display:none;">
                 <label for="edu_cert" class="af-btn af-btn-ink af-btn-sm">Choose Files</label>
@@ -1164,7 +1164,7 @@
               <label class="af-lbl required">Photo (Passport size, white background)</label>
               <div class="upload-area af-upload">
                 <div class="af-upload-icon"><i class="ri-camera-line"></i></div>
-                <h5>Upload Photo</h5>
+                <h4>Upload Photo</h4>
                 <p>JPG / PNG &mdash; clear face, white background</p>
                 <input type="file" name="passport_photo" id="pass_photo" accept=".jpg,.jpeg,.png" style="display:none;" required>
                 <div class="d-flex justify-content-center gap-2 flex-wrap">

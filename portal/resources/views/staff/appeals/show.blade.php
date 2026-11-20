@@ -6,7 +6,7 @@
   <div class="d-flex justify-content-between align-items-center mb-4">
     <div>
       <a href="{{ route('staff.appeals.index') }}" class="text-decoration-none text-muted mb-2 d-inline-block"><i class="ri-arrow-left-line me-1"></i>Back to Appeals</a>
-      <h3 class="fw-bold m-0" style="color:#0f172a;">Appeal: {{ $appeal->reference_number ?? 'N/A' }}</h3>
+      <h1 class="fw-bold m-0" style="color:#0f172a;">Appeal: {{ $appeal->reference_number ?? 'N/A' }}</h1>
       <div class="text-muted small">Submitted on {{ $appeal->created_at->format('d M Y, H:i') }}</div>
     </div>
     <div class="d-flex gap-2">
@@ -28,7 +28,7 @@
     <div class="col-lg-8">
       {{-- Applicant Info --}}
       <div class="zmc-card mb-4">
-        <h6 class="fw-bold mb-3 border-bottom pb-2">Applicant Information</h6>
+        <h2 class="fw-bold mb-3 border-bottom pb-2">Applicant Information</h2>
         <div class="row g-3">
           <div class="col-md-4">
             <div class="text-muted small">Full Name</div>
@@ -47,7 +47,7 @@
 
       {{-- Appeal Details --}}
       <div class="zmc-card mb-4">
-        <h6 class="fw-bold mb-3 border-bottom pb-2">Appeal Details</h6>
+        <h3 class="fw-bold mb-3 border-bottom pb-2">Appeal Details</h3>
         <div class="row g-3">
           <div class="col-md-6">
             <div class="text-muted small">Category</div>
@@ -75,7 +75,7 @@
 
       {{-- Communications Tab --}}
       <div class="zmc-card mb-4">
-        <h6 class="fw-bold mb-3 border-bottom pb-2">Communication History</h6>
+        <h4 class="fw-bold mb-3 border-bottom pb-2">Communication History</h4>
         @if($appeal->communications->count() > 0)
           <div class="list-group list-group-flush">
             @foreach($appeal->communications as $comm)
@@ -100,7 +100,7 @@
       
       {{-- Status & Assignment --}}
       <div class="zmc-card mb-4 border-top border-4 border-primary">
-        <h6 class="fw-bold mb-3">Officer Actions</h6>
+        <h5 class="fw-bold mb-3">Officer Actions</h5>
         
         <form method="POST" action="{{ route('staff.appeals.assign', $appeal) }}" class="mb-3">
           @csrf @method('PATCH')

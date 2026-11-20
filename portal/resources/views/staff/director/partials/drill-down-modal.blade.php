@@ -20,9 +20,9 @@
     <div class="modal-dialog modal-xl modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="{{ $modalId }}Label">
+                <h1 class="modal-title" id="{{ $modalId }}Label">
                     <i class="ri-file-list-line me-2"></i>{{ $title }}
-                </h5>
+                </h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">

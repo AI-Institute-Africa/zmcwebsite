@@ -1,5 +1,5 @@
 <div class="zmc-card bg-white shadow-sm border-0 rounded-4 p-4">
-    <h5 class="fw-bold mb-4">Operational Throughput (MonthlyProcessed)</h5>
+    <h1 class="fw-bold mb-4">Operational Throughput (MonthlyProcessed)</h1>
     <div class="table-responsive">
         <table class="table table-hover align-middle">
             <thead class="bg-light">

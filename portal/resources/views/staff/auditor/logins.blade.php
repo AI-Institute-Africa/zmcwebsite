@@ -6,7 +6,7 @@
 
   <div class="d-flex justify-content-between align-items-start flex-wrap gap-2 mb-4">
     <div>
-      <h4 class="fw-bold m-0" style="font-size: var(--font-size-2xl); color:#1e293b;">User Logins</h4>
+      <h1 class="fw-bold m-0" style="font-size: var(--font-size-2xl); color:#1e293b;">User Logins</h1>
       <div class="text-muted mt-1" style="font-size: var(--font-size-base);"><i class="ri-login-box-line me-1"></i>Login events with user name and recent activity actions.</div>
     </div>
     <div class="d-flex gap-2">
@@ -45,7 +45,7 @@
 
   <div class="zmc-card shadow-sm border-0 p-0">
     <div class="p-3 border-bottom d-flex justify-content-between align-items-center">
-      <h6 class="fw-bold m-0"><i class="ri-history-line me-2" style="color:var(--zmc-accent)"></i>Login Events</h6>
+      <h2 class="fw-bold m-0"><i class="ri-history-line me-2" style="color:var(--zmc-accent)"></i>Login Events</h2>
       <div class="small text-muted">Read-only</div>
     </div>
 

@@ -4,7 +4,7 @@
 <div class="zmc-dashboard-wrapper" style="font-family:'Inter', sans-serif;">
   <div class="d-flex justify-content-between align-items-center mb-4">
     <div>
-      <h3 class="fw-bold m-0" style="color:#0f172a;">Reports & Analytics</h3>
+      <h1 class="fw-bold m-0" style="color:#0f172a;">Reports & Analytics</h1>
       <div class="text-muted small">Analyze appeals data and generate reports</div>
     </div>
     <div>
@@ -52,7 +52,7 @@
   <div class="row g-4">
     <div class="col-md-6">
       <div class="zmc-card h-100">
-        <h6 class="fw-bold border-bottom pb-2 mb-3">Appeals by Category</h6>
+        <h3 class="fw-bold border-bottom pb-2 mb-3">Appeals by Category</h3>
         <table class="table table-sm">
           <thead>
             <tr>

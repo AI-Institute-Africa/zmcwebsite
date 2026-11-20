@@ -79,7 +79,7 @@
           <div class="accordion-body bg-light-subtle">
             @if($app->documents->count() > 0)
               <div class="d-flex justify-content-between align-items-center mb-3">
-                <h6 class="m-0 fw-bold text-secondary"><i class="ri-attachment-line me-1"></i> Uploaded Files</h6>
+                <h2 class="m-0 fw-bold text-secondary"><i class="ri-attachment-line me-1"></i> Uploaded Files</h2>
                 <a href="{{ route('staff.registrar.applications.zip-download', $app) }}" class="btn btn-sm btn-success px-3 shadow-xs">
                   <i class="ri-file-zip-line me-1"></i> Download All as ZIP
                 </a>

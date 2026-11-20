@@ -1,7 +1,7 @@
 <div class="row g-4 mb-4">
     <div class="col-md-7">
         <div class="zmc-card bg-white shadow-sm border-0 rounded-4 p-4 h-100">
-            <h5 class="fw-bold mb-4">High-Risk Action Log (MTD)</h5>
+            <h1 class="fw-bold mb-4">High-Risk Action Log (MTD)</h1>
             <div class="table-responsive">
                 <table class="table table-borderless align-middle mb-0">
                     <thead class="bg-light rounded-3">
@@ -78,7 +78,7 @@
     
     <div class="col-md-5">
         <div class="zmc-card bg-white shadow-sm border-0 rounded-4 p-4 h-100">
-            <h5 class="fw-bold mb-4">Reprint & Waste Integrity</h5>
+            <h2 class="fw-bold mb-4">Reprint & Waste Integrity</h2>
             
             @php
                 $totalPrints = $reprints['total'] ?? 0;
@@ -111,7 +111,7 @@
                     </div>
                 </div>
 
-                <h6 class="small fw-bold text-muted text-uppercase mb-3">Top Reprint Operators</h6>
+                <h3 class="small fw-bold text-muted text-uppercase mb-3">Top Reprint Operators</h3>
                 @if(isset($reprints['top_staff']) && $reprints['top_staff']->isNotEmpty())
                     @foreach($reprints['top_staff']->take(5) as $staff)
                         <div class="d-flex justify-content-between align-items-center py-2 border-bottom">

@@ -6,9 +6,9 @@
 <div class="container-fluid px-4">
     <div class="d-flex justify-content-between align-items-start flex-wrap gap-2 mb-4">
         <div>
-            <h4 class="fw-bold m-0" style="font-size:22px; color:#1e293b;">
+            <h1 class="fw-bold m-0" style="font-size:22px; color:#1e293b;">
                 <i class="ri-dashboard-3-line me-2"></i>Create New Dashboard
-            </h4>
+            </h1>
             <div class="text-muted mt-1" style="font-size:13px;">Set up a new custom dashboard</div>
         </div>
         <a href="{{ route('staff.it.dashboard-builder') }}" class="btn btn-sm btn-outline-dark">

@@ -12,7 +12,7 @@
 
   <div class="d-flex justify-content-between align-items-start flex-wrap gap-2 mb-4">
     <div>
-      <h4 class="fw-bold m-0" style="font-size:22px;color:#1e293b;">Conversation</h4>
+      <h1 class="fw-bold m-0" style="font-size:22px;color:#1e293b;">Conversation</h1>
       <div class="text-muted mt-1" style="font-size:13px;">
         <i class="ri-hashtag me-1"></i> Ref: <span class="badge bg-light text-dark border">{{ $ref }}</span>
         <span class="mx-2">•</span>
@@ -35,7 +35,7 @@
 
   <div class="zmc-card p-0 shadow-sm border-0">
     <div class="p-3 border-bottom d-flex justify-content-between align-items-center">
-      <h6 class="fw-bold m-0"><i class="ri-chat-3-line me-2" style="color:var(--zmc-accent)"></i>Thread</h6>
+      <h2 class="fw-bold m-0"><i class="ri-chat-3-line me-2" style="color:var(--zmc-accent)"></i>Thread</h2>
       <span class="small text-muted">{{ $messages->count() }} messages</span>
     </div>
 

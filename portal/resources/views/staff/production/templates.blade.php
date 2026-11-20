@@ -6,9 +6,9 @@
 
   <div class="d-flex justify-content-between align-items-start flex-wrap gap-2 mb-4">
     <div>
-      <h4 class="fw-bold m-0" style="font-size:22px; color:#1e293b;">
+      <h1 class="fw-bold m-0" style="font-size:22px; color:#1e293b;">
         <i class="ri-layout-masonry-line me-2" style="color:var(--zmc-accent)"></i>Card &amp; Certificate Templates
-      </h4>
+      </h1>
       <div class="text-muted mt-1" style="font-size:13px;">
         Manage saved templates for card and certificate production.
       </div>

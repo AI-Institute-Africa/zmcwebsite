@@ -6,7 +6,7 @@
 <div class="zmc-dashboard-wrapper" style="font-family: var(--font-primary); color: var(--zmc-text-dark);">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <div>
-            <h4 class="fw-bold m-0">Notices & Events</h4>
+            <h1 class="fw-bold m-0">Notices & Events</h1>
             <div class="text-muted small">View published notices and upcoming events</div>
         </div>
         <a href="{{ route('staff.registrar.dashboard') }}" class="btn btn-light border btn-sm">
@@ -19,9 +19,9 @@
         <div class="col-lg-6">
             <div class="zmc-card p-0 shadow-sm border-0">
                 <div class="p-3 border-bottom">
-                    <h6 class="fw-bold m-0">
+                    <h2 class="fw-bold m-0">
                         <i class="ri-newspaper-line me-2" style="color:#2563eb"></i> Notices
-                    </h6>
+                    </h2>
                 </div>
 
                 <div class="p-3">
@@ -29,7 +29,7 @@
                         <div class="card mb-3 border">
                             <div class="card-body">
                                 <div class="d-flex justify-content-between align-items-start mb-2">
-                                    <h6 class="fw-bold mb-0">{{ $notice->title }}</h6>
+                                    <h3 class="fw-bold mb-0">{{ $notice->title }}</h3>
                                     <span class="badge bg-primary-subtle text-primary border-primary">
                                         {{ $notice->published_at?->format('d M Y H:i') }}
                                     </span>
@@ -62,9 +62,9 @@
         <div class="col-lg-6">
             <div class="zmc-card p-0 shadow-sm border-0">
                 <div class="p-3 border-bottom">
-                    <h6 class="fw-bold m-0">
+                    <h4 class="fw-bold m-0">
                         <i class="ri-calendar-event-line me-2" style="color:#ffffff"></i> Events
-                    </h6>
+                    </h4>
                 </div>
 
                 <div class="p-3">
@@ -72,7 +72,7 @@
                         <div class="card mb-3 border">
                             <div class="card-body">
                                 <div class="d-flex justify-content-between align-items-start mb-2">
-                                    <h6 class="fw-bold mb-0">{{ $event->title }}</h6>
+                                    <h5 class="fw-bold mb-0">{{ $event->title }}</h5>
                                     <span class="badge bg-success-subtle text-success border-success">
                                         {{ $event->starts_at?->format('d M Y') }}
                                     </span>

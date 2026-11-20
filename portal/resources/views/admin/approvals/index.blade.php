@@ -5,7 +5,7 @@
 <div class="zmc-dashboard-wrapper" style="font-family:'Roboto', sans-serif; color:#334155;">
   <div class="d-flex justify-content-between align-items-start flex-wrap gap-2 mb-4">
     <div>
-      <h4 class="fw-bold m-0" style="font-size:22px; color:#1e293b;">User Approvals</h4>
+      <h1 class="fw-bold m-0" style="font-size:22px; color:#1e293b;">User Approvals</h1>
       <div class="text-muted mt-1" style="font-size:13px;">
         Approve or reject accounts created by IT Admin.
       </div>
@@ -23,7 +23,7 @@
 
   <div class="zmc-card p-0 shadow-sm border-0">
     <div class="p-3 border-bottom d-flex justify-content-between align-items-center">
-      <h6 class="fw-bold m-0"><i class="ri-user-follow-line me-2" style="color:var(--zmc-accent)"></i> Pending approvals</h6>
+      <h2 class="fw-bold m-0"><i class="ri-user-follow-line me-2" style="color:var(--zmc-accent)"></i> Pending approvals</h2>
     </div>
     <div class="table-responsive">
       <table class="table table-hover align-middle mb-0 zmc-mini-table">

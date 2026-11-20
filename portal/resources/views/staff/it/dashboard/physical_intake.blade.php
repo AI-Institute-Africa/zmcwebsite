@@ -7,7 +7,7 @@
   <div class="zmc-dashboard-wrapper" style="font-family:'Roboto', sans-serif; color:#334155; padding: 20px;">
     <div class="d-flex justify-content-between align-items-start flex-wrap gap-2 mb-4">
       <div>
-        <h4 class="fw-bold m-0" style="font-size:22px; color:#1e293b;">New Physical Intake</h4>
+        <h1 class="fw-bold m-0" style="font-size:22px; color:#1e293b;">New Physical Intake</h1>
         <div class="text-muted mt-1" style="font-size:13px;">
           <i class="ri-information-line me-1"></i>
           Record walk-in applications, renewals, and replacements for card generation.
@@ -39,7 +39,7 @@
 
   <div class="zmc-card shadow-sm mb-4">
     <div class="card-header bg-light">
-      <h6 class="fw-bold m-0"><i class="ri-user-add-line me-2"></i>Intake Type</h6>
+      <h2 class="fw-bold m-0"><i class="ri-user-add-line me-2"></i>Intake Type</h2>
     </div>
     <div class="card-body">
       <div class="row g-3">
@@ -65,7 +65,7 @@
 
   <div id="newApplicationForm" class="card shadow-sm mb-4" style="display: none;">
     <div class="card-header bg-primary text-white">
-      <h6 class="fw-bold m-0"><i class="ri-user-add-line me-2"></i>New Application Details</h6>
+      <h3 class="fw-bold m-0"><i class="ri-user-add-line me-2"></i>New Application Details</h3>
     </div>
     <div class="card-body">
       <div id="newAppInfoAlert" class="alert alert-info">
@@ -294,7 +294,7 @@
 
   <div id="existingApplicationForm" class="card shadow-sm mb-4" style="display: none;">
     <div class="card-header bg-success text-white">
-      <h6 class="fw-bold m-0"><i class="ri-refresh-line me-2"></i>Renewal / Replacement Details</h6>
+      <h4 class="fw-bold m-0"><i class="ri-refresh-line me-2"></i>Renewal / Replacement Details</h4>
     </div>
     <div class="card-body">
       <div class="alert alert-info">

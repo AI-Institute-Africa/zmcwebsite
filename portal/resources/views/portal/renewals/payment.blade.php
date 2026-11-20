@@ -46,7 +46,7 @@
       @endif
 
       <div class="step-content active">
-        <h3 class="step-title">Choose Payment Method</h3>
+        <h2 class="step-title">Choose Payment Method</h2>
         <div class="current-step-info mb-4">
           <i class="ri-information-line me-2"></i>
           Select your preferred payment method below.
@@ -57,7 +57,7 @@
           <div class="col-md-6">
             <div class="card shadow-sm h-100">
               <div class="card-body">
-                <h5 class="fw-bold mb-2"><i class="ri-smartphone-line me-2"></i>Pay with PayNow</h5>
+                <h3 class="fw-bold mb-2"><i class="ri-smartphone-line me-2"></i>Pay with PayNow</h3>
                 <p class="text-muted mb-3" style="font-size:13px;">Complete payment online using PayNow platform</p>
                 <button type="button" onclick="showPaynowModal()" class="btn btn-primary w-100">
                   <i class="ri-wallet-line me-1"></i>Pay with PayNow
@@ -70,7 +70,7 @@
           <div class="col-md-6">
             <div class="card shadow-sm h-100">
               <div class="card-body">
-                <h5 class="fw-bold mb-2"><i class="ri-file-upload-line me-2"></i>Upload Proof of Payment</h5>
+                <h4 class="fw-bold mb-2"><i class="ri-file-upload-line me-2"></i>Upload Proof of Payment</h4>
                 <p class="text-muted mb-3" style="font-size:13px;">If you've already paid, upload your proof of payment</p>
                 <button type="button" onclick="showProofModal()" class="btn btn-secondary w-100">
                   <i class="ri-upload-line me-1"></i>Upload Proof

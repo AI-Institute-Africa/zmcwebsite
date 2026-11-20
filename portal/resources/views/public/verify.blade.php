@@ -63,7 +63,7 @@
 <div class="verify-card">
     <div class="logo-section">
         <img src="{{ asset('zmc_logo.png') }}" alt="ZMC Logo">
-        <h4 class="fw-bold">Zimbabwe Media Council</h4>
+        <h1 class="fw-bold">Zimbabwe Media Council</h1>
         <p class="text-muted small">Official Document Verification</p>
     </div>
 
@@ -99,9 +99,9 @@
             {{ strtoupper($status) }}
         </div>
 
-        <h5 class="fw-bold mb-0">
+        <h2 class="fw-bold mb-0">
             {{ $holderName }}
-        </h5>
+        </h2>
         <p class="text-muted small">{{ $isAccreditation ? 'Accredited Media Practitioner' : 'Registered Media House' }}</p>
 
         <div class="info-grid">

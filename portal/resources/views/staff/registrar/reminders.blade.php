@@ -9,9 +9,9 @@
 
   <div class="d-flex justify-content-between align-items-start flex-wrap gap-2 mb-4">
     <div>
-      <h4 class="fw-bold m-0" style="font-size:22px; color:#1e293b;">
+      <h1 class="fw-bold m-0" style="font-size:22px; color:#1e293b;">
         <i class="ri-alarm-line me-2"></i> Reminders
-      </h4>
+      </h1>
       <div class="text-muted mt-1" style="font-size:13px;">
         Create and manage reminders for practitioners and media houses.
       </div>
@@ -84,7 +84,7 @@
     <form class="modal-content" method="POST" action="{{ route('staff.registrar.reminders.store') }}">
       @csrf
       <div class="modal-header">
-        <h5 class="modal-title fw-bold"><i class="ri-alarm-line me-2"></i> Create Reminder</h5>
+        <h2 class="modal-title fw-bold"><i class="ri-alarm-line me-2"></i> Create Reminder</h2>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">

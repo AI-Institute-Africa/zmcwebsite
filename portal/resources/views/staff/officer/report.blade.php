@@ -5,7 +5,7 @@
   <div class="zmc-dashboard-wrapper" style="font-family: var(--font-primary); color: var(--zmc-text-dark);">
     <div class="d-flex justify-content-between align-items-start flex-wrap gap-2 mb-4">
       <div>
-        <h4 class="fw-bold m-0" style="font-size: var(--font-size-2xl); color:#1e293b;">{{ $title ?? 'Page' }}</h4>
+        <h1 class="fw-bold m-0" style="font-size: var(--font-size-2xl); color:#1e293b;">{{ $title ?? 'Page' }}</h1>
         @if(!empty($subtitle))
           <div class="text-muted mt-1" style="font-size: var(--font-size-base);">
             <i class="ri-information-line me-1"></i>{{ $subtitle }}
@@ -97,7 +97,7 @@
       <div class="card shadow-sm mb-4 border-0">
         <div class="card-body">
           <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-3">
-            <h6 class="fw-bold m-0">{{ $bars['title'] ?? 'Overview' }}</h6>
+            <h2 class="fw-bold m-0">{{ $bars['title'] ?? 'Overview' }}</h2>
             <div class="d-flex gap-3">
               @foreach(($bars['series'] ?? []) as $series)
                 <span class="d-inline-flex align-items-center gap-1" style="font-size: var(--font-size-xs);">
@@ -130,7 +130,7 @@
     @foreach(($sections ?? []) as $section)
       <div class="card shadow-sm mb-4 border-0">
         <div class="card-body">
-          <h6 class="fw-bold mb-3">{{ $section['title'] ?? 'Records' }}</h6>
+          <h3 class="fw-bold mb-3">{{ $section['title'] ?? 'Records' }}</h3>
           <div class="table-responsive">
             <table class="table table-hover align-middle mb-0">
               <thead>

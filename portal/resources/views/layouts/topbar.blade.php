@@ -64,7 +64,7 @@
         </button>
         <div class="dropdown-menu dropdown-menu-end p-0 shadow-lg border-0 mt-2" aria-labelledby="messageDropdown" style="width: 300px; border-radius: 12px; overflow: hidden;">
           <div class="p-3 bg-light border-bottom d-flex justify-content-between align-items-center">
-            <h6 class="m-0 fw-bold" style="font-size: var(--font-size-xs);">Messages</h6>
+            <h1 class="m-0 fw-bold" style="font-size: var(--font-size-xs);">Messages</h1>
             @if($unreadCount > 0)
               <span class="badge bg-primary-subtle text-primary small">{{ $unreadCount }} New</span>
             @else

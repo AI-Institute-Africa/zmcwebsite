@@ -4,7 +4,7 @@
 @section('content')
 <div class="d-flex justify-content-between align-items-center mb-3">
   <div>
-    <h4 class="fw-bold mb-1">{{ $application->reference }}</h4>
+    <h1 class="fw-bold mb-1">{{ $application->reference }}</h1>
     <div class="text-muted">{{ strtoupper($application->application_type) }} • {{ str_replace('_',' ', $application->status) }}</div>
   </div>
   <div class="d-flex align-items-center gap-2">

@@ -97,9 +97,9 @@
                   {{-- Exchange Rate Calculator --}}
                   <div class="card border shadow-sm">
                     <div class="card-body">
-                      <h6 class="card-title fw-bold mb-3">
+                      <h1 class="card-title fw-bold mb-3">
                         <i class="ri-calculator-line me-1"></i> Exchange Rate Calculator
-                      </h6>
+                      </h1>
                       <div class="row g-3">
                         <div class="col-12">
                           <label class="form-label small fw-bold">RBZ Exchange Rate (1 USD = ? ZWG)</label>

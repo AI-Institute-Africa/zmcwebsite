@@ -6,7 +6,7 @@
 <div class="container-fluid py-3">
   <div class="d-flex align-items-center justify-content-between flex-wrap gap-2 mb-3">
     <div>
-      <h4 class="fw-bold mb-0">Templates & Documents</h4>
+      <h1 class="fw-bold mb-0">Templates & Documents</h1>
       <div class="text-muted" style="font-size:13px;">Upload templates and manage active versions (basic version control).</div>
     </div>
     <a class="btn btn-sm btn-outline-secondary" href="{{ route('admin.templates.index') }}">Catalogue</a>

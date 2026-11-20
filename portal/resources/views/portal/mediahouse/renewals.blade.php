@@ -22,7 +22,7 @@
     @if(isset($drafts) && $drafts->count())
       <div class="card shadow-sm mb-4">
         <div class="card-body">
-          <h6 class="fw-bold mb-3"><i class="ri-draft-line me-1"></i>My Saved Drafts</h6>
+          <h2 class="fw-bold mb-3"><i class="ri-draft-line me-1"></i>My Saved Drafts</h2>
           <div class="table-responsive">
             <table class="table table-sm align-middle mb-0">
               <thead>
@@ -245,7 +245,7 @@
             <label class="form-label required">Proof of Payment / Payment Advice (if applicable)</label>
             <div class="upload-area">
               <i class="ri-bank-card-line"></i>
-              <h5>Upload Proof of Payment</h5>
+              <h4>Upload Proof of Payment</h4>
               <p>PDF/JPG/PNG</p>
               {{-- ✅ IMPORTANT: name attribute --}}
               <input type="file" name="proof_of_payment" accept=".pdf,.jpg,.jpeg,.png" style="display:none;" required>
@@ -362,7 +362,7 @@
         </div>
 
         <div class="alert alert-warning">
-          <h6 class="mb-2"><i class="ri-file-text-line me-2"></i>Declaration</h6>
+          <h4 class="mb-2"><i class="ri-file-text-line me-2"></i>Declaration</h4>
           <p class="mb-2">I declare that the information provided in this AP5 application is true and complete.</p>
           <div class="form-check mt-2">
             <input class="form-check-input" type="checkbox" id="ap5Agree" name="declaration_confirmed" value="1" required>

@@ -7,14 +7,14 @@
         <a href="{{ route('staff.director.dashboard') }}" class="btn btn-sm btn-link p-0 text-muted mb-2 text-decoration-none">
             <i class="ri-arrow-left-line"></i> Back to Overview
         </a>
-        <h4 class="fw-bold m-0" style="font-size: var(--font-size-2xl); color:#1e293b;">Geographic Distribution & Regional Analysis</h4>
+        <h1 class="fw-bold m-0" style="font-size: var(--font-size-2xl); color:#1e293b;">Geographic Distribution & Regional Analysis</h1>
     </div>
 
     <div class="row g-4">
         <!-- Accreditations by Region -->
         <div class="col-md-6">
             <div class="zmc-card">
-                <h6 class="fw-bold mb-3">Accreditations by Region</h6>
+                <h2 class="fw-bold mb-3">Accreditations by Region</h2>
                 <div style="height: 300px;">
                     <canvas id="accreditationsByRegionChart"></canvas>
                 </div>
@@ -24,7 +24,7 @@
         <!-- Revenue by Region -->
         <div class="col-md-6">
             <div class="zmc-card">
-                <h6 class="fw-bold mb-3">Revenue by Region</h6>
+                <h3 class="fw-bold mb-3">Revenue by Region</h3>
                 <div style="height: 300px;">
                     <canvas id="revenueByRegionChart"></canvas>
                 </div>
@@ -35,7 +35,7 @@
         <!-- Media Houses by Region -->
         <div class="col-md-6">
             <div class="zmc-card">
-                <h6 class="fw-bold mb-3">Media Houses by Region</h6>
+                <h4 class="fw-bold mb-3">Media Houses by Region</h4>
                 <div style="height: 300px;">
                     <canvas id="mediaHousesByRegionChart"></canvas>
                 </div>
@@ -45,7 +45,7 @@
         <!-- Regional Summary Table -->
         <div class="col-md-12">
             <div class="zmc-card">
-                <h6 class="fw-bold mb-3">Regional Performance Summary</h6>
+                <h5 class="fw-bold mb-3">Regional Performance Summary</h5>
                 <div class="table-responsive">
                     <table class="table table-sm table-hover mb-0">
                         <thead>

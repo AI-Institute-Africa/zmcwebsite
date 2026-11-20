@@ -16,9 +16,9 @@
 
     <div class="d-flex justify-content-between align-items-center mb-4 bg-white p-4 rounded-4 shadow-sm border border-slate-100">
         <div>
-            <h2 class="fw-bold m-0" style="letter-spacing:-0.02em; color:#0f172a;">
+            <h1 class="fw-bold m-0" style="letter-spacing:-0.02em; color:#0f172a;">
                 <i class="ri-money-dollar-circle-line me-2" style="color:#ea580c;"></i>FOIA Appeals Payment Verification
-            </h2>
+            </h1>
             <p class="text-muted m-0 small mt-1">Verify payment proofs for FOIA appeals</p>
         </div>
         <div class="d-flex gap-2 align-items-center">
@@ -68,7 +68,7 @@
     {{-- Appeals Table --}}
     <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
         <div class="card-header bg-white p-4 border-0">
-            <h6 class="fw-bold m-0"><i class="ri-list-check me-2" style="color:#ea580c;"></i>Pending Payment Verifications</h6>
+            <h2 class="fw-bold m-0"><i class="ri-list-check me-2" style="color:#ea580c;"></i>Pending Payment Verifications</h2>
         </div>
         <div class="table-responsive">
             <table class="table table-hover align-middle mb-0 small">
@@ -127,7 +127,7 @@
                                 <form action="{{ route('staff.accounts.foia_appeals.approve_payment', $appeal) }}" method="POST">
                                     @csrf
                                     <div class="modal-header bg-success bg-opacity-10 border-0 p-4">
-                                        <h5 class="modal-title fw-bold"><i class="ri-checkbox-circle-line me-2"></i>Approve Payment</h5>
+                                        <h3 class="modal-title fw-bold"><i class="ri-checkbox-circle-line me-2"></i>Approve Payment</h3>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                                     </div>
                                     <div class="modal-body p-4">
@@ -156,7 +156,7 @@
                                 <form action="{{ route('staff.accounts.foia_appeals.reject_payment', $appeal) }}" method="POST">
                                     @csrf
                                     <div class="modal-header bg-danger bg-opacity-10 border-0 p-4">
-                                        <h5 class="modal-title fw-bold"><i class="ri-close-circle-line me-2"></i>Reject Payment</h5>
+                                        <h4 class="modal-title fw-bold"><i class="ri-close-circle-line me-2"></i>Reject Payment</h4>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                                     </div>
                                     <div class="modal-body p-4">

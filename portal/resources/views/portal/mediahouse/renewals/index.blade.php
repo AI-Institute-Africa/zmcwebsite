@@ -5,7 +5,7 @@
 @section('content')
 <div id="mediahouse-renewals-page">
   <div class="d-flex justify-content-between align-items-center mb-4">
-    <h4 class="fw-bold text-dark m-0" style="font-size:18px;">My Renewals & Replacements (AP5)</h4>
+    <h1 class="fw-bold text-dark m-0" style="font-size:18px;">My Renewals & Replacements (AP5)</h1>
     <a class="btn btn-secondary" href="{{ route('mediahouse.portal') }}">
       <i class="ri-arrow-left-line me-1"></i>Back to Dashboard
     </a>
@@ -23,7 +23,7 @@
   @if($renewals->count() > 0)
     <div class="card shadow-sm">
       <div class="card-body">
-        <h6 class="fw-bold mb-3"><i class="ri-file-list-3-line me-1"></i>My Renewal Applications</h6>
+        <h2 class="fw-bold mb-3"><i class="ri-file-list-3-line me-1"></i>My Renewal Applications</h2>
         <div class="table-responsive">
           <table class="table table-sm align-middle mb-0">
             <thead>
@@ -74,7 +74,7 @@
     <div class="card shadow-sm">
       <div class="card-body text-center py-5">
         <i class="ri-file-list-3-line" style="font-size:48px; opacity:0.3;"></i>
-        <h5 class="mt-3 mb-2">No Renewals Yet</h5>
+        <h3 class="mt-3 mb-2">No Renewals Yet</h3>
         <p class="text-muted mb-4">You haven't started any renewal or replacement applications.</p>
         <a href="{{ route('mediahouse.renewals.select-type') }}" class="btn btn-primary">
           <i class="ri-add-line me-1"></i>Start Your First Renewal

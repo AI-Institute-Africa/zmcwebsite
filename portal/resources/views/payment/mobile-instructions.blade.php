@@ -6,7 +6,7 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header bg-info text-white">
-                    <h5 class="mb-0">📱 Complete Your Mobile Payment</h5>
+                    <h1 class="mb-0">📱 Complete Your Mobile Payment</h1>
                 </div>
                 <div class="card-body">
                     <div class="alert alert-info" role="alert">
@@ -32,7 +32,7 @@
                     <div class="card bg-light mb-4">
                         <div class="card-body">
                             @if($instructions)
-                                <h6>{{ $instructions }}</h6>
+                                <h2>{{ $instructions }}</h2>
                             @else
                                 <p>Please follow the payment prompt sent to your mobile device.</p>
                             @endif

@@ -4,7 +4,7 @@
 <div class="zmc-dashboard-wrapper" style="font-family:'Inter', sans-serif; color:#334155;">
   <div class="d-flex justify-content-between align-items-center mb-4">
     <div>
-      <h3 class="fw-bold m-0" style="color:#0f172a;">FOIA Appeals Management</h3>
+      <h1 class="fw-bold m-0" style="color:#0f172a;">FOIA Appeals Management</h1>
       <div class="text-muted small">Manage public appeals received from the website</div>
     </div>
     <div>
@@ -21,7 +21,7 @@
         </div>
         <div>
           <div class="text-muted small fw-bold text-uppercase">Total Appeals</div>
-          <h3 class="m-0 fw-bold">{{ number_format($stats['total']) }}</h3>
+          <h2 class="m-0 fw-bold">{{ number_format($stats['total']) }}</h2>
         </div>
       </div>
     </div>
@@ -64,7 +64,7 @@
   <div class="row g-4 mb-4">
     <div class="col-lg-8">
       <div class="zmc-card h-100">
-        <h6 class="fw-bold mb-3">Appeals Submitted by Month</h6>
+        <h4 class="fw-bold mb-3">Appeals Submitted by Month</h4>
         <div style="height:300px;">
           <canvas id="monthlyChart"></canvas>
         </div>
@@ -72,7 +72,7 @@
     </div>
     <div class="col-lg-4">
       <div class="zmc-card h-100">
-        <h6 class="fw-bold mb-3">Appeals by Status</h6>
+        <h5 class="fw-bold mb-3">Appeals by Status</h5>
         <div style="height:300px;">
           <canvas id="statusChart"></canvas>
         </div>

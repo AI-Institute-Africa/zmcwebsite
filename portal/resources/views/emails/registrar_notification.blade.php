@@ -1,4 +1,4 @@
-<h2>Application Awaiting Registrar Review</h2>
+<h1>Application Awaiting Registrar Review</h1>
 
 <p>Dear Registrar,</p>
 

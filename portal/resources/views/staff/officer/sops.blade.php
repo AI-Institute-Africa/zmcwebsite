@@ -5,7 +5,7 @@
   <div class="zmc-dashboard-wrapper" style="font-family: var(--font-primary); color: var(--zmc-text-dark);">
     <div class="d-flex justify-content-between align-items-start flex-wrap gap-2 mb-4">
       <div>
-        <h4 class="fw-bold m-0" style="font-size: var(--font-size-2xl); color:#1e293b;">System Help / SOPs</h4>
+        <h1 class="fw-bold m-0" style="font-size: var(--font-size-2xl); color:#1e293b;">System Help / SOPs</h1>
         <div class="text-muted mt-1" style="font-size: var(--font-size-base);">
           <i class="ri-information-line me-1"></i>Standard operating procedures and quick links for Accreditation
           Officers.
@@ -22,7 +22,7 @@
       <div class="col-12 col-xl-6">
         <div class="card shadow-sm border-0 h-100">
           <div class="card-body">
-            <h6 class="fw-bold mb-3"><i class="ri-file-list-3-line me-1"></i>Processing an application</h6>
+            <h2 class="fw-bold mb-3"><i class="ri-file-list-3-line me-1"></i>Processing an application</h2>
             <ol class="small mb-0 ps-3">
               <li class="mb-2">Open <a href="{{ route('staff.officer.applications.index') }}">All Applications</a> and filter by year and progress.</li>
               <li class="mb-2">Open the application and verify the applicant details and uploaded documents.</li>
@@ -37,7 +37,7 @@
       <div class="col-12 col-xl-6">
         <div class="card shadow-sm border-0 h-100">
           <div class="card-body">
-            <h6 class="fw-bold mb-3"><i class="ri-folder-shield-2-line me-1"></i>Document verification</h6>
+            <h3 class="fw-bold mb-3"><i class="ri-folder-shield-2-line me-1"></i>Document verification</h3>
             <ol class="small mb-0 ps-3">
               <li class="mb-2">Work from <a href="{{ route('staff.officer.documents.pending') }}">Pending Verification</a>.</li>
               <li class="mb-2">Check that every required document is legible, current and matches the applicant's details.</li>
@@ -51,7 +51,7 @@
       <div class="col-12 col-xl-6">
         <div class="card shadow-sm border-0 h-100">
           <div class="card-body">
-            <h6 class="fw-bold mb-3"><i class="ri-calendar-todo-line me-1"></i>Renewals and expiries</h6>
+            <h4 class="fw-bold mb-3"><i class="ri-calendar-todo-line me-1"></i>Renewals and expiries</h4>
             <ol class="small mb-0 ps-3">
               <li class="mb-2">Review <a href="{{ route('staff.officer.renewals.expiring') }}">Expiring Soon</a> and <a href="{{ route('staff.officer.renewals.expired') }}">Expired</a> registers weekly.</li>
               <li class="mb-2">Send reminders from the expiry pages (all holders or selected records).</li>
@@ -65,7 +65,7 @@
       <div class="col-12 col-xl-6">
         <div class="card shadow-sm border-0 h-100">
           <div class="card-body">
-            <h6 class="fw-bold mb-3"><i class="ri-shield-keyhole-line me-1"></i>Compliance and verification</h6>
+            <h5 class="fw-bold mb-3"><i class="ri-shield-keyhole-line me-1"></i>Compliance and verification</h5>
             <ol class="small mb-0 ps-3">
               <li class="mb-2">Monitor the register from <a href="{{ route('staff.officer.compliance.monitoring') }}">Compliance Monitoring</a>.</li>
               <li class="mb-2">Log and follow up violations, investigation cases and unaccredited practice reports.</li>

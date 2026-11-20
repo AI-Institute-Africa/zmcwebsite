@@ -5,7 +5,7 @@
 <div class="zmc-dashboard-wrapper" style="font-family: var(--font-primary); color: var(--zmc-text-dark);">
   <div class="d-flex justify-content-between align-items-start flex-wrap gap-2 mb-4">
     <div>
-      <h4 class="fw-bold m-0" style="font-size: var(--font-size-2xl); color: var(--zmc-text-dark);">{{ $title ?? 'Suspended / Revoked Records' }}</h4>
+      <h1 class="fw-bold m-0" style="font-size: var(--font-size-2xl); color: var(--zmc-text-dark);">{{ $title ?? 'Suspended / Revoked Records' }}</h1>
       <div class="text-muted mt-1" style="font-size: var(--font-size-base);"><i class="ri-information-line me-1"></i>Suspended/revoked items across accreditation and registration.</div>
     </div>
     <div class="d-flex gap-2">
@@ -17,7 +17,7 @@
     <div class="col-12 col-lg-6">
       <div class="card shadow-sm">
         <div class="card-body">
-          <h6 class="fw-bold">Accreditation (Media Practitioners)</h6>
+          <h2 class="fw-bold">Accreditation (Media Practitioners)</h2>
           <div class="table-responsive">
             <table class="table table-hover align-middle">
               <thead><tr><th>Holder</th><th>Certificate</th><th>Status</th><th>Expires</th></tr></thead>
@@ -45,7 +45,7 @@
     <div class="col-12 col-lg-6">
       <div class="card shadow-sm">
         <div class="card-body">
-          <h6 class="fw-bold">Registration (Media Houses)</h6>
+          <h3 class="fw-bold">Registration (Media Houses)</h3>
           <div class="table-responsive">
             <table class="table table-hover align-middle">
               <thead><tr><th>Entity</th><th>Reg No</th><th>Status</th><th>Expires</th></tr></thead>

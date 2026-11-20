@@ -10,7 +10,7 @@
                 <div class="mb-3">
                     <i class="ri-shield-keyhole-line" style="font-size:48px; color:#111;"></i>
                 </div>
-                <h4 class="fw-bold m-0" style="color:#111 !important;">Change Your Password</h4>
+                <h1 class="fw-bold m-0" style="color:#111 !important;">Change Your Password</h1>
                 <p class="mt-2 mb-0" style="font-size:14px; color:#111 !important;">Secure your account with a new password</p>
             </div>
             

@@ -7,9 +7,9 @@
   {{-- Header --}}
   <div class="d-flex justify-content-between align-items-start flex-wrap gap-2 mb-4">
     <div>
-      <h4 class="fw-bold m-0" style="font-size:var(--font-size-2xl);color:#1e293b;">
+      <h1 class="fw-bold m-0" style="font-size:var(--font-size-2xl);color:#1e293b;">
         <i class="ri-palette-line me-2" style="color:var(--zmc-accent)"></i>Design Studio
-      </h4>
+      </h1>
       <div class="text-muted mt-1" style="font-size:var(--font-size-base);">
         Design and manage the card and certificate templates used in production.
       </div>
@@ -186,7 +186,7 @@
 
   {{-- Workflow Guide --}}
   <div class="zmc-card border-0" style="background:#f8fafc;">
-    <h6 class="fw-bold mb-3"><i class="ri-flow-chart me-2" style="color:var(--zmc-accent)"></i>Template Workflow</h6>
+    <h2 class="fw-bold mb-3"><i class="ri-flow-chart me-2" style="color:var(--zmc-accent)"></i>Template Workflow</h2>
     <div class="d-flex flex-wrap gap-2 align-items-center small">
       <span class="badge bg-secondary px-3 py-2">1. Design</span>
       <i class="ri-arrow-right-line text-muted"></i>

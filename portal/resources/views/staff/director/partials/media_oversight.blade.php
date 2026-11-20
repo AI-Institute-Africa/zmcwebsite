@@ -1,7 +1,7 @@
 <div class="row g-4 mb-4">
     <div class="col-md-8">
         <div class="zmc-card bg-white shadow-sm border-0 rounded-4 p-4 h-100">
-            <h5 class="fw-bold mb-4">Media House Entity Status</h5>
+            <h1 class="fw-bold mb-4">Media House Entity Status</h1>
             
             <div class="row g-3 mb-4">
                 <div class="col-md-3">
@@ -50,9 +50,9 @@
             
             @if(isset($housesExceedingThresholds) && $housesExceedingThresholds->isNotEmpty())
                 <div class="mt-4">
-                    <h6 class="small fw-bold text-muted text-uppercase mb-3">
+                    <h2 class="small fw-bold text-muted text-uppercase mb-3">
                         <i class="ri-alert-line text-warning me-1"></i> Houses Exceeding Staff Threshold
-                    </h6>
+                    </h2>
                     @foreach($housesExceedingThresholds->take(3) as $house)
                         <div class="d-flex justify-content-between align-items-center py-2 border-bottom">
                             <span class="smaller fw-bold">{{ $house->applicant->name ?? 'Media House #' . $house->id }}</span>
@@ -66,7 +66,7 @@
     
     <div class="col-md-4">
         <div class="zmc-card bg-white shadow-sm border-0 rounded-4 p-4 h-100">
-            <h5 class="fw-bold mb-4">Staff Metrics</h5>
+            <h3 class="fw-bold mb-4">Staff Metrics</h3>
             
             <div class="text-center mb-4 p-4 bg-light rounded-4">
                 <div class="text-muted small fw-bold text-uppercase mb-2">Avg Staff per House</div>
@@ -87,7 +87,7 @@
             
             @if(isset($regional) && $regional->isNotEmpty())
                 <div class="mt-4">
-                    <h6 class="small fw-bold text-muted text-uppercase mb-3">Regional Distribution</h6>
+                    <h4 class="small fw-bold text-muted text-uppercase mb-3">Regional Distribution</h4>
                     <div class="table-responsive">
                         <table class="table table-sm table-borderless align-middle mb-0">
                             <tbody>

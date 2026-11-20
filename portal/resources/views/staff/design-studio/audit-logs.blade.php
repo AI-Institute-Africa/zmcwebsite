@@ -6,9 +6,9 @@
 
   <div class="d-flex justify-content-between align-items-start flex-wrap gap-2 mb-4">
     <div>
-      <h4 class="fw-bold m-0" style="font-size:var(--font-size-2xl);color:#1e293b;">
+      <h1 class="fw-bold m-0" style="font-size:var(--font-size-2xl);color:#1e293b;">
         <i class="ri-file-list-3-line me-2" style="color:var(--zmc-accent)"></i>Design Studio Audit Logs
-      </h4>
+      </h1>
       <div class="text-muted mt-1">Complete record of design changes, activation, versioning, and archive actions.</div>
     </div>
     <a href="{{ route('staff.design-studio.dashboard') }}" class="btn btn-white border shadow-sm btn-sm px-3">
@@ -113,7 +113,7 @@
                   <div class="modal-dialog modal-lg">
                     <div class="modal-content">
                       <div class="modal-header">
-                        <h6 class="modal-title fw-bold">Log Detail — {{ ucwords(str_replace('_',' ',$log->action)) }}</h6>
+                        <h2 class="modal-title fw-bold">Log Detail — {{ ucwords(str_replace('_',' ',$log->action)) }}</h2>
                         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                       </div>
                       <div class="modal-body small">

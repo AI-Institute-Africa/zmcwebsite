@@ -6,7 +6,7 @@
 <div class="container-fluid py-3">
   <div class="d-flex align-items-center justify-content-between flex-wrap gap-2 mb-3">
     <div>
-      <h4 class="fw-bold mb-0">System Settings</h4>
+      <h1 class="fw-bold mb-0">System Settings</h1>
       <div class="text-muted" style="font-size:13px;">Branding, security, backups, and integrations.</div>
     </div>
   </div>

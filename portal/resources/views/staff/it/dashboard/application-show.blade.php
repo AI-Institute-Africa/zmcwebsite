@@ -6,7 +6,7 @@
 <div class="container-fluid">
   <div class="d-flex justify-content-between align-items-center mb-3">
     <div>
-      <h4 class="fw-bold mb-0">Application {{ $application->reference }}</h4>
+      <h1 class="fw-bold mb-0">Application {{ $application->reference }}</h1>
       <div class="text-muted small">Read-only view • Applicant: {{ $application->applicant?->name ?? 'N/A' }}</div>
     </div>
     <a href="{{ route('staff.it.dashboard', ['tab' => 'monitoring']) }}" class="btn btn-outline-secondary btn-sm">
@@ -18,7 +18,7 @@
     <div class="col-lg-5">
       <div class="card shadow-sm border-0">
         <div class="card-body">
-          <h6 class="fw-bold">Summary</h6>
+          <h2 class="fw-bold">Summary</h2>
           <div class="row small">
             <div class="col-6 text-muted">Type</div>
             <div class="col-6 fw-semibold">{{ ucfirst($application->application_type) }} / {{ ucfirst($application->request_type) }}</div>
@@ -54,7 +54,7 @@
       <div class="card shadow-sm border-0 mt-3">
         <div class="card-body">
           <div class="d-flex justify-content-between align-items-center">
-            <h6 class="fw-bold mb-0">Attachments</h6>
+            <h3 class="fw-bold mb-0">Attachments</h3>
             <span class="text-muted small">{{ $application->documents?->count() ?? 0 }} files</span>
           </div>
 
@@ -87,7 +87,7 @@
       <div class="card shadow-sm border-0">
         <div class="card-body">
           <div class="d-flex justify-content-between align-items-center">
-            <h6 class="fw-bold mb-0">Activity timeline</h6>
+            <h4 class="fw-bold mb-0">Activity timeline</h4>
             <span class="text-muted small">Latest first</span>
           </div>
           <div class="mt-3" style="max-height: 520px; overflow:auto;">
@@ -111,7 +111,7 @@
 
       <div class="card shadow-sm border-0 mt-3">
         <div class="card-body">
-          <h6 class="fw-bold">Admin actions</h6>
+          <h5 class="fw-bold">Admin actions</h5>
           <div class="text-muted small mb-2">These actions are logged to <code>application_audit_logs</code>.</div>
 
           <form class="d-flex flex-wrap gap-2" method="POST" action="{{ route('staff.it.application.unlock', $application) }}">

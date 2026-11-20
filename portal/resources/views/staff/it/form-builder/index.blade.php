@@ -271,7 +271,7 @@
                 @csrf
                 <input type="hidden" name="form_type" value="{{ $formType }}">
                 <div class="modal-header">
-                    <h5 class="modal-title fw-bold">Add Custom Field</h5>
+                    <h3 class="modal-title fw-bold">Add Custom Field</h3>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
@@ -336,7 +336,7 @@
             <form action="{{ route('staff.it.form-builder.update', $field->id) }}" method="POST">
                 @csrf
                 <div class="modal-header">
-                    <h5 class="modal-title fw-bold">Edit Field: {{ $field->field_label }}</h5>
+                    <h4 class="modal-title fw-bold">Edit Field: {{ $field->field_label }}</h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">

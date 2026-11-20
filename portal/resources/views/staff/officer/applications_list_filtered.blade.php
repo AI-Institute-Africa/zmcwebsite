@@ -6,8 +6,8 @@
   <div class="zmc-dashboard-wrapper" style="font-family: var(--font-primary); color: var(--zmc-text-dark);">
     <div class="d-flex justify-content-between align-items-start flex-wrap gap-2 mb-3">
       <div>
-        <h4 class="fw-bold m-0" style="font-size: var(--font-size-2xl); color:#1e293b;">{{ $title ?? 'Applications' }}
-        </h4>
+        <h1 class="fw-bold m-0" style="font-size: var(--font-size-2xl); color:#1e293b;">{{ $title ?? 'Applications' }}
+        </h1>
         <div class="text-muted mt-1" style="font-size: var(--font-size-base);"><i
             class="ri-information-line me-1"></i>Filter and search applications. Export the current filtered view as CSV.</div>
       </div>
@@ -141,7 +141,7 @@
     <div class="modal-dialog modal-dialog-centered modal-lg">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title fw-bold">Advanced Filters</h5>
+          <h2 class="modal-title fw-bold">Advanced Filters</h2>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <form method="GET">

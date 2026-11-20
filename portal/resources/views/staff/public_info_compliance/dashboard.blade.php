@@ -4,9 +4,9 @@
 <div class="zmc-dashboard-wrapper" style="font-family:'Roboto', sans-serif; color:#334155;">
   <div class="d-flex justify-content-between align-items-start flex-wrap gap-2 mb-4">
     <div>
-      <h4 class="fw-bold m-0" style="font-size:22px; color:#1e293b;">
+      <h1 class="fw-bold m-0" style="font-size:22px; color:#1e293b;">
         <i class="ri-shield-check-line me-2" style="color:var(--zmc-accent);"></i>Public Information Compliance Management
-      </h4>
+      </h1>
       <div class="text-muted mt-1" style="font-size:13px;">
         Complaints are handled in the Complaints Handling System. Use FOIA Appeals Management for public information appeals.
       </div>
@@ -39,7 +39,7 @@
         <div class="mb-2" style="width:100px;height:100px;margin:0 auto;">
           <canvas id="totalChart"></canvas>
         </div>
-        <h3 class="fw-bold m-0" style="color:var(--zmc-primary);">{{ number_format($stats['total']) }}</h3>
+        <h2 class="fw-bold m-0" style="color:var(--zmc-primary);">{{ number_format($stats['total']) }}</h2>
         <p class="text-muted small m-0">Total Records</p>
       </div>
     </div>
@@ -63,7 +63,7 @@
     </div>
     <div class="col-6 col-lg-3">
       <div class="zmc-card text-center h-100 d-flex flex-column justify-content-center">
-        <h5 class="fw-bold m-0" style="color:var(--zmc-primary);">Public Information</h5>
+        <h4 class="fw-bold m-0" style="color:var(--zmc-primary);">Public Information</h4>
         <p class="text-muted small m-0 mt-2">Compliance Management</p>
       </div>
     </div>

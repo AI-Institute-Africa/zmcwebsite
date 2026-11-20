@@ -14,7 +14,7 @@
     </style>
 </head>
 <body>
-    <h2>ZMC Integrated Portal - Audit Log Report</h2>
+    <h1>ZMC Integrated Portal - Audit Log Report</h1>
     <div class="meta">
         <div><strong>Exported By:</strong> {{ $exportedBy }}</div>
         <div><strong>Exported At:</strong> {{ $exportedAt->format('Y-m-d H:i:s') }}</div>

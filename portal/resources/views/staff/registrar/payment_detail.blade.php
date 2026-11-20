@@ -6,7 +6,7 @@
 <div class="zmc-dashboard-wrapper" style="font-family: var(--font-primary); color: var(--zmc-text-dark);">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <div>
-            <h4 class="fw-bold m-0">Payment Submission Detail</h4>
+            <h1 class="fw-bold m-0">Payment Submission Detail</h1>
             <div class="text-muted small mt-1">
                 <i class="ri-eye-line me-1"></i>
                 Read-only view

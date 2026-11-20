@@ -6,7 +6,7 @@
 <div class="container-fluid py-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <div>
-            <h2 class="mb-1">Accounts Ledger</h2>
+            <h1 class="mb-1">Accounts Ledger</h1>
             <p class="text-muted mb-0">All recorded payments across the system.</p>
         </div>
     </div>

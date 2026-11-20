@@ -1,7 +1,7 @@
 <div class="card border-0 shadow-sm rounded-4">
     <div class="card-header bg-white border-0 p-4 d-flex justify-content-between align-items-center">
         <div>
-            <h6 class="fw-bold m-0">Master Activity Audit Trail</h6>
+            <h1 class="fw-bold m-0">Master Activity Audit Trail</h1>
             <p class="text-slate-600 small m-0 fw-medium">Immutable records of all administrative and user actions</p>
         </div>
         <button class="btn btn-slate-100 border text-slate-600 btn-sm rounded-pill px-3 fw-bold">

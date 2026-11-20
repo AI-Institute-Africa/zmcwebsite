@@ -5,7 +5,7 @@
 @section('content')
 <div id="mediahouse-renewal-show">
   <div class="d-flex justify-content-between align-items-center mb-4">
-    <h4 class="fw-bold text-dark m-0" style="font-size:18px;">Renewal Application Details</h4>
+    <h1 class="fw-bold text-dark m-0" style="font-size:18px;">Renewal Application Details</h1>
     <a class="btn btn-secondary" href="{{ route('mediahouse.renewals.index') }}">
       <i class="ri-arrow-left-line me-1"></i>Back to Renewals
     </a>
@@ -49,7 +49,7 @@
     <div class="col-md-6">
       <div class="card shadow-sm h-100">
         <div class="card-body">
-          <h6 class="fw-bold mb-3"><i class="ri-file-text-line me-2"></i>Original Registration</h6>
+          <h2 class="fw-bold mb-3"><i class="ri-file-text-line me-2"></i>Original Registration</h2>
           <div class="row g-3">
             <div class="col-12">
               <div class="zmc-lbl">Registration Number</div>
@@ -78,7 +78,7 @@
     <div class="col-md-6">
       <div class="card shadow-sm h-100">
         <div class="card-body">
-          <h6 class="fw-bold mb-3"><i class="ri-wallet-line me-2"></i>Payment Information</h6>
+          <h3 class="fw-bold mb-3"><i class="ri-wallet-line me-2"></i>Payment Information</h3>
           <div class="row g-3">
             <div class="col-12">
               <div class="zmc-lbl">Payment Method</div>
@@ -118,7 +118,7 @@
       <div class="col-12">
         <div class="card shadow-sm">
           <div class="card-body">
-            <h6 class="fw-bold mb-3"><i class="ri-edit-line me-2"></i>Changes Requested</h6>
+            <h4 class="fw-bold mb-3"><i class="ri-edit-line me-2"></i>Changes Requested</h4>
             <div class="row g-3">
               @foreach($renewal->changeRequests as $change)
                 <div class="col-md-6">
@@ -152,7 +152,7 @@
     <div class="col-12">
       <div class="card shadow-sm">
         <div class="card-body">
-          <h6 class="fw-bold mb-3"><i class="ri-time-line me-2"></i>Application Timeline</h6>
+          <h5 class="fw-bold mb-3"><i class="ri-time-line me-2"></i>Application Timeline</h5>
           <div class="timeline">
             <div class="timeline-item">
               <div class="timeline-marker"></div>

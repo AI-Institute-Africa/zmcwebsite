@@ -20,9 +20,9 @@
 
     <div class="d-flex justify-content-between align-items-start flex-wrap gap-2 mb-4">
         <div>
-            <h4 class="fw-bold m-0" style="font-size:22px; color:#1e293b;">
+            <h1 class="fw-bold m-0" style="font-size:22px; color:#1e293b;">
                 <i class="ri-dashboard-3-line me-2"></i>Dashboard Builder
-            </h4>
+            </h1>
             <div class="text-muted mt-1" style="font-size:13px;">Create and manage custom dashboards for different roles</div>
         </div>
         <div class="d-flex gap-2">
@@ -52,7 +52,7 @@
                 <div class="card border-0 shadow-sm h-100">
                     <div class="card-body">
                         <div class="d-flex justify-content-between align-items-start mb-2">
-                            <h6 class="fw-bold mb-0">{{ $dashboard->name }}</h6>
+                            <h2 class="fw-bold mb-0">{{ $dashboard->name }}</h2>
                             @if($dashboard->is_active)
                                 <span class="badge bg-success">Active</span>
                             @else

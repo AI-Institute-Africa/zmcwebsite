@@ -31,7 +31,7 @@
             </div>
             
             <div class="box">
-                <h3 style="margin-top:0; color:#ff9800;">About the Annual Levy</h3>
+                <h2 style="margin-top:0; color:#ff9800;">About the Annual Levy</h2>
                 <p>Under the Zimbabwe Media Commission Act, every registered media house is required to pay an annual levy equal to <strong>0.5% of gross annual turnover</strong>.</p>
                 
                 <p><strong>Why This Matters:</strong></p>
