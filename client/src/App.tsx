@@ -8,6 +8,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Chatbot from "./components/Chatbot";
 import SocialSidebar from "./components/SocialSidebar";
+import BackButton from "./components/BackButton";
 import HomePage from "./pages/HomePage";
 import AboutPage from "./pages/AboutPage";
 import AccreditationPage from "./pages/AccreditationPage";
@@ -165,6 +166,7 @@ function AppContent() {
       </main>
       <Footer onNavigate={handleNavigate} />
       <SocialSidebar />
+      <BackButton />
       <Chatbot onNavigate={handleNavigate} />
       <Toaster />
     </div>
