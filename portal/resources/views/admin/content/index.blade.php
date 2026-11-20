@@ -223,7 +223,7 @@
 
 @hasanyrole('pr_officer')
 {{-- Create Notice --}}
-<div class="modal fade" id="createNotice" tabindex="-1" aria-hidden="true">
+<div class="modal fade" id="createNotice" tabindex="-1" aria-hidden="true" data-bs-backdrop="true" data-bs-keyboard="true">
   <div class="modal-dialog modal-dialog-centered modal-lg">
     <form class="modal-content" method="POST" enctype="multipart/form-data" action="{{ Route::has('admin.content.notices.store') ? route('admin.content.notices.store') : route('content.notices.store') }}">
       @csrf
@@ -252,7 +252,7 @@
 {{-- Create Event --}}
 
 {{-- Create Event --}}
-<div class="modal fade" id="createEvent" tabindex="-1" aria-hidden="true">
+<div class="modal fade" id="createEvent" tabindex="-1" aria-hidden="true" data-bs-backdrop="true" data-bs-keyboard="true">
   <div class="modal-dialog modal-dialog-centered modal-lg">
     <form class="modal-content" method="POST" enctype="multipart/form-data" action="{{ Route::has('admin.content.events.store') ? route('admin.content.events.store') : route('content.events.store') }}">
       @csrf
@@ -285,7 +285,7 @@
 
 {{-- Edit modals --}}
 @foreach($notices as $n)
-<div class="modal fade" id="editNotice{{ $n->id }}" tabindex="-1" aria-hidden="true">
+<div class="modal fade" id="editNotice{{ $n->id }}" tabindex="-1" aria-hidden="true" data-bs-backdrop="true" data-bs-keyboard="true">
   <div class="modal-dialog modal-dialog-centered modal-lg">
     <form class="modal-content" method="POST" enctype="multipart/form-data" action="{{ route('staff.it.notices.update',$n) }}">
       @csrf @method('PUT')
@@ -321,7 +321,7 @@
 @endforeach
 
 @foreach($events as $e)
-<div class="modal fade" id="editEvent{{ $e->id }}" tabindex="-1" aria-hidden="true">
+<div class="modal fade" id="editEvent{{ $e->id }}" tabindex="-1" aria-hidden="true" data-bs-backdrop="true" data-bs-keyboard="true">
   <div class="modal-dialog modal-dialog-centered modal-lg">
     <form class="modal-content" method="POST" enctype="multipart/form-data" action="{{ route('staff.it.events.update',$e) }}">
       @csrf @method('PUT')
@@ -354,7 +354,7 @@
 @endforeach
 
 {{-- Create Vacancy Modal --}}
-<div class="modal fade" id="createVacancy" tabindex="-1" aria-hidden="true">
+<div class="modal fade" id="createVacancy" tabindex="-1" aria-hidden="true" data-bs-backdrop="true" data-bs-keyboard="true">
   <div class="modal-dialog modal-dialog-centered modal-lg">
     <form class="modal-content" method="POST" enctype="multipart/form-data" action="{{ route('staff.it.vacancies.store') }}">
       @csrf
@@ -377,7 +377,7 @@
 </div>
 
 @foreach($vacancies as $v)
-<div class="modal fade" id="editVacancy{{ $v->id }}" tabindex="-1" aria-hidden="true">
+<div class="modal fade" id="editVacancy{{ $v->id }}" tabindex="-1" aria-hidden="true" data-bs-backdrop="true" data-bs-keyboard="true">
   <div class="modal-dialog modal-dialog-centered modal-lg">
     <form class="modal-content" method="POST" enctype="multipart/form-data" action="{{ route('staff.it.vacancies.update',$v) }}">
       @csrf @method('POST') {{-- Using POST with method if needed, controller expects POST for files usually --}}
@@ -401,7 +401,7 @@
 @endforeach
 
 {{-- Create Tender Modal --}}
-<div class="modal fade" id="createTender" tabindex="-1" aria-hidden="true">
+<div class="modal fade" id="createTender" tabindex="-1" aria-hidden="true" data-bs-backdrop="true" data-bs-keyboard="true">
   <div class="modal-dialog modal-dialog-centered modal-lg">
     <form class="modal-content" method="POST" enctype="multipart/form-data" action="{{ route('staff.it.tenders.store') }}">
       @csrf
@@ -423,7 +423,7 @@
 </div>
 
 @foreach($tenders as $t)
-<div class="modal fade" id="editTender{{ $t->id }}" tabindex="-1" aria-hidden="true">
+<div class="modal fade" id="editTender{{ $t->id }}" tabindex="-1" aria-hidden="true" data-bs-backdrop="true" data-bs-keyboard="true">
   <div class="modal-dialog modal-dialog-centered modal-lg">
     <form class="modal-content" method="POST" enctype="multipart/form-data" action="{{ route('staff.it.tenders.update',$t) }}">
       @csrf @method('POST')
