@@ -339,6 +339,9 @@ export default function PublicDirectory({ variant }: PublicDirectoryProps) {
       {!loading && !error && records.length > 0 && (
         <div
           className="overflow-x-auto rounded-2xl bg-white"
+          tabIndex={0}
+          role="region"
+          aria-label="Directory table (scrollable)"
           style={{ boxShadow: "var(--shadow-sm)", border: "1px solid var(--neutral-100)" }}
         >
           <table className="w-full border-collapse text-sm" data-testid={`directory-table-${variant}`}>

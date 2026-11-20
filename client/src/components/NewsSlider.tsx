@@ -227,9 +227,10 @@ export default function NewsSlider() {
               color: "var(--primary-dark)",
               boxShadow: "0 2px 8px rgba(0,0,0,0.08)",
             }}
+            aria-label="Previous slide"
             data-testid="button-prev-slide"
           >
-            <ChevronLeft className="w-4.5 h-4.5" />
+            <ChevronLeft className="w-4.5 h-4.5" aria-hidden="true" />
           </button>
           <button
             onClick={nextSlide}
@@ -240,9 +241,10 @@ export default function NewsSlider() {
               color: "var(--primary-dark)",
               boxShadow: "0 2px 8px rgba(0,0,0,0.08)",
             }}
+            aria-label="Next slide"
             data-testid="button-next-slide"
           >
-            <ChevronRight className="w-4.5 h-4.5" />
+            <ChevronRight className="w-4.5 h-4.5" aria-hidden="true" />
           </button>
         </div>
 
@@ -258,6 +260,8 @@ export default function NewsSlider() {
               style={{
                 background: index === currentSlide ? "var(--primary)" : "var(--neutral-300)",
               }}
+              aria-label={`Go to slide ${index + 1}`}
+              aria-current={index === currentSlide ? "true" : undefined}
               data-testid={`slide-dot-${index}`}
             />
           ))}
