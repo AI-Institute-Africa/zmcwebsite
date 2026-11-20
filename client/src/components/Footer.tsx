@@ -58,14 +58,15 @@ export default function Footer({ onNavigate }: FooterProps) {
           </p>
           <div className="flex gap-4 mt-6">
             {[
-              { icon: Facebook, href: SOCIAL_LINKS.facebook },
-              { icon: Twitter, href: SOCIAL_LINKS.x },
-              { icon: Instagram, href: SOCIAL_LINKS.instagram },
-              { icon: Youtube, href: SOCIAL_LINKS.youtube },
+              { icon: Facebook, href: SOCIAL_LINKS.facebook, label: "Facebook" },
+              { icon: Twitter, href: SOCIAL_LINKS.x, label: "X (Twitter)" },
+              { icon: Instagram, href: SOCIAL_LINKS.instagram, label: "Instagram" },
+              { icon: Youtube, href: SOCIAL_LINKS.youtube, label: "YouTube" },
             ].map((social, index) => (
               <a
                 key={index}
                 href={social.href}
+                aria-label={`${social.label} (opens in a new tab)`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 rounded-xl flex items-center justify-center transition-all hover:-translate-y-1"

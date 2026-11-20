@@ -1,21 +1,37 @@
-import { Card, CardContent } from "@/components/ui/card";
-import { AlertCircle } from "lucide-react";
+import { useEffect } from "react";
+import { Link } from "wouter";
 
 export default function NotFound() {
-  return (
-    <div className="min-h-screen w-full flex items-center justify-center bg-gray-50">
-      <Card className="w-full max-w-md mx-4">
-        <CardContent className="pt-6">
-          <div className="flex mb-4 gap-2">
-            <AlertCircle className="h-8 w-8 text-red-500" />
-            <h1 className="text-2xl font-bold text-gray-900">404 Page Not Found</h1>
-          </div>
+  useEffect(() => {
+    const prev = document.title;
+    document.title = "Page not found | Zimbabwe Media Commission";
+    const meta = document.createElement("meta");
+    meta.name = "robots";
+    meta.content = "noindex";
+    document.head.appendChild(meta);
+    return () => {
+      document.title = prev;
+      meta.remove();
+    };
+  }, []);
 
-          <p className="mt-4 text-sm text-gray-600">
-            Did you forget to add the page to the router?
-          </p>
-        </CardContent>
-      </Card>
+  return (
+    <div className="min-h-[60vh] flex items-center justify-center px-4 pt-32 pb-16">
+      <div className="max-w-md text-center">
+        <p className="text-sm font-semibold mb-2" style={{ color: "var(--primary-dark)" }}>404</p>
+        <h1 className="text-3xl font-bold mb-3" style={{ color: "var(--neutral-900)" }}>Page not found</h1>
+        <p className="mb-6" style={{ color: "var(--neutral-600)" }}>
+          The page you are looking for does not exist or has moved.
+        </p>
+        <Link
+          href="/"
+          className="inline-block px-6 py-3 rounded-xl font-semibold text-white"
+          style={{ background: "var(--primary-dark)" }}
+          data-testid="link-home"
+        >
+          Back to home
+        </Link>
+      </div>
     </div>
   );
 }

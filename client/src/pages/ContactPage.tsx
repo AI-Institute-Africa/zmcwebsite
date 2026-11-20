@@ -119,51 +119,56 @@ export default function ContactPage({ onNavigate }: ContactPageProps) {
                   <form onSubmit={handleSubmit}>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                       <div>
-                        <label className="block mb-2 font-medium text-[0.9rem]" style={{ color: "var(--neutral-700)" }}>{t.pages.contact.fullName} *</label>
+                        <label htmlFor="contact-first" className="block mb-2 font-medium text-[0.9rem]" style={{ color: "var(--neutral-700)" }}>{t.pages.contact.fullName} *</label>
                         <input
                           type="text"
                           required
                           className="w-full py-3 px-4 rounded-xl text-base transition-all focus:outline-none"
                           style={{ border: "2px solid var(--neutral-200)", background: "var(--neutral-50)" }}
-                          data-testid="input-contact-firstname"
+                          id="contact-first"
+                        data-testid="input-contact-firstname"
                         />
                       </div>
                       <div>
-                        <label className="block mb-2 font-medium text-[0.9rem]" style={{ color: "var(--neutral-700)" }}>Last Name *</label>
+                        <label htmlFor="contact-last" className="block mb-2 font-medium text-[0.9rem]" style={{ color: "var(--neutral-700)" }}>Last Name *</label>
                         <input
                           type="text"
                           required
                           className="w-full py-3 px-4 rounded-xl text-base transition-all focus:outline-none"
                           style={{ border: "2px solid var(--neutral-200)", background: "var(--neutral-50)" }}
+                          id="contact-last"
                           data-testid="input-contact-lastname"
                         />
                       </div>
                     </div>
                     <div className="mb-4">
-                      <label className="block mb-2 font-medium text-[0.9rem]" style={{ color: "var(--neutral-700)" }}>{t.pages.contact.emailAddress} *</label>
+                      <label htmlFor="contact-email" className="block mb-2 font-medium text-[0.9rem]" style={{ color: "var(--neutral-700)" }}>{t.pages.contact.emailAddress} *</label>
                       <input
                         type="email"
                         required
                         className="w-full py-3 px-4 rounded-xl text-base transition-all focus:outline-none"
                         style={{ border: "2px solid var(--neutral-200)", background: "var(--neutral-50)" }}
+                        id="contact-email"
                         data-testid="input-contact-email"
                       />
                     </div>
                     <div className="mb-4">
-                      <label className="block mb-2 font-medium text-[0.9rem]" style={{ color: "var(--neutral-700)" }}>{t.pages.contact.phone}</label>
+                      <label htmlFor="contact-phone" className="block mb-2 font-medium text-[0.9rem]" style={{ color: "var(--neutral-700)" }}>{t.pages.contact.phone}</label>
                       <input
                         type="tel"
                         className="w-full py-3 px-4 rounded-xl text-base transition-all focus:outline-none"
                         style={{ border: "2px solid var(--neutral-200)", background: "var(--neutral-50)" }}
+                        id="contact-phone"
                         data-testid="input-contact-phone"
                       />
                     </div>
                     <div className="mb-4">
-                      <label className="block mb-2 font-medium text-[0.9rem]" style={{ color: "var(--neutral-700)" }}>{t.pages.contact.subject} *</label>
+                      <label htmlFor="contact-subject" className="block mb-2 font-medium text-[0.9rem]" style={{ color: "var(--neutral-700)" }}>{t.pages.contact.subject} *</label>
                       <select
                         required
                         className="w-full py-3 px-4 rounded-xl text-base transition-all focus:outline-none"
                         style={{ border: "2px solid var(--neutral-200)", background: "var(--neutral-50)" }}
+                        id="contact-subject"
                         data-testid="select-subject"
                       >
                         <option value="">Select subject...</option>
@@ -176,12 +181,13 @@ export default function ContactPage({ onNavigate }: ContactPageProps) {
                       </select>
                     </div>
                     <div className="mb-6">
-                      <label className="block mb-2 font-medium text-[0.9rem]" style={{ color: "var(--neutral-700)" }}>{t.pages.contact.message} *</label>
+                      <label htmlFor="contact-message" className="block mb-2 font-medium text-[0.9rem]" style={{ color: "var(--neutral-700)" }}>{t.pages.contact.message} *</label>
                       <textarea
                         required
                         rows={5}
                         className="w-full py-3 px-4 rounded-xl text-base transition-all focus:outline-none"
                         style={{ border: "2px solid var(--neutral-200)", background: "var(--neutral-50)" }}
+                        id="contact-message"
                         data-testid="textarea-message"
                       />
                     </div>

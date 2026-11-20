@@ -264,6 +264,8 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           className="lg:hidden p-2 rounded-lg"
           style={{ background: "rgba(0,0,0,0.1)", color: "#212121" }}
+          aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+          aria-expanded={mobileMenuOpen}
           data-testid="button-mobile-menu"
         >
           {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}

@@ -33,6 +33,7 @@ import MediaHubPage from "./pages/MediaHubPage";
 import VacanciesPage from "./pages/VacanciesPage";
 import VacancyDetailPage from "./pages/VacancyDetailPage";
 import { SubscribeProvider } from "./components/SubscribeDialog";
+import NotFound from "./pages/not-found";
 
 function Router() {
   const [, setLocation] = useLocation();
@@ -121,7 +122,7 @@ function Router() {
         <MediaHubPage onNavigate={handleNavigate} />
       </Route>
       <Route>
-        <HomePage onNavigate={handleNavigate} />
+        <NotFound />
       </Route>
     </Switch>
   );
@@ -157,8 +158,9 @@ function AppContent() {
 
   return (
     <div className="min-h-screen flex flex-col" style={{ background: "var(--neutral-50)" }}>
+      <a href="#main-content" className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[2000] focus:px-4 focus:py-2 focus:rounded-lg focus:bg-white focus:text-black focus:shadow-lg">Skip to main content</a>
       <Header currentPage={currentPage} onNavigate={handleNavigate} />
-      <main className="flex-1">
+      <main id="main-content" tabIndex={-1} className="flex-1 outline-none">
         <Router />
       </main>
       <Footer onNavigate={handleNavigate} />

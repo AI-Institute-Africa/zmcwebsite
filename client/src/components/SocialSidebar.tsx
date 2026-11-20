@@ -22,6 +22,7 @@ export default function SocialSidebar() {
           className="w-[36px] h-[36px] flex items-center justify-center text-white transition-all hover:opacity-80"
           style={{ background: social.bg }}
           title={social.label}
+          aria-label={`${social.label} (opens in a new tab)`}
           data-testid={`social-sidebar-${social.label.toLowerCase()}`}
         >
           {social.isX ? (
