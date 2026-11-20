@@ -147,7 +147,7 @@
         <div class="d-flex justify-content-between align-items-start mb-3">
           <div class="flex-grow-1">
             <div class="text-muted small fw-bold text-uppercase mb-2">PayNow Confirmed</div>
-            <div class="fw-black" style="font-size:32px; color:#3b82f6;">{{ number_format($stats['paynow_confirmed'] ?? 0) }}</div>
+            <div class="fw-black" style="font-size:32px; color:#1e40af;">{{ number_format($stats['paynow_confirmed'] ?? 0) }}</div>
           </div>
           <div class="bg-primary bg-opacity-10 p-3 rounded-3">
             <i class="ri-bank-card-line text-primary" style="font-size: 32px;"></i>

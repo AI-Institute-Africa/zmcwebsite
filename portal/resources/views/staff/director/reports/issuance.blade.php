@@ -155,7 +155,7 @@
                     </div>
                     <div class="col-md-3">
                         <div class="p-3 border rounded-3 text-center bg-danger bg-opacity-10 border-danger">
-                            <div class="h3 fw-bold mb-1 text-danger">
+                            <div class="h3 fw-bold mb-1" style="color:#b91c1c;">
                                 {{ $outstandingUnprinted->count() }}
                             </div>
                             <div class="text-muted small">Pending Prints</div>

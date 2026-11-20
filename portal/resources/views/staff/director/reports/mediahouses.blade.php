@@ -49,7 +49,7 @@
                         <p class="text-muted mb-0">Monitoring organizational capacity and compliance thresholds</p>
                     </div>
                     <div class="col-md-4 text-end">
-                        <div class="h1 fw-bold mb-0" style="color: #3b82f6;">{{ number_format($averageStaffPerHouse, 1) }}</div>
+                        <div class="h1 fw-bold mb-0" style="color: #1e40af;">{{ number_format($averageStaffPerHouse, 1) }}</div>
                         <div class="text-muted small">Average Staff Members</div>
                     </div>
                 </div>
