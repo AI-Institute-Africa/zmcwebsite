@@ -352,6 +352,16 @@
   /* --------------------------------------------------------- accessibility */
   function a11yFixes() {
     var words = function (c) { var m = /ri-([a-z0-9-]+?)(-line|-fill)?(\s|$)/.exec(c || ''); return m ? m[1].replace(/-/g, ' ') : ''; };
+    // modals: every dialog needs a name; close buttons are named "Close" (not the generic "Action")
+    $$('.btn-close:not([aria-label]):not([aria-labelledby])').forEach(function (b) { b.setAttribute('aria-label', 'Close'); });
+    $$('.modal').forEach(function (m, mi) {
+      if (!m.getAttribute('role')) m.setAttribute('role', 'dialog');
+      if (m.getAttribute('aria-label') || m.getAttribute('aria-labelledby')) return;
+      var h = m.querySelector('.modal-title, .zmc-modal-title, h1, h2, h3, h4, h5, h6');
+      var txt = h && (h.textContent || '').replace(/\s+/g, ' ').trim();
+      if (h && txt) { if (!h.id) h.id = 'zmcmt' + mi + (m.id || ''); m.setAttribute('aria-labelledby', h.id); }
+      else m.setAttribute('aria-label', 'Dialog');
+    });
     $$('button, a.btn, a.icon-btn').forEach(function (b) {
       if (b.getAttribute('aria-label') || b.getAttribute('aria-labelledby')) return;
       var txt = (b.textContent || '').replace(/\s+/g, '').length;

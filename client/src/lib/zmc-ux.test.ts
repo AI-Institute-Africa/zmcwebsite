@@ -314,6 +314,29 @@ describe("portal UX layer (zmc-ux.js)", () => {
       expect(photo).toHaveAttribute("alt", "");
     });
 
+    it("names modals from their title and labels close buttons", () => {
+      const fixture = `
+        <section class="content">
+          <div class="modal" id="payModal" aria-hidden="true">
+            <div class="modal-content">
+              <div class="modal-title">Payment Required</div>
+              <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+          </div>
+          <div class="modal" id="namedModal" aria-label="Already named"></div>
+        </section>
+      `;
+      loadZmcUx(fixture);
+      window.zmcA11y();
+
+      const modal = document.getElementById("payModal")!;
+      expect(modal).toHaveAttribute("role", "dialog");
+      const labelId = modal.getAttribute("aria-labelledby")!;
+      expect(document.getElementById(labelId)).toHaveTextContent("Payment Required");
+      expect(document.querySelector(".btn-close")).toHaveAttribute("aria-label", "Close");
+      expect(document.getElementById("namedModal")).not.toHaveAttribute("aria-labelledby");
+    });
+
     it("hides decorative icons from assistive technology", () => {
       const fixture = `
         <section class="content">
