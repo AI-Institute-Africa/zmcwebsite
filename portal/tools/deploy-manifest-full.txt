@@ -320,3 +320,5 @@ resources/views/staff/superadmin/dashboard.blade.php
 resources/views/website/event-show.blade.php
 resources/views/website/notice-show.blade.php
 resources/views/staff/it/dashboard/security.blade.php
+resources/views/layouts/sidebar.blade.php
+resources/views/layouts/sidebar_staff.blade.php
