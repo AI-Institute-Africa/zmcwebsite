@@ -5,6 +5,8 @@
 #   manifest = one path per line, relative to the app root (e.g. resources/views/layouts/portal.blade.php)
 set -e
 SRC="${1:?path to the portal/ folder}"; MANIFEST="${2:?manifest file}"
+# tolerate Windows (CRLF) line endings in the manifest
+CLEAN=$(mktemp); tr -d '' < "$MANIFEST" > "$CLEAN"; MANIFEST="$CLEAN"
 APP=/var/www/portal.zmc.org.zw; BK=/home/zmc/backups/ux-$(date +%Y%m%d-%H%M%S)
 mkdir -p "$BK"
 # 1) lint PHP before touching anything

@@ -354,7 +354,7 @@
                                 @if(!empty($ipBlockingAvailable))
                                     <form action="{{ route('staff.it.security.ip.unblock', $block) }}" method="POST">
                                         @csrf
-                                        <button type="submit" class="security-config-button security-config-button--danger" aria-label="Unblock {{ $block->ip_address }}">Remove</button>
+                                        <button type="submit" class="security-config-button security-config-button--danger" aria-label="Remove block on {{ $block->ip_address }}">Remove</button>
                                     </form>
                                 @endif
                             </div>

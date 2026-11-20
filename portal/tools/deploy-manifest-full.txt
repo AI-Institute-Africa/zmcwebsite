@@ -319,3 +319,4 @@ resources/views/staff/superadmin/applications/show.blade.php
 resources/views/staff/superadmin/dashboard.blade.php
 resources/views/website/event-show.blade.php
 resources/views/website/notice-show.blade.php
+resources/views/staff/it/dashboard/security.blade.php

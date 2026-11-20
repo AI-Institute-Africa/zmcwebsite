@@ -289,3 +289,4 @@ resources/views/staff/research_training/settings.blade.php
 resources/views/staff/superadmin/applications/index.blade.php
 resources/views/staff/superadmin/applications/show.blade.php
 resources/views/staff/superadmin/dashboard.blade.php
+resources/views/staff/it/dashboard/security.blade.php

@@ -319,6 +319,7 @@
             .header-title { font-size: 22px; }
             .header-subtitle { font-size: 13px; }
         }
+        .visually-hidden { position:absolute !important; width:1px; height:1px; margin:-1px; padding:0; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
     </style>
 <style>
     .zmc-pilot-notice{position:fixed;top:14px;left:50%;transform:translateX(-50%);z-index:3000;width:min(820px,calc(100% - 24px));display:flex;align-items:center;gap:12px;padding:14px 18px;border:1px solid rgba(212,175,55,0.4);border-radius:16px;background:#ffffff;box-shadow:0 10px 30px rgba(0,0,0,0.08);color:#1a1a1a;font:500 13px/1.6 Inter,sans-serif}.zmc-pilot-notice .notice-icon{display:flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,rgba(46,125,86,0.12)0%,rgba(212,175,55,0.12)100%);flex:0 0 auto}.zmc-pilot-notice .notice-icon i{color:#2e7d56;font-size:20px}.zmc-pilot-notice .notice-content{flex:1 1 auto;display:flex;flex-direction:column;gap:2px}.zmc-pilot-notice .notice-title{font-weight:700;color:#1a2e22;font-size:13px}.zmc-pilot-notice .notice-text{color:#4a4a4a;font-size:12.5px}.zmc-pilot-notice .notice-close{margin-left:auto;background:transparent;border:none;color:#6b6b6b;cursor:pointer;font-size:20px;line-height:1;padding:4px 8px;border-radius:8px}.zmc-pilot-notice .notice-close:hover{background:rgba(0,0,0,0.04);color:#1a1a1a}@media(max-width:600px){.zmc-pilot-notice{top:8px;padding:10px 12px;font-size:12px}.zmc-pilot-notice .notice-icon{width:36px;height:36px}.zmc-pilot-notice .notice-icon i{font-size:18px}}
@@ -390,11 +391,11 @@
             </button>
         </form>
 
-        <a href="{{ config('services.media_hub.url') }}" target="_blank" rel="noopener noreferrer" class="portal-card" aria-label="Open the ZMC Media Hub in a new tab">
+        <a href="{{ config('services.media_hub.url') }}" target="_blank" rel="noopener noreferrer" class="portal-card">
             <div class="card-icon media-hub">
                 <i class="ri-links-line"></i>
             </div>
-            <div class="card-title">ZMC Media Hub</div>
+            <div class="card-title">ZMC Media Hub<span class="visually-hidden"> (opens in a new tab)</span></div>
             <div class="card-desc">Explore ZMC media resources, learning materials, and public information in the Media Hub.</div>
             <div class="card-footer">
                 <div class="card-stream">
