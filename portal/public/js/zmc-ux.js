@@ -267,7 +267,14 @@
       });
     }
   }
-  function enhanceTables() { $$('.content table.table').forEach(enhanceTable); }
+  // Dropdown menus inside .table-responsive (overflow:auto) get clipped and stretch the table's scroll area.
+  // Popper's "fixed" strategy lets the menu escape the overflow box. Must be set before the first click.
+  function fixTableDropdowns() {
+    $$('.table-responsive [data-bs-toggle="dropdown"]:not([data-bs-popper-config])').forEach(function (t) {
+      t.setAttribute('data-bs-popper-config', '{"strategy":"fixed"}');
+    });
+  }
+  function enhanceTables() { fixTableDropdowns(); $$('.content table.table').forEach(enhanceTable); }
   window.zmcEnhanceTables = enhanceTables;
 
   /* -------------------------------------------------------------- sidebar */

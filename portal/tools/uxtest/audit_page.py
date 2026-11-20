@@ -132,7 +132,7 @@ function csvLine(l) { const out = []; let cur = '', q = false; for (let i = 0; i
       const dd = stage.querySelector('[data-bs-toggle="dropdown"]');
       if (dd && dd.offsetParent !== null) {
         r.dds++;
-        try { dd.click(); await sleep(30); const menu = dd.parentElement.querySelector('.dropdown-menu'); const a = menu.getBoundingClientRect(); await sleep(450); const b = menu.getBoundingClientRect();
+        try { dd.scrollIntoView({ block: 'center', behavior: 'instant' }); await sleep(120); dd.click(); await sleep(30); const menu = dd.parentElement.querySelector('.dropdown-menu'); const a = menu.getBoundingClientRect(); await sleep(450); const b = menu.getBoundingClientRect();
           if (Math.abs(a.top - b.top) > 3 || Math.abs(a.left - b.left) > 3) r.ddBad++; dd.click(); } catch (e) { r.ddBad++; }
       }
       // required fields: empty required input shows inline message on blur

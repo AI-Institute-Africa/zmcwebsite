@@ -314,6 +314,25 @@ describe("portal UX layer (zmc-ux.js)", () => {
       expect(photo).toHaveAttribute("alt", "");
     });
 
+    it("makes dropdowns inside .table-responsive escape the overflow box", () => {
+      const fixture = `
+        <section class="content">
+          <div class="table-responsive">
+            <table class="table"><tbody><tr><td>
+              <div class="dropdown"><button class="btn" data-bs-toggle="dropdown">Actions</button><ul class="dropdown-menu"></ul></div>
+            </td></tr></tbody></table>
+          </div>
+          <div class="dropdown"><button class="btn" id="outside" data-bs-toggle="dropdown">Outside</button></div>
+        </section>
+      `;
+      loadZmcUx(fixture);
+      window.zmcEnhanceTables();
+
+      const inside = document.querySelector(".table-responsive [data-bs-toggle='dropdown']");
+      expect(inside).toHaveAttribute("data-bs-popper-config", '{"strategy":"fixed"}');
+      expect(document.getElementById("outside")).not.toHaveAttribute("data-bs-popper-config");
+    });
+
     it("names modals from their title and labels close buttons", () => {
       const fixture = `
         <section class="content">
