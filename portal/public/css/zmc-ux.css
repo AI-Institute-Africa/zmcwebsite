@@ -169,3 +169,12 @@ label.zmc-required::after { content: " *"; color: #dc2626; font-weight: 700; }
 /* Laravel pagination must wrap on phones instead of overflowing */
 .pagination { flex-wrap: wrap; row-gap: 4px; }
 @media (max-width: 575px) { nav[role="navigation"] > div { flex-wrap: wrap; justify-content: center; } nav[role="navigation"] .d-none.flex-sm-fill { display: block !important; } }
+
+/* Wide tables that are not stacked cards scroll inside themselves on phones instead of pushing the page sideways */
+@media (max-width: 768px) {
+  .content table:not(.zmc-stack) { display: block; max-width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+}
+
+/* The visually-hidden label added to empty table headers is absolutely positioned: its header must be its containing block,
+   otherwise in a wide scrolling table it escapes the clipping and widens the whole page. */
+.zmc-table th:has(> .visually-hidden), table th:has(> .visually-hidden) { position: relative; }

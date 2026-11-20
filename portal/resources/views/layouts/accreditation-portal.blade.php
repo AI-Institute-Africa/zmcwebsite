@@ -227,7 +227,8 @@
   @include('layouts.favicon')
 </head>
 <body>
-  <div class="zmc-pilot-notice" role="status"><i class="ri-information-line"></i><span>This portal is currently in a testing phase and is not yet accepting applications. In the meantime, please continue to submit applications at the Commission's head office or Bulawayo regional office. For further information or guidance, kindly contact the Commission.</span></div>
+  <div class="zmc-pilot-notice" role="status" id="zmcPilotNotice"><i class="ri-information-line"></i><span>This portal is currently in a testing phase and is not yet accepting applications. In the meantime, please continue to submit applications at the Commission's head office or Bulawayo regional office. For further information or guidance, kindly contact the Commission.</span><button type="button" id="zmcNoticeClose" aria-label="Close" style="margin-left:auto;background:transparent;border:none;color:#facc15;cursor:pointer;font-size:22px;line-height:1;">&times;</button></div>
+  <script>try{var n=document.getElementById("zmcPilotNotice");if(localStorage.getItem("zmc_pilot_notice_closed")=="1"&&n){n.style.display="none";}var b=document.getElementById("zmcNoticeClose");if(b){b.onclick=function(){try{localStorage.setItem("zmc_pilot_notice_closed","1");}catch(e){}if(n){n.style.display="none";}};}}catch(e){}</script>
   <div class="vertical-menu">
     <div class="navbar-brand-box">
       <img src="{{ asset('zmc_logo.png') }}" alt="ZMC Logo">

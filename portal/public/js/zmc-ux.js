@@ -170,7 +170,7 @@
     var ths = $$('th', thead.rows[thead.rows.length - 1]);
     ths.forEach(function (th) {
       if (!th.getAttribute('scope')) th.setAttribute('scope', 'col');
-      if (!cellText(th) && !th.getAttribute('aria-label') && !th.querySelector('input,button,select')) th.setAttribute('aria-label', tbody.querySelector('a.btn, button') ? 'Actions' : 'Column');
+      if (!cellText(th) && !th.querySelector('input,button,select,.visually-hidden')) { var lbl = tbody.querySelector('a.btn, button') ? 'Actions' : 'Column'; th.innerHTML = '<span class="visually-hidden">' + lbl + '</span>'; }
     });
 
     // empty state
@@ -397,8 +397,8 @@
     }
     headingLevels();
     $$('th').forEach(function (th) {
-      if ((th.textContent || '').trim() || th.getAttribute('aria-label') || th.querySelector('input,button,select')) return;
-      th.setAttribute('aria-label', th.closest('table') && th.closest('table').querySelector('tbody a.btn, tbody button') ? 'Actions' : 'Column');
+      if ((th.textContent || '').trim() || th.querySelector('input,button,select,.visually-hidden')) return;
+      th.innerHTML = '<span class="visually-hidden">' + (th.closest('table') && th.closest('table').querySelector('tbody a.btn, tbody button') ? 'Actions' : 'Column') + '</span>';
     });
     // server-side validation errors: connect message to field + announce
     $$('.is-invalid').forEach(function (f, i) {
@@ -576,10 +576,10 @@
   // attribute-selector remaps would stop matching. So we APPEND to the original attribute text with setAttribute: the
   // original declarations stay byte-for-byte intact, and the later declaration wins.
   var cgOrig = new Map();
-  function cgApply(el, color) {
+  function cgApply(el, color, fullOpacity) {
     if (!cgOrig.has(el)) cgOrig.set(el, el.getAttribute('style') || '');
     var base = cgOrig.get(el), sep = base && !/;\s*$/.test(base) ? ';' : '';
-    el.setAttribute('style', base + sep + 'color:' + color + ' !important');
+    el.setAttribute('style', base + sep + 'color:' + color + ' !important' + (fullOpacity ? ';opacity:1 !important' : ''));
     el.setAttribute('data-zmc-cg', '1');
   }
   function cgFlush() { /* nothing to flush: colours are written inline */ }
@@ -641,18 +641,26 @@
       var cs = getComputedStyle(el);
       if (cs.visibility === 'hidden' || cs.display === 'none' || parseFloat(cs.opacity) < 0.3) continue;
       var fg = cgParse(cs.color), bg = cgBg(el, memo); if (!fg || !bg) continue;
-      var a = fg.a, mix = { r: fg.r * a + bg.r * (1 - a), g: fg.g * a + bg.g * (1 - a), b: fg.b * a + bg.b * (1 - a) };
+      var effOpacity = 1;
+      for (var oe = el; oe && oe.nodeType === 1 && oe !== root.parentElement; oe = oe.parentElement) { var ov = parseFloat(getComputedStyle(oe).opacity); if (!isNaN(ov)) effOpacity *= ov; }
+      var a = fg.a * effOpacity, mix = { r: fg.r * a + bg.r * (1 - a), g: fg.g * a + bg.g * (1 - a), b: fg.b * a + bg.b * (1 - a) };
       var L1 = cgLum(mix), L2 = cgLum(bg);
       var ratio = (Math.max(L1, L2) + 0.05) / (Math.min(L1, L2) + 0.05);
       var px = parseFloat(cs.fontSize) || 14, bold = (parseInt(cs.fontWeight, 10) || 400) >= 700;
       var need = (px >= 24 || (px >= 18.66 && bold)) ? 3 : 4.5;          // WCAG large-text threshold
-      if (ratio >= need) continue;
-      if (ratio >= 3) {                                                    // close: nudge lightness, keep the hue
+      if (ratio >= need + 0.1) continue;                                   // small margin: other engines round the ratio slightly differently
+      if (ratio >= 3 && effOpacity >= 0.99) {                              // close: nudge lightness, keep the hue
         var nudged = cgNudge(fg, bg, L2, need + 0.15);
         if (nudged) { cgApply(el, nudged); fixed++; continue; }
       }
-      var white = 1.05 / (L2 + 0.05), black = (L2 + 0.05) / 0.05;
-      cgApply(el, white >= black ? '#f8fafc' : '#0f172a');
+      // real ratios of the two candidate colours that would actually be applied (not pure black/white estimates)
+      var cr = function (La, Lb) { return (Math.max(La, Lb) + 0.05) / (Math.min(La, Lb) + 0.05); };
+      var rLight = cr(cgLum({ r: 248, g: 250, b: 252 }), L2), rDark = cr(cgLum({ r: 15, g: 23, b: 42 }), L2);
+      var bestColor = rLight >= rDark ? '#f8fafc' : '#0f172a', bestRatio = Math.max(rLight, rDark);
+      var ownOpacity = parseFloat(cs.opacity);                              // text dimmed by its own opacity: restore full opacity too
+      var restoreOpacity = ownOpacity < 0.99 && ownOpacity >= 0.3;
+      if (bestRatio < ratio + 0.05 && !restoreOpacity) continue;            // never make text worse (e.g. white on #0d6efd is already 4.5:1)
+      cgApply(el, bestColor, restoreOpacity);
       fixed++;
     }
     cgFlush();

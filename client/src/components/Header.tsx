@@ -30,7 +30,23 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
   const [opportunitiesOpen, setOpportunitiesOpen] = useState(false);
   const [mediaCentreOpen, setMediaCentreOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [testingNoticeDismissed, setTestingNoticeDismissed] = useState<boolean>(() => {
+    try {
+      return localStorage.getItem("zmc_testing_notice_closed") === "1";
+    } catch {
+      return false;
+    }
+  });
   const [, setLocation] = useLocation();
+
+  const dismissTestingNotice = () => {
+    try {
+      localStorage.setItem("zmc_testing_notice_closed", "1");
+    } catch {
+      // ignore storage errors
+    }
+    setTestingNoticeDismissed(true);
+  };
 
   const headerRef = useRef<HTMLElement>(null);
 
@@ -198,14 +214,24 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
         </div>
       </div>
 
-      <div
-        role="status"
-        aria-label="Portal testing notice"
-        style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 8, minHeight: 42, padding: "8px 16px", background: "#172b2b", color: "#fff", borderTop: "1px solid rgba(255,255,255,.18)", borderBottom: "1px solid rgba(255,255,255,.18)", fontSize: 12, fontWeight: 600, lineHeight: 1.35, textAlign: "center" }}
-      >
-        <span style={{ color: "#f5c518", fontSize: 16, lineHeight: 1 }}>⚗</span>
-        <span><strong style={{ color: "#f5c518" }}>Testing phase:</strong> This website is under testing and some features may not work as expected. Kindly report any issues to the Commission.</span>
-      </div>
+      {!testingNoticeDismissed && (
+        <div
+          role="status"
+          aria-label="Portal testing notice"
+          style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 8, minHeight: 42, padding: "8px 16px", background: "#172b2b", color: "#fff", borderTop: "1px solid rgba(255,255,255,.18)", borderBottom: "1px solid rgba(255,255,255,.18)", fontSize: 13, fontWeight: 600, lineHeight: 1.35, textAlign: "center" }}
+        >
+          <span style={{ color: "#f5c518", fontSize: 16, lineHeight: 1 }}>⚗</span>
+          <span><strong style={{ color: "#f5c518" }}>Testing phase:</strong> This website is under testing and some features may not work as expected. Kindly report any issues to the Commission.</span>
+          <button
+            type="button"
+            onClick={dismissTestingNotice}
+            aria-label="Dismiss testing notice"
+            style={{ marginLeft: "auto", background: "transparent", border: "none", color: "#f5c518", cursor: "pointer", fontSize: 20, lineHeight: 1, padding: "0 4px" }}
+          >
+            ×
+          </button>
+        </div>
+      )}
 
       {/* Main Navigation */}
       <div className="px-4 md:pl-14 md:pr-8 flex justify-between items-center">
