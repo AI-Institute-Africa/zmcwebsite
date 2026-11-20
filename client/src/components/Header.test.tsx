@@ -57,4 +57,60 @@ describe("Header", () => {
     renderWithProviders(<Header currentPage="events" onNavigate={vi.fn()} />);
     expect(screen.getByTestId("nav-events")).toBeInTheDocument();
   });
+
+  describe("testing phase notice", () => {
+    beforeEach(() => {
+      localStorage.removeItem("zmc_testing_notice_closed");
+    });
+
+    afterEach(() => {
+      localStorage.removeItem("zmc_testing_notice_closed");
+    });
+
+    it("renders the testing phase notice by default with a dismissible close button", () => {
+      renderWithProviders(<Header currentPage="home" onNavigate={vi.fn()} />);
+
+      const notice = screen.getByRole("status", { name: /portal testing notice/i });
+      expect(notice).toBeInTheDocument();
+      expect(screen.getByText(/Testing phase:/)).toBeInTheDocument();
+      expect(screen.getByText(/some features may not work as expected/)).toBeInTheDocument();
+      expect(screen.getByLabelText(/Dismiss testing notice/)).toBeInTheDocument();
+    });
+
+    it("hides the notice and persists dismissal in localStorage when the close button is clicked", async () => {
+      const user = userEvent.setup();
+      renderWithProviders(<Header currentPage="home" onNavigate={vi.fn()} />);
+
+      expect(screen.getByRole("status", { name: /portal testing notice/i })).toBeInTheDocument();
+      expect(localStorage.getItem("zmc_testing_notice_closed")).toBeNull();
+
+      await user.click(screen.getByLabelText(/Dismiss testing notice/));
+
+      expect(screen.queryByRole("status", { name: /portal testing notice/i })).not.toBeInTheDocument();
+      expect(localStorage.getItem("zmc_testing_notice_closed")).toBe("1");
+    });
+
+    it("does not render the notice when it was already dismissed in localStorage", () => {
+      localStorage.setItem("zmc_testing_notice_closed", "1");
+      renderWithProviders(<Header currentPage="home" onNavigate={vi.fn()} />);
+
+      expect(screen.queryByRole("status", { name: /portal testing notice/i })).not.toBeInTheDocument();
+      expect(screen.queryByText(/Testing phase:/)).not.toBeInTheDocument();
+    });
+
+    it("keeps the rest of the header functional after the notice is dismissed", async () => {
+      const user = userEvent.setup();
+      const onNavigate = vi.fn();
+      renderWithProviders(<Header currentPage="home" onNavigate={onNavigate} />);
+
+      await user.click(screen.getByLabelText(/Dismiss testing notice/));
+      expect(screen.queryByRole("status", { name: /portal testing notice/i })).not.toBeInTheDocument();
+
+      await user.click(screen.getByTestId("button-portal"));
+      expect(onNavigate).not.toHaveBeenCalled(); // portal link opens in new tab, does not call onNavigate
+
+      await user.click(screen.getByTestId("button-accreditation-header"));
+      expect(onNavigate).toHaveBeenCalledWith("accreditation");
+    });
+  });
 });
