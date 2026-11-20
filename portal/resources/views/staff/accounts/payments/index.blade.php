@@ -88,7 +88,7 @@
                         <td>{{ $payment->created_at->format('Y-m-d H:i') }}</td>
                         <td>
                             <div class="dropdown">
-                                <button class="btn btn-sm btn-light border dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                                <button class="btn btn-sm btn-light border dropdown-toggle" type="button" data-bs-toggle="dropdown" data-bs-boundary="viewport">
                                     Options
                                 </button>
                                 <ul class="dropdown-menu dropdown-menu-end">

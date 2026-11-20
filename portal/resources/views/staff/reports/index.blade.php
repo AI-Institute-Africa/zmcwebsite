@@ -92,7 +92,7 @@
                     </button>
                     <button class="btn btn-white border btn-sm px-3" @click="resetFilters">Reset</button>
                     <div class="btn-group btn-group-sm">
-                        <button type="button" class="btn btn-success dropdown-toggle" data-bs-toggle="dropdown">
+                        <button type="button" class="btn btn-success dropdown-toggle" data-bs-toggle="dropdown" data-bs-boundary="viewport">
                             <i class="ri-download-line me-1"></i> Export
                         </button>
                         <ul class="dropdown-menu dropdown-menu-end shadow-sm">

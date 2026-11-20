@@ -117,7 +117,7 @@
             </div>
             <div class="col-md-6 text-md-end">
                 <div class="btn-group">
-                    <button type="button" class="btn btn-success dropdown-toggle" data-bs-toggle="dropdown">
+                    <button type="button" class="btn btn-success dropdown-toggle" data-bs-toggle="dropdown" data-bs-boundary="viewport">
                         <i class="ri-download-line me-1"></i> Export
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end">
