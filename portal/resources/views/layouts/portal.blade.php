@@ -2166,6 +2166,8 @@
 
   
   <div class="app">
+    {{-- Restore the saved desktop menu state before first paint (no width flash). --}}
+    <script>try{if(window.innerWidth>=992&&localStorage.getItem('zmc.sidebar.collapsed')==='1'){document.querySelector('.app').classList.add('sidebar-collapsed');document.documentElement.classList.add('zmc-rail');}}catch(e){}</script>
     {{--
     ✅ Super Admin uses the STAFF theme/sidebar.
     So both /staff/* and /admin/* routes load the same staff sidebar.
@@ -2232,15 +2234,28 @@
       // Sidebar toggle handling (desktop: collapse, mobile: slide)
       const btn = document.getElementById('sidebarToggle');
       const overlay = document.getElementById('sidebarOverlay');
+      const syncToggle = function () {
+        const app = document.querySelector('.app');
+        if (!btn || !app) return;
+        const mobile = window.innerWidth < 992;
+        const open = mobile ? app.classList.contains('sidebar-open') : !app.classList.contains('sidebar-collapsed');
+        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        btn.setAttribute('title', open ? 'Collapse menu' : 'Expand menu');
+      };
       if (btn) {
         btn.addEventListener('click', function () {
           const app = document.querySelector('.app');
           if (window.innerWidth < 992) {
             app?.classList.toggle('sidebar-open');
           } else {
-            app?.classList.toggle('sidebar-collapsed');
+            const collapsed = app ? app.classList.toggle('sidebar-collapsed') : false;
+            document.documentElement.classList.toggle('zmc-rail', collapsed);
+            try { localStorage.setItem('zmc.sidebar.collapsed', collapsed ? '1' : '0'); } catch (e) { /* storage unavailable */ }
           }
+          syncToggle();
         });
+        window.addEventListener('resize', syncToggle);
+        syncToggle();
       }
       if (overlay) {
         overlay.addEventListener('click', function () {

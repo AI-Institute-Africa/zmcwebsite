@@ -371,6 +371,65 @@ describe("portal UX layer (zmc-ux.js)", () => {
     });
   });
 
+  describe("topbar Back button and collapsed menu rail", () => {
+    const backFixture = `
+      <div class="app">
+        <ul class="sidebar-menu">
+          <li><a href="/staff/officer/dashboard"><i class="ri-home-line"></i><span>Dashboard</span></a></li>
+          <li><a href="/staff/officer/applications"><i class="ri-file-line"></i><span>Applications</span></a></li>
+        </ul>
+        <section class="content"><button id="zmcBackBtn" type="button">Back</button></section>
+      </div>
+    `;
+
+    const setReferrer = (value: string) =>
+      Object.defineProperty(document, "referrer", { value, configurable: true });
+
+    it("goes back in history when the previous page is another portal page", async () => {
+      const back = vi.spyOn(window.history, "back").mockImplementation(() => {});
+      vi.spyOn(window.history, "length", "get").mockReturnValue(4);
+      setReferrer(`${location.origin}/staff/officer/applications`);
+      loadZmcUx(backFixture);
+      window.zmcBackButton();
+      document.getElementById("zmcBackBtn")!.click();
+      expect(back).toHaveBeenCalledTimes(1);
+    });
+
+    it("does not step back into a login or sign-out page", () => {
+      const back = vi.spyOn(window.history, "back").mockImplementation(() => {});
+      vi.spyOn(window.history, "length", "get").mockReturnValue(4);
+      setReferrer(`${location.origin}/staff/login`);
+      loadZmcUx(backFixture);
+      window.zmcBackButton();
+      try {
+        document.getElementById("zmcBackBtn")!.click();
+      } catch {
+        /* jsdom cannot navigate to the dashboard fallback */
+      }
+      expect(back).not.toHaveBeenCalled();
+    });
+
+    it("binds the Back button only once", () => {
+      loadZmcUx(backFixture);
+      window.zmcBackButton();
+      window.zmcBackButton();
+      expect(document.getElementById("zmcBackBtn")).toHaveAttribute("data-zmc-bound", "1");
+    });
+
+    it("adds icon tooltips while the menu is collapsed and removes them when expanded", async () => {
+      Object.defineProperty(window, "innerWidth", { value: 1280, configurable: true });
+      loadZmcUx(backFixture.replace('class="app"', 'class="app sidebar-collapsed"'));
+      window.zmcRailTitles();
+      const link = document.querySelector('a[href="/staff/officer/applications"]')!;
+      expect(link).toHaveAttribute("title", "Applications");
+
+      document.querySelector(".app")!.classList.remove("sidebar-collapsed");
+      await Promise.resolve();
+      await Promise.resolve();
+      expect(link).not.toHaveAttribute("title");
+    });
+  });
+
   describe("a11yInit (skip-to-content link)", () => {
     it("creates a skip-to-main-content link when a .content section exists", () => {
       const fixture = `<section class="content"><h1>Dashboard</h1></section>`;

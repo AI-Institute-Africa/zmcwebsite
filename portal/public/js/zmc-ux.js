@@ -771,8 +771,42 @@
   }
 
   /* ---------------------------------------------------------------- boot */
+  /* ------------------------------------------------- back button + menu rail */
+  // Back goes to the previous portal page; if there is none (new tab, login, sign-out, same page) it goes to the dashboard.
+  function backButton() {
+    var b = $('#zmcBackBtn'); if (!b || b.dataset.zmcBound) return; b.dataset.zmcBound = '1';
+    b.addEventListener('click', function () {
+      var path = '', same = false;
+      try { var u = new URL(document.referrer); same = u.origin === location.origin; path = u.pathname; } catch (e) { /* no referrer */ }
+      var authPage = /\/(login|logout|register|otp|password|select-role|verify|activate)/i.test(path);
+      if (same && !authPage && path !== location.pathname && history.length > 1) { history.back(); return; }
+      var dash = $$('.sidebar-menu a[href]').filter(function (a) { return /dashboard/i.test(a.getAttribute('href') || ''); })[0];
+      location.href = dash ? dash.href : '/';
+    });
+  }
+  window.zmcBackButton = backButton;
+
+  // Collapsed desktop menu shows icons only: give each icon its label as a tooltip.
+  function railTitles() {
+    var app = $('.app'); if (!app) return;
+    function sync() {
+      var rail = app.classList.contains('sidebar-collapsed') && window.innerWidth >= 992;
+      $$('.sidebar-menu li:not(.menu-title) > a').forEach(function (a) {
+        if (rail) {
+          if (a.hasAttribute('title')) return;
+          var lab = a.querySelector('span:not(.zmc-badge)') || a;
+          var t = (lab.textContent || '').replace(/\s+/g, ' ').trim();
+          if (t) { a.setAttribute('title', t); a.setAttribute('data-zmc-rail-title', '1'); }
+        } else if (a.hasAttribute('data-zmc-rail-title')) { a.removeAttribute('title'); a.removeAttribute('data-zmc-rail-title'); }
+      });
+    }
+    if (window.MutationObserver) new MutationObserver(sync).observe(app, { attributes: true, attributeFilter: ['class'] });
+    window.addEventListener('resize', sync); sync();
+  }
+  window.zmcRailTitles = railTitles;
+
   function boot() {
-    convertFlashAlerts(); enhanceTables(); sidebar(); a11yInit(); forms(); startContrastGuard(); startChartTheme();
+    convertFlashAlerts(); enhanceTables(); sidebar(); backButton(); railTitles(); a11yInit(); forms(); startContrastGuard(); startChartTheme();
     // late-rendered tables (AJAX partials)
     if (window.MutationObserver) {
       var t; new MutationObserver(function () { clearTimeout(t); t = setTimeout(function () { enhanceTables(); a11yFixes(); bindValidation(); }, 150); }).observe(document.body, { childList: true, subtree: true });

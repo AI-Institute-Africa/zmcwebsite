@@ -19,7 +19,7 @@
     : 'Mass Media Service Registration';
 @endphp
 
-<div class="vertical-menu">
+<div class="vertical-menu" id="zmcSidebar">
   <div class="navbar-brand-box">
     <a href="{{ route('home') }}">
       <img src="{{ asset('zmc_logo_fresh_nobg.png') }}" alt="ZMC Logo">

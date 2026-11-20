@@ -109,6 +109,35 @@ a.zmc-queue__stat:hover { transform: translateY(-2px); box-shadow: 0 10px 22px r
 .topbar-left { display: flex; align-items: center; flex: 1; min-width: 0; }
 @media (max-width: 575px) { .zmc-search { display: none; } }
 
+/* ------------------------------------------------------ back button (top bar) */
+.topbar-back { height: 40px; padding: 0 14px 0 10px; border-radius: 12px; border: 1px solid var(--zmc-ux-border); background: var(--zmc-ux-card); color: var(--zmc-ux-text); display: inline-flex; align-items: center; gap: 4px; font-size: 13px; font-weight: 600; cursor: pointer; white-space: nowrap; transition: background-color .15s ease, border-color .15s ease; }
+.topbar-back i { font-size: 18px; line-height: 1; }
+.topbar-back:hover { background: var(--zmc-ux-card-2); border-color: #ca8a04; }
+.topbar-back:focus-visible, .topbar-toggle:focus-visible { outline: 3px solid rgba(250,204,21,.7); outline-offset: 2px; }
+@media (max-width: 575px) { .topbar-back { width: 40px; padding: 0; justify-content: center; } .topbar-back span { display: none; } }
+
+/* --------------------------------------------- collapsible desktop menu (icon rail) */
+@media (min-width: 992px) {
+  .vertical-menu { transition: width .2s ease; }
+  .main { transition: margin-left .2s ease; }
+}
+.app.sidebar-collapsed .sidebar-menu li.menu-title { font-size: 0; padding: 0; height: 1px; margin: 10px 20px; background: rgba(255,255,255,.14); overflow: hidden; }
+.app.sidebar-collapsed .sidebar-menu li.menu-title::after { display: none; }
+.app.sidebar-collapsed .zmc-pin { display: none; }
+.app.sidebar-collapsed .sidebar-menu li a span.zmc-badge { display: block !important; position: absolute; top: 8px; right: 16px; width: 9px; height: 9px; min-width: 0; padding: 0; margin: 0; font-size: 0; }
+.zmc-rail .zmc-draft { left: 94px; }
+@media (max-width: 991px) {
+  /* the rail is a desktop-only state: when the window shrinks, the drawer is always full width */
+  .app.sidebar-collapsed .vertical-menu { width: 270px; }
+  .app.sidebar-collapsed .logo-sub, .app.sidebar-collapsed .logo-text, .app.sidebar-collapsed .sidebar-user > div { display: revert; }
+  .app.sidebar-collapsed .sidebar-menu li a span { display: revert; }
+  .app.sidebar-collapsed .sidebar-menu li.menu-title { font-size: revert; height: auto; margin: revert; padding: revert; background: none; overflow: visible; }
+  .app.sidebar-collapsed .sidebar-menu li.menu-title::after { display: revert; }
+  .app.sidebar-collapsed .zmc-pin { display: revert; }
+  .app.sidebar-collapsed .sidebar-menu li a span.zmc-badge { position: static; width: auto; min-width: 22px; padding: 1px 7px; font-size: 11px; }
+  .zmc-rail .zmc-draft { left: 12px; }
+}
+
 /* ------------------------------------------------------------- forms */
 label.zmc-required::after { content: " *"; color: #dc2626; font-weight: 700; }
 [data-bs-theme="dark"] label.zmc-required::after { color: #f87171; }

@@ -25,9 +25,17 @@
 
     <!-- Left Section: Toggle Only -->
     <div class="topbar-left">
-      <button class="topbar-toggle" type="button" id="sidebarToggle" aria-label="Toggle menu">
-        <i class="ri-menu-2-line"></i>
+      <button class="topbar-toggle" type="button" id="sidebarToggle" aria-label="Toggle menu" aria-expanded="true" aria-controls="zmcSidebar">
+        <i class="ri-menu-2-line" aria-hidden="true"></i>
       </button>
+      @php
+        $zmcOnDashboard = request()->is('/') || request()->routeIs('*dashboard*') || request()->routeIs('home');
+      @endphp
+      @unless($zmcOnDashboard)
+        <button class="topbar-back" type="button" id="zmcBackBtn" aria-label="Go back" title="Go back">
+          <i class="ri-arrow-left-line" aria-hidden="true"></i><span>Back</span>
+        </button>
+      @endunless
       @if($isStaff && \Illuminate\Support\Facades\Route::has('staff.search'))
         <form class="zmc-search" action="{{ route('staff.search') }}" method="GET" role="search">
           <i class="ri-search-line" aria-hidden="true"></i>

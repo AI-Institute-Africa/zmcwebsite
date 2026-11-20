@@ -25,7 +25,7 @@
   };
 @endphp
 
-<div class="vertical-menu">
+<div class="vertical-menu" id="zmcSidebar">
   <div class="navbar-brand-box">
     <a href="{{ route('staff.officer.dashboard') }}">
       <img src="{{ asset('zmc_logo.png') }}" alt="ZMC Logo">
